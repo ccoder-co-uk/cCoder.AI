@@ -1,0 +1,107 @@
+@model AIWorkspaceViewModel
+@{
+    ViewData["Title"] = "Agent Console";
+    string providerJson = System.Text.Json.JsonSerializer.Serialize(Model.Providers);
+}
+
+<section class="workspace-grid">
+    <aside class="control-panel panel">
+        <div class="panel-heading">
+            <p class="eyebrow">Session Setup</p>
+            <h2>Run the agent manually</h2>
+            <p class="lede">Choose a provider, give the agent a task, and watch the final answer stream into a chat-style workspace while the internal loop stays hidden behind the agent boundary.</p>
+        </div>
+
+        <form id="agent-form" class="control-form">
+            <div class="field-group">
+                <label class="field-label" for="provider">Provider</label>
+                <select id="provider" name="provider" class="field-input">
+                    @foreach (AIProviderOptionViewModel provider in Model.Providers)
+                    {
+                        <option value="@provider.Key" selected="@(provider.Key == Model.DefaultProvider)">
+                            @provider.Name
+                        </option>
+                    }
+                </select>
+                <p id="provider-description" class="field-hint"></p>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label" for="workingDirectory">Working Directory</label>
+                <input id="workingDirectory" name="workingDirectory" class="field-input" value="@Model.DefaultWorkingDirectory" />
+            </div>
+
+            <div class="field-row">
+                <div class="field-group">
+                    <label class="field-label" for="model">Model</label>
+                    <select id="model" name="model" class="field-input">
+                        <option value="">Loading available models...</option>
+                    </select>
+                    <p id="model-description" class="field-hint">The library asks the provider's paired model provider for available models.</p>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="maxIterations">Max Iterations</label>
+                    <input id="maxIterations" name="maxIterations" class="field-input" type="number" min="1" max="20" value="@Model.DefaultMaxIterations" />
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field-group">
+                    <label class="field-label" for="customModel">Custom Model Override</label>
+                    <input id="customModel" name="customModel" class="field-input" placeholder="Optional explicit model id" />
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">Available Models</span>
+                    <button type="button" id="refresh-models-button" class="secondary-button field-button">Refresh Models</button>
+                </div>
+            </div>
+
+            <details class="field-group context-panel">
+                <summary class="context-summary">Workspace Use Case Prompt</summary>
+                <div class="context-body">@Model.UseCasePrompt</div>
+            </details>
+        </form>
+    </aside>
+
+    <section class="conversation-panel panel">
+        <div class="panel-heading conversation-heading">
+            <div>
+                <p class="eyebrow">Live Session</p>
+                <h2>Conversation</h2>
+            </div>
+            <div class="conversation-status">
+                <span id="status-pill" class="status-pill idle">Idle</span>
+            </div>
+        </div>
+
+        <div id="message-list" class="message-list">
+            <article class="message-card assistant-card">
+                <div class="message-meta">
+                    <span class="message-role">assistant</span>
+                    <span class="message-tag">ready</span>
+                </div>
+                <div class="message-content">
+                    Agent console is ready. Submit a task and the streamed final answer will appear here.
+                </div>
+            </article>
+        </div>
+
+        <section class="composer-panel">
+            <label class="field-label" for="instructions">Task</label>
+            <textarea id="instructions" name="instructions" form="agent-form" class="field-input field-textarea task-textarea composer-textarea" placeholder="Ask the agent to inspect files, run a command, or answer a question using the configured model."></textarea>
+            <div class="action-row composer-actions">
+                <button type="submit" id="send-button" form="agent-form" class="primary-button">Send to Agent</button>
+                <button type="button" id="clear-button" class="secondary-button">Clear Session</button>
+            </div>
+        </section>
+    </section>
+</section>
+
+<script type="application/json" id="provider-options">@Html.Raw(providerJson)</script>
+
+@section Scripts
+{
+    <script src="~/js/agent-console.js" asp-append-version="true"></script>
+}

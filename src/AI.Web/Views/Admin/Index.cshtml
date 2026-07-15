@@ -1,0 +1,161 @@
+@model AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<section class="admin-dashboard">
+    <header class="page-hero panel">
+        <div class="panel-heading">
+            <p class="eyebrow">Admin</p>
+            <h2>Operational Visibility</h2>
+            <p class="lede">Review provider configuration, live model availability, and recent agent activity without exposing secrets.</p>
+        </div>
+    </header>
+
+    <section class="summary-grid">
+        <article class="summary-card panel">
+            <div class="panel-heading compact-heading">
+                <p class="eyebrow">Default Provider</p>
+                <h3>@Model.DefaultProvider</h3>
+            </div>
+        </article>
+
+        <article class="summary-card panel">
+            <div class="panel-heading compact-heading">
+                <p class="eyebrow">Configured Providers</p>
+                <h3>@Model.ProviderCount</h3>
+            </div>
+        </article>
+
+        <article class="summary-card panel">
+            <div class="panel-heading compact-heading">
+                <p class="eyebrow">Recent Runs</p>
+                <h3>@Model.RecentRunCount</h3>
+            </div>
+        </article>
+
+        <article class="summary-card panel">
+            <div class="panel-heading compact-heading">
+                <p class="eyebrow">Agent Loop</p>
+                <h3>@Model.AgentSettings.MaxIterations iterations</h3>
+                <p class="field-hint">Timeout @Model.AgentSettings.ShellCommandTimeoutSeconds s</p>
+            </div>
+        </article>
+    </section>
+
+    <section class="admin-grid">
+        <section class="panel">
+            <div class="panel-heading">
+                <p class="eyebrow">Providers</p>
+                <h2>Provider Diagnostics</h2>
+            </div>
+
+            <div class="stack-list">
+                @foreach (ProviderDiagnosticsViewModel provider in Model.Providers)
+                {
+                    <article class="stack-card">
+                        <div class="stack-card-header">
+                            <div>
+                                <h3>@provider.Name</h3>
+                                <p class="field-hint">@provider.Key</p>
+                            </div>
+                            <div class="badge-row">
+                                <span class="message-tag">Completion key @(provider.CompletionApiKeyConfigured ? "configured" : "empty")</span>
+                                <span class="message-tag">Model key @(provider.ModelApiKeyConfigured ? "configured" : "empty")</span>
+                            </div>
+                        </div>
+
+                        <dl class="diagnostic-grid">
+                            <div>
+                                <dt>Completion Endpoint</dt>
+                                <dd>@(string.IsNullOrWhiteSpace(provider.CompletionEndpoint) ? "Not configured" : provider.CompletionEndpoint)</dd>
+                            </div>
+                            <div>
+                                <dt>Model Endpoint</dt>
+                                <dd>@(string.IsNullOrWhiteSpace(provider.ModelEndpoint) ? "Not configured" : provider.ModelEndpoint)</dd>
+                            </div>
+                            <div>
+                                <dt>Default Model</dt>
+                                <dd>@(string.IsNullOrWhiteSpace(provider.DefaultModel) ? "Not configured" : provider.DefaultModel)</dd>
+                            </div>
+                            <div>
+                                <dt>Available Models</dt>
+                                <dd>
+                                    @if (provider.AvailableModels.Count > 0)
+                                    {
+                                        <span>@string.Join(", ", provider.AvailableModels)</span>
+                                    }
+                                    else if (string.IsNullOrWhiteSpace(provider.ModelLookupError) is false)
+                                    {
+                                        <span>@provider.ModelLookupError</span>
+                                    }
+                                    else
+                                    {
+                                        <span>No models returned.</span>
+                                    }
+                                </dd>
+                            </div>
+                        </dl>
+                    </article>
+                }
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <p class="eyebrow">Runs</p>
+                <h2>Recent Activity</h2>
+            </div>
+
+            @if (Model.RecentRuns.Count == 0)
+            {
+                <div class="empty-state">
+                    No agent runs have been recorded yet.
+                </div>
+            }
+            else
+            {
+                <div class="stack-list">
+                    @foreach (RunHistoryItemViewModel run in Model.RecentRuns)
+                    {
+                        <article class="stack-card">
+                            <div class="stack-card-header">
+                                <div>
+                                    <h3>@run.Source</h3>
+                                    <p class="field-hint">@run.Operation on @run.RecordedOn.ToLocalTime().ToString("dd MMM yyyy HH:mm:ss")</p>
+                                </div>
+                                <div class="badge-row">
+                                    <span class="message-tag">@run.Provider</span>
+                                    <span class="message-tag">@run.Model</span>
+                                    <span class="message-tag">@(run.Succeeded ? "Succeeded" : "Failed")</span>
+                                </div>
+                            </div>
+
+                            <dl class="diagnostic-grid">
+                                <div>
+                                    <dt>Iterations</dt>
+                                    <dd>@run.Iterations</dd>
+                                </div>
+                                <div>
+                                    <dt>Duration</dt>
+                                    <dd>@($"{run.DurationMilliseconds:N0} ms")</dd>
+                                </div>
+                                <div class="diagnostic-span">
+                                    <dt>Summary</dt>
+                                    <dd>@run.Summary</dd>
+                                </div>
+                                @if (string.IsNullOrWhiteSpace(run.ErrorMessage) is false)
+                                {
+                                    <div class="diagnostic-span">
+                                        <dt>Error</dt>
+                                        <dd>@run.ErrorMessage</dd>
+                                    </div>
+                                }
+                            </dl>
+                        </article>
+                    }
+                </div>
+            }
+        </section>
+    </section>
+</section>

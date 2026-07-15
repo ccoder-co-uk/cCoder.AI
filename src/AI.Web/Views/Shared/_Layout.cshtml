@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - cCoder.AI</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="brand-block">
+                <span class="brand-kicker">cCoder AI</span>
+                <h1 class="brand-title">Agent Console</h1>
+            </div>
+            <div class="header-actions">
+                <nav class="header-nav" aria-label="Primary">
+                    <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : string.Empty)" href="/">Console</a>
+                    <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" ? "active" : string.Empty)" href="/Admin">Admin</a>
+                </nav>
+                <div class="brand-summary">
+                    <span class="summary-chip">Shell-first</span>
+                    <span class="summary-chip">OpenAI-compatible</span>
+                    <span class="summary-chip">CRM-ready baseline</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="page-frame">
+            @RenderBody()
+        </main>
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
