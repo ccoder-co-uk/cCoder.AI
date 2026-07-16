@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="AI.AcceptanceTests/AI.AcceptanceTests.csproj" />
+  <Project Path="AI.Web/AI.Web.csproj" />
+  <Project Path="cCoder.AI.Tests/cCoder.AI.Tests.csproj" />
+  <Project Path="cCoder.AI/cCoder.AI.csproj" />
+</Solution>

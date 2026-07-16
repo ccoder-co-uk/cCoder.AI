@@ -1,0 +1,120 @@
+using cCoder.AI.Models.Configurations;
+using cCoder.AI.Models.Requests;
+using cCoder.AI.Models.Responses;
+using FluentAssertions;
+using Moq;
+
+namespace cCoder.AI.Tests.Services.Foundations.Completions;
+
+public partial class CompletionProviderServiceTests
+{
+    [Fact]
+    public async Task ShouldUseDefaultProviderForPromptCompletionAsync()
+    {
+        // Given
+        CompletionRequest inputRequest = new()
+        {
+            Prompt = "List the files in the current directory.",
+        };
+
+        CompletionResponse expectedResponse = new()
+        {
+            Content = "{\"type\":\"final\",\"message\":\"done\"}",
+            Model = "gpt-oss:20b",
+            Provider = "Ollama",
+            RawContent = "{}",
+        };
+
+        chatCompletionsBrokerMock
+            .Setup(broker => broker.PostChatCompletionAsync(
+                "Ollama",
+                It.Is<AICompletionProviderConfiguration>(configuration => configuration.DefaultModel == "gpt-oss:20b"),
+                It.Is<ProviderCompletionRequest>(request =>
+                    request.Model == "gpt-oss:20b" &&
+                    request.Messages.Count == 1 &&
+                    request.Messages[0].Role == "user" &&
+                    request.Messages[0].Content == inputRequest.Prompt),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(expectedResponse);
+
+        // When
+        CompletionResponse actualResponse = await completionProviderService.CompleteAsync(inputRequest);
+
+        // Then
+        actualResponse.Should().BeSameAs(expectedResponse);
+
+        chatCompletionsBrokerMock.Verify(broker => broker.PostChatCompletionAsync(
+            "Ollama",
+            It.IsAny<AICompletionProviderConfiguration>(),
+            It.IsAny<ProviderCompletionRequest>(),
+            It.IsAny<CancellationToken>()),
+            Times.Once);
+    }
+
+    [Fact]
+    public async Task ShouldUseRequestedProviderForChatCompletionAsync()
+    {
+        // Given
+        CompletionResponse expectedResponse = new()
+        {
+            Content = "Hello from Azure Foundry.",
+            Model = "custom-model",
+            Provider = "AzureFoundry",
+            RawContent = "{}",
+        };
+
+        IReadOnlyList<ChatCompletionMessage> inputMessages =
+        [
+            new("system", "Be concise."),
+            new("user", "Say hello."),
+        ];
+
+        chatCompletionsBrokerMock
+            .Setup(broker => broker.PostChatCompletionAsync(
+                "AzureFoundry",
+                It.Is<AICompletionProviderConfiguration>(configuration => configuration.DefaultModel == "gpt-4.1"),
+                It.Is<ProviderCompletionRequest>(request =>
+                    request.Model == "custom-model" &&
+                    request.Messages.Count == 2),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(expectedResponse);
+
+        // When
+        CompletionResponse actualResponse = await completionProviderService.CompleteChatAsync(
+            provider: "AzureFoundry",
+            model: "custom-model",
+            messages: inputMessages);
+
+        // Then
+        actualResponse.Should().BeSameAs(expectedResponse);
+    }
+
+    [Fact]
+    public async Task ShouldRouteCodexProviderThroughTheCliBrokerAsync()
+    {
+        CompletionResponse expectedResponse = new()
+        {
+            Content = "ready",
+            Model = "gpt-5.6-luna",
+            Provider = "Codex",
+            RawContent = "ready"
+        };
+        codexCliBrokerMock
+            .Setup(broker => broker.CompleteAsync(
+                "Codex",
+                It.Is<AIProviderConfiguration>(provider => provider.CompletionProvider.Mode == Models.Enums.AIProviderMode.CodexCli),
+                It.Is<ProviderCompletionRequest>(request => request.Model == "gpt-5.6-luna"),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(expectedResponse);
+
+        CompletionResponse actualResponse = await completionProviderService.CompleteAsync(
+            new CompletionRequest
+            {
+                Provider = "Codex",
+                Prompt = "Return ready."
+            });
+
+        actualResponse.Should().BeSameAs(expectedResponse);
+        chatCompletionsBrokerMock.VerifyNoOtherCalls();
+    }
+}
