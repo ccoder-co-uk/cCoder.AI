@@ -8,6 +8,8 @@ public class AgentRunRequest
     public string? Provider { get; set; }
     public string? Model { get; set; }
     public string? SystemPrompt { get; set; }
+    public IReadOnlyList<string> InputFilePaths { get; set; } =
+        Array.Empty<string>();
     public string? WorkingDirectory { get; set; }
     public IReadOnlyDictionary<string, string>? EnvironmentVariables { get; set; }
     public ShellKind ShellKind { get; set; } = ShellKind.Auto;

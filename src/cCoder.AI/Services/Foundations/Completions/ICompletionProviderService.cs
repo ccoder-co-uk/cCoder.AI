@@ -16,4 +16,20 @@ public interface ICompletionProviderService
         double? temperature = null,
         bool enableShellTooling = false,
         CancellationToken cancellationToken = default);
+
+    ValueTask<CompletionResponse> CompleteChatAsync(
+        string? provider,
+        string? model,
+        IReadOnlyList<ChatCompletionMessage> messages,
+        double? temperature,
+        bool enableShellTooling,
+        IReadOnlyList<string>? inputFilePaths,
+        CancellationToken cancellationToken = default) =>
+        CompleteChatAsync(
+            provider: provider,
+            model: model,
+            messages: messages,
+            temperature: temperature,
+            enableShellTooling: enableShellTooling,
+            cancellationToken: cancellationToken);
 }

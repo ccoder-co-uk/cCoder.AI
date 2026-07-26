@@ -32,6 +32,7 @@ public sealed class CodexCliBroker : ICodexCliBroker
             StandardErrorEncoding = Encoding.UTF8
         };
         AddArguments(startInfo, configuration, request.Model);
+        AddInputFiles(startInfo: startInfo, inputFilePaths: request.InputFilePaths);
 
         using Process process = new() { StartInfo = startInfo };
         try
@@ -125,6 +126,31 @@ public sealed class CodexCliBroker : ICodexCliBroker
             }
         }
         startInfo.ArgumentList.Add("-");
+    }
+
+    static void AddInputFiles(
+        ProcessStartInfo startInfo,
+        IReadOnlyList<string> inputFilePaths)
+    {
+        foreach (string inputFilePath in inputFilePaths ?? [])
+        {
+            string fullPath = Path.GetFullPath(path: inputFilePath);
+
+            if (!File.Exists(path: fullPath))
+            {
+                throw new FileNotFoundException(
+                    message: "An AI input file could not be found.",
+                    fileName: fullPath);
+            }
+
+            startInfo.ArgumentList.Insert(
+                index: startInfo.ArgumentList.Count - 1,
+                item: "--image");
+
+            startInfo.ArgumentList.Insert(
+                index: startInfo.ArgumentList.Count - 1,
+                item: fullPath);
+        }
     }
 
     static string BuildPrompt(IReadOnlyList<ChatCompletionMessage> messages)

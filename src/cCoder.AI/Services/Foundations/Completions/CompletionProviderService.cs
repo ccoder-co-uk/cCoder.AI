@@ -42,6 +42,23 @@ public class CompletionProviderService(
         IReadOnlyList<ChatCompletionMessage> messages,
         double? temperature = null,
         bool enableShellTooling = false,
+        CancellationToken cancellationToken = default) =>
+        await CompleteChatAsync(
+            provider: provider,
+            model: model,
+            messages: messages,
+            temperature: temperature,
+            enableShellTooling: enableShellTooling,
+            inputFilePaths: null,
+            cancellationToken: cancellationToken);
+
+    public async ValueTask<CompletionResponse> CompleteChatAsync(
+        string? provider,
+        string? model,
+        IReadOnlyList<ChatCompletionMessage> messages,
+        double? temperature,
+        bool enableShellTooling,
+        IReadOnlyList<string>? inputFilePaths,
         CancellationToken cancellationToken = default)
     {
         (string providerKey, AIProviderConfiguration providerConfiguration) = ResolveProviderConfiguration(provider);
@@ -72,6 +89,7 @@ public class CompletionProviderService(
         ProviderCompletionRequest providerRequest = new()
         {
             EnableShellTooling = enableShellTooling,
+            InputFilePaths = inputFilePaths ?? Array.Empty<string>(),
             Messages = messages,
             Model = resolvedModel,
             Temperature = temperature ?? completionProvider.Temperature,

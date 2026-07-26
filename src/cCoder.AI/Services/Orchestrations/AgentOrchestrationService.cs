@@ -38,12 +38,21 @@ public class AgentOrchestrationService(
         {
             List<ChatCompletionMessage> requestMessages = CloneMessages(messages);
 
-            lastCompletionResponse = await completionProviderService.CompleteChatAsync(
-                request.Provider,
-                request.Model,
-                messages,
-                enableShellTooling: true,
-                cancellationToken: cancellationToken);
+            lastCompletionResponse = request.InputFilePaths?.Count > 0
+                ? await completionProviderService.CompleteChatAsync(
+                    provider: request.Provider,
+                    model: request.Model,
+                    messages: messages,
+                    temperature: null,
+                    enableShellTooling: true,
+                    inputFilePaths: request.InputFilePaths,
+                    cancellationToken: cancellationToken)
+                : await completionProviderService.CompleteChatAsync(
+                    provider: request.Provider,
+                    model: request.Model,
+                    messages: messages,
+                    enableShellTooling: true,
+                    cancellationToken: cancellationToken);
 
             if (!TryParseDirective(lastCompletionResponse.Content, out AgentDirective agentDirective, out string parseError))
             {
