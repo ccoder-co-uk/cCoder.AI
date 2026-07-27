@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Models.Responses;
@@ -26,7 +30,7 @@ public partial class CompletionProviderServiceTests
         };
 
         chatCompletionsBrokerMock
-            .Setup(broker => broker.PostChatCompletionAsync(
+            .Setup(expression: broker => broker.PostChatCompletionAsync(
                 "Ollama",
                 It.Is<AICompletionProviderConfiguration>(configuration => configuration.DefaultModel == "gpt-oss:20b"),
                 It.Is<ProviderCompletionRequest>(request =>
@@ -35,20 +39,20 @@ public partial class CompletionProviderServiceTests
                     request.Messages[0].Role == "user" &&
                     request.Messages[0].Content == inputRequest.Prompt),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(expectedResponse);
+            .ReturnsAsync(value: expectedResponse);
 
         // When
-        CompletionResponse actualResponse = await completionProviderService.CompleteAsync(inputRequest);
+        CompletionResponse actualResponse = await completionProviderService.CompleteAsync(request: inputRequest);
 
         // Then
-        actualResponse.Should().BeSameAs(expectedResponse);
+        actualResponse.Should().BeSameAs(expected: expectedResponse);
 
-        chatCompletionsBrokerMock.Verify(broker => broker.PostChatCompletionAsync(
+        chatCompletionsBrokerMock.Verify(expression: broker => broker.PostChatCompletionAsync(
             "Ollama",
             It.IsAny<AICompletionProviderConfiguration>(),
             It.IsAny<ProviderCompletionRequest>(),
             It.IsAny<CancellationToken>()),
-            Times.Once);
+times: Times.Once);
     }
 
     [Fact]
@@ -70,14 +74,14 @@ public partial class CompletionProviderServiceTests
         ];
 
         chatCompletionsBrokerMock
-            .Setup(broker => broker.PostChatCompletionAsync(
+            .Setup(expression: broker => broker.PostChatCompletionAsync(
                 "AzureFoundry",
                 It.Is<AICompletionProviderConfiguration>(configuration => configuration.DefaultModel == "gpt-4.1"),
                 It.Is<ProviderCompletionRequest>(request =>
                     request.Model == "custom-model" &&
                     request.Messages.Count == 2),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(expectedResponse);
+            .ReturnsAsync(value: expectedResponse);
 
         // When
         CompletionResponse actualResponse = await completionProviderService.CompleteChatAsync(
@@ -86,7 +90,7 @@ public partial class CompletionProviderServiceTests
             messages: inputMessages);
 
         // Then
-        actualResponse.Should().BeSameAs(expectedResponse);
+        actualResponse.Should().BeSameAs(expected: expectedResponse);
     }
 
     [Fact]
@@ -100,21 +104,21 @@ public partial class CompletionProviderServiceTests
             RawContent = "ready"
         };
         codexCliBrokerMock
-            .Setup(broker => broker.CompleteAsync(
+            .Setup(expression: broker => broker.CompleteAsync(
                 "Codex",
                 It.Is<AIProviderConfiguration>(provider => provider.CompletionProvider.Mode == Models.Enums.AIProviderMode.CodexCli),
                 It.Is<ProviderCompletionRequest>(request => request.Model == "gpt-5.6-luna"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(expectedResponse);
+            .ReturnsAsync(value: expectedResponse);
 
         CompletionResponse actualResponse = await completionProviderService.CompleteAsync(
-            new CompletionRequest
-            {
-                Provider = "Codex",
-                Prompt = "Return ready."
-            });
+request: new CompletionRequest
+{
+    Provider = "Codex",
+    Prompt = "Return ready."
+});
 
-        actualResponse.Should().BeSameAs(expectedResponse);
+        actualResponse.Should().BeSameAs(expected: expectedResponse);
         chatCompletionsBrokerMock.VerifyNoOtherCalls();
     }
 }

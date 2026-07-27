@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Collections.Concurrent;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Models.Responses;
@@ -21,7 +25,7 @@ public sealed class TestModelManagerService : IModelManagerService
         ImportRequests.Clear();
         RetrievalRequests.Clear();
 
-        while (importResponses.TryDequeue(out _))
+        while (importResponses.TryDequeue(result: out _))
         {
         }
     }
@@ -30,12 +34,12 @@ public sealed class TestModelManagerService : IModelManagerService
         availableModels[provider] = models.ToList();
 
     public void EnqueueImportResponse(ModelImportResponse response) =>
-        importResponses.Enqueue(response);
+        importResponses.Enqueue(item: response);
 
     public AIProviderCapabilitiesResponse GetProviderCapabilities(string provider) => new()
     {
         Provider = provider,
-        DefaultModel = availableModels.TryGetValue(provider, out List<ModelDescriptorResponse>? models)
+        DefaultModel = availableModels.TryGetValue(key: provider, value: out List<ModelDescriptorResponse>? models)
             ? models.FirstOrDefault()?.Id ?? string.Empty
             : string.Empty,
         MaxConcurrency = 1,
@@ -47,14 +51,14 @@ public sealed class TestModelManagerService : IModelManagerService
         string? provider,
         CancellationToken cancellationToken = default)
     {
-        RetrievalRequests.Add(provider);
+        RetrievalRequests.Add(item: provider);
 
-        if (provider is not null && availableModels.TryGetValue(provider, out List<ModelDescriptorResponse>? models))
+        if (provider is not null && availableModels.TryGetValue(key: provider, value: out List<ModelDescriptorResponse>? models))
         {
-            return ValueTask.FromResult<IReadOnlyList<ModelDescriptorResponse>>(models);
+            return ValueTask.FromResult<IReadOnlyList<ModelDescriptorResponse>>(result: models);
         }
 
-        return ValueTask.FromResult<IReadOnlyList<ModelDescriptorResponse>>([]);
+        return ValueTask.FromResult<IReadOnlyList<ModelDescriptorResponse>>(result: []);
     }
 
     public ValueTask<ModelImportResponse> ImportModelAsync(
@@ -62,14 +66,14 @@ public sealed class TestModelManagerService : IModelManagerService
         ModelImportRequest request,
         CancellationToken cancellationToken = default)
     {
-        ImportRequests.Add((provider, request.ModelId));
+        ImportRequests.Add(item: (provider, request.ModelId));
 
-        if (importResponses.TryDequeue(out ModelImportResponse? response))
+        if (importResponses.TryDequeue(result: out ModelImportResponse? response))
         {
-            return ValueTask.FromResult(response);
+            return ValueTask.FromResult(result: response);
         }
 
-        return ValueTask.FromResult(new ModelImportResponse
+        return ValueTask.FromResult(result: new ModelImportResponse
         {
             Provider = provider,
             ModelId = request.ModelId,

@@ -1,6 +1,11 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI.Brokers.Completions;
 using cCoder.AI.Brokers.ModelProviders;
 using cCoder.AI.Brokers.Shells;
+using cCoder.AI.Exposures;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Services.Foundations.Models;
 using cCoder.AI.Services.Foundations.Completions;
@@ -15,14 +20,14 @@ public static partial class IServiceCollectionExtensions
     public static IServiceCollection AddAI(
         this IServiceCollection services,
         Action<AIConfiguration> configure) =>
-        services.AddAI((_, configuration) => configure?.Invoke(configuration));
+        services.AddAI(configure: (_, configuration) => configure?.Invoke(configuration));
 
     public static IServiceCollection AddAI(
         this IServiceCollection services,
         Action<IServiceCollection, AIConfiguration> configure)
     {
-        AIConfiguration configuration = CreateConfiguration(services, configure);
-        RegisterAI(services, configuration);
+        AIConfiguration configuration = CreateConfiguration(services: services, configure: configure);
+        RegisterAI(services: services, configuration: configuration);
 
         return services;
     }
@@ -32,7 +37,7 @@ public static partial class IServiceCollectionExtensions
         AIConfiguration aiConfiguration)
     {
         AIConfiguration configuration = aiConfiguration ?? new AIConfiguration();
-        RegisterAI(services, configuration);
+        RegisterAI(services: services, configuration: configuration);
 
         return services;
     }
@@ -42,7 +47,7 @@ public static partial class IServiceCollectionExtensions
         Action<IServiceCollection, AIConfiguration> configure)
     {
         AIConfiguration configuration = new();
-        configure?.Invoke(services, configuration);
+        configure?.Invoke(arg1: services, arg2: configuration);
 
         return configuration;
     }
@@ -51,17 +56,21 @@ public static partial class IServiceCollectionExtensions
         IServiceCollection services,
         AIConfiguration configuration)
     {
-        services.AddSingleton(configuration);
-        services.AddSingleton<IOptions<AIConfiguration>>(_ => Options.Create(configuration));
+        services.AddSingleton(implementationInstance: configuration);
+        services.AddSingleton<IOptions<AIConfiguration>>(implementationFactory: _ => Options.Create(configuration));
         services.AddHttpClient<IChatCompletionsBroker, ChatCompletionsBroker>()
-            .ConfigureHttpClient(client => client.Timeout = Timeout.InfiniteTimeSpan);
+            .ConfigureHttpClient(configureClient: client => client.Timeout = Timeout.InfiniteTimeSpan);
         services.AddSingleton<ICodexCliBroker, CodexCliBroker>();
         services.AddHttpClient<IModelProviderBroker, ModelProviderBroker>()
-            .ConfigureHttpClient(client => client.Timeout = Timeout.InfiniteTimeSpan);
+            .ConfigureHttpClient(configureClient: client => client.Timeout = Timeout.InfiniteTimeSpan);
         services.AddTransient<IShellBroker, ShellBroker>();
         services.AddSingleton<IAIProviderExecutionLimiter, AIProviderExecutionLimiter>();
         services.AddTransient<ICompletionProviderService, CompletionProviderService>();
         services.AddTransient<IModelManagerService, ModelManagerService>();
         services.AddTransient<IAgentOrchestrationService, AgentOrchestrationService>();
+        services.AddTransient<ChatContext>();
+        services
+            .AddControllers()
+            .AddApplicationPart(assembly: typeof(ChatContext).Assembly);
     }
 }

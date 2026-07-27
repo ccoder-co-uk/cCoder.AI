@@ -1,21 +1,25 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI;
 using cCoder.AI.Models.Configurations;
 using AI.Web.Services.Diagnostics;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args: args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton<IAgentRunHistoryService, AgentRunHistoryService>();
-builder.Services.AddAI((_, configuration) =>
+builder.Services.AddAI(configure: (_, configuration) =>
 {
     builder.Configuration.GetSection(AIConfiguration.SectionName).Bind(configuration);
 });
 
 WebApplication app = builder.Build();
 
-if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Acceptance"))
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment(environmentName: "Acceptance"))
 {
     app.MapOpenApi();
 }

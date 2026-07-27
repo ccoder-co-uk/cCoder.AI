@@ -1,16 +1,21 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using AI.Web.Models;
+using AI.Web.Services.Diagnostics;
+using cCoder.AI.Exposures;
 using cCoder.AI.Models.Configurations;
+using cCoder.AI.Models.Enums;
 using cCoder.AI.Models.Requests;
-using cCoder.AI.Services.Orchestrations;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using AI.Web.Services.Diagnostics;
 
 namespace AI.Web.Controllers;
 
 public class HomeController(
     AIConfiguration aiConfiguration,
-    IAgentOrchestrationService agentOrchestrationService,
+    ChatContext chatContext,
     IAgentRunHistoryService agentRunHistoryService)
     : Controller
 {
@@ -25,12 +30,12 @@ public class HomeController(
     public IActionResult Index()
     {
         IReadOnlyList<AIProviderOptionViewModel> providers = aiConfiguration.Providers
-            .OrderBy(provider => provider.Key)
-            .Select(provider => new AIProviderOptionViewModel
+            .OrderBy(keySelector: provider => provider.Key)
+            .Select(selector: provider => new AIProviderOptionViewModel
             {
                 Key = provider.Key,
                 Name = string.IsNullOrWhiteSpace(provider.Value.Name) ? provider.Key : provider.Value.Name,
-                Description = BuildProviderDescription(provider.Key),
+                Description = BuildProviderDescription(provider.Value),
                 DefaultModel = provider.Value.CompletionProvider.DefaultModel,
                 SupportsModelListing = string.IsNullOrWhiteSpace(provider.Value.ModelProvider.Endpoint) is false,
             })
@@ -45,38 +50,28 @@ public class HomeController(
             Providers = providers,
         };
 
-        return View(viewModel);
+        return View(model: viewModel);
     }
 
     [HttpPost]
     public async Task StreamConversationAsync(
-        [FromBody] AgentWorkspaceRequest request,
+        [FromBody] ChatRequest chatRequest,
         CancellationToken cancellationToken)
     {
         DateTimeOffset startedOn = DateTimeOffset.UtcNow;
-        string provider = request.Provider ?? string.Empty;
-        string model = request.Model ?? string.Empty;
+        string provider = chatRequest.Provider ?? string.Empty;
+        string model = chatRequest.Model ?? string.Empty;
         int iterations = 0;
         bool succeeded = false;
         string? errorMessage = null;
 
         Response.StatusCode = StatusCodes.Status200OK;
         Response.ContentType = "application/x-ndjson";
+        chatRequest.SystemPrompt ??= WorkspaceUseCasePrompt;
 
-        AgentRunRequest agentRunRequest = new()
-        {
-            Instructions = request.Instructions,
-            MaxIterations = request.MaxIterations,
-            Model = request.Model,
-            Provider = request.Provider,
-            ShellKind = cCoder.AI.Models.Enums.ShellKind.Auto,
-            SystemPrompt = WorkspaceUseCasePrompt,
-            WorkingDirectory = request.WorkingDirectory,
-        };
-
-        await foreach (var token in agentOrchestrationService.StreamAsync(
-            agentRunRequest,
-            cancellationToken))
+        await foreach (var token in chatContext.InferAsStreamAsync(
+            chatRequest: chatRequest,
+            cancellationToken: cancellationToken))
         {
             if (token.Completion is not null)
             {
@@ -86,18 +81,28 @@ public class HomeController(
                 succeeded = token.Completion.Succeeded;
             }
 
-            if (token.Type.Equals("error", StringComparison.OrdinalIgnoreCase))
+            if (token.Type.Equals(
+                value: "error",
+                comparisonType: StringComparison.OrdinalIgnoreCase))
             {
                 errorMessage = token.Content;
             }
 
-            string serializedToken = JsonSerializer.Serialize(token);
-            await Response.WriteAsync(serializedToken, cancellationToken);
-            await Response.WriteAsync("\n", cancellationToken);
-            await Response.Body.FlushAsync(cancellationToken);
+            string serializedToken = JsonSerializer.Serialize(value: token);
+
+            await Response.WriteAsync(
+                text: serializedToken,
+                cancellationToken: cancellationToken);
+
+            await Response.WriteAsync(
+                text: "\n",
+                cancellationToken: cancellationToken);
+
+            await Response.Body.FlushAsync(
+                cancellationToken: cancellationToken);
         }
 
-        agentRunHistoryService.Record(new AgentRunHistoryEntry
+        agentRunHistoryService.Record(entry: new AgentRunHistoryEntry
         {
             Source = "Workspace",
             Operation = "Manual Chat",
@@ -105,17 +110,25 @@ public class HomeController(
             Model = model,
             Succeeded = succeeded && string.IsNullOrWhiteSpace(errorMessage),
             Iterations = iterations,
-            Summary = request.Instructions,
+            Summary = chatRequest.Instructions,
             ErrorMessage = errorMessage,
             RecordedOn = DateTimeOffset.UtcNow,
-            Duration = DateTimeOffset.UtcNow - startedOn
+            Duration = DateTimeOffset.UtcNow - startedOn,
         });
     }
 
-    private static string BuildProviderDescription(string providerKey) =>
-        providerKey.Equals("Ollama", StringComparison.OrdinalIgnoreCase)
-            ? "Local OpenAI-compatible endpoint for fast iteration against your machine."
-            : providerKey.Equals("AzureFoundry", StringComparison.OrdinalIgnoreCase)
-                ? "Remote hosted model using your Azure Foundry-compatible endpoint and key."
-                : "Configured AI provider.";
+    private static string BuildProviderDescription(
+        AIProviderConfiguration providerConfiguration) =>
+        providerConfiguration.CompletionProvider.Mode switch
+        {
+            AIProviderMode.OllamaApi =>
+                "Local Ollama endpoint for private, on-device inference.",
+            AIProviderMode.OpenAICompatible =>
+                "OpenAI-compatible hosted completion provider.",
+            AIProviderMode.AzureFoundry =>
+                "Azure AI Foundry hosted model deployment.",
+            AIProviderMode.CodexCli =>
+                "Codex CLI using its configured ChatGPT or API-key session.",
+            _ => "Configured AI provider.",
+        };
 }

@@ -1,0 +1,3712 @@
+{
+  "Classes": [
+    {
+      "Name": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "StandardElementType": "Broker",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "PostChatCompletionAsync",
+          "Inputs": [
+            {
+              "Name": "providerName",
+              "Type": "System.String"
+            },
+            {
+              "Name": "providerConfiguration",
+              "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration"
+            },
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.ProviderCompletionRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "StandardElementType": "Broker",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "CompleteAsync",
+          "Inputs": [
+            {
+              "Name": "providerName",
+              "Type": "System.String"
+            },
+            {
+              "Name": "providerConfiguration",
+              "Type": "cCoder.AI.Models.Configurations.AIProviderConfiguration"
+            },
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.ProviderCompletionRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "StandardElementType": "Broker",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "GetStringAsync",
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration"
+            },
+            {
+              "Name": "relativePath",
+              "Type": "System.String"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E"
+        },
+        {
+          "Name": "PostAsync",
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration"
+            },
+            {
+              "Name": "relativePath",
+              "Type": "System.String"
+            },
+            {
+              "Name": "payload",
+              "Type": "System.Object"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Brokers.Shells.ShellBroker",
+      "StandardElementType": "Broker",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "ExecuteAsync",
+          "Inputs": [
+            {
+              "Name": "command",
+              "Type": "System.String"
+            },
+            {
+              "Name": "workingDirectory",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "environmentVariables",
+              "Type": "System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?"
+            },
+            {
+              "Name": "shellKind",
+              "Type": "cCoder.AI.Models.Enums.ShellKind"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ToolExecutionResponse\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Exposures.ChatContext",
+      "StandardElementType": "Exposure",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "InferAsStreamAsync",
+          "Inputs": [
+            {
+              "Name": "chatRequest",
+              "Type": "cCoder.AI.Models.Requests.ChatRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Collections.Generic.IAsyncEnumerable\u003CcCoder.AI.Models.Responses.AgentStreamTokenResponse\u003E"
+        },
+        {
+          "Name": "InferAsync",
+          "Inputs": [
+            {
+              "Name": "chatRequest",
+              "Type": "cCoder.AI.Models.Requests.ChatRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.AgentRunResponse\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Exposures.Controllers.AIController",
+      "StandardElementType": "Exposure",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "PostAgentsAsync",
+          "Inputs": [
+            {
+              "Name": "agentRunRequest",
+              "Type": "cCoder.AI.Models.Requests.AgentRunRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+        },
+        {
+          "Name": "PostChatAsync",
+          "Inputs": [
+            {
+              "Name": "chatRequest",
+              "Type": "cCoder.AI.Models.Requests.ChatRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+        },
+        {
+          "Name": "PostCompletionsAsync",
+          "Inputs": [
+            {
+              "Name": "completionRequest",
+              "Type": "cCoder.AI.Models.Requests.CompletionRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+        },
+        {
+          "Name": "StreamAgentsAsync",
+          "Inputs": [
+            {
+              "Name": "agentRunRequest",
+              "Type": "cCoder.AI.Models.Requests.AgentRunRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.Task"
+        },
+        {
+          "Name": "StreamChatAsync",
+          "Inputs": [
+            {
+              "Name": "chatRequest",
+              "Type": "cCoder.AI.Models.Requests.ChatRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.Task"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Exposures.Controllers.ModelController",
+      "StandardElementType": "Exposure",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "GetAvailableModelsAsync",
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+        },
+        {
+          "Name": "PostImportModelAsync",
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String"
+            },
+            {
+              "Name": "modelImportRequest",
+              "Type": "cCoder.AI.Models.Requests.ModelImportRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.IServiceCollectionExtensions",
+      "StandardElementType": "App",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "AddAI",
+          "Inputs": [
+            {
+              "Name": "services",
+              "Type": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
+            },
+            {
+              "Name": "configure",
+              "Type": "System.Action\u003CcCoder.AI.Models.Configurations.AIConfiguration\u003E"
+            }
+          ],
+          "ReturnType": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
+        },
+        {
+          "Name": "AddAI",
+          "Inputs": [
+            {
+              "Name": "services",
+              "Type": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
+            },
+            {
+              "Name": "configure",
+              "Type": "System.Action\u003CMicrosoft.Extensions.DependencyInjection.IServiceCollection, cCoder.AI.Models.Configurations.AIConfiguration\u003E"
+            }
+          ],
+          "ReturnType": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
+        },
+        {
+          "Name": "AddAI",
+          "Inputs": [
+            {
+              "Name": "services",
+              "Type": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
+            },
+            {
+              "Name": "aiConfiguration",
+              "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
+            }
+          ],
+          "ReturnType": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.AIAgentConfiguration",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "BasePrompt",
+          "Type": "System.String"
+        },
+        {
+          "Name": "MaxIterations",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "ShellCommandTimeoutSeconds",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "StreamingChunkCharacterCount",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "StreamingChunkDelayMilliseconds",
+          "Type": "System.Int32"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "ApiKey",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ApiKeyHeaderName",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ApiKeyScheme",
+          "Type": "System.String"
+        },
+        {
+          "Name": "DefaultModel",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Endpoint",
+          "Type": "System.String"
+        },
+        {
+          "Name": "MaxRetryAttempts",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Mode",
+          "Type": "cCoder.AI.Models.Enums.AIProviderMode"
+        },
+        {
+          "Name": "RetryBaseDelayMilliseconds",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Temperature",
+          "Type": "System.Double"
+        },
+        {
+          "Name": "TimeoutSeconds",
+          "Type": "System.Int32"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.AIConfiguration",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Agent",
+          "Type": "cCoder.AI.Models.Configurations.AIAgentConfiguration"
+        },
+        {
+          "Name": "DefaultProvider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Providers",
+          "Type": "System.Collections.Generic.Dictionary\u003CSystem.String, cCoder.AI.Models.Configurations.AIProviderConfiguration\u003E"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "StandardElementType": "Dependency",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "AddCodex",
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
+            },
+            {
+              "Name": "key",
+              "Type": "System.String"
+            },
+            {
+              "Name": "configure",
+              "Type": "System.Action\u003CcCoder.AI.Models.Configurations.CodexAIProviderOptions\u003E"
+            }
+          ],
+          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration"
+        },
+        {
+          "Name": "AddFoundry",
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
+            },
+            {
+              "Name": "key",
+              "Type": "System.String"
+            },
+            {
+              "Name": "configure",
+              "Type": "System.Action\u003CcCoder.AI.Models.Configurations.FoundryAIProviderOptions\u003E"
+            }
+          ],
+          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration"
+        },
+        {
+          "Name": "AddOllama",
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
+            },
+            {
+              "Name": "key",
+              "Type": "System.String"
+            },
+            {
+              "Name": "configure",
+              "Type": "System.Action\u003CcCoder.AI.Models.Configurations.OllamaAIProviderOptions\u003E"
+            }
+          ],
+          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration"
+        },
+        {
+          "Name": "AddOpenAI",
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
+            },
+            {
+              "Name": "key",
+              "Type": "System.String"
+            },
+            {
+              "Name": "configure",
+              "Type": "System.Action\u003CcCoder.AI.Models.Configurations.OpenAIProviderOptions\u003E"
+            }
+          ],
+          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "ApiKey",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ApiKeyHeaderName",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ApiKeyScheme",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Endpoint",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Mode",
+          "Type": "cCoder.AI.Models.Enums.AIModelProviderMode"
+        },
+        {
+          "Name": "TimeoutSeconds",
+          "Type": "System.Int32"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.AIProviderConfiguration",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "CodexCli",
+          "Type": "cCoder.AI.Models.Configurations.CodexCliConfiguration"
+        },
+        {
+          "Name": "CompletionProvider",
+          "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration"
+        },
+        {
+          "Name": "MaxConcurrency",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "ModelProvider",
+          "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration"
+        },
+        {
+          "Name": "Name",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "ApiKey",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Endpoint",
+          "Type": "System.String"
+        },
+        {
+          "Name": "MaxConcurrency",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "MaxRetryAttempts",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ModelEndpoint",
+          "Type": "System.String"
+        },
+        {
+          "Name": "RetryBaseDelayMilliseconds",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Temperature",
+          "Type": "System.Double"
+        },
+        {
+          "Name": "TimeoutSeconds",
+          "Type": "System.Int32"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "ExecutablePath",
+          "Type": "System.String"
+        },
+        {
+          "Name": "IgnoreRules",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "IgnoreUserConfiguration",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "LocalProvider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ReasoningEffort",
+          "Type": "System.String"
+        },
+        {
+          "Name": "SandboxMode",
+          "Type": "System.String"
+        },
+        {
+          "Name": "UseOss",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "WorkingDirectory",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.CodexCliConfiguration",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "ExecutablePath",
+          "Type": "System.String"
+        },
+        {
+          "Name": "IgnoreRules",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "IgnoreUserConfiguration",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "LocalProvider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ReasoningEffort",
+          "Type": "System.String"
+        },
+        {
+          "Name": "SandboxMode",
+          "Type": "System.String"
+        },
+        {
+          "Name": "UseOss",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "WorkingDirectory",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.FoundryAIProviderOptions",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "ApiKeyHeaderName",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ApiKeyScheme",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.OllamaAIProviderOptions",
+      "StandardElementType": "Model",
+      "Properties": [],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Configurations.OpenAIProviderOptions",
+      "StandardElementType": "Model",
+      "Properties": [],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Internal.AgentDirective",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Command",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Message",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Reason",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Tool",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Type",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Requests.AgentRunRequest",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "EnvironmentVariables",
+          "Type": "System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?"
+        },
+        {
+          "Name": "InputFilePaths",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E"
+        },
+        {
+          "Name": "Instructions",
+          "Type": "System.String"
+        },
+        {
+          "Name": "MaxIterations",
+          "Type": "System.Int32?"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "ShellKind",
+          "Type": "cCoder.AI.Models.Enums.ShellKind"
+        },
+        {
+          "Name": "SystemPrompt",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "WorkingDirectory",
+          "Type": "System.String?"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Requests.ChatCompletionMessage",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Content",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Role",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Requests.ChatRequest",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "EnvironmentVariables",
+          "Type": "System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?"
+        },
+        {
+          "Name": "InputFilePaths",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E"
+        },
+        {
+          "Name": "Instructions",
+          "Type": "System.String"
+        },
+        {
+          "Name": "MaxIterations",
+          "Type": "System.Int32?"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "ShellKind",
+          "Type": "cCoder.AI.Models.Enums.ShellKind"
+        },
+        {
+          "Name": "SystemPrompt",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "WorkingDirectory",
+          "Type": "System.String?"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Requests.CompletionRequest",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Model",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Prompt",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "SystemPrompt",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Temperature",
+          "Type": "System.Double?"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Requests.ModelImportRequest",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "ModelId",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Requests.ProviderCompletionRequest",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "EnableShellTooling",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "InputFilePaths",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E"
+        },
+        {
+          "Name": "Messages",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Temperature",
+          "Type": "System.Double"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Responses.AIProviderCapabilitiesResponse",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "DefaultModel",
+          "Type": "System.String"
+        },
+        {
+          "Name": "MaxConcurrency",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "SupportsModelImport",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "SupportsModelListing",
+          "Type": "System.Boolean"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Responses.AgentIterationResponse",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "CompletionContent",
+          "Type": "System.String"
+        },
+        {
+          "Name": "IterationNumber",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "ParseError",
+          "Type": "System.String"
+        },
+        {
+          "Name": "RequestMessages",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E"
+        },
+        {
+          "Name": "ResultType",
+          "Type": "cCoder.AI.Models.Enums.AgentResultType"
+        },
+        {
+          "Name": "ToolExecution",
+          "Type": "cCoder.AI.Models.Responses.ToolExecutionResponse?"
+        },
+        {
+          "Name": "ToolName",
+          "Type": "System.String?"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Responses.AgentRunResponse",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "FinalMessage",
+          "Type": "System.String"
+        },
+        {
+          "Name": "IterationResponses",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Responses.AgentIterationResponse\u003E"
+        },
+        {
+          "Name": "Iterations",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Succeeded",
+          "Type": "System.Boolean"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Responses.AgentStreamTokenResponse",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Completion",
+          "Type": "cCoder.AI.Models.Responses.AgentRunResponse?"
+        },
+        {
+          "Name": "Content",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Sequence",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Type",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Responses.CompletionResponse",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Content",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "RawContent",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Responses.ModelDescriptorResponse",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Description",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Id",
+          "Type": "System.String"
+        },
+        {
+          "Name": "IsAvailable",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "Name",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Publisher",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Version",
+          "Type": "System.String?"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Responses.ModelImportResponse",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Message",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ModelId",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "RawContent",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Succeeded",
+          "Type": "System.Boolean"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Responses.ToolExecutionResponse",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Command",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ExitCode",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "ShellKind",
+          "Type": "cCoder.AI.Models.Enums.ShellKind"
+        },
+        {
+          "Name": "StandardError",
+          "Type": "System.String"
+        },
+        {
+          "Name": "StandardOutput",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ToolName",
+          "Type": "System.String"
+        },
+        {
+          "Name": "WorkingDirectory",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "StandardElementType": "FoundationService",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "AcquireAsync",
+          "Inputs": [
+            {
+              "Name": "providerKey",
+              "Type": "System.String"
+            },
+            {
+              "Name": "maxConcurrency",
+              "Type": "System.Int32"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.IAsyncDisposable\u003E"
+        },
+        {
+          "Name": "Dispose",
+          "Inputs": [],
+          "ReturnType": "System.Void"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "StandardElementType": "FoundationService",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "DisposeAsync",
+          "Inputs": [],
+          "ReturnType": "System.Threading.Tasks.ValueTask"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "StandardElementType": "FoundationService",
+      "Properties": [
+        {
+          "Name": "MaxConcurrency",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Semaphore",
+          "Type": "System.Threading.SemaphoreSlim"
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "\u003CClone\u003E$",
+          "Inputs": [],
+          "ReturnType": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate"
+        },
+        {
+          "Name": "Deconstruct",
+          "Inputs": [
+            {
+              "Name": "MaxConcurrency",
+              "Type": "System.Int32"
+            }
+          ],
+          "ReturnType": "System.Void"
+        },
+        {
+          "Name": "Equals",
+          "Inputs": [
+            {
+              "Name": "obj",
+              "Type": "System.Object?"
+            }
+          ],
+          "ReturnType": "System.Boolean"
+        },
+        {
+          "Name": "Equals",
+          "Inputs": [
+            {
+              "Name": "other",
+              "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate?"
+            }
+          ],
+          "ReturnType": "System.Boolean"
+        },
+        {
+          "Name": "GetHashCode",
+          "Inputs": [],
+          "ReturnType": "System.Int32"
+        },
+        {
+          "Name": "ToString",
+          "Inputs": [],
+          "ReturnType": "System.String"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "StandardElementType": "FoundationService",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "CompleteAsync",
+          "Inputs": [
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.CompletionRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+        },
+        {
+          "Name": "CompleteChatAsync",
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "model",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "messages",
+              "Type": "System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E"
+            },
+            {
+              "Name": "temperature",
+              "Type": "System.Double?"
+            },
+            {
+              "Name": "enableShellTooling",
+              "Type": "System.Boolean"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+        },
+        {
+          "Name": "CompleteChatAsync",
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "model",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "messages",
+              "Type": "System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E"
+            },
+            {
+              "Name": "temperature",
+              "Type": "System.Double?"
+            },
+            {
+              "Name": "enableShellTooling",
+              "Type": "System.Boolean"
+            },
+            {
+              "Name": "inputFilePaths",
+              "Type": "System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E?"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "StandardElementType": "FoundationService",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "GetProviderCapabilities",
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String"
+            }
+          ],
+          "ReturnType": "cCoder.AI.Models.Responses.AIProviderCapabilitiesResponse"
+        },
+        {
+          "Name": "ImportModelAsync",
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String"
+            },
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.ModelImportRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ModelImportResponse\u003E"
+        },
+        {
+          "Name": "RetrieveAvailableModelsAsync",
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Responses.ModelDescriptorResponse\u003E\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "StandardElementType": "OrchestrationService",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "RunAsync",
+          "Inputs": [
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.AgentRunRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.AgentRunResponse\u003E"
+        },
+        {
+          "Name": "StreamAsync",
+          "Inputs": [
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.AgentRunRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Collections.Generic.IAsyncEnumerable\u003CcCoder.AI.Models.Responses.AgentStreamTokenResponse\u003E"
+        }
+      ]
+    }
+  ],
+  "Links": [
+    {
+      "FromType": "cCoder.AI.Exposures.ChatContext",
+      "ToType": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService"
+    },
+    {
+      "FromType": "cCoder.AI.Exposures.Controllers.AIController",
+      "ToType": "cCoder.AI.Exposures.ChatContext"
+    },
+    {
+      "FromType": "cCoder.AI.Exposures.Controllers.AIController",
+      "ToType": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService"
+    },
+    {
+      "FromType": "cCoder.AI.Exposures.Controllers.AIController",
+      "ToType": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService"
+    },
+    {
+      "FromType": "cCoder.AI.Exposures.Controllers.ModelController",
+      "ToType": "cCoder.AI.Services.Foundations.Models.ModelManagerService"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "ToType": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "ToType": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "ToType": "cCoder.AI.Brokers.Completions.CodexCliBroker"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "ToType": "cCoder.AI.Models.Configurations.AIConfiguration"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "ToType": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "ToType": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "ToType": "cCoder.AI.Models.Configurations.AIConfiguration"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "ToType": "cCoder.AI.Brokers.Shells.ShellBroker"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "ToType": "cCoder.AI.Models.Configurations.AIConfiguration"
+    },
+    {
+      "FromType": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "ToType": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService"
+    }
+  ],
+  "AnalysisItems": [
+    {
+      "Code": "STX0006",
+      "Description": "Business implementation classes should be internal by default.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 21
+    },
+    {
+      "Code": "STXB003",
+      "Description": "A broker must not contain loops.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 32
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 34
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 37
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 40
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 42
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STXB005",
+      "Description": "A broker must not handle exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 47
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 59
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 60
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 61
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 62
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 62
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 68
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 70
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 95
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 102
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 103
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 105
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 108
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 108
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 109
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 113
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 113
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 122
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 123
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 123
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 132
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 137
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 148
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 167
+    },
+    {
+      "Code": "STXFORMAT002",
+      "Description": "Expression-bodied method implementations must start on the line after the =\u003E token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 186
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 222
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 248
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 253
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 257
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 261
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 277
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 285
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 305
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 310
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 315
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 320
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 327
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 330
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 335
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 340
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 343
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 349
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 352
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 356
+    },
+    {
+      "Code": "STX0006",
+      "Description": "Business implementation classes should be internal by default.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 21
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 25
+    },
+    {
+      "Code": "STXB005",
+      "Description": "A broker must not handle exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 42
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 42
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 44
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 56
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 60
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 62
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 62
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 63
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 63
+    },
+    {
+      "Code": "STXB005",
+      "Description": "A broker must not handle exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 65
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 77
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 77
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 80
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 83
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 84
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 106
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 106
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 106
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 109
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 109
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 110
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 111
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 111
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 112
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 113
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 113
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 118
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 118
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 123
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 123
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 126
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 126
+    },
+    {
+      "Code": "STXB003",
+      "Description": "A broker must not contain loops.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 139
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 143
+    },
+    {
+      "Code": "STXB003",
+      "Description": "A broker must not contain loops.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 167
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 167
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 180
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 181
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 191
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 191
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 198
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 198
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 201
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 201
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 202
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 204
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 204
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 210
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 210
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 211
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 214
+    },
+    {
+      "Code": "STXB005",
+      "Description": "A broker must not handle exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 219
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 221
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 222
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 230
+    },
+    {
+      "Code": "STX0006",
+      "Description": "Business implementation classes should be internal by default.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 40
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 72
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 73
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 73
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 90
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 95
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 106
+    },
+    {
+      "Code": "STX0006",
+      "Description": "Business implementation classes should be internal by default.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
+      "LineNumber": 22
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
+      "LineNumber": 22
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
+      "LineNumber": 70
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
+      "LineNumber": 74
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
+      "LineNumber": 75
+    },
+    {
+      "Code": "STXB002",
+      "Description": "A broker must not contain branching logic.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
+      "LineNumber": 81
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.ChatContext",
+      "LineNumber": 42
+    },
+    {
+      "Code": "STXAPI001",
+      "Description": "An API controller must have exactly one business dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXAPI002",
+      "Description": "An API controller must expose a single model contract.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 24
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 37
+    },
+    {
+      "Code": "STXAPI004",
+      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 48
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 60
+    },
+    {
+      "Code": "STXAPI004",
+      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 71
+    },
+    {
+      "Code": "STXE002",
+      "Description": "An exposure must not contain loops.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 88
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 104
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
+      "LineNumber": 33
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIAgentConfiguration",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIAgentConfiguration",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIAgentConfiguration",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIAgentConfiguration",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIAgentConfiguration",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 18
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 19
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
+      "LineNumber": 20
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfiguration",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfiguration",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfiguration",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderConfiguration",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderConfiguration",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderConfiguration",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderConfiguration",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
+      "LineNumber": 44
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
+      "LineNumber": 46
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
+      "LineNumber": 47
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
+      "LineNumber": 48
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
+      "LineNumber": 49
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
+      "LineNumber": 51
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexCliConfiguration",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexCliConfiguration",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexCliConfiguration",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexCliConfiguration",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexCliConfiguration",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexCliConfiguration",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.CodexCliConfiguration",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.FoundryAIProviderOptions",
+      "LineNumber": 38
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.FoundryAIProviderOptions",
+      "LineNumber": 39
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Internal.AgentDirective",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.AgentRunRequest",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.AgentRunRequest",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.AgentRunRequest",
+      "LineNumber": 19
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ChatCompletionMessage",
+      "LineNumber": 19
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ChatCompletionMessage",
+      "LineNumber": 20
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ChatRequest",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ChatRequest",
+      "LineNumber": 19
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ChatRequest",
+      "LineNumber": 26
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.CompletionRequest",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ModelImportRequest",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ProviderCompletionRequest",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ProviderCompletionRequest",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ProviderCompletionRequest",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AIProviderCapabilitiesResponse",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AIProviderCapabilitiesResponse",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AIProviderCapabilitiesResponse",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AgentIterationResponse",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AgentIterationResponse",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AgentIterationResponse",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AgentRunResponse",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AgentRunResponse",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AgentRunResponse",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AgentRunResponse",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.AgentStreamTokenResponse",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.CompletionResponse",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.CompletionResponse",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.CompletionResponse",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.CompletionResponse",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ModelDescriptorResponse",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ModelDescriptorResponse",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ModelDescriptorResponse",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ModelImportResponse",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ModelImportResponse",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ModelImportResponse",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ModelImportResponse",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ToolExecutionResponse",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ToolExecutionResponse",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ToolExecutionResponse",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ToolExecutionResponse",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Responses.ToolExecutionResponse",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STX0006",
+      "Description": "Business implementation classes should be internal by default.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STX0008",
+      "Description": "A service must declare its validations in a Validations partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STX0009",
+      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STX0010",
+      "Description": "Every public service method must enter through a local TryCatch operation.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STX0011",
+      "Description": "Every service input must be validated inside TryCatch before business work.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXEX001",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXEX002",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXEX003",
+      "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 20
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 23
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 40
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 57
+    },
+    {
+      "Code": "STX0008",
+      "Description": "A service must declare its validations in a Validations partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "LineNumber": 50
+    },
+    {
+      "Code": "STX0009",
+      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "LineNumber": 50
+    },
+    {
+      "Code": "STX0010",
+      "Description": "Every public service method must enter through a local TryCatch operation.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "LineNumber": 50
+    },
+    {
+      "Code": "STX0014",
+      "Description": "A service contract must be named after its implementation with an I prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "LineNumber": 50
+    },
+    {
+      "Code": "STXEX001",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "LineNumber": 50
+    },
+    {
+      "Code": "STXEX002",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "LineNumber": 50
+    },
+    {
+      "Code": "STXEX003",
+      "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "LineNumber": 50
+    },
+    {
+      "Code": "STXF002",
+      "Description": "A foundation service may only depend on brokers, exposures, or nothing.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "LineNumber": 50
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
+      "LineNumber": 57
+    },
+    {
+      "Code": "STX0004",
+      "Description": "A service must not depend on another service at the same layer.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STX0008",
+      "Description": "A service must declare its validations in a Validations partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STX0009",
+      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STX0014",
+      "Description": "A service contract must be named after its implementation with an I prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STX0015",
+      "Description": "Every public service method must be declared by its local interface.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STXEX001",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STXEX002",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STXEX003",
+      "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STXF002",
+      "Description": "A foundation service may only depend on brokers, exposures, or nothing.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 45
+    },
+    {
+      "Code": "STX0002",
+      "Description": "Properties may only be declared on models.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
+      "LineNumber": 47
+    },
+    {
+      "Code": "STX0004",
+      "Description": "A service must not depend on another service at the same layer.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STX0006",
+      "Description": "Business implementation classes should be internal by default.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STX0007",
+      "Description": "A service public API must use one model contract or primitive types.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STX0008",
+      "Description": "A service must declare its validations in a Validations partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STX0009",
+      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STX0010",
+      "Description": "Every public service method must enter through a local TryCatch operation.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STX0011",
+      "Description": "Every service input must be validated inside TryCatch before business work.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXEX001",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXEX002",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXEX003",
+      "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXF002",
+      "Description": "A foundation service may only depend on brokers, exposures, or nothing.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STX0018",
+      "Description": "Service method names must include each model type they operate on.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 19
+    },
+    {
+      "Code": "STX0005",
+      "Description": "A public service method must not call another public method on the same service.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 34
+    },
+    {
+      "Code": "STX0018",
+      "Description": "Service method names must include each model type they operate on.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 43
+    },
+    {
+      "Code": "STXFORMAT012",
+      "Description": "Expression-bodied methods must return awaitable calls directly instead of adding redundant async and await keywords.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 43
+    },
+    {
+      "Code": "STX0005",
+      "Description": "A public service method must not call another public method on the same service.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 50
+    },
+    {
+      "Code": "STX0018",
+      "Description": "Service method names must include each model type they operate on.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 59
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 71
+    },
+    {
+      "Code": "STX0006",
+      "Description": "Business implementation classes should be internal by default.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STX0007",
+      "Description": "A service public API must use one model contract or primitive types.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STX0008",
+      "Description": "A service must declare its validations in a Validations partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STX0009",
+      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STX0010",
+      "Description": "Every public service method must enter through a local TryCatch operation.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STX0011",
+      "Description": "Every service input must be validated inside TryCatch before business work.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STX0012",
+      "Description": "Business-operation validation methods must evaluate their rules through a validation collector.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STX0023",
+      "Description": "Each business operation must call its operation-specific validation method.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXEX001",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXEX002",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXEX003",
+      "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXF002",
+      "Description": "A foundation service may only depend on brokers, exposures, or nothing.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 23
+    },
+    {
+      "Code": "STX0005",
+      "Description": "A public service method must not call another public method on the same service.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 44
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 44
+    },
+    {
+      "Code": "STX0018",
+      "Description": "Service method names must include each model type they operate on.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 66
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 110
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 148
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 163
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 172
+    },
+    {
+      "Code": "STX0006",
+      "Description": "Business implementation classes should be internal by default.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STX0007",
+      "Description": "A service public API must use one model contract or primitive types.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STX0008",
+      "Description": "A service must declare its validations in a Validations partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STX0009",
+      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STX0010",
+      "Description": "Every public service method must enter through a local TryCatch operation.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STX0011",
+      "Description": "Every service input must be validated inside TryCatch before business work.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STXEX001",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STXEX002",
+      "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STXEX003",
+      "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STXO001",
+      "Description": "An orchestration must have two or three foundation or processing dependencies and must not mix them.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STX0018",
+      "Description": "Service method names must include each model type they operate on.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 25
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 32
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 73
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 121
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 141
+    },
+    {
+      "Code": "STX0018",
+      "Description": "Service method names must include each model type they operate on.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 155
+    },
+    {
+      "Code": "STX0005",
+      "Description": "A public service method must not call another public method on the same service.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 170
+    }
+  ]
+}

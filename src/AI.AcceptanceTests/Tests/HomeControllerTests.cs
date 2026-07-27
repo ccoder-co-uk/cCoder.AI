@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using AI.AcceptanceTests.Infrastructure;
 using FluentAssertions;
 
@@ -14,7 +18,7 @@ public sealed partial class HomeControllerTests(AIWebApplicationFactory factory)
         // Given
         factory.ModelManagerService.Reset();
         factory.ModelManagerService.SeedAvailableModels(
-            "Ollama",
+provider: "Ollama",
             new cCoder.AI.Models.Responses.ModelDescriptorResponse
             {
                 Id = "gpt-oss:20b",
@@ -24,16 +28,16 @@ public sealed partial class HomeControllerTests(AIWebApplicationFactory factory)
             });
 
         // When
-        using HttpResponseMessage response = await client.GetAsync("/");
+        using HttpResponseMessage response = await client.GetAsync(requestUri: "/");
         string content = await response.Content.ReadAsStringAsync();
 
         // Then
-        response.IsSuccessStatusCode.Should().BeTrue(content);
-        content.Should().Contain("Agent Console");
-        content.Should().Contain("Send to Agent");
-        content.Should().Contain("Conversation");
-        content.Should().Contain("Refresh Models");
-        content.Should().NotContain("Iteration Trace");
+        response.IsSuccessStatusCode.Should().BeTrue(because: content);
+        content.Should().Contain(expected: "Agent Console");
+        content.Should().Contain(expected: "Send to Agent");
+        content.Should().Contain(expected: "Conversation");
+        content.Should().Contain(expected: "Refresh Models");
+        content.Should().NotContain(unexpected: "Iteration Trace");
     }
 
     [Fact]
@@ -42,7 +46,7 @@ public sealed partial class HomeControllerTests(AIWebApplicationFactory factory)
         // Given
         factory.ModelManagerService.Reset();
         factory.ModelManagerService.SeedAvailableModels(
-            "Ollama",
+provider: "Ollama",
             new cCoder.AI.Models.Responses.ModelDescriptorResponse
             {
                 Id = "gpt-oss:20b",
@@ -52,14 +56,14 @@ public sealed partial class HomeControllerTests(AIWebApplicationFactory factory)
             });
 
         // When
-        using HttpResponseMessage response = await client.GetAsync("/Admin");
+        using HttpResponseMessage response = await client.GetAsync(requestUri: "/Admin");
         string content = await response.Content.ReadAsStringAsync();
 
         // Then
-        response.IsSuccessStatusCode.Should().BeTrue(content);
-        content.Should().Contain("Operational Visibility");
-        content.Should().Contain("Provider Diagnostics");
-        content.Should().Contain("Recent Activity");
-        content.Should().Contain("gpt-oss:20b");
+        response.IsSuccessStatusCode.Should().BeTrue(because: content);
+        content.Should().Contain(expected: "Operational Visibility");
+        content.Should().Contain(expected: "Provider Diagnostics");
+        content.Should().Contain(expected: "Recent Activity");
+        content.Should().Contain(expected: "gpt-oss:20b");
     }
 }

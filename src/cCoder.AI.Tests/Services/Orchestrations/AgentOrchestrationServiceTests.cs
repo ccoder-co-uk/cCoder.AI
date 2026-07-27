@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI.Brokers.Shells;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Services.Foundations.Completions;
@@ -30,8 +34,8 @@ public partial class AgentOrchestrationServiceTests
         };
 
         agentOrchestrationService = new AgentOrchestrationService(
-            completionProviderServiceMock.Object,
-            shellBrokerMock.Object,
-            aiConfiguration);
+completionProviderService: completionProviderServiceMock.Object,
+shellBroker: shellBrokerMock.Object,
+aiConfiguration: aiConfiguration);
     }
 }

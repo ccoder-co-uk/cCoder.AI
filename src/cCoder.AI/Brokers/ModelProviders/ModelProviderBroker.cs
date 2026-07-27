@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -15,18 +19,18 @@ public class ModelProviderBroker(HttpClient httpClient) : IModelProviderBroker
         CancellationToken cancellationToken = default)
     {
         using CancellationTokenSource requestTimeout = CreateRequestTimeout(
-            configuration.TimeoutSeconds,
-            cancellationToken);
+timeoutSeconds: configuration.TimeoutSeconds,
+cancellationToken: cancellationToken);
 
         using HttpRequestMessage httpRequestMessage =
-            new(HttpMethod.Get, BuildUri(configuration.Endpoint, relativePath));
+            new(HttpMethod.Get, BuildUri(endpoint: configuration.Endpoint, relativePath: relativePath));
 
-        ApplyAuthentication(configuration, httpRequestMessage);
+        ApplyAuthentication(configuration: configuration, httpRequestMessage: httpRequestMessage);
 
         using HttpResponseMessage response =
-            await httpClient.SendAsync(httpRequestMessage, requestTimeout.Token);
+            await httpClient.SendAsync(request: httpRequestMessage, cancellationToken: requestTimeout.Token);
 
-        string content = await response.Content.ReadAsStringAsync(requestTimeout.Token);
+        string content = await response.Content.ReadAsStringAsync(cancellationToken: requestTimeout.Token);
         response.EnsureSuccessStatusCode();
 
         return content;
@@ -39,21 +43,21 @@ public class ModelProviderBroker(HttpClient httpClient) : IModelProviderBroker
         CancellationToken cancellationToken = default)
     {
         using CancellationTokenSource requestTimeout = CreateRequestTimeout(
-            configuration.TimeoutSeconds,
-            cancellationToken);
+timeoutSeconds: configuration.TimeoutSeconds,
+cancellationToken: cancellationToken);
 
         using HttpRequestMessage httpRequestMessage =
-            new(HttpMethod.Post, BuildUri(configuration.Endpoint, relativePath));
+            new(HttpMethod.Post, BuildUri(endpoint: configuration.Endpoint, relativePath: relativePath));
 
-        ApplyAuthentication(configuration, httpRequestMessage);
+        ApplyAuthentication(configuration: configuration, httpRequestMessage: httpRequestMessage);
 
-        string serializedPayload = JsonSerializer.Serialize(payload, JsonSerializerOptions);
-        httpRequestMessage.Content = new StringContent(serializedPayload, Encoding.UTF8, "application/json");
+        string serializedPayload = JsonSerializer.Serialize(value: payload, options: JsonSerializerOptions);
+        httpRequestMessage.Content = new StringContent(content: serializedPayload, encoding: Encoding.UTF8, mediaType: "application/json");
 
         using HttpResponseMessage response =
-            await httpClient.SendAsync(httpRequestMessage, requestTimeout.Token);
+            await httpClient.SendAsync(request: httpRequestMessage, cancellationToken: requestTimeout.Token);
 
-        string content = await response.Content.ReadAsStringAsync(requestTimeout.Token);
+        string content = await response.Content.ReadAsStringAsync(cancellationToken: requestTimeout.Token);
         response.EnsureSuccessStatusCode();
 
         return content;
@@ -63,18 +67,18 @@ public class ModelProviderBroker(HttpClient httpClient) : IModelProviderBroker
         int timeoutSeconds,
         CancellationToken cancellationToken)
     {
-        CancellationTokenSource requestTimeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        CancellationTokenSource requestTimeout = CancellationTokenSource.CreateLinkedTokenSource(token: cancellationToken);
 
         if (timeoutSeconds > 0)
-            requestTimeout.CancelAfter(TimeSpan.FromSeconds(timeoutSeconds));
+            requestTimeout.CancelAfter(delay: TimeSpan.FromSeconds(timeoutSeconds));
 
         return requestTimeout;
     }
 
     private static string BuildUri(string endpoint, string relativePath)
     {
-        string trimmedEndpoint = endpoint.TrimEnd('/');
-        string trimmedRelativePath = relativePath.TrimStart('/');
+        string trimmedEndpoint = endpoint.TrimEnd(trimChar: '/');
+        string trimmedRelativePath = relativePath.TrimStart(trimChar: '/');
 
         return $"{trimmedEndpoint}/{trimmedRelativePath}";
     }
@@ -83,26 +87,26 @@ public class ModelProviderBroker(HttpClient httpClient) : IModelProviderBroker
         AIModelProviderConfiguration configuration,
         HttpRequestMessage httpRequestMessage)
     {
-        if (string.IsNullOrWhiteSpace(configuration.ApiKey))
+        if (string.IsNullOrWhiteSpace(value: configuration.ApiKey))
         {
             return;
         }
 
         if (configuration.ApiKeyHeaderName.Equals(
-            "Authorization",
-            StringComparison.OrdinalIgnoreCase))
+value: "Authorization",
+comparisonType: StringComparison.OrdinalIgnoreCase))
         {
             httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue(
-                configuration.ApiKeyScheme,
-                configuration.ApiKey);
+scheme: configuration.ApiKeyScheme,
+parameter: configuration.ApiKey);
 
             return;
         }
 
-        string headerValue = string.IsNullOrWhiteSpace(configuration.ApiKeyScheme)
+        string headerValue = string.IsNullOrWhiteSpace(value: configuration.ApiKeyScheme)
             ? configuration.ApiKey
             : $"{configuration.ApiKeyScheme} {configuration.ApiKey}";
 
-        httpRequestMessage.Headers.Add(configuration.ApiKeyHeaderName, headerValue);
+        httpRequestMessage.Headers.Add(name: configuration.ApiKeyHeaderName, value: headerValue);
     }
 }

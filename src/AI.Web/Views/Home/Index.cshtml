@@ -99,7 +99,9 @@
     </section>
 </section>
 
-<script type="application/json" id="provider-options">@Html.Raw(providerJson)</script>
+<script type="application/json"
+        id="provider-options"
+        data-system-prompt="@Model.UseCasePrompt">@Html.Raw(providerJson)</script>
 
 @section Scripts
 {

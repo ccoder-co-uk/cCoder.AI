@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Net.Http.Json;
 using System.Text.Json;
 using AI.AcceptanceTests.Infrastructure;
@@ -24,20 +28,20 @@ public sealed partial class AIControllerTests : IClassFixture<AIWebApplicationFa
     private async Task<T> ReadAsAsync<T>(HttpResponseMessage httpResponseMessage)
     {
         string content = await httpResponseMessage.Content.ReadAsStringAsync();
-        httpResponseMessage.IsSuccessStatusCode.Should().BeTrue(content);
+        httpResponseMessage.IsSuccessStatusCode.Should().BeTrue(because: content);
 
-        return JsonSerializer.Deserialize<T>(content, JsonSerializerOptions)
-            ?? throw new InvalidOperationException("The acceptance response payload could not be deserialized.");
+        return JsonSerializer.Deserialize<T>(json: content, options: JsonSerializerOptions)
+            ?? throw new InvalidOperationException(message: "The acceptance response payload could not be deserialized.");
     }
 
     private async Task<IReadOnlyList<AgentStreamTokenResponse>> ReadNdjsonAsAsync(HttpResponseMessage httpResponseMessage)
     {
         string content = await httpResponseMessage.Content.ReadAsStringAsync();
-        httpResponseMessage.IsSuccessStatusCode.Should().BeTrue(content);
+        httpResponseMessage.IsSuccessStatusCode.Should().BeTrue(because: content);
 
         return content
-            .Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-            .Select(line => JsonSerializer.Deserialize<AgentStreamTokenResponse>(line, JsonSerializerOptions))
+            .Split(separator: '\n', options: StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(selector: line => JsonSerializer.Deserialize<AgentStreamTokenResponse>(line, JsonSerializerOptions))
             .Cast<AgentStreamTokenResponse>()
             .ToList();
     }

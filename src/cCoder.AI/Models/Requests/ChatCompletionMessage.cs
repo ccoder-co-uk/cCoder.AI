@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 namespace cCoder.AI.Models.Requests;
 
 public class ChatCompletionMessage

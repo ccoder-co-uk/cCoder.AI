@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI.Brokers.Completions;
 using cCoder.AI.Models.Enums;
 using cCoder.AI.Models.Configurations;
@@ -20,7 +24,7 @@ public partial class CompletionProviderServiceTests
         AIConfiguration aiConfiguration = new()
         {
             DefaultProvider = "Ollama",
-            Providers = new Dictionary<string, AIProviderConfiguration>(StringComparer.OrdinalIgnoreCase)
+            Providers = new Dictionary<string, AIProviderConfiguration>(comparer: StringComparer.OrdinalIgnoreCase)
             {
                 ["Ollama"] = new()
                 {
@@ -59,9 +63,9 @@ public partial class CompletionProviderServiceTests
         };
 
         completionProviderService = new CompletionProviderService(
-            chatCompletionsBrokerMock.Object,
-            codexCliBrokerMock.Object,
-            new AIProviderExecutionLimiter(),
-            aiConfiguration);
+chatCompletionsBroker: chatCompletionsBrokerMock.Object,
+codexCliBroker: codexCliBrokerMock.Object,
+providerExecutionLimiter: new AIProviderExecutionLimiter(),
+aiConfiguration: aiConfiguration);
     }
 }

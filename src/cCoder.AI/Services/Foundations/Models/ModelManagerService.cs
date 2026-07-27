@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Text.Json.Nodes;
 using cCoder.AI.Brokers.ModelProviders;
 using cCoder.AI.Models.Configurations;
@@ -14,8 +18,8 @@ public class ModelManagerService(
 {
     public AIProviderCapabilitiesResponse GetProviderCapabilities(string provider)
     {
-        AIProviderConfiguration configuration = ResolveProviderConfiguration(provider);
-        bool hasModelEndpoint = !string.IsNullOrWhiteSpace(configuration.ModelProvider.Endpoint);
+        AIProviderConfiguration configuration = ResolveProviderConfiguration(provider: provider);
+        bool hasModelEndpoint = !string.IsNullOrWhiteSpace(value: configuration.ModelProvider.Endpoint);
         bool supportsListing = hasModelEndpoint && configuration.ModelProvider.Mode is
             AIModelProviderMode.OllamaApi
             or AIModelProviderMode.AzureFoundryDeployments
@@ -25,7 +29,7 @@ public class ModelManagerService(
         {
             Provider = configuration.Name,
             DefaultModel = configuration.CompletionProvider.DefaultModel,
-            MaxConcurrency = Math.Max(1, configuration.MaxConcurrency),
+            MaxConcurrency = Math.Max(val1: 1, val2: configuration.MaxConcurrency),
             SupportsModelListing = supportsListing,
             SupportsModelImport = hasModelEndpoint
                 && configuration.ModelProvider.Mode == AIModelProviderMode.OllamaApi
@@ -36,26 +40,26 @@ public class ModelManagerService(
         string? provider,
         CancellationToken cancellationToken = default)
     {
-        AIProviderConfiguration providerConfiguration = ResolveProviderConfiguration(provider);
-        if (!GetProviderCapabilities(providerConfiguration.Name).SupportsModelListing)
+        AIProviderConfiguration providerConfiguration = ResolveProviderConfiguration(provider: provider);
+        if (!GetProviderCapabilities(provider: providerConfiguration.Name).SupportsModelListing)
         {
             throw new InvalidOperationException(
-                $"Model listing is not supported for provider '{providerConfiguration.Name}'.");
+message: $"Model listing is not supported for provider '{providerConfiguration.Name}'.");
         }
 
         return providerConfiguration.ModelProvider.Mode switch
         {
             AIModelProviderMode.OllamaApi =>
-                await RetrieveOllamaModelsAsync(providerConfiguration, cancellationToken),
+                await RetrieveOllamaModelsAsync(providerConfiguration: providerConfiguration, cancellationToken: cancellationToken),
 
             AIModelProviderMode.AzureFoundryDeployments =>
-                await RetrieveAzureFoundryDeploymentsAsync(providerConfiguration, cancellationToken),
+                await RetrieveAzureFoundryDeploymentsAsync(providerConfiguration: providerConfiguration, cancellationToken: cancellationToken),
 
             AIModelProviderMode.OpenAICompatible =>
-                await RetrieveOpenAIModelsAsync(providerConfiguration, cancellationToken),
+                await RetrieveOpenAIModelsAsync(providerConfiguration: providerConfiguration, cancellationToken: cancellationToken),
 
             _ => throw new InvalidOperationException(
-                $"Model listing is not supported for provider '{providerConfiguration.Name}'."),
+message: $"Model listing is not supported for provider '{providerConfiguration.Name}'."),
         };
     }
 
@@ -64,21 +68,21 @@ public class ModelManagerService(
         ModelImportRequest request,
         CancellationToken cancellationToken = default)
     {
-        ValidateImportRequest(request);
+        ValidateImportRequest(request: request);
 
-        AIProviderConfiguration providerConfiguration = ResolveProviderConfiguration(provider);
+        AIProviderConfiguration providerConfiguration = ResolveProviderConfiguration(provider: provider);
 
         return providerConfiguration.ModelProvider.Mode switch
         {
             AIModelProviderMode.OllamaApi =>
-                await ImportOllamaModelAsync(providerConfiguration, request, cancellationToken),
+                await ImportOllamaModelAsync(providerConfiguration: providerConfiguration, request: request, cancellationToken: cancellationToken),
 
             AIModelProviderMode.AzureFoundryDeployments =>
                 throw new InvalidOperationException(
-                    $"Model import for provider '{providerConfiguration.Name}' requires a deployment workflow and is not supported by the basic import endpoint."),
+message: $"Model import for provider '{providerConfiguration.Name}' requires a deployment workflow and is not supported by the basic import endpoint."),
 
             _ => throw new InvalidOperationException(
-                $"Model import is not supported for provider '{providerConfiguration.Name}'."),
+message: $"Model import is not supported for provider '{providerConfiguration.Name}'."),
         };
     }
 
@@ -87,14 +91,14 @@ public class ModelManagerService(
         CancellationToken cancellationToken)
     {
         string content = await modelProviderBroker.GetStringAsync(
-            providerConfiguration.ModelProvider,
-            "api/tags",
-            cancellationToken);
+configuration: providerConfiguration.ModelProvider,
+relativePath: "api/tags",
+cancellationToken: cancellationToken);
 
-        JsonNode? jsonNode = JsonNode.Parse(content);
+        JsonNode? jsonNode = JsonNode.Parse(json: content);
 
         return jsonNode?["models"]?.AsArray()
-            .Select(node => new ModelDescriptorResponse
+            .Select(selector: node => new ModelDescriptorResponse
             {
                 Id = node?["name"]?.GetValue<string>() ?? string.Empty,
                 Name = node?["name"]?.GetValue<string>() ?? string.Empty,
@@ -103,7 +107,7 @@ public class ModelManagerService(
                 Version = node?["modified_at"]?.GetValue<string>(),
                 Description = node?["model"]?.GetValue<string>(),
             })
-            .Where(model => string.IsNullOrWhiteSpace(model.Id) is false)
+            .Where(predicate: model => string.IsNullOrWhiteSpace(model.Id) is false)
             .ToList()
             ?? [];
     }
@@ -113,14 +117,14 @@ public class ModelManagerService(
         CancellationToken cancellationToken)
     {
         string content = await modelProviderBroker.GetStringAsync(
-            providerConfiguration.ModelProvider,
-            "deployments",
-            cancellationToken);
+configuration: providerConfiguration.ModelProvider,
+relativePath: "deployments",
+cancellationToken: cancellationToken);
 
-        JsonNode? jsonNode = JsonNode.Parse(content);
+        JsonNode? jsonNode = JsonNode.Parse(json: content);
 
         return jsonNode?["value"]?.AsArray()
-            .Select(node =>
+            .Select(selector: node =>
             {
                 string id = node?["name"]?.GetValue<string>()
                     ?? node?["id"]?.GetValue<string>()
@@ -141,7 +145,7 @@ public class ModelManagerService(
                     Description = node?["properties"]?["model"]?["format"]?.GetValue<string>(),
                 };
             })
-            .Where(model => string.IsNullOrWhiteSpace(model.Id) is false)
+            .Where(predicate: model => string.IsNullOrWhiteSpace(model.Id) is false)
             .ToList()
             ?? [];
     }
@@ -151,13 +155,13 @@ public class ModelManagerService(
         CancellationToken cancellationToken)
     {
         string content = await modelProviderBroker.GetStringAsync(
-            providerConfiguration.ModelProvider,
-            "models",
-            cancellationToken);
+configuration: providerConfiguration.ModelProvider,
+relativePath: "models",
+cancellationToken: cancellationToken);
 
-        JsonNode? jsonNode = JsonNode.Parse(content);
+        JsonNode? jsonNode = JsonNode.Parse(json: content);
         return jsonNode?["data"]?.AsArray()
-            .Select(node => new ModelDescriptorResponse
+            .Select(selector: node => new ModelDescriptorResponse
             {
                 Id = node?["id"]?.GetValue<string>() ?? string.Empty,
                 Name = node?["id"]?.GetValue<string>() ?? string.Empty,
@@ -165,7 +169,7 @@ public class ModelManagerService(
                 IsAvailable = true,
                 Publisher = node?["owned_by"]?.GetValue<string>()
             })
-            .Where(model => string.IsNullOrWhiteSpace(model.Id) is false)
+            .Where(predicate: model => string.IsNullOrWhiteSpace(model.Id) is false)
             .ToList()
             ?? [];
     }
@@ -176,16 +180,16 @@ public class ModelManagerService(
         CancellationToken cancellationToken)
     {
         string rawContent = await modelProviderBroker.PostAsync(
-            providerConfiguration.ModelProvider,
-            "api/pull",
-            new
-            {
-                model = request.ModelId,
-                stream = false,
-            },
-            cancellationToken);
+configuration: providerConfiguration.ModelProvider,
+relativePath: "api/pull",
+payload: new
+{
+    model = request.ModelId,
+    stream = false,
+},
+cancellationToken: cancellationToken);
 
-        string status = JsonNode.Parse(rawContent)?["status"]?.GetValue<string>() ?? "submitted";
+        string status = JsonNode.Parse(json: rawContent)?["status"]?.GetValue<string>() ?? "submitted";
 
         return new ModelImportResponse
         {
@@ -199,27 +203,27 @@ public class ModelManagerService(
 
     private AIProviderConfiguration ResolveProviderConfiguration(string? provider)
     {
-        string resolvedProviderName = string.IsNullOrWhiteSpace(provider)
+        string resolvedProviderName = string.IsNullOrWhiteSpace(value: provider)
             ? aiConfiguration.DefaultProvider
             : provider;
 
-        if (aiConfiguration.Providers.TryGetValue(resolvedProviderName, out AIProviderConfiguration? configuration))
+        if (aiConfiguration.Providers.TryGetValue(key: resolvedProviderName, value: out AIProviderConfiguration? configuration))
         {
-            configuration.Name = string.IsNullOrWhiteSpace(configuration.Name)
+            configuration.Name = string.IsNullOrWhiteSpace(value: configuration.Name)
                 ? resolvedProviderName
                 : configuration.Name;
 
             return configuration;
         }
 
-        throw new InvalidOperationException($"Unsupported AI provider '{resolvedProviderName}'.");
+        throw new InvalidOperationException(message: $"Unsupported AI provider '{resolvedProviderName}'.");
     }
 
     private static void ValidateImportRequest(ModelImportRequest request)
     {
-        if (string.IsNullOrWhiteSpace(request.ModelId))
+        if (string.IsNullOrWhiteSpace(value: request.ModelId))
         {
-            throw new ArgumentException("ModelId is required.", nameof(request));
+            throw new ArgumentException(message: "ModelId is required.", paramName: nameof(request));
         }
     }
 }

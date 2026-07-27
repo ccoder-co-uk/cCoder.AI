@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using AI.Web.Models;
 using AI.Web.Services.Diagnostics;
 using cCoder.AI.Models.Configurations;
@@ -16,24 +20,24 @@ public class AdminController(
     {
         List<ProviderDiagnosticsViewModel> providers = [];
 
-        foreach ((string key, AIProviderConfiguration providerConfiguration) in aiConfiguration.Providers.OrderBy(item => item.Key))
+        foreach ((string key, AIProviderConfiguration providerConfiguration) in aiConfiguration.Providers.OrderBy(keySelector: item => item.Key))
         {
             ProviderDiagnosticsViewModel provider = new()
             {
                 Key = key,
-                Name = string.IsNullOrWhiteSpace(providerConfiguration.Name) ? key : providerConfiguration.Name,
+                Name = string.IsNullOrWhiteSpace(value: providerConfiguration.Name) ? key : providerConfiguration.Name,
                 CompletionEndpoint = providerConfiguration.CompletionProvider.Endpoint,
                 ModelEndpoint = providerConfiguration.ModelProvider.Endpoint,
                 DefaultModel = providerConfiguration.CompletionProvider.DefaultModel,
-                CompletionApiKeyConfigured = string.IsNullOrWhiteSpace(providerConfiguration.CompletionProvider.ApiKey) is false,
-                ModelApiKeyConfigured = string.IsNullOrWhiteSpace(providerConfiguration.ModelProvider.ApiKey) is false
+                CompletionApiKeyConfigured = string.IsNullOrWhiteSpace(value: providerConfiguration.CompletionProvider.ApiKey) is false,
+                ModelApiKeyConfigured = string.IsNullOrWhiteSpace(value: providerConfiguration.ModelProvider.ApiKey) is false
             };
 
             try
             {
                 provider.AvailableModels = (await modelManagerService
-                    .RetrieveAvailableModelsAsync(key, cancellationToken))
-                    .Select(model => model.Name)
+                    .RetrieveAvailableModelsAsync(provider: key, cancellationToken: cancellationToken))
+                    .Select(selector: model => model.Name)
                     .ToList();
             }
             catch (Exception exception)
@@ -41,7 +45,7 @@ public class AdminController(
                 provider.ModelLookupError = exception.Message;
             }
 
-            providers.Add(provider);
+            providers.Add(item: provider);
         }
 
         IReadOnlyList<AgentRunHistoryEntry> recentRuns = agentRunHistoryService.RetrieveRecent();
@@ -59,7 +63,7 @@ public class AdminController(
                 StreamingChunkDelayMilliseconds = aiConfiguration.Agent.StreamingChunkDelayMilliseconds
             },
             Providers = providers,
-            RecentRuns = recentRuns.Select(run => new RunHistoryItemViewModel
+            RecentRuns = recentRuns.Select(selector: run => new RunHistoryItemViewModel
             {
                 Source = run.Source,
                 Operation = run.Operation,
@@ -74,6 +78,6 @@ public class AdminController(
             }).ToList()
         };
 
-        return View(viewModel);
+        return View(model: viewModel);
     }
 }

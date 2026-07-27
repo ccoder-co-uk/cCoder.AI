@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Collections.Concurrent;
 
 namespace AI.Web.Services.Diagnostics;
@@ -9,9 +13,9 @@ public class AgentRunHistoryService : IAgentRunHistoryService
 
     public void Record(AgentRunHistoryEntry entry)
     {
-        entries.Enqueue(entry);
+        entries.Enqueue(item: entry);
 
-        while (entries.Count > MaxEntries && entries.TryDequeue(out _))
+        while (entries.Count > MaxEntries && entries.TryDequeue(result: out _))
         {
         }
     }
@@ -19,6 +23,6 @@ public class AgentRunHistoryService : IAgentRunHistoryService
     public IReadOnlyList<AgentRunHistoryEntry> RetrieveRecent(int take = 25) =>
         entries
             .Reverse()
-            .Take(Math.Max(1, take))
+            .Take(count: Math.Max(1, take))
             .ToList();
 }

@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using cCoder.AI.Models.Enums;
@@ -14,25 +18,25 @@ public class ShellBroker : IShellBroker
         ShellKind shellKind,
         CancellationToken cancellationToken = default)
     {
-        ShellKind actualShellKind = ResolveShellKind(shellKind);
-        string effectiveWorkingDirectory = string.IsNullOrWhiteSpace(workingDirectory)
+        ShellKind actualShellKind = ResolveShellKind(shellKind: shellKind);
+        string effectiveWorkingDirectory = string.IsNullOrWhiteSpace(value: workingDirectory)
             ? Environment.CurrentDirectory
-            : Path.GetFullPath(workingDirectory);
+            : Path.GetFullPath(path: workingDirectory);
 
         ProcessStartInfo processStartInfo = BuildProcessStartInfo(
-            command,
-            actualShellKind,
-            effectiveWorkingDirectory,
-            environmentVariables);
+command: command,
+shellKind: actualShellKind,
+workingDirectory: effectiveWorkingDirectory,
+environmentVariables: environmentVariables);
 
         using Process process = new() { StartInfo = processStartInfo };
 
         process.Start();
 
-        Task<string> standardOutputTask = process.StandardOutput.ReadToEndAsync(cancellationToken);
-        Task<string> standardErrorTask = process.StandardError.ReadToEndAsync(cancellationToken);
+        Task<string> standardOutputTask = process.StandardOutput.ReadToEndAsync(cancellationToken: cancellationToken);
+        Task<string> standardErrorTask = process.StandardError.ReadToEndAsync(cancellationToken: cancellationToken);
 
-        await process.WaitForExitAsync(cancellationToken);
+        await process.WaitForExitAsync(cancellationToken: cancellationToken);
 
         string standardOutput = await standardOutputTask;
         string standardError = await standardErrorTask;
@@ -67,7 +71,7 @@ public class ShellBroker : IShellBroker
         {
             foreach ((string key, string value) in environmentVariables)
             {
-                if (string.IsNullOrWhiteSpace(key))
+                if (string.IsNullOrWhiteSpace(value: key))
                     continue;
 
                 processStartInfo.Environment[key] = value ?? string.Empty;
@@ -78,21 +82,21 @@ public class ShellBroker : IShellBroker
         {
             case ShellKind.PowerShell:
                 processStartInfo.FileName = "powershell";
-                processStartInfo.ArgumentList.Add("-NoProfile");
-                processStartInfo.ArgumentList.Add("-ExecutionPolicy");
-                processStartInfo.ArgumentList.Add("Bypass");
-                processStartInfo.ArgumentList.Add("-Command");
-                processStartInfo.ArgumentList.Add(command);
+                processStartInfo.ArgumentList.Add(item: "-NoProfile");
+                processStartInfo.ArgumentList.Add(item: "-ExecutionPolicy");
+                processStartInfo.ArgumentList.Add(item: "Bypass");
+                processStartInfo.ArgumentList.Add(item: "-Command");
+                processStartInfo.ArgumentList.Add(item: command);
                 break;
 
             case ShellKind.Bash:
                 processStartInfo.FileName = "bash";
-                processStartInfo.ArgumentList.Add("-lc");
-                processStartInfo.ArgumentList.Add(command);
+                processStartInfo.ArgumentList.Add(item: "-lc");
+                processStartInfo.ArgumentList.Add(item: command);
                 break;
 
             default:
-                throw new InvalidOperationException($"Unsupported shell kind: {shellKind}.");
+                throw new InvalidOperationException(message: $"Unsupported shell kind: {shellKind}.");
         }
 
         return processStartInfo;
@@ -101,7 +105,7 @@ public class ShellBroker : IShellBroker
     private static ShellKind ResolveShellKind(ShellKind shellKind) =>
         shellKind switch
         {
-            ShellKind.Auto when RuntimeInformation.IsOSPlatform(OSPlatform.Windows) => ShellKind.PowerShell,
+            ShellKind.Auto when RuntimeInformation.IsOSPlatform(osPlatform: OSPlatform.Windows) => ShellKind.PowerShell,
             ShellKind.Auto => ShellKind.Bash,
             _ => shellKind,
         };

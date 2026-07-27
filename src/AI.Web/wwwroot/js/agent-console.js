@@ -240,6 +240,7 @@
                     instructions: effectiveInstructions,
                     provider: providerSelect.value,
                     model: customModelInput.value.trim() || modelSelect.value || null,
+                    systemPrompt: document.getElementById("provider-options").dataset.systemPrompt || null,
                     workingDirectory: workingDirectoryInput.value.trim() || null,
                     maxIterations: maxIterationsInput.value ? Number(maxIterationsInput.value) : null
                 })

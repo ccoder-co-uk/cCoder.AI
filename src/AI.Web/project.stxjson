@@ -1,0 +1,645 @@
+{
+  "Classes": [
+    {
+      "Name": "AI.Web.Controllers.AdminController",
+      "StandardElementType": "Exposure",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "Index",
+          "Inputs": [
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "AI.Web.Controllers.HomeController",
+      "StandardElementType": "Exposure",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "Index",
+          "Inputs": [],
+          "ReturnType": "IActionResult"
+        },
+        {
+          "Name": "StreamConversationAsync",
+          "Inputs": [
+            {
+              "Name": "chatRequest",
+              "Type": "cCoder.AI.Models.Requests.ChatRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.Task"
+        }
+      ]
+    },
+    {
+      "Name": "AI.Web.Models.AIProviderOptionViewModel",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "DefaultModel",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Description",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Key",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Name",
+          "Type": "System.String"
+        },
+        {
+          "Name": "SupportsModelListing",
+          "Type": "System.Boolean"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "AI.Web.Models.AIWorkspaceViewModel",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "DefaultMaxIterations",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "DefaultProvider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "DefaultWorkingDirectory",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Providers",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CAI.Web.Models.AIProviderOptionViewModel\u003E"
+        },
+        {
+          "Name": "UseCasePrompt",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "AI.Web.Models.AdminDashboardViewModel",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "AgentSettings",
+          "Type": "AI.Web.Models.AgentSettingsViewModel"
+        },
+        {
+          "Name": "DefaultProvider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ProviderCount",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Providers",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CAI.Web.Models.ProviderDiagnosticsViewModel\u003E"
+        },
+        {
+          "Name": "RecentRunCount",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "RecentRuns",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CAI.Web.Models.RunHistoryItemViewModel\u003E"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "AI.Web.Models.AgentSettingsViewModel",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "MaxIterations",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "ShellCommandTimeoutSeconds",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "StreamingChunkCharacterCount",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "StreamingChunkDelayMilliseconds",
+          "Type": "System.Int32"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "AI.Web.Models.ProviderDiagnosticsViewModel",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "AvailableModels",
+          "Type": "System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E"
+        },
+        {
+          "Name": "CompletionApiKeyConfigured",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "CompletionEndpoint",
+          "Type": "System.String"
+        },
+        {
+          "Name": "DefaultModel",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Key",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ModelApiKeyConfigured",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "ModelEndpoint",
+          "Type": "System.String"
+        },
+        {
+          "Name": "ModelLookupError",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Name",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "AI.Web.Models.RunHistoryItemViewModel",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "DurationMilliseconds",
+          "Type": "System.Double"
+        },
+        {
+          "Name": "ErrorMessage",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Iterations",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Operation",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "RecordedOn",
+          "Type": "System.DateTimeOffset"
+        },
+        {
+          "Name": "Source",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Succeeded",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "Summary",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Duration",
+          "Type": "System.TimeSpan"
+        },
+        {
+          "Name": "ErrorMessage",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Iterations",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Operation",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "RecordedOn",
+          "Type": "System.DateTimeOffset"
+        },
+        {
+          "Name": "Source",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Succeeded",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "Summary",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "AI.Web.Services.Diagnostics.AgentRunHistoryService",
+      "StandardElementType": "Unknown",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "Record",
+          "Inputs": [
+            {
+              "Name": "entry",
+              "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry"
+            }
+          ],
+          "ReturnType": "System.Void"
+        },
+        {
+          "Name": "RetrieveRecent",
+          "Inputs": [
+            {
+              "Name": "take",
+              "Type": "System.Int32"
+            }
+          ],
+          "ReturnType": "System.Collections.Generic.IReadOnlyList\u003CAI.Web.Services.Diagnostics.AgentRunHistoryEntry\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "Program",
+      "StandardElementType": "App",
+      "Properties": [],
+      "Methods": []
+    }
+  ],
+  "Links": [
+    {
+      "FromType": "AI.Web.Controllers.AdminController",
+      "ToType": "AI.Web.Services.Diagnostics.AgentRunHistoryService"
+    },
+    {
+      "FromType": "AI.Web.Controllers.HomeController",
+      "ToType": "AI.Web.Services.Diagnostics.AgentRunHistoryService"
+    }
+  ],
+  "AnalysisItems": [
+    {
+      "Code": "STXAPI001",
+      "Description": "An API controller must have exactly one business dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.AdminController",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXAPI004",
+      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.AdminController",
+      "LineNumber": 19
+    },
+    {
+      "Code": "STXFORMAT009",
+      "Description": "Every method chained from an invocation result must begin on a new line.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.AdminController",
+      "LineNumber": 78
+    },
+    {
+      "Code": "STXAPI001",
+      "Description": "An API controller must have exactly one business dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXAPI004",
+      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 30
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 37
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 38
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 40
+    },
+    {
+      "Code": "STXAPI004",
+      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 56
+    },
+    {
+      "Code": "STXE002",
+      "Description": "An exposure must not contain loops.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 72
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 111
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 134
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIProviderOptionViewModel",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIProviderOptionViewModel",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIProviderOptionViewModel",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIProviderOptionViewModel",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIWorkspaceViewModel",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIWorkspaceViewModel",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIWorkspaceViewModel",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIWorkspaceViewModel",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIWorkspaceViewModel",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AdminDashboardViewModel",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AdminDashboardViewModel",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AdminDashboardViewModel",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AdminDashboardViewModel",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.ProviderDiagnosticsViewModel",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.ProviderDiagnosticsViewModel",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.ProviderDiagnosticsViewModel",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.ProviderDiagnosticsViewModel",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.ProviderDiagnosticsViewModel",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.ProviderDiagnosticsViewModel",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.RunHistoryItemViewModel",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.RunHistoryItemViewModel",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.RunHistoryItemViewModel",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.RunHistoryItemViewModel",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.RunHistoryItemViewModel",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STXSTRUCT001",
+      "Description": "The source file must live in the standard folder for its element type.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
+      "LineNumber": 7
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STX0001",
+      "Description": "The type is not a valid Standard element type.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryService",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXAPP005",
+      "Description": "Program.cs must compose the app through IServiceCollection using SDK namespaces and one local composition namespace only.",
+      "Severity": "Warning",
+      "Type": "Program",
+      "LineNumber": 37
+    }
+  ]
+}

@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI.Brokers.Completions;
 using cCoder.AI.Brokers.ModelProviders;
 using cCoder.AI.Brokers.Shells;
@@ -19,7 +23,7 @@ public class IServiceCollectionExtensionsTests
         IServiceCollection services = new ServiceCollection();
 
         // When
-        services.AddAI(configuration =>
+        services.AddAI(configure: configuration =>
         {
             configuration.DefaultProvider = "local";
             configuration.AddOllama("local", ollama =>
@@ -62,22 +66,22 @@ public class IServiceCollectionExtensionsTests
 
         AIConfiguration configuration = serviceProvider.GetRequiredService<AIConfiguration>();
         configuration.Providers["local"].CompletionProvider.Endpoint
-            .Should().Be("http://localhost:11434/api/chat");
+            .Should().Be(expected: "http://localhost:11434/api/chat");
         configuration.Providers["open ai"].CompletionProvider.Endpoint
-            .Should().Be("https://api.openai.com/v1/chat/completions");
+            .Should().Be(expected: "https://api.openai.com/v1/chat/completions");
         configuration.Providers["open ai"].CompletionProvider.ApiKeyHeaderName
-            .Should().Be("Authorization");
-        configuration.Providers["open ai"].MaxConcurrency.Should().Be(4);
+            .Should().Be(expected: "Authorization");
+        configuration.Providers["open ai"].MaxConcurrency.Should().Be(expected: 4);
         configuration.Providers["foundry"].CompletionProvider.ApiKeyHeaderName
-            .Should().Be("api-key");
+            .Should().Be(expected: "api-key");
         configuration.Providers["foundry"].CompletionProvider.Endpoint
-            .Should().Be("https://foundry.test/models/chat/completions");
+            .Should().Be(expected: "https://foundry.test/models/chat/completions");
         configuration.Providers["codex"].CompletionProvider.Mode
-            .Should().Be(Models.Enums.AIProviderMode.CodexCli);
-        configuration.Providers["codex"].CodexCli.ExecutablePath.Should().Be("codex-test");
+            .Should().Be(expected: Models.Enums.AIProviderMode.CodexCli);
+        configuration.Providers["codex"].CodexCli.ExecutablePath.Should().Be(expected: "codex-test");
 
         IModelManagerService models = serviceProvider.GetRequiredService<IModelManagerService>();
-        models.GetProviderCapabilities("local").Should().BeEquivalentTo(new
+        models.GetProviderCapabilities(provider: "local").Should().BeEquivalentTo(expectation: new
         {
             Provider = "local",
             DefaultModel = "gpt-oss:20b",
@@ -85,6 +89,6 @@ public class IServiceCollectionExtensionsTests
             SupportsModelListing = true,
             SupportsModelImport = true
         });
-        models.GetProviderCapabilities("codex").SupportsModelListing.Should().BeFalse();
+        models.GetProviderCapabilities(provider: "codex").SupportsModelListing.Should().BeFalse();
     }
 }

@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -19,24 +23,24 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
         CancellationToken cancellationToken = default)
     {
         using CancellationTokenSource requestTimeout = CreateRequestTimeout(
-            providerConfiguration.TimeoutSeconds,
-            cancellationToken);
+timeoutSeconds: providerConfiguration.TimeoutSeconds,
+cancellationToken: cancellationToken);
 
-        string serializedRequest = SerializeRequest(providerConfiguration, request);
-        int maxAttempts = Math.Max(1, providerConfiguration.MaxRetryAttempts + 1);
+        string serializedRequest = SerializeRequest(providerConfiguration: providerConfiguration, request: request);
+        int maxAttempts = Math.Max(val1: 1, val2: providerConfiguration.MaxRetryAttempts + 1);
 
         for (int attempt = 1; attempt <= maxAttempts; attempt++)
         {
             using HttpRequestMessage httpRequestMessage =
                 new(HttpMethod.Post, providerConfiguration.Endpoint);
-            ApplyAuthentication(providerConfiguration, httpRequestMessage);
+            ApplyAuthentication(providerConfiguration: providerConfiguration, httpRequestMessage: httpRequestMessage);
             httpRequestMessage.Content =
-                new StringContent(serializedRequest, Encoding.UTF8, "application/json");
+                new StringContent(content: serializedRequest, encoding: Encoding.UTF8, mediaType: "application/json");
 
             using HttpResponseMessage httpResponseMessage =
-                await httpClient.SendAsync(httpRequestMessage, requestTimeout.Token);
+                await httpClient.SendAsync(request: httpRequestMessage, cancellationToken: requestTimeout.Token);
             string rawContent =
-                await httpResponseMessage.Content.ReadAsStringAsync(requestTimeout.Token);
+                await httpResponseMessage.Content.ReadAsStringAsync(cancellationToken: requestTimeout.Token);
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -46,39 +50,39 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
                     {
                         Provider = providerName,
                         Model = request.Model,
-                        Content = ExtractContent(providerConfiguration, rawContent),
+                        Content = ExtractContent(providerConfiguration: providerConfiguration, rawContent: rawContent),
                         RawContent = rawContent,
                     };
                 }
                 catch (InvalidOperationException) when (attempt < maxAttempts)
                 {
                     await Task.Delay(
-                        TimeSpan.FromMilliseconds(
+delay: TimeSpan.FromMilliseconds(
                             Math.Max(1, providerConfiguration.RetryBaseDelayMilliseconds)
                             * Math.Pow(2, Math.Max(0, attempt - 1))),
-                        requestTimeout.Token);
+cancellationToken: requestTimeout.Token);
                     continue;
                 }
             }
 
-            if (attempt < maxAttempts && IsTransient(httpResponseMessage.StatusCode, rawContent))
+            if (attempt < maxAttempts && IsTransient(statusCode: httpResponseMessage.StatusCode, rawContent: rawContent))
             {
                 TimeSpan retryDelay = ResolveRetryDelay(
-                    httpResponseMessage,
-                    attempt,
-                    providerConfiguration.RetryBaseDelayMilliseconds);
-                await Task.Delay(retryDelay, requestTimeout.Token);
+response: httpResponseMessage,
+attempt: attempt,
+retryBaseDelayMilliseconds: providerConfiguration.RetryBaseDelayMilliseconds);
+                await Task.Delay(delay: retryDelay, cancellationToken: requestTimeout.Token);
                 continue;
             }
 
-            EnsureSuccessStatusCode(providerName, httpResponseMessage, rawContent);
+            EnsureSuccessStatusCode(providerName: providerName, httpResponseMessage: httpResponseMessage, rawContent: rawContent);
         }
 
-        throw new InvalidOperationException("The AI provider request ended without a response.");
+        throw new InvalidOperationException(message: "The AI provider request ended without a response.");
     }
 
     private static bool IsTransient(System.Net.HttpStatusCode statusCode, string rawContent) =>
-        !rawContent.Contains("insufficient_quota", StringComparison.OrdinalIgnoreCase)
+        !rawContent.Contains(value: "insufficient_quota", comparisonType: StringComparison.OrdinalIgnoreCase)
         && (statusCode == System.Net.HttpStatusCode.RequestTimeout
             || statusCode == System.Net.HttpStatusCode.TooManyRequests
             || (int)statusCode >= 500);
@@ -88,11 +92,11 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
         int attempt,
         int retryBaseDelayMilliseconds)
     {
-        if (response.Headers.TryGetValues("retry-after-ms", out IEnumerable<string>? millisecondValues)
-            && int.TryParse(millisecondValues.FirstOrDefault(), out int retryAfterMilliseconds)
+        if (response.Headers.TryGetValues(name: "retry-after-ms", values: out IEnumerable<string>? millisecondValues)
+            && int.TryParse(s: millisecondValues.FirstOrDefault(), result: out int retryAfterMilliseconds)
             && retryAfterMilliseconds > 0)
         {
-            return TimeSpan.FromMilliseconds(retryAfterMilliseconds);
+            return TimeSpan.FromMilliseconds(milliseconds: retryAfterMilliseconds);
         }
 
         if (response.Headers.RetryAfter?.Delta is TimeSpan delta && delta > TimeSpan.Zero)
@@ -105,18 +109,18 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
                 return dateDelay;
         }
 
-        int baseDelay = Math.Max(1, retryBaseDelayMilliseconds);
-        return TimeSpan.FromMilliseconds(baseDelay * Math.Pow(2, Math.Max(0, attempt - 1)));
+        int baseDelay = Math.Max(val1: 1, val2: retryBaseDelayMilliseconds);
+        return TimeSpan.FromMilliseconds(value: baseDelay * Math.Pow(2, Math.Max(0, attempt - 1)));
     }
 
     private static CancellationTokenSource CreateRequestTimeout(
         int timeoutSeconds,
         CancellationToken cancellationToken)
     {
-        CancellationTokenSource requestTimeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        CancellationTokenSource requestTimeout = CancellationTokenSource.CreateLinkedTokenSource(token: cancellationToken);
 
         if (timeoutSeconds > 0)
-            requestTimeout.CancelAfter(TimeSpan.FromSeconds(timeoutSeconds));
+            requestTimeout.CancelAfter(delay: TimeSpan.FromSeconds(timeoutSeconds));
 
         return requestTimeout;
     }
@@ -125,27 +129,27 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
         AICompletionProviderConfiguration providerConfiguration,
         HttpRequestMessage httpRequestMessage)
     {
-        if (string.IsNullOrWhiteSpace(providerConfiguration.ApiKey))
+        if (string.IsNullOrWhiteSpace(value: providerConfiguration.ApiKey))
         {
             return;
         }
 
         if (providerConfiguration.ApiKeyHeaderName.Equals(
-            "Authorization",
-            StringComparison.OrdinalIgnoreCase))
+value: "Authorization",
+comparisonType: StringComparison.OrdinalIgnoreCase))
         {
             httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue(
-                providerConfiguration.ApiKeyScheme,
-                providerConfiguration.ApiKey);
+scheme: providerConfiguration.ApiKeyScheme,
+parameter: providerConfiguration.ApiKey);
 
             return;
         }
 
-        string headerValue = string.IsNullOrWhiteSpace(providerConfiguration.ApiKeyScheme)
+        string headerValue = string.IsNullOrWhiteSpace(value: providerConfiguration.ApiKeyScheme)
             ? providerConfiguration.ApiKey
             : $"{providerConfiguration.ApiKeyScheme} {providerConfiguration.ApiKey}";
 
-        httpRequestMessage.Headers.Add(providerConfiguration.ApiKeyHeaderName, headerValue);
+        httpRequestMessage.Headers.Add(name: providerConfiguration.ApiKeyHeaderName, value: headerValue);
     }
 
     private static string SerializeRequest(
@@ -176,7 +180,7 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
             }
         };
 
-        return JsonSerializer.Serialize(payload, JsonSerializerOptions);
+        return JsonSerializer.Serialize(value: payload, options: JsonSerializerOptions);
     }
 
     private static object[] BuildOllamaShellTools() =>
@@ -221,9 +225,9 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
         }
 
         throw new HttpRequestException(
-            $"AI provider '{providerName}' returned {(int)httpResponseMessage.StatusCode} ({httpResponseMessage.ReasonPhrase}). Response: {rawContent}",
-            null,
-            httpResponseMessage.StatusCode);
+message: $"AI provider '{providerName}' returned {(int)httpResponseMessage.StatusCode} ({httpResponseMessage.ReasonPhrase}). Response: {rawContent}",
+inner: null,
+statusCode: httpResponseMessage.StatusCode);
     }
 
     private static string ExtractContent(
@@ -231,13 +235,13 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
         string rawContent) =>
         providerConfiguration.Mode switch
         {
-            Models.Enums.AIProviderMode.OllamaApi => ExtractOllamaContent(rawContent),
-            _ => ExtractOpenAICompatibleContent(rawContent),
+            Models.Enums.AIProviderMode.OllamaApi => ExtractOllamaContent(rawContent: rawContent),
+            _ => ExtractOpenAICompatibleContent(rawContent: rawContent),
         };
 
     private static string ExtractOpenAICompatibleContent(string rawContent)
     {
-        JsonNode? jsonNode = JsonNode.Parse(rawContent);
+        JsonNode? jsonNode = JsonNode.Parse(json: rawContent);
 
         JsonNode? contentNode = jsonNode?["choices"]?[0]?["message"]?["content"];
 
@@ -249,51 +253,51 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
         if (contentNode is JsonArray jsonArray)
         {
             IEnumerable<string> parts = jsonArray
-                .Select(node => node?["text"]?.GetValue<string>())
-                .Where(text => string.IsNullOrWhiteSpace(text) is false)!;
+                .Select(selector: node => node?["text"]?.GetValue<string>())
+                .Where(predicate: text => string.IsNullOrWhiteSpace(text) is false)!;
 
-            string joinedContent = string.Join(Environment.NewLine, parts);
+            string joinedContent = string.Join(separator: Environment.NewLine, values: parts);
 
-            if (string.IsNullOrWhiteSpace(joinedContent) is false)
+            if (string.IsNullOrWhiteSpace(value: joinedContent) is false)
             {
                 return joinedContent;
             }
         }
 
-        throw new InvalidOperationException("The AI provider response did not contain a usable assistant message.");
+        throw new InvalidOperationException(message: "The AI provider response did not contain a usable assistant message.");
     }
 
     private static string ExtractOllamaContent(string rawContent)
     {
-        JsonNode? jsonNode = JsonNode.Parse(rawContent);
+        JsonNode? jsonNode = JsonNode.Parse(json: rawContent);
         JsonNode? messageNode = jsonNode?["message"];
 
         string content = messageNode?["content"]?.GetValue<string>() ?? string.Empty;
 
-        if (string.IsNullOrWhiteSpace(content) is false)
+        if (string.IsNullOrWhiteSpace(value: content) is false)
         {
             return content;
         }
 
         JsonNode? toolCallNode = messageNode?["tool_calls"]?[0];
-        string command = ExtractOllamaCommand(toolCallNode?["function"]?["arguments"]);
+        string command = ExtractOllamaCommand(argumentsNode: toolCallNode?["function"]?["arguments"]);
 
-        if (string.IsNullOrWhiteSpace(command) is false)
+        if (string.IsNullOrWhiteSpace(value: command) is false)
         {
             string reason = messageNode?["thinking"]?.GetValue<string>() ?? "Ollama requested a shell tool call.";
 
             return JsonSerializer.Serialize(
-                new
-                {
-                    type = "tool",
-                    tool = "shell",
-                    command,
-                    reason,
-                },
-                JsonSerializerOptions);
+value: new
+{
+    type = "tool",
+    tool = "shell",
+    command,
+    reason,
+},
+options: JsonSerializerOptions);
         }
 
-        throw new InvalidOperationException("The Ollama response did not contain usable assistant content or a tool call.");
+        throw new InvalidOperationException(message: "The Ollama response did not contain usable assistant content or a tool call.");
     }
 
     private static string ExtractOllamaCommand(JsonNode argumentsNode)
@@ -319,8 +323,8 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
         }
 
         List<string> segments = cmdArray
-            .Select(node => node?.GetValue<string>())
-            .Where(segment => string.IsNullOrWhiteSpace(segment) is false)
+            .Select(selector: node => node?.GetValue<string>())
+            .Where(predicate: segment => string.IsNullOrWhiteSpace(segment) is false)
             .ToList();
 
         if (segments.Count == 0)
@@ -329,29 +333,29 @@ public class ChatCompletionsBroker(HttpClient httpClient) : IChatCompletionsBrok
         }
 
         if (segments.Count >= 3 &&
-            (segments[0].Equals("bash", StringComparison.OrdinalIgnoreCase) ||
-             segments[0].Equals("sh", StringComparison.OrdinalIgnoreCase)) &&
-            segments[1].Equals("-lc", StringComparison.OrdinalIgnoreCase))
+            (segments[0].Equals(value: "bash", comparisonType: StringComparison.OrdinalIgnoreCase) ||
+             segments[0].Equals(value: "sh", comparisonType: StringComparison.OrdinalIgnoreCase)) &&
+            segments[1].Equals(value: "-lc", comparisonType: StringComparison.OrdinalIgnoreCase))
         {
-            return string.Join(" ", segments.Skip(2));
+            return string.Join(separator: " ", values: segments.Skip(2));
         }
 
         if (segments.Count >= 2 &&
-            (segments[0].Equals("powershell", StringComparison.OrdinalIgnoreCase) ||
-             segments[0].Equals("pwsh", StringComparison.OrdinalIgnoreCase)) &&
-            (segments[1].Equals("-Command", StringComparison.OrdinalIgnoreCase) ||
-             segments[1].Equals("/Command", StringComparison.OrdinalIgnoreCase)))
+            (segments[0].Equals(value: "powershell", comparisonType: StringComparison.OrdinalIgnoreCase) ||
+             segments[0].Equals(value: "pwsh", comparisonType: StringComparison.OrdinalIgnoreCase)) &&
+            (segments[1].Equals(value: "-Command", comparisonType: StringComparison.OrdinalIgnoreCase) ||
+             segments[1].Equals(value: "/Command", comparisonType: StringComparison.OrdinalIgnoreCase)))
         {
-            return string.Join(" ", segments.Skip(2));
+            return string.Join(separator: " ", values: segments.Skip(2));
         }
 
         if (segments.Count >= 2 &&
-            segments[0].Equals("cmd", StringComparison.OrdinalIgnoreCase) &&
-            segments[1].Equals("/c", StringComparison.OrdinalIgnoreCase))
+            segments[0].Equals(value: "cmd", comparisonType: StringComparison.OrdinalIgnoreCase) &&
+            segments[1].Equals(value: "/c", comparisonType: StringComparison.OrdinalIgnoreCase))
         {
-            return string.Join(" ", segments.Skip(2));
+            return string.Join(separator: " ", values: segments.Skip(2));
         }
 
-        return string.Join(" ", segments);
+        return string.Join(separator: " ", values: segments);
     }
 }

@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Net.Http.Json;
 using cCoder.AI.Models.Enums;
 using cCoder.AI.Models.Requests;
@@ -20,7 +24,7 @@ public sealed partial class AIControllerTests
             ShellKind = ShellKind.PowerShell,
         };
 
-        factory.CompletionProviderService.EnqueueResponse(new CompletionResponse
+        factory.CompletionProviderService.EnqueueResponse(completionResponse: new CompletionResponse
         {
             Content = "{\"type\":\"tool\",\"tool\":\"shell\",\"command\":\"Get-Location\",\"reason\":\"Need the current folder.\"}",
             Model = "gpt-oss:20b",
@@ -28,7 +32,7 @@ public sealed partial class AIControllerTests
             RawContent = "{}",
         });
 
-        factory.CompletionProviderService.EnqueueResponse(new CompletionResponse
+        factory.CompletionProviderService.EnqueueResponse(completionResponse: new CompletionResponse
         {
             Content = "{\"type\":\"final\",\"message\":\"The folder is C:\\\\Temp.\"}",
             Model = "gpt-oss:20b",
@@ -36,7 +40,7 @@ public sealed partial class AIControllerTests
             RawContent = "{}",
         });
 
-        factory.ShellBroker.EnqueueResponse(new ToolExecutionResponse
+        factory.ShellBroker.EnqueueResponse(toolExecutionResponse: new ToolExecutionResponse
         {
             Command = "Get-Location",
             ExitCode = 0,
@@ -47,15 +51,15 @@ public sealed partial class AIControllerTests
         });
 
         // When
-        using HttpResponseMessage response = await client.PostAsJsonAsync("/Api/AI/Agents", inputRequest);
-        AgentRunResponse actualResponse = await ReadAsAsync<AgentRunResponse>(response);
+        using HttpResponseMessage response = await client.PostAsJsonAsync(requestUri: "/Api/AI/Agents", value: inputRequest);
+        AgentRunResponse actualResponse = await ReadAsAsync<AgentRunResponse>(httpResponseMessage: response);
 
         // Then
         actualResponse.Succeeded.Should().BeTrue();
-        actualResponse.FinalMessage.Should().Be("The folder is C:\\Temp.");
-        actualResponse.IterationResponses.Should().HaveCount(2);
+        actualResponse.FinalMessage.Should().Be(expected: "The folder is C:\\Temp.");
+        actualResponse.IterationResponses.Should().HaveCount(expected: 2);
         factory.ShellBroker.Executions.Should().ContainSingle();
-        factory.ShellBroker.Executions[0].Command.Should().Be("Get-Location");
+        factory.ShellBroker.Executions[0].Command.Should().Be(expected: "Get-Location");
     }
 
     [Fact]
@@ -68,7 +72,7 @@ public sealed partial class AIControllerTests
             Provider = "Ollama",
         };
 
-        factory.CompletionProviderService.EnqueueResponse(new CompletionResponse
+        factory.CompletionProviderService.EnqueueResponse(completionResponse: new CompletionResponse
         {
             Content = "{\"type\":\"final\",\"message\":\"The folder is C:\\\\Temp.\"}",
             Model = "gpt-oss:20b",
@@ -77,13 +81,13 @@ public sealed partial class AIControllerTests
         });
 
         // When
-        using HttpResponseMessage response = await client.PostAsJsonAsync("/Api/AI/Agents/Stream", inputRequest);
-        IReadOnlyList<AgentStreamTokenResponse> actualTokens = await ReadNdjsonAsAsync(response);
+        using HttpResponseMessage response = await client.PostAsJsonAsync(requestUri: "/Api/AI/Agents/Stream", value: inputRequest);
+        IReadOnlyList<AgentStreamTokenResponse> actualTokens = await ReadNdjsonAsAsync(httpResponseMessage: response);
 
         // Then
         actualTokens.Should().NotBeEmpty();
-        actualTokens[0].Type.Should().Be("start");
-        actualTokens[^1].Type.Should().Be("complete");
-        actualTokens[^1].Completion!.FinalMessage.Should().Be("The folder is C:\\Temp.");
+        actualTokens[0].Type.Should().Be(expected: "start");
+        actualTokens[^1].Type.Should().Be(expected: "complete");
+        actualTokens[^1].Completion!.FinalMessage.Should().Be(expected: "The folder is C:\\Temp.");
     }
 }

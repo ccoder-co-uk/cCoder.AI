@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI.Models.Enums;
 
 namespace cCoder.AI.Models.Configurations;
@@ -10,10 +14,10 @@ public static class AIConfigurationProviderExtensions
         Action<OllamaAIProviderOptions> configure)
     {
         OllamaAIProviderOptions options = new();
-        configure?.Invoke(options);
-        string baseEndpoint = TrimKnownSuffix(options.Endpoint, "/api/chat");
+        configure?.Invoke(obj: options);
+        string baseEndpoint = TrimKnownSuffix(endpoint: options.Endpoint, suffix: "/api/chat");
 
-        return AddProvider(configuration, key, options, new AIProviderConfiguration
+        return AddProvider(configuration: configuration, key: key, options: options, provider: new AIProviderConfiguration
         {
             CompletionProvider = BuildCompletion(
                 options,
@@ -36,10 +40,10 @@ public static class AIConfigurationProviderExtensions
         Action<OpenAIProviderOptions> configure)
     {
         OpenAIProviderOptions options = new();
-        configure?.Invoke(options);
-        string baseEndpoint = TrimKnownSuffix(options.Endpoint, "/chat/completions");
+        configure?.Invoke(obj: options);
+        string baseEndpoint = TrimKnownSuffix(endpoint: options.Endpoint, suffix: "/chat/completions");
 
-        return AddProvider(configuration, key, options, new AIProviderConfiguration
+        return AddProvider(configuration: configuration, key: key, options: options, provider: new AIProviderConfiguration
         {
             CompletionProvider = BuildCompletion(
                 options,
@@ -62,9 +66,9 @@ public static class AIConfigurationProviderExtensions
         Action<FoundryAIProviderOptions> configure)
     {
         FoundryAIProviderOptions options = new();
-        configure?.Invoke(options);
+        configure?.Invoke(obj: options);
 
-        return AddProvider(configuration, key, options, new AIProviderConfiguration
+        return AddProvider(configuration: configuration, key: key, options: options, provider: new AIProviderConfiguration
         {
             CompletionProvider = BuildCompletion(
                 options,
@@ -87,15 +91,15 @@ public static class AIConfigurationProviderExtensions
         Action<CodexAIProviderOptions> configure)
     {
         CodexAIProviderOptions options = new();
-        configure?.Invoke(options);
+        configure?.Invoke(obj: options);
         AIProviderConfiguration provider = new()
         {
             CompletionProvider = BuildCompletion(
-                options,
-                AIProviderMode.CodexCli,
-                options.ExecutablePath,
-                string.Empty,
-                string.Empty),
+options: options,
+mode: AIProviderMode.CodexCli,
+endpoint: options.ExecutablePath,
+apiKeyHeaderName: string.Empty,
+apiKeyScheme: string.Empty),
             ModelProvider = new AIModelProviderConfiguration(),
             CodexCli = new CodexCliConfiguration
             {
@@ -110,7 +114,7 @@ public static class AIConfigurationProviderExtensions
             }
         };
 
-        return AddProvider(configuration, key, options, provider);
+        return AddProvider(configuration: configuration, key: key, options: options, provider: provider);
     }
 
     static AIConfiguration AddProvider(
@@ -119,11 +123,11 @@ public static class AIConfigurationProviderExtensions
         AIProviderRegistrationOptions options,
         AIProviderConfiguration provider)
     {
-        ArgumentNullException.ThrowIfNull(configuration);
-        string providerKey = ValidateKey(key);
+        ArgumentNullException.ThrowIfNull(argument: configuration);
+        string providerKey = ValidateKey(key: key);
 
         provider.Name = providerKey;
-        provider.MaxConcurrency = Math.Max(1, options.MaxConcurrency);
+        provider.MaxConcurrency = Math.Max(val1: 1, val2: options.MaxConcurrency);
         configuration.Providers[providerKey] = provider;
         return configuration;
     }
@@ -141,10 +145,10 @@ public static class AIConfigurationProviderExtensions
             ApiKey = options.ApiKey?.Trim() ?? string.Empty,
             ApiKeyHeaderName = apiKeyHeaderName,
             ApiKeyScheme = apiKeyScheme,
-            TimeoutSeconds = Math.Max(1, options.TimeoutSeconds),
+            TimeoutSeconds = Math.Max(val1: 1, val2: options.TimeoutSeconds),
             Temperature = options.Temperature,
-            MaxRetryAttempts = Math.Max(0, options.MaxRetryAttempts),
-            RetryBaseDelayMilliseconds = Math.Max(1, options.RetryBaseDelayMilliseconds)
+            MaxRetryAttempts = Math.Max(val1: 0, val2: options.MaxRetryAttempts),
+            RetryBaseDelayMilliseconds = Math.Max(val1: 1, val2: options.RetryBaseDelayMilliseconds)
         };
 
     static AIModelProviderConfiguration BuildModel(
@@ -159,46 +163,46 @@ public static class AIConfigurationProviderExtensions
             ApiKey = options.ApiKey?.Trim() ?? string.Empty,
             ApiKeyHeaderName = apiKeyHeaderName,
             ApiKeyScheme = apiKeyScheme,
-            TimeoutSeconds = Math.Max(1, options.TimeoutSeconds)
+            TimeoutSeconds = Math.Max(val1: 1, val2: options.TimeoutSeconds)
         };
 
     static string ValidateKey(string key)
     {
-        if (string.IsNullOrWhiteSpace(key))
-            throw new ArgumentException("A provider key is required.", nameof(key));
+        if (string.IsNullOrWhiteSpace(value: key))
+            throw new ArgumentException(message: "A provider key is required.", paramName: nameof(key));
 
         return key.Trim();
     }
 
     static string Coalesce(string preferred, string fallback) =>
-        string.IsNullOrWhiteSpace(preferred) ? fallback : preferred.Trim();
+        string.IsNullOrWhiteSpace(value: preferred) ? fallback : preferred.Trim();
 
     static string AppendPath(string endpoint, string relativePath) =>
-        $"{endpoint?.TrimEnd('/')}/{relativePath.TrimStart('/')}";
+        $"{endpoint?.TrimEnd(trimChar: '/')}/{relativePath.TrimStart(trimChar: '/')}";
 
     static string TrimKnownSuffix(string endpoint, string suffix)
     {
-        string value = endpoint?.Trim().TrimEnd('/') ?? string.Empty;
-        return value.EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
+        string value = endpoint?.Trim().TrimEnd(trimChar: '/') ?? string.Empty;
+        return value.EndsWith(value: suffix, comparisonType: StringComparison.OrdinalIgnoreCase)
             ? value[..^suffix.Length]
             : value;
     }
 
     static string BuildFoundryCompletionEndpoint(string endpoint)
     {
-        string value = endpoint?.Trim().TrimEnd('/') ?? string.Empty;
-        if (string.IsNullOrWhiteSpace(value)
-            || value.Contains("/chat/completions", StringComparison.OrdinalIgnoreCase))
+        string value = endpoint?.Trim().TrimEnd(trimChar: '/') ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(value: value)
+            || value.Contains(value: "/chat/completions", comparisonType: StringComparison.OrdinalIgnoreCase))
         {
             return value;
         }
 
-        if (value.EndsWith("/openai/v1", StringComparison.OrdinalIgnoreCase))
-            return AppendPath(value, "chat/completions");
+        if (value.EndsWith(value: "/openai/v1", comparisonType: StringComparison.OrdinalIgnoreCase))
+            return AppendPath(endpoint: value, relativePath: "chat/completions");
 
-        if (value.EndsWith("/models", StringComparison.OrdinalIgnoreCase))
-            return AppendPath(value, "chat/completions?api-version=2024-05-01-preview");
+        if (value.EndsWith(value: "/models", comparisonType: StringComparison.OrdinalIgnoreCase))
+            return AppendPath(endpoint: value, relativePath: "chat/completions?api-version=2024-05-01-preview");
 
-        return AppendPath(value, "models/chat/completions?api-version=2024-05-01-preview");
+        return AppendPath(endpoint: value, relativePath: "models/chat/completions?api-version=2024-05-01-preview");
     }
 }

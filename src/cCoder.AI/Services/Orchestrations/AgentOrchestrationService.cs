@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Text.Json;
 using System.Runtime.CompilerServices;
 using cCoder.AI.Brokers.Shells;
@@ -22,12 +26,12 @@ public class AgentOrchestrationService(
         AgentRunRequest request,
         CancellationToken cancellationToken = default)
     {
-        ValidateRequest(request);
+        ValidateRequest(request: request);
 
         int maxIterations = request.MaxIterations ?? aiConfiguration.Agent.MaxIterations;
         List<ChatCompletionMessage> messages =
         [
-            new("system", BuildSystemPrompt(request.SystemPrompt)),
+            new("system", BuildSystemPrompt(additionalSystemPrompt: request.SystemPrompt)),
             new("user", request.Instructions),
         ];
 
@@ -36,7 +40,7 @@ public class AgentOrchestrationService(
 
         for (int iterationNumber = 1; iterationNumber <= maxIterations; iterationNumber++)
         {
-            List<ChatCompletionMessage> requestMessages = CloneMessages(messages);
+            List<ChatCompletionMessage> requestMessages = CloneMessages(messages: messages);
 
             lastCompletionResponse = request.InputFilePaths?.Count > 0
                 ? await completionProviderService.CompleteChatAsync(
@@ -54,9 +58,9 @@ public class AgentOrchestrationService(
                     enableShellTooling: true,
                     cancellationToken: cancellationToken);
 
-            if (!TryParseDirective(lastCompletionResponse.Content, out AgentDirective agentDirective, out string parseError))
+            if (!TryParseDirective(content: lastCompletionResponse.Content, directive: out AgentDirective agentDirective, error: out string parseError))
             {
-                iterationResponses.Add(new AgentIterationResponse
+                iterationResponses.Add(item: new AgentIterationResponse
                 {
                     CompletionContent = lastCompletionResponse.Content,
                     IterationNumber = iterationNumber,
@@ -65,15 +69,15 @@ public class AgentOrchestrationService(
                     ResultType = AgentResultType.InvalidDirective,
                 });
 
-                messages.Add(new ChatCompletionMessage("assistant", lastCompletionResponse.Content ?? string.Empty));
-                messages.Add(new ChatCompletionMessage("user", BuildDirectiveRepairMessage(lastCompletionResponse.Content, parseError)));
+                messages.Add(item: new ChatCompletionMessage("assistant", lastCompletionResponse.Content ?? string.Empty));
+                messages.Add(item: new ChatCompletionMessage("user", BuildDirectiveRepairMessage(lastCompletionResponse.Content, parseError)));
 
                 continue;
             }
 
-            if (agentDirective.Type.Equals("final", StringComparison.OrdinalIgnoreCase))
+            if (agentDirective.Type.Equals(value: "final", comparisonType: StringComparison.OrdinalIgnoreCase))
             {
-                iterationResponses.Add(new AgentIterationResponse
+                iterationResponses.Add(item: new AgentIterationResponse
                 {
                     CompletionContent = lastCompletionResponse.Content,
                     IterationNumber = iterationNumber,
@@ -93,37 +97,37 @@ public class AgentOrchestrationService(
             }
 
             bool isLegacyToolDirective =
-                agentDirective.Type.Equals("tool", StringComparison.OrdinalIgnoreCase) &&
-                agentDirective.Tool?.Equals("shell", StringComparison.OrdinalIgnoreCase) == true;
+                agentDirective.Type.Equals(value: "tool", comparisonType: StringComparison.OrdinalIgnoreCase) &&
+                agentDirective.Tool?.Equals(value: "shell", comparisonType: StringComparison.OrdinalIgnoreCase) == true;
 
             bool isShellDirective =
-                agentDirective.Type.Equals("shell", StringComparison.OrdinalIgnoreCase);
+                agentDirective.Type.Equals(value: "shell", comparisonType: StringComparison.OrdinalIgnoreCase);
 
             if (!isLegacyToolDirective && !isShellDirective)
             {
                 throw new InvalidOperationException(
-                    "Agent loop expected a 'final' result or a 'shell' command request.");
+message: "Agent loop expected a 'final' result or a 'shell' command request.");
             }
 
-            if (string.IsNullOrWhiteSpace(agentDirective.Command))
+            if (string.IsNullOrWhiteSpace(value: agentDirective.Command))
             {
-                throw new InvalidOperationException("Shell command requests must include a command.");
+                throw new InvalidOperationException(message: "Shell command requests must include a command.");
             }
 
             using CancellationTokenSource linkedCancellationTokenSource =
-                CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                CancellationTokenSource.CreateLinkedTokenSource(token: cancellationToken);
 
             linkedCancellationTokenSource.CancelAfter(
-                TimeSpan.FromSeconds(aiConfiguration.Agent.ShellCommandTimeoutSeconds));
+delay: TimeSpan.FromSeconds(aiConfiguration.Agent.ShellCommandTimeoutSeconds));
 
             ToolExecutionResponse toolExecutionResponse = await shellBroker.ExecuteAsync(
-                agentDirective.Command,
-                request.WorkingDirectory,
-                request.EnvironmentVariables,
-                request.ShellKind,
-                linkedCancellationTokenSource.Token);
+command: agentDirective.Command,
+workingDirectory: request.WorkingDirectory,
+environmentVariables: request.EnvironmentVariables,
+shellKind: request.ShellKind,
+cancellationToken: linkedCancellationTokenSource.Token);
 
-            iterationResponses.Add(new AgentIterationResponse
+            iterationResponses.Add(item: new AgentIterationResponse
             {
                 CompletionContent = lastCompletionResponse.Content,
                 IterationNumber = iterationNumber,
@@ -133,8 +137,8 @@ public class AgentOrchestrationService(
                 ToolName = "shell",
             });
 
-            messages.Add(new ChatCompletionMessage("assistant", lastCompletionResponse.Content));
-            messages.Add(new ChatCompletionMessage("user", BuildToolResultMessage(toolExecutionResponse)));
+            messages.Add(item: new ChatCompletionMessage("assistant", lastCompletionResponse.Content));
+            messages.Add(item: new ChatCompletionMessage("user", BuildToolResultMessage(toolExecutionResponse)));
         }
 
         return new AgentRunResponse
@@ -163,7 +167,7 @@ public class AgentOrchestrationService(
 
         try
         {
-            agentRunResponse = await RunAsync(request, cancellationToken);
+            agentRunResponse = await RunAsync(request: request, cancellationToken: cancellationToken);
         }
         catch (Exception exception)
         {
@@ -185,8 +189,8 @@ public class AgentOrchestrationService(
         int sequence = 1;
 
         foreach (string chunk in ChunkText(
-            agentRunResponse!.FinalMessage,
-            aiConfiguration.Agent.StreamingChunkCharacterCount))
+content: agentRunResponse!.FinalMessage,
+chunkCharacterCount: aiConfiguration.Agent.StreamingChunkCharacterCount))
         {
             yield return new AgentStreamTokenResponse
             {
@@ -200,8 +204,8 @@ public class AgentOrchestrationService(
             if (aiConfiguration.Agent.StreamingChunkDelayMilliseconds > 0)
             {
                 await Task.Delay(
-                    aiConfiguration.Agent.StreamingChunkDelayMilliseconds,
-                    cancellationToken);
+millisecondsDelay: aiConfiguration.Agent.StreamingChunkDelayMilliseconds,
+cancellationToken: cancellationToken);
             }
         }
 
@@ -220,7 +224,7 @@ public class AgentOrchestrationService(
     {
         string basePrompt = aiConfiguration.Agent.BasePrompt;
 
-        if (string.IsNullOrWhiteSpace(additionalSystemPrompt))
+        if (string.IsNullOrWhiteSpace(value: additionalSystemPrompt))
         {
             return basePrompt;
         }
@@ -269,7 +273,7 @@ public class AgentOrchestrationService(
         directive = null;
         error = string.Empty;
 
-        if (string.IsNullOrWhiteSpace(content))
+        if (string.IsNullOrWhiteSpace(value: content))
         {
             error = "Response content was empty.";
             return false;
@@ -277,19 +281,19 @@ public class AgentOrchestrationService(
 
         string normalizedContent = content.Trim();
 
-        if (normalizedContent.StartsWith("```", StringComparison.Ordinal))
+        if (normalizedContent.StartsWith(value: "```", comparisonType: StringComparison.Ordinal))
         {
             normalizedContent = normalizedContent
-                .Replace("```json", string.Empty, StringComparison.OrdinalIgnoreCase)
-                .Replace("```", string.Empty, StringComparison.Ordinal)
+                .Replace(oldValue: "```json", newValue: string.Empty, comparisonType: StringComparison.OrdinalIgnoreCase)
+                .Replace(oldValue: "```", newValue: string.Empty, comparisonType: StringComparison.Ordinal)
                 .Trim();
         }
 
         try
         {
             directive = JsonSerializer.Deserialize<AgentDirective>(
-                normalizedContent,
-                JsonSerializerOptions);
+json: normalizedContent,
+options: JsonSerializerOptions);
 
             if (directive is null)
             {
@@ -297,7 +301,7 @@ public class AgentOrchestrationService(
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(directive.Type))
+            if (string.IsNullOrWhiteSpace(value: directive.Type))
             {
                 error = "Agent response did not include a directive type.";
                 directive = null;
@@ -316,30 +320,30 @@ public class AgentOrchestrationService(
 
     private static void ValidateRequest(AgentRunRequest request)
     {
-        if (string.IsNullOrWhiteSpace(request.Instructions))
+        if (string.IsNullOrWhiteSpace(value: request.Instructions))
         {
-            throw new ArgumentException("Instructions are required.", nameof(request));
+            throw new ArgumentException(message: "Instructions are required.", paramName: nameof(request));
         }
     }
 
     private static IEnumerable<string> ChunkText(string content, int chunkCharacterCount)
     {
-        if (string.IsNullOrEmpty(content))
+        if (string.IsNullOrEmpty(value: content))
         {
             yield break;
         }
 
-        int safeChunkCharacterCount = Math.Max(1, chunkCharacterCount);
+        int safeChunkCharacterCount = Math.Max(val1: 1, val2: chunkCharacterCount);
 
         for (int index = 0; index < content.Length; index += safeChunkCharacterCount)
         {
-            int length = Math.Min(safeChunkCharacterCount, content.Length - index);
-            yield return content.Substring(index, length);
+            int length = Math.Min(val1: safeChunkCharacterCount, val2: content.Length - index);
+            yield return content.Substring(startIndex: index, length: length);
         }
     }
 
     private static List<ChatCompletionMessage> CloneMessages(IEnumerable<ChatCompletionMessage> messages) =>
         messages
-            .Select(message => new ChatCompletionMessage(message.Role, message.Content))
+            .Select(selector: message => new ChatCompletionMessage(message.Role, message.Content))
             .ToList();
 }

@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 namespace AI.Web.Services.Diagnostics;
 
 public interface IAgentRunHistoryService

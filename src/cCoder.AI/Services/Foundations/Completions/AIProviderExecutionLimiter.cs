@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Collections.Concurrent;
 
 namespace cCoder.AI.Services.Foundations.Completions;
@@ -12,22 +16,22 @@ public sealed class AIProviderExecutionLimiter : IAIProviderExecutionLimiter, ID
         int maxConcurrency,
         CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(providerKey))
-            throw new ArgumentException("A provider key is required.", nameof(providerKey));
+        if (string.IsNullOrWhiteSpace(value: providerKey))
+            throw new ArgumentException(message: "A provider key is required.", paramName: nameof(providerKey));
 
-        int configuredLimit = Math.Max(1, maxConcurrency);
+        int configuredLimit = Math.Max(val1: 1, val2: maxConcurrency);
         ProviderGate gate = gates.GetOrAdd(
-            providerKey.Trim(),
-            _ => new ProviderGate(configuredLimit));
+key: providerKey.Trim(),
+valueFactory: _ => new ProviderGate(configuredLimit));
 
         if (gate.MaxConcurrency != configuredLimit)
         {
             throw new InvalidOperationException(
-                $"AI provider '{providerKey}' was registered with conflicting concurrency limits.");
+message: $"AI provider '{providerKey}' was registered with conflicting concurrency limits.");
         }
 
-        await gate.Semaphore.WaitAsync(cancellationToken);
-        return new GateLease(gate.Semaphore);
+        await gate.Semaphore.WaitAsync(cancellationToken: cancellationToken);
+        return new GateLease(semaphore: gate.Semaphore);
     }
 
     public void Dispose()
@@ -49,7 +53,7 @@ public sealed class AIProviderExecutionLimiter : IAIProviderExecutionLimiter, ID
 
         public ValueTask DisposeAsync()
         {
-            if (Interlocked.Exchange(ref released, 1) == 0)
+            if (Interlocked.Exchange(location1: ref released, value: 1) == 0)
                 semaphore.Release();
 
             return ValueTask.CompletedTask;

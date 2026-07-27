@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI.Brokers.Shells;
 using cCoder.AI.Services.Foundations.Completions;
 using cCoder.AI.Services.Foundations.Models;
@@ -18,9 +22,9 @@ public sealed class AIWebApplicationFactory : WebApplicationFactory<Program>
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseEnvironment("Acceptance");
+        builder.UseEnvironment(environment: "Acceptance");
 
-        builder.ConfigureAppConfiguration((_, configurationBuilder) =>
+        builder.ConfigureAppConfiguration(configureDelegate: (_, configurationBuilder) =>
         {
             configurationBuilder.AddInMemoryCollection(
             [
@@ -33,7 +37,7 @@ public sealed class AIWebApplicationFactory : WebApplicationFactory<Program>
             ]);
         });
 
-        builder.ConfigureTestServices(services =>
+        builder.ConfigureTestServices(servicesConfiguration: services =>
         {
             services.RemoveAll<ICompletionProviderService>();
             services.RemoveAll<IShellBroker>();

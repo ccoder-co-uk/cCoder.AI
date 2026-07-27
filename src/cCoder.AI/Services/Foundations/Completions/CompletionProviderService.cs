@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI.Brokers.Completions;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Models.Requests;
@@ -16,24 +20,24 @@ public class CompletionProviderService(
         CompletionRequest request,
         CancellationToken cancellationToken = default)
     {
-        ValidatePrompt(request.Prompt);
+        ValidatePrompt(prompt: request.Prompt);
 
         List<ChatCompletionMessage> messages = [];
 
-        if (string.IsNullOrWhiteSpace(request.SystemPrompt) is false)
+        if (string.IsNullOrWhiteSpace(value: request.SystemPrompt) is false)
         {
-            messages.Add(new ChatCompletionMessage("system", request.SystemPrompt));
+            messages.Add(item: new ChatCompletionMessage("system", request.SystemPrompt));
         }
 
-        messages.Add(new ChatCompletionMessage("user", request.Prompt));
+        messages.Add(item: new ChatCompletionMessage("user", request.Prompt));
 
         return CompleteChatAsync(
-            request.Provider,
-            request.Model,
-            messages,
-            request.Temperature,
-            false,
-            cancellationToken);
+provider: request.Provider,
+model: request.Model,
+messages: messages,
+temperature: request.Temperature,
+enableShellTooling: false,
+cancellationToken: cancellationToken);
     }
 
     public async ValueTask<CompletionResponse> CompleteChatAsync(
@@ -61,30 +65,30 @@ public class CompletionProviderService(
         IReadOnlyList<string>? inputFilePaths,
         CancellationToken cancellationToken = default)
     {
-        (string providerKey, AIProviderConfiguration providerConfiguration) = ResolveProviderConfiguration(provider);
-        string providerName = ResolveProviderName(providerConfiguration, providerKey);
+        (string providerKey, AIProviderConfiguration providerConfiguration) = ResolveProviderConfiguration(provider: provider);
+        string providerName = ResolveProviderName(providerConfiguration: providerConfiguration, providerName: providerKey);
         AICompletionProviderConfiguration completionProvider = providerConfiguration.CompletionProvider;
-        string resolvedModel = string.IsNullOrWhiteSpace(model)
+        string resolvedModel = string.IsNullOrWhiteSpace(value: model)
             ? completionProvider.DefaultModel
             : model;
 
-        if (string.IsNullOrWhiteSpace(resolvedModel))
+        if (string.IsNullOrWhiteSpace(value: resolvedModel))
         {
             throw new InvalidOperationException(
-                $"No model was provided for AI provider '{providerName}'.");
+message: $"No model was provided for AI provider '{providerName}'.");
         }
 
         if (completionProvider.Mode != cCoder.AI.Models.Enums.AIProviderMode.CodexCli
-            && string.IsNullOrWhiteSpace(completionProvider.Endpoint))
+            && string.IsNullOrWhiteSpace(value: completionProvider.Endpoint))
         {
             throw new InvalidOperationException(
-                $"No endpoint was configured for AI provider '{providerName}'.");
+message: $"No endpoint was configured for AI provider '{providerName}'.");
         }
 
         await using IAsyncDisposable lease = await providerExecutionLimiter.AcquireAsync(
-            providerKey,
-            providerConfiguration.MaxConcurrency,
-            cancellationToken);
+providerKey: providerKey,
+maxConcurrency: providerConfiguration.MaxConcurrency,
+cancellationToken: cancellationToken);
 
         ProviderCompletionRequest providerRequest = new()
         {
@@ -97,44 +101,44 @@ public class CompletionProviderService(
 
         return completionProvider.Mode == cCoder.AI.Models.Enums.AIProviderMode.CodexCli
             ? await codexCliBroker.CompleteAsync(
-                providerName,
-                providerConfiguration,
-                providerRequest,
-                cancellationToken)
+providerName: providerName,
+providerConfiguration: providerConfiguration,
+request: providerRequest,
+cancellationToken: cancellationToken)
             : await chatCompletionsBroker.PostChatCompletionAsync(
-                providerName,
-                completionProvider,
-                providerRequest,
-                cancellationToken);
+providerName: providerName,
+providerConfiguration: completionProvider,
+request: providerRequest,
+cancellationToken: cancellationToken);
     }
 
     private (string ProviderKey, AIProviderConfiguration Configuration) ResolveProviderConfiguration(string? provider)
     {
-        string resolvedProviderName = string.IsNullOrWhiteSpace(provider)
+        string resolvedProviderName = string.IsNullOrWhiteSpace(value: provider)
             ? aiConfiguration.DefaultProvider
             : provider;
 
-        if (aiConfiguration.Providers.TryGetValue(resolvedProviderName, out AIProviderConfiguration? configuration))
+        if (aiConfiguration.Providers.TryGetValue(key: resolvedProviderName, value: out AIProviderConfiguration? configuration))
         {
-            configuration.Name = ResolveProviderName(configuration, resolvedProviderName);
+            configuration.Name = ResolveProviderName(providerConfiguration: configuration, providerName: resolvedProviderName);
             return (resolvedProviderName, configuration);
         }
 
-        throw new InvalidOperationException($"Unsupported AI provider '{resolvedProviderName}'.");
+        throw new InvalidOperationException(message: $"Unsupported AI provider '{resolvedProviderName}'.");
     }
 
     private static string ResolveProviderName(
         AIProviderConfiguration providerConfiguration,
         string? providerName) =>
-        string.IsNullOrWhiteSpace(providerConfiguration.Name)
+        string.IsNullOrWhiteSpace(value: providerConfiguration.Name)
             ? providerName?.Trim() ?? string.Empty
             : providerConfiguration.Name;
 
     private static void ValidatePrompt(string prompt)
     {
-        if (string.IsNullOrWhiteSpace(prompt))
+        if (string.IsNullOrWhiteSpace(value: prompt))
         {
-            throw new ArgumentException("Prompt is required.", nameof(prompt));
+            throw new ArgumentException(message: "Prompt is required.", paramName: nameof(prompt));
         }
     }
 }

@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using cCoder.AI.Models.Enums;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Models.Responses;
@@ -21,7 +25,7 @@ public partial class AgentOrchestrationServiceTests
         IReadOnlyList<ChatCompletionMessage>? actualMessages = null;
 
         completionProviderServiceMock
-            .Setup(service => service.CompleteChatAsync(
+            .Setup(expression: service => service.CompleteChatAsync(
                 inputRequest.Provider,
                 inputRequest.Model,
                 It.IsAny<IReadOnlyList<ChatCompletionMessage>>(),
@@ -29,8 +33,8 @@ public partial class AgentOrchestrationServiceTests
                 true,
                 It.IsAny<CancellationToken>()))
             .Callback<string?, string?, IReadOnlyList<ChatCompletionMessage>, double?, bool, CancellationToken>(
-                (_, _, messages, _, _, _) => actualMessages = messages)
-            .ReturnsAsync(new CompletionResponse
+action: (_, _, messages, _, _, _) => actualMessages = messages)
+            .ReturnsAsync(value: new CompletionResponse
             {
                 Content = "{\"type\":\"final\",\"message\":\"Hello.\"}",
                 Model = "gpt-oss:20b",
@@ -39,25 +43,25 @@ public partial class AgentOrchestrationServiceTests
             });
 
         // When
-        AgentRunResponse actualResponse = await agentOrchestrationService.RunAsync(inputRequest);
+        AgentRunResponse actualResponse = await agentOrchestrationService.RunAsync(request: inputRequest);
 
         // Then
         actualResponse.Succeeded.Should().BeTrue();
-        actualResponse.FinalMessage.Should().Be("Hello.");
-        actualResponse.IterationResponses.Should().HaveCount(1);
-        actualResponse.IterationResponses[0].ResultType.Should().Be(AgentResultType.Final);
+        actualResponse.FinalMessage.Should().Be(expected: "Hello.");
+        actualResponse.IterationResponses.Should().HaveCount(expected: 1);
+        actualResponse.IterationResponses[0].ResultType.Should().Be(expected: AgentResultType.Final);
         actualMessages.Should().NotBeNull();
-        actualMessages![0].Role.Should().Be("system");
-        actualMessages[0].Content.Should().Contain("BASE PROMPT");
-        actualMessages[0].Content.Should().Contain("USE CASE PROMPT");
+        actualMessages![0].Role.Should().Be(expected: "system");
+        actualMessages[0].Content.Should().Contain(expected: "BASE PROMPT");
+        actualMessages[0].Content.Should().Contain(expected: "USE CASE PROMPT");
 
-        shellBrokerMock.Verify(broker => broker.ExecuteAsync(
+        shellBrokerMock.Verify(expression: broker => broker.ExecuteAsync(
             It.IsAny<string>(),
             It.IsAny<string>(),
             It.IsAny<IReadOnlyDictionary<string, string>?>(),
             It.IsAny<ShellKind>(),
             It.IsAny<CancellationToken>()),
-            Times.Never);
+times: Times.Never);
     }
 
     [Fact]
@@ -72,21 +76,21 @@ public partial class AgentOrchestrationServiceTests
         };
 
         completionProviderServiceMock
-            .SetupSequence(service => service.CompleteChatAsync(
+            .SetupSequence(expression: service => service.CompleteChatAsync(
                 inputRequest.Provider,
                 inputRequest.Model,
                 It.IsAny<IReadOnlyList<ChatCompletionMessage>>(),
                 null,
                 true,
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new CompletionResponse
+            .ReturnsAsync(value: new CompletionResponse
             {
                 Content = "{\"type\":\"tool\",\"tool\":\"shell\",\"command\":\"Get-Location\",\"reason\":\"Need the working directory.\"}",
                 Model = "gpt-oss:20b",
                 Provider = "Ollama",
                 RawContent = "{}",
             })
-            .ReturnsAsync(new CompletionResponse
+            .ReturnsAsync(value: new CompletionResponse
             {
                 Content = "{\"type\":\"final\",\"message\":\"The working directory is C:\\\\Temp.\"}",
                 Model = "gpt-oss:20b",
@@ -105,23 +109,23 @@ public partial class AgentOrchestrationServiceTests
         };
 
         shellBrokerMock
-            .Setup(broker => broker.ExecuteAsync(
+            .Setup(expression: broker => broker.ExecuteAsync(
                 "Get-Location",
                 inputRequest.WorkingDirectory,
                 inputRequest.EnvironmentVariables,
                 inputRequest.ShellKind,
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(toolExecutionResponse);
+            .ReturnsAsync(value: toolExecutionResponse);
 
         // When
-        AgentRunResponse actualResponse = await agentOrchestrationService.RunAsync(inputRequest);
+        AgentRunResponse actualResponse = await agentOrchestrationService.RunAsync(request: inputRequest);
 
         // Then
         actualResponse.Succeeded.Should().BeTrue();
-        actualResponse.FinalMessage.Should().Be("The working directory is C:\\Temp.");
-        actualResponse.IterationResponses.Should().HaveCount(2);
-        actualResponse.IterationResponses[0].ToolExecution.Should().BeEquivalentTo(toolExecutionResponse);
-        actualResponse.IterationResponses[1].ResultType.Should().Be(AgentResultType.Final);
+        actualResponse.FinalMessage.Should().Be(expected: "The working directory is C:\\Temp.");
+        actualResponse.IterationResponses.Should().HaveCount(expected: 2);
+        actualResponse.IterationResponses[0].ToolExecution.Should().BeEquivalentTo(expectation: toolExecutionResponse);
+        actualResponse.IterationResponses[1].ResultType.Should().Be(expected: AgentResultType.Final);
     }
 
     [Fact]
@@ -134,14 +138,14 @@ public partial class AgentOrchestrationServiceTests
         };
 
         completionProviderServiceMock
-            .Setup(service => service.CompleteChatAsync(
+            .Setup(expression: service => service.CompleteChatAsync(
                 inputRequest.Provider,
                 inputRequest.Model,
                 It.IsAny<IReadOnlyList<ChatCompletionMessage>>(),
                 null,
                 true,
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new CompletionResponse
+            .ReturnsAsync(value: new CompletionResponse
             {
                 Content = "{\"type\":\"final\",\"message\":\"Hello stream.\"}",
                 Model = "gpt-oss:20b",
@@ -152,27 +156,27 @@ public partial class AgentOrchestrationServiceTests
         List<AgentStreamTokenResponse> actualTokens = [];
 
         // When
-        await foreach (AgentStreamTokenResponse token in agentOrchestrationService.StreamAsync(inputRequest))
+        await foreach (AgentStreamTokenResponse token in agentOrchestrationService.StreamAsync(request: inputRequest))
         {
-            actualTokens.Add(token);
+            actualTokens.Add(item: token);
         }
 
         // Then
-        actualTokens.Should().HaveCountGreaterThanOrEqualTo(3);
-        actualTokens[0].Type.Should().Be("start");
-        actualTokens[^1].Type.Should().Be("complete");
-        actualTokens.Where(token => token.Type == "token")
-            .Select(token => token.Content)
+        actualTokens.Should().HaveCountGreaterThanOrEqualTo(expected: 3);
+        actualTokens[0].Type.Should().Be(expected: "start");
+        actualTokens[^1].Type.Should().Be(expected: "complete");
+        actualTokens.Where(predicate: token => token.Type == "token")
+            .Select(selector: token => token.Content)
             .Should()
             .NotBeEmpty();
 
         string streamedMessage = string.Concat(
-            actualTokens
+values: actualTokens
                 .Where(token => token.Type == "token")
                 .Select(token => token.Content));
 
-        streamedMessage.Should().Be("Hello stream.");
-        actualTokens[^1].Completion!.FinalMessage.Should().Be("Hello stream.");
+        streamedMessage.Should().Be(expected: "Hello stream.");
+        actualTokens[^1].Completion!.FinalMessage.Should().Be(expected: "Hello stream.");
     }
 
     [Fact]
@@ -185,21 +189,21 @@ public partial class AgentOrchestrationServiceTests
         };
 
         completionProviderServiceMock
-            .SetupSequence(service => service.CompleteChatAsync(
+            .SetupSequence(expression: service => service.CompleteChatAsync(
                 inputRequest.Provider,
                 inputRequest.Model,
                 It.IsAny<IReadOnlyList<ChatCompletionMessage>>(),
                 null,
                 true,
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new CompletionResponse
+            .ReturnsAsync(value: new CompletionResponse
             {
                 Content = string.Empty,
                 Model = "gpt-oss:20b",
                 Provider = "Ollama",
                 RawContent = "{}",
             })
-            .ReturnsAsync(new CompletionResponse
+            .ReturnsAsync(value: new CompletionResponse
             {
                 Content = "{\"type\":\"final\",\"message\":\"Recovered.\"}",
                 Model = "gpt-oss:20b",
@@ -208,18 +212,18 @@ public partial class AgentOrchestrationServiceTests
             });
 
         // When
-        AgentRunResponse actualResponse = await agentOrchestrationService.RunAsync(inputRequest);
+        AgentRunResponse actualResponse = await agentOrchestrationService.RunAsync(request: inputRequest);
 
         // Then
         actualResponse.Succeeded.Should().BeTrue();
-        actualResponse.FinalMessage.Should().Be("Recovered.");
-        actualResponse.Iterations.Should().Be(2);
-        shellBrokerMock.Verify(broker => broker.ExecuteAsync(
+        actualResponse.FinalMessage.Should().Be(expected: "Recovered.");
+        actualResponse.Iterations.Should().Be(expected: 2);
+        shellBrokerMock.Verify(expression: broker => broker.ExecuteAsync(
             It.IsAny<string>(),
             It.IsAny<string>(),
             It.IsAny<IReadOnlyDictionary<string, string>?>(),
             It.IsAny<ShellKind>(),
             It.IsAny<CancellationToken>()),
-            Times.Never);
+times: Times.Never);
     }
 }

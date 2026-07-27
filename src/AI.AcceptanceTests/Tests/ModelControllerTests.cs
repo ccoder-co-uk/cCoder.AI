@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Net.Http.Json;
 using System.Text.Json;
 using AI.AcceptanceTests.Infrastructure;
@@ -25,7 +29,7 @@ public sealed class ModelControllerTests : IClassFixture<AIWebApplicationFactory
     {
         // Given
         factory.ModelManagerService.SeedAvailableModels(
-            "Ollama",
+provider: "Ollama",
             new ModelDescriptorResponse
             {
                 Id = "gpt-oss:20b",
@@ -35,25 +39,25 @@ public sealed class ModelControllerTests : IClassFixture<AIWebApplicationFactory
             });
 
         // When
-        using HttpResponseMessage response = await client.GetAsync("/Api/Model/Providers/Ollama/Available");
+        using HttpResponseMessage response = await client.GetAsync(requestUri: "/Api/Model/Providers/Ollama/Available");
         string content = await response.Content.ReadAsStringAsync();
 
         IReadOnlyList<ModelDescriptorResponse> actualResponse =
-            JsonSerializer.Deserialize<List<ModelDescriptorResponse>>(content, JsonSerializerOptions)
-            ?? throw new InvalidOperationException("The acceptance response payload could not be deserialized.");
+            JsonSerializer.Deserialize<List<ModelDescriptorResponse>>(json: content, options: JsonSerializerOptions)
+            ?? throw new InvalidOperationException(message: "The acceptance response payload could not be deserialized.");
 
         // Then
-        response.IsSuccessStatusCode.Should().BeTrue(content);
+        response.IsSuccessStatusCode.Should().BeTrue(because: content);
         actualResponse.Should().ContainSingle();
-        actualResponse[0].Id.Should().Be("gpt-oss:20b");
-        factory.ModelManagerService.RetrievalRequests.Should().ContainSingle("Ollama");
+        actualResponse[0].Id.Should().Be(expected: "gpt-oss:20b");
+        factory.ModelManagerService.RetrievalRequests.Should().ContainSingle(because: "Ollama");
     }
 
     [Fact]
     public async Task PostImportModel_ShouldReturnImportResponse()
     {
         // Given
-        factory.ModelManagerService.EnqueueImportResponse(new ModelImportResponse
+        factory.ModelManagerService.EnqueueImportResponse(response: new ModelImportResponse
         {
             Provider = "Ollama",
             ModelId = "llama3.1:8b",
@@ -69,19 +73,19 @@ public sealed class ModelControllerTests : IClassFixture<AIWebApplicationFactory
 
         // When
         using HttpResponseMessage response = await client.PostAsJsonAsync(
-            "/Api/Model/Providers/Ollama/Import",
-            inputRequest);
+requestUri: "/Api/Model/Providers/Ollama/Import",
+value: inputRequest);
 
         string content = await response.Content.ReadAsStringAsync();
         ModelImportResponse actualResponse =
-            JsonSerializer.Deserialize<ModelImportResponse>(content, JsonSerializerOptions)
-            ?? throw new InvalidOperationException("The acceptance response payload could not be deserialized.");
+            JsonSerializer.Deserialize<ModelImportResponse>(json: content, options: JsonSerializerOptions)
+            ?? throw new InvalidOperationException(message: "The acceptance response payload could not be deserialized.");
 
         // Then
-        response.IsSuccessStatusCode.Should().BeTrue(content);
-        actualResponse.Provider.Should().Be("Ollama");
-        actualResponse.ModelId.Should().Be("llama3.1:8b");
+        response.IsSuccessStatusCode.Should().BeTrue(because: content);
+        actualResponse.Provider.Should().Be(expected: "Ollama");
+        actualResponse.ModelId.Should().Be(expected: "llama3.1:8b");
         factory.ModelManagerService.ImportRequests.Should().ContainSingle();
-        factory.ModelManagerService.ImportRequests[0].ModelId.Should().Be("llama3.1:8b");
+        factory.ModelManagerService.ImportRequests[0].ModelId.Should().Be(expected: "llama3.1:8b");
     }
 }

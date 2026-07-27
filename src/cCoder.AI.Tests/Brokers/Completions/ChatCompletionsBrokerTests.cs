@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -15,7 +19,7 @@ public class ChatCompletionsBrokerTests
     public async Task ShouldRetrySuccessfulOllamaResponseWithoutAssistantContentAsync()
     {
         int requestCount = 0;
-        var handler = new StubHttpMessageHandler(_ =>
+        var handler = new StubHttpMessageHandler(responseFactory: _ =>
         {
             requestCount++;
             string response = requestCount == 1
@@ -27,7 +31,7 @@ public class ChatCompletionsBrokerTests
                 Content = new StringContent(response, Encoding.UTF8, "application/json")
             };
         });
-        var broker = new ChatCompletionsBroker(new HttpClient(handler));
+        var broker = new ChatCompletionsBroker(httpClient: new HttpClient(handler));
         AICompletionProviderConfiguration providerConfiguration = new()
         {
             Mode = AIProviderMode.OllamaApi,
@@ -37,16 +41,16 @@ public class ChatCompletionsBrokerTests
         };
 
         var response = await broker.PostChatCompletionAsync(
-            "Ollama",
-            providerConfiguration,
-            new ProviderCompletionRequest
-            {
-                Model = "qwen3.5:4b",
-                Messages = [new ChatCompletionMessage("user", "Return structured JSON.")]
-            });
+providerName: "Ollama",
+providerConfiguration: providerConfiguration,
+request: new ProviderCompletionRequest
+{
+    Model = "qwen3.5:4b",
+    Messages = [new ChatCompletionMessage("user", "Return structured JSON.")]
+});
 
-        requestCount.Should().Be(2);
-        response.Content.Should().Contain("ready");
+        requestCount.Should().Be(expected: 2);
+        response.Content.Should().Contain(expected: "ready");
     }
 
     [Fact]
@@ -54,7 +58,7 @@ public class ChatCompletionsBrokerTests
     {
         // Given
         string requestBody = string.Empty;
-        var handler = new StubHttpMessageHandler(request =>
+        var handler = new StubHttpMessageHandler(responseFactory: request =>
         {
             requestBody = request.Content!.ReadAsStringAsync().GetAwaiter().GetResult();
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -65,7 +69,7 @@ public class ChatCompletionsBrokerTests
                     "application/json")
             };
         });
-        var broker = new ChatCompletionsBroker(new HttpClient(handler));
+        var broker = new ChatCompletionsBroker(httpClient: new HttpClient(handler));
         AICompletionProviderConfiguration providerConfiguration = new()
         {
             Mode = AIProviderMode.OllamaApi,
@@ -74,17 +78,17 @@ public class ChatCompletionsBrokerTests
 
         // When
         await broker.PostChatCompletionAsync(
-            "Ollama",
-            providerConfiguration,
-            new ProviderCompletionRequest
-            {
-                Model = "qwen3.5:4b",
-                Messages = [new ChatCompletionMessage("user", "Return structured JSON.")]
-            });
+providerName: "Ollama",
+providerConfiguration: providerConfiguration,
+request: new ProviderCompletionRequest
+{
+    Model = "qwen3.5:4b",
+    Messages = [new ChatCompletionMessage("user", "Return structured JSON.")]
+});
 
         // Then
-        requestBody.Should().Contain("\"think\":false");
-        requestBody.Should().NotContain("\"format\":\"json\"");
+        requestBody.Should().Contain(expected: "\"think\":false");
+        requestBody.Should().NotContain(unexpected: "\"format\":\"json\"");
     }
 
     [Fact]
@@ -112,14 +116,14 @@ public class ChatCompletionsBrokerTests
             }
             """;
 
-        var handler = new StubHttpMessageHandler(_ =>
+        var handler = new StubHttpMessageHandler(responseFactory: _ =>
             new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(rawResponse, Encoding.UTF8, "application/json")
             });
 
         HttpClient httpClient = new(handler);
-        var broker = new ChatCompletionsBroker(httpClient);
+        var broker = new ChatCompletionsBroker(httpClient: httpClient);
 
         AICompletionProviderConfiguration providerConfiguration = new()
         {
@@ -130,20 +134,20 @@ public class ChatCompletionsBrokerTests
         ProviderCompletionRequest request = new()
         {
             Model = "gpt-oss:20b",
-            Messages = [new ChatCompletionMessage("user", "Inspect the helper scripts.")],
+            Messages = [new ChatCompletionMessage(role: "user", content: "Inspect the helper scripts.")],
             Temperature = 0.2,
         };
 
         // When
         var response = await broker.PostChatCompletionAsync(
-            "Ollama",
-            providerConfiguration,
-            request);
+providerName: "Ollama",
+providerConfiguration: providerConfiguration,
+request: request);
 
         // Then
-        response.Content.Should().Contain("\"type\":\"tool\"");
-        response.Content.Should().Contain("\"tool\":\"shell\"");
-        response.Content.Should().Contain("ls -R ../Shared/helper-scripts");
+        response.Content.Should().Contain(expected: "\"type\":\"tool\"");
+        response.Content.Should().Contain(expected: "\"tool\":\"shell\"");
+        response.Content.Should().Contain(expected: "ls -R ../Shared/helper-scripts");
     }
 
     [Fact]
@@ -152,14 +156,14 @@ public class ChatCompletionsBrokerTests
         // Given
         const string rawResponse = "{\"error\":{\"message\":\"simulated provider failure\"}}";
 
-        var handler = new StubHttpMessageHandler(_ =>
+        var handler = new StubHttpMessageHandler(responseFactory: _ =>
             new HttpResponseMessage(HttpStatusCode.InternalServerError)
             {
                 Content = new StringContent(rawResponse, Encoding.UTF8, "application/json")
             });
 
         HttpClient httpClient = new(handler);
-        var broker = new ChatCompletionsBroker(httpClient);
+        var broker = new ChatCompletionsBroker(httpClient: httpClient);
 
         AICompletionProviderConfiguration providerConfiguration = new()
         {
@@ -171,26 +175,26 @@ public class ChatCompletionsBrokerTests
         ProviderCompletionRequest request = new()
         {
             Model = "gpt-oss:20b",
-            Messages = [new ChatCompletionMessage("user", "Hello.")],
+            Messages = [new ChatCompletionMessage(role: "user", content: "Hello.")],
             Temperature = 0.2,
         };
 
         // When
         Func<Task> action = async () => await broker.PostChatCompletionAsync(
-            "Ollama",
-            providerConfiguration,
-            request);
+providerName: "Ollama",
+providerConfiguration: providerConfiguration,
+request: request);
 
         // Then
         await action.Should().ThrowAsync<HttpRequestException>()
-            .Where(exception => exception.Message.Contains(rawResponse));
+            .Where(exceptionExpression: exception => exception.Message.Contains(rawResponse));
     }
 
     [Fact]
     public async Task ShouldRetryTransientProviderFailuresAsync()
     {
         int requestCount = 0;
-        var handler = new StubHttpMessageHandler(_ =>
+        var handler = new StubHttpMessageHandler(responseFactory: _ =>
         {
             requestCount++;
             return requestCount == 1
@@ -206,7 +210,7 @@ public class ChatCompletionsBrokerTests
                         "application/json")
                 };
         });
-        var broker = new ChatCompletionsBroker(new HttpClient(handler));
+        var broker = new ChatCompletionsBroker(httpClient: new HttpClient(handler));
         AICompletionProviderConfiguration providerConfiguration = new()
         {
             Mode = AIProviderMode.OpenAICompatible,
@@ -216,16 +220,16 @@ public class ChatCompletionsBrokerTests
         };
 
         var response = await broker.PostChatCompletionAsync(
-            "open-ai",
-            providerConfiguration,
-            new ProviderCompletionRequest
-            {
-                Model = "test-model",
-                Messages = [new ChatCompletionMessage("user", "Hello.")]
-            });
+providerName: "open-ai",
+providerConfiguration: providerConfiguration,
+request: new ProviderCompletionRequest
+{
+    Model = "test-model",
+    Messages = [new ChatCompletionMessage("user", "Hello.")]
+});
 
-        response.Content.Should().Be("ready");
-        requestCount.Should().Be(2);
+        response.Content.Should().Be(expected: "ready");
+        requestCount.Should().Be(expected: 2);
     }
 
     private sealed class StubHttpMessageHandler(
@@ -235,6 +239,6 @@ public class ChatCompletionsBrokerTests
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken) =>
-            Task.FromResult(responseFactory(request));
+            Task.FromResult(result: responseFactory(request));
     }
 }

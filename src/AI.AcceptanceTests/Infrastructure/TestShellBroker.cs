@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Collections.Concurrent;
 using cCoder.AI.Brokers.Shells;
 using cCoder.AI.Models.Enums;
@@ -15,13 +19,13 @@ public sealed class TestShellBroker : IShellBroker
     {
         Executions.Clear();
 
-        while (toolExecutionResponses.TryDequeue(out _))
+        while (toolExecutionResponses.TryDequeue(result: out _))
         {
         }
     }
 
     public void EnqueueResponse(ToolExecutionResponse toolExecutionResponse) =>
-        toolExecutionResponses.Enqueue(toolExecutionResponse);
+        toolExecutionResponses.Enqueue(item: toolExecutionResponse);
 
     public ValueTask<ToolExecutionResponse> ExecuteAsync(
         string command,
@@ -30,14 +34,14 @@ public sealed class TestShellBroker : IShellBroker
         ShellKind shellKind,
         CancellationToken cancellationToken = default)
     {
-        Executions.Add((command, workingDirectory, environmentVariables, shellKind));
+        Executions.Add(item: (command, workingDirectory, environmentVariables, shellKind));
 
-        if (toolExecutionResponses.TryDequeue(out ToolExecutionResponse? toolExecutionResponse))
+        if (toolExecutionResponses.TryDequeue(result: out ToolExecutionResponse? toolExecutionResponse))
         {
-            return ValueTask.FromResult(toolExecutionResponse);
+            return ValueTask.FromResult(result: toolExecutionResponse);
         }
 
-        return ValueTask.FromResult(new ToolExecutionResponse
+        return ValueTask.FromResult(result: new ToolExecutionResponse
         {
             Command = command,
             ExitCode = 0,

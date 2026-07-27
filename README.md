@@ -49,8 +49,46 @@ builder.Services.AddAI(ai =>
 
 The registration key (`local`, `desktop`, `open-ai`, or `foundry` above) is the provider value supplied to `ICompletionProviderService` and `IAgentOrchestrationService` requests.
 
+## Consumer exposure
+
+Consumers should use `ChatContext` as the high-level inference boundary. It
+accepts a `ChatRequest`, supports attached image paths and agent tools, and can
+either return a complete response or stream inference tokens:
+
+```csharp
+ChatContext chat = serviceProvider.GetRequiredService<ChatContext>();
+
+AgentRunResponse response = await chat.InferAsync(new ChatRequest
+{
+    Instructions = "Describe the attached image.",
+    Provider = "codex",
+    InputFilePaths = [imagePath]
+});
+```
+
+Use `InferAsStreamAsync` for an `IAsyncEnumerable<AgentStreamTokenResponse>`.
+`AddAI` registers the exposure and the library-owned MVC application part.
+Applications that map controllers consequently receive:
+
+- `POST /Api/AI/Completions`
+- `POST /Api/AI/Agents`
+- `POST /Api/AI/Agents/Stream`
+- `POST /Api/AI/Chat`
+- `POST /Api/AI/Chat/Stream`
+- `GET /Api/Model/Providers/{provider}/Available`
+- `POST /Api/Model/Providers/{provider}/Import`
+
+The included web application contains only UI-facing controller actions. Its
+API controllers are supplied by `cCoder.AI`, so another host receives the same
+API surface by referencing and configuring the package.
+
 Provider concurrency is enforced inside `cCoder.AI`, independently for each key. Transient HTTP 408, 429, and 5xx responses are retried using provider retry settings and `Retry-After` headers when supplied. Application-level schedulers may impose lower workload concurrency, but cannot exceed the provider cap during inference.
 
 The Codex provider runs non-interactive `codex exec` requests in ephemeral, read-only mode. Set `ExecutablePath` in the Codex provider configuration when the CLI is not on `PATH`; Codex desktop installations are discovered automatically. To route Codex through a local model instead, set `UseOss = true` and `LocalProvider = "ollama"`.
 
 Applications can query `IModelManagerService.GetProviderCapabilities(key)` for the provider's declared concurrency limit and model-listing support, then call `RetrieveAvailableModelsAsync(key)` when listing is supported. This keeps provider/model selection and worker controls capability-driven in consuming applications.
+
+The sample web application exposes every completion provider currently
+implemented by the library: Ollama, OpenAI-compatible, Azure AI Foundry, and
+Codex CLI. Keys and endpoints remain configuration-driven; secrets should be
+provided through environment variables or another configuration provider.

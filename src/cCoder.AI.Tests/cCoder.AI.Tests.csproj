@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="cCoder.CodeAnalysis" Version="2026.7.23.1729" />
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
     <PackageReference Include="FluentAssertions" Version="8.9.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />

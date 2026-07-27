@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------
+// Copyright (c) Paul.Ward@ccoder.co.uk
+// ---------------------------------------------------------------
+
 using System.Collections.Concurrent;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Models.Responses;
@@ -17,20 +21,20 @@ public sealed class TestCompletionProviderService : ICompletionProviderService
         CompletionRequests.Clear();
         ChatRequests.Clear();
 
-        while (completionResponses.TryDequeue(out _))
+        while (completionResponses.TryDequeue(result: out _))
         {
         }
     }
 
     public void EnqueueResponse(CompletionResponse completionResponse) =>
-        completionResponses.Enqueue(completionResponse);
+        completionResponses.Enqueue(item: completionResponse);
 
     public ValueTask<CompletionResponse> CompleteAsync(
         CompletionRequest request,
         CancellationToken cancellationToken = default)
     {
-        CompletionRequests.Add(request);
-        return ValueTask.FromResult(DequeueResponse());
+        CompletionRequests.Add(item: request);
+        return ValueTask.FromResult(result: DequeueResponse());
     }
 
     public ValueTask<CompletionResponse> CompleteChatAsync(
@@ -41,17 +45,17 @@ public sealed class TestCompletionProviderService : ICompletionProviderService
         bool enableShellTooling = false,
         CancellationToken cancellationToken = default)
     {
-        ChatRequests.Add((provider, model, messages));
-        return ValueTask.FromResult(DequeueResponse());
+        ChatRequests.Add(item: (provider, model, messages));
+        return ValueTask.FromResult(result: DequeueResponse());
     }
 
     private CompletionResponse DequeueResponse()
     {
-        if (completionResponses.TryDequeue(out CompletionResponse? completionResponse))
+        if (completionResponses.TryDequeue(result: out CompletionResponse? completionResponse))
         {
             return completionResponse;
         }
 
-        throw new InvalidOperationException("No completion response was queued for the acceptance test.");
+        throw new InvalidOperationException(message: "No completion response was queued for the acceptance test.");
     }
 }
