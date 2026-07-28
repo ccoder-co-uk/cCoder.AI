@@ -39,7 +39,32 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task"
+          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "AI.Web.IServiceCollectionExtensions",
+      "StandardElementType": "App",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "AddAIWeb",
+          "Inputs": [
+            {
+              "Name": "services",
+              "Type": "IServiceCollection"
+            },
+            {
+              "Name": "applicationConfiguration",
+              "Type": "IConfiguration"
+            },
+            {
+              "Name": "configure",
+              "Type": "System.Action\u003CAI.Web.Models.AIWebConfiguration\u003E"
+            }
+          ],
+          "ReturnType": "System.Void"
         }
       ]
     },
@@ -66,6 +91,17 @@
         {
           "Name": "SupportsModelListing",
           "Type": "System.Boolean"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "AI.Web.Models.AIWebConfiguration",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "AI",
+          "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
         }
       ],
       "Methods": []
@@ -411,13 +447,6 @@
       "LineNumber": 111
     },
     {
-      "Code": "STXFORMAT001",
-      "Description": "Source files must not contain newline characters after the final code token.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 134
-    },
-    {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
@@ -586,13 +615,6 @@
       "LineNumber": 15
     },
     {
-      "Code": "STXSTRUCT001",
-      "Description": "The source file must live in the standard folder for its element type.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
-      "LineNumber": 7
-    },
-    {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
@@ -633,13 +655,6 @@
       "Severity": "Warning",
       "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryService",
       "LineNumber": 9
-    },
-    {
-      "Code": "STXAPP005",
-      "Description": "Program.cs must compose the app through IServiceCollection using SDK namespaces and one local composition namespace only.",
-      "Severity": "Warning",
-      "Type": "Program",
-      "LineNumber": 37
     }
   ]
 }

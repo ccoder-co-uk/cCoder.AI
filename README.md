@@ -3,7 +3,7 @@
 `cCoder.AI` is a named-provider inference broker. Applications register every AI endpoint once, then select a provider by its key on each completion or agent request.
 
 ```csharp
-builder.Services.AddAI(ai =>
+builder.Services.AddAIWeb(ai =>
 {
     ai.DefaultProvider = "local";
 
@@ -67,7 +67,7 @@ AgentRunResponse response = await chat.InferAsync(new ChatRequest
 ```
 
 Use `InferAsStreamAsync` for an `IAsyncEnumerable<AgentStreamTokenResponse>`.
-`AddAI` registers the exposure and the library-owned MVC application part.
+`AddAIWeb` registers the exposure and the library-owned MVC application part.
 Applications that map controllers consequently receive:
 
 - `POST /Api/AI/Completions`
@@ -92,3 +92,23 @@ The sample web application exposes every completion provider currently
 implemented by the library: Ollama, OpenAI-compatible, Azure AI Foundry, and
 Codex CLI. Keys and endpoints remain configuration-driven; secrets should be
 provided through environment variables or another configuration provider.
+
+## Local configuration
+
+The sample application binds an `AIWebConfiguration` root containing the `AI`
+domain section. Keep provider secrets empty in `appsettings.json` and provide
+them through structured user- or machine-level environment variables:
+
+- `AI__Providers__Ollama__CompletionProvider__ApiKey`
+- `AI__Providers__Ollama__ModelProvider__ApiKey`
+- `AI__Providers__AzureFoundry__CompletionProvider__ApiKey`
+- `AI__Providers__AzureFoundry__ModelProvider__ApiKey`
+- `AI__Providers__OpenAI__CompletionProvider__ApiKey`
+- `AI__Providers__OpenAI__ModelProvider__ApiKey`
+- `AI__Providers__Codex__CompletionProvider__ApiKey`
+- `AI__Providers__Codex__ModelProvider__ApiKey`
+
+Only define variables for configured providers that require credentials.
+Restart Visual Studio after changing user- or machine-level variables, then run
+the application with F5. No local secrets file or configuration conversion step
+is required.
