@@ -15,62 +15,79 @@ using Microsoft.Extensions.Options;
 
 namespace cCoder.AI;
 
-public static partial class IServiceCollectionExtensions
+public static class IServiceCollectionExtensions
 {
-    public static IServiceCollection AddAI(
+    public static IServiceCollection AddAIWeb(
         this IServiceCollection services,
-        Action<AIConfiguration> configure) =>
-        services.AddAI(configure: (_, configuration) => configure?.Invoke(configuration));
-
-    public static IServiceCollection AddAI(
-        this IServiceCollection services,
-        Action<IServiceCollection, AIConfiguration> configure)
-    {
-        AIConfiguration configuration = CreateConfiguration(services: services, configure: configure);
-        RegisterAI(services: services, configuration: configuration);
-
-        return services;
-    }
-
-    public static IServiceCollection AddAI(
-        this IServiceCollection services,
-        AIConfiguration aiConfiguration)
-    {
-        AIConfiguration configuration = aiConfiguration ?? new AIConfiguration();
-        RegisterAI(services: services, configuration: configuration);
-
-        return services;
-    }
-
-    private static AIConfiguration CreateConfiguration(
-        IServiceCollection services,
-        Action<IServiceCollection, AIConfiguration> configure)
+        Action<AIConfiguration> configure)
     {
         AIConfiguration configuration = new();
-        configure?.Invoke(arg1: services, arg2: configuration);
+        configure?.Invoke(configuration);
 
-        return configuration;
+        return services.AddAIWeb(configuration);
     }
 
-    private static void RegisterAI(
-        IServiceCollection services,
+    public static IServiceCollection AddAIWeb(
+        this IServiceCollection services,
         AIConfiguration configuration)
     {
+        ArgumentNullException.ThrowIfNull(argument: configuration);
+
         services.AddSingleton(implementationInstance: configuration);
-        services.AddSingleton<IOptions<AIConfiguration>>(implementationFactory: _ => Options.Create(configuration));
-        services.AddHttpClient<IChatCompletionsBroker, ChatCompletionsBroker>()
-            .ConfigureHttpClient(configureClient: client => client.Timeout = Timeout.InfiniteTimeSpan);
+        services.AddSingleton<IOptions<AIConfiguration>>(
+            implementationFactory: _ =>
+                Options.Create(configuration));
+        services.AddBrokers();
+        services.AddFoundations();
+        services.AddOrchestrations();
+        services.AddExposures();
+
+        return services;
+    }
+
+    private static void AddBrokers(
+        this IServiceCollection services)
+    {
+        IHttpClientBuilder completions = services.AddHttpClient<
+            IChatCompletionsBroker,
+            ChatCompletionsBroker>();
+
+        completions.ConfigureHttpClient(
+            configureClient: client =>
+                client.Timeout = Timeout.InfiniteTimeSpan);
+
         services.AddSingleton<ICodexCliBroker, CodexCliBroker>();
-        services.AddHttpClient<IModelProviderBroker, ModelProviderBroker>()
-            .ConfigureHttpClient(configureClient: client => client.Timeout = Timeout.InfiniteTimeSpan);
+
+        IHttpClientBuilder models = services.AddHttpClient<
+            IModelProviderBroker,
+            ModelProviderBroker>();
+
+        models.ConfigureHttpClient(
+            configureClient: client =>
+                client.Timeout = Timeout.InfiniteTimeSpan);
+
         services.AddTransient<IShellBroker, ShellBroker>();
+    }
+
+    private static void AddFoundations(
+        this IServiceCollection services)
+    {
         services.AddSingleton<IAIProviderExecutionLimiter, AIProviderExecutionLimiter>();
         services.AddTransient<ICompletionProviderService, CompletionProviderService>();
         services.AddTransient<IModelManagerService, ModelManagerService>();
+    }
+
+    private static void AddOrchestrations(
+        this IServiceCollection services) =>
         services.AddTransient<IAgentOrchestrationService, AgentOrchestrationService>();
+
+    private static void AddExposures(
+        this IServiceCollection services)
+    {
         services.AddTransient<ChatContext>();
-        services
-            .AddControllers()
-            .AddApplicationPart(assembly: typeof(ChatContext).Assembly);
+
+        IMvcBuilder mvcBuilder = services.AddControllers();
+        mvcBuilder.AddApplicationPart(
+            assembly: typeof(ChatContext).Assembly);
     }
 }

@@ -295,7 +295,7 @@
       "Properties": [],
       "Methods": [
         {
-          "Name": "AddAI",
+          "Name": "AddAIWeb",
           "Inputs": [
             {
               "Name": "services",
@@ -309,28 +309,14 @@
           "ReturnType": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
         },
         {
-          "Name": "AddAI",
+          "Name": "AddAIWeb",
           "Inputs": [
             {
               "Name": "services",
               "Type": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
             },
             {
-              "Name": "configure",
-              "Type": "System.Action\u003CMicrosoft.Extensions.DependencyInjection.IServiceCollection, cCoder.AI.Models.Configurations.AIConfiguration\u003E"
-            }
-          ],
-          "ReturnType": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
-        },
-        {
-          "Name": "AddAI",
-          "Inputs": [
-            {
-              "Name": "services",
-              "Type": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
-            },
-            {
-              "Name": "aiConfiguration",
+              "Name": "configuration",
               "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
             }
           ],
@@ -433,7 +419,7 @@
     },
     {
       "Name": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
-      "StandardElementType": "Dependency",
+      "StandardElementType": "Exposure",
       "Properties": [],
       "Methods": [
         {
@@ -2372,13 +2358,6 @@
       "LineNumber": 81
     },
     {
-      "Code": "STXFORMAT001",
-      "Description": "Source files must not contain newline characters after the final code token.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Exposures.ChatContext",
-      "LineNumber": 42
-    },
-    {
       "Code": "STXAPI001",
       "Description": "An API controller must have exactly one business dependency.",
       "Severity": "Warning",
@@ -2433,13 +2412,6 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
       "LineNumber": 88
-    },
-    {
-      "Code": "STXFORMAT001",
-      "Description": "Source files must not contain newline characters after the final code token.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 104
     },
     {
       "Code": "STX0019",
@@ -2573,6 +2545,202 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfiguration",
       "LineNumber": 13
+    },
+    {
+      "Code": "STXSTRUCT001",
+      "Description": "The source file must live in the standard folder for its element type.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 22
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 25
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 28
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 31
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 38
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 48
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 51
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 54
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 57
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 64
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 73
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 76
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 79
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 82
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 89
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 95
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 121
+    },
+    {
+      "Code": "STXFORMAT002",
+      "Description": "Expression-bodied method implementations must start on the line after the =\u003E token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 140
+    },
+    {
+      "Code": "STXFORMAT002",
+      "Description": "Expression-bodied method implementations must start on the line after the =\u003E token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 159
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 172
+    },
+    {
+      "Code": "STXFORMAT009",
+      "Description": "Every method chained from an invocation result must begin on a new line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 185
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 186
+    },
+    {
+      "Code": "STXFORMAT009",
+      "Description": "Every method chained from an invocation result must begin on a new line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 193
+    },
+    {
+      "Code": "STXFORMAT003",
+      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 194
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 201
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "LineNumber": 204
     },
     {
       "Code": "STXM002",

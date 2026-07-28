@@ -54,7 +54,7 @@ public class HomeController(
     }
 
     [HttpPost]
-    public async Task StreamConversationAsync(
+    public async Task<IActionResult> StreamConversationAsync(
         [FromBody] ChatRequest chatRequest,
         CancellationToken cancellationToken)
     {
@@ -115,6 +115,8 @@ public class HomeController(
             RecordedOn = DateTimeOffset.UtcNow,
             Duration = DateTimeOffset.UtcNow - startedOn,
         });
+
+        return new EmptyResult();
     }
 
     private static string BuildProviderDescription(

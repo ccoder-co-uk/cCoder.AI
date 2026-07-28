@@ -2,20 +2,11 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
-using cCoder.AI;
-using cCoder.AI.Models.Configurations;
-using AI.Web.Services.Diagnostics;
+using AI.Web;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args: args);
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApi();
-builder.Services.AddSingleton<IAgentRunHistoryService, AgentRunHistoryService>();
-builder.Services.AddAI(configure: (_, configuration) =>
-{
-    builder.Configuration.GetSection(AIConfiguration.SectionName).Bind(configuration);
-});
+builder.Services.AddAIWeb(builder.Configuration);
 
 WebApplication app = builder.Build();
 

@@ -23,7 +23,7 @@ public class IServiceCollectionExtensionsTests
         IServiceCollection services = new ServiceCollection();
 
         // When
-        services.AddAI(configure: configuration =>
+        services.AddAIWeb(configure: configuration =>
         {
             configuration.DefaultProvider = "local";
             configuration.AddOllama("local", ollama =>
