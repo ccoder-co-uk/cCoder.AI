@@ -139,6 +139,162 @@
       ]
     },
     {
+      "Name": "cCoder.AI.Dependencies.ChatCompletionsDependency",
+      "StandardElementType": "Unknown",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "PostChatCompletionAsync",
+          "Inputs": [
+            {
+              "Name": "providerName",
+              "Type": "System.String"
+            },
+            {
+              "Name": "providerConfiguration",
+              "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration"
+            },
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.ProviderCompletionRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Dependencies.CodexCliDependency",
+      "StandardElementType": "Dependency",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "CompleteAsync",
+          "Inputs": [
+            {
+              "Name": "providerName",
+              "Type": "System.String"
+            },
+            {
+              "Name": "providerConfiguration",
+              "Type": "cCoder.AI.Models.Configurations.AIProviderConfiguration"
+            },
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.ProviderCompletionRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Dependencies.ModelProviderDependency",
+      "StandardElementType": "Unknown",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "GetStringAsync",
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration"
+            },
+            {
+              "Name": "relativePath",
+              "Type": "System.String"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E"
+        },
+        {
+          "Name": "PostAsync",
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration"
+            },
+            {
+              "Name": "relativePath",
+              "Type": "System.String"
+            },
+            {
+              "Name": "payload",
+              "Type": "System.Object"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Dependencies.ProviderGateDependency",
+      "StandardElementType": "Dependency",
+      "Properties": [],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Dependencies.ProviderGateDependency.GateLease",
+      "StandardElementType": "Dependency",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "DisposeAsync",
+          "Inputs": [],
+          "ReturnType": "System.Threading.Tasks.ValueTask"
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Dependencies.ShellDependency",
+      "StandardElementType": "Dependency",
+      "Properties": [],
+      "Methods": [
+        {
+          "Name": "ExecuteAsync",
+          "Inputs": [
+            {
+              "Name": "command",
+              "Type": "System.String"
+            },
+            {
+              "Name": "workingDirectory",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "environmentVariables",
+              "Type": "System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?"
+            },
+            {
+              "Name": "shellKind",
+              "Type": "cCoder.AI.Models.Enums.ShellKind"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ToolExecutionResponse\u003E"
+        }
+      ]
+    },
+    {
       "Name": "cCoder.AI.Exposures.ChatContext",
       "StandardElementType": "Exposure",
       "Properties": [],
@@ -418,7 +574,7 @@
       "Methods": []
     },
     {
-      "Name": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Name": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "StandardElementType": "Exposure",
       "Properties": [],
       "Methods": [
@@ -1170,79 +1326,6 @@
       ]
     },
     {
-      "Name": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "StandardElementType": "FoundationService",
-      "Properties": [],
-      "Methods": [
-        {
-          "Name": "DisposeAsync",
-          "Inputs": [],
-          "ReturnType": "System.Threading.Tasks.ValueTask"
-        }
-      ]
-    },
-    {
-      "Name": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "StandardElementType": "FoundationService",
-      "Properties": [
-        {
-          "Name": "MaxConcurrency",
-          "Type": "System.Int32"
-        },
-        {
-          "Name": "Semaphore",
-          "Type": "System.Threading.SemaphoreSlim"
-        }
-      ],
-      "Methods": [
-        {
-          "Name": "\u003CClone\u003E$",
-          "Inputs": [],
-          "ReturnType": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate"
-        },
-        {
-          "Name": "Deconstruct",
-          "Inputs": [
-            {
-              "Name": "MaxConcurrency",
-              "Type": "System.Int32"
-            }
-          ],
-          "ReturnType": "System.Void"
-        },
-        {
-          "Name": "Equals",
-          "Inputs": [
-            {
-              "Name": "obj",
-              "Type": "System.Object?"
-            }
-          ],
-          "ReturnType": "System.Boolean"
-        },
-        {
-          "Name": "Equals",
-          "Inputs": [
-            {
-              "Name": "other",
-              "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate?"
-            }
-          ],
-          "ReturnType": "System.Boolean"
-        },
-        {
-          "Name": "GetHashCode",
-          "Inputs": [],
-          "ReturnType": "System.Int32"
-        },
-        {
-          "Name": "ToString",
-          "Inputs": [],
-          "ReturnType": "System.String"
-        }
-      ]
-    },
-    {
       "Name": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "StandardElementType": "FoundationService",
       "Properties": [],
@@ -1414,6 +1497,26 @@
   ],
   "Links": [
     {
+      "FromType": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "ToType": "cCoder.AI.Dependencies.ChatCompletionsDependency"
+    },
+    {
+      "FromType": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "ToType": "cCoder.AI.Dependencies.CodexCliDependency"
+    },
+    {
+      "FromType": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "ToType": "cCoder.AI.Dependencies.ModelProviderDependency"
+    },
+    {
+      "FromType": "cCoder.AI.Brokers.Shells.ShellBroker",
+      "ToType": "cCoder.AI.Dependencies.ShellDependency"
+    },
+    {
+      "FromType": "cCoder.AI.Dependencies.ProviderGateDependency.GateLease",
+      "ToType": "cCoder.AI.Dependencies.ProviderGateDependency"
+    },
+    {
       "FromType": "cCoder.AI.Exposures.ChatContext",
       "ToType": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService"
     },
@@ -1432,10 +1535,6 @@
     {
       "FromType": "cCoder.AI.Exposures.Controllers.ModelController",
       "ToType": "cCoder.AI.Services.Foundations.Models.ModelManagerService"
-    },
-    {
-      "FromType": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "ToType": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate"
     },
     {
       "FromType": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
@@ -1476,886 +1575,18 @@
   ],
   "AnalysisItems": [
     {
-      "Code": "STX0006",
-      "Description": "Business implementation classes should be internal by default.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 15
-    },
-    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 21
-    },
-    {
-      "Code": "STXB003",
-      "Description": "A broker must not contain loops.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 32
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 34
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 37
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 40
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 42
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STXB005",
-      "Description": "A broker must not handle exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 47
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 59
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 60
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 61
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 62
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 62
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 68
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 70
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 95
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 102
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 103
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 105
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 108
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 108
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 109
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 113
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 113
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 122
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 123
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 123
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 132
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 137
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 148
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 167
-    },
-    {
-      "Code": "STXFORMAT002",
-      "Description": "Expression-bodied method implementations must start on the line after the =\u003E token.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 186
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 222
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 248
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 253
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 257
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 261
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 277
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 285
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 305
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 310
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 315
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 320
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 327
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 330
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 335
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 340
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 343
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 349
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 352
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
-      "LineNumber": 356
-    },
-    {
-      "Code": "STX0006",
-      "Description": "Business implementation classes should be internal by default.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 13
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 21
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 25
-    },
-    {
-      "Code": "STXB005",
-      "Description": "A broker must not handle exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 42
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 42
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 44
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 56
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 60
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 62
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 62
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 63
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 63
-    },
-    {
-      "Code": "STXB005",
-      "Description": "A broker must not handle exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 65
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 77
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 77
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 80
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 83
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 84
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 106
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 106
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 106
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 109
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 109
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 110
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 111
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 111
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 112
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 113
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 113
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 118
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 118
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 123
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 123
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 126
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 126
-    },
-    {
-      "Code": "STXB003",
-      "Description": "A broker must not contain loops.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 139
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 143
-    },
-    {
-      "Code": "STXB003",
-      "Description": "A broker must not contain loops.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 167
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 167
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 180
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 181
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 191
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 191
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 198
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 198
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 201
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 201
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 202
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 204
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 204
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 210
-    },
-    {
-      "Code": "STXFORMAT003",
-      "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 210
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 211
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 214
-    },
-    {
-      "Code": "STXB005",
-      "Description": "A broker must not handle exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 219
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 221
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 222
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
-      "LineNumber": 230
-    },
-    {
-      "Code": "STX0006",
-      "Description": "Business implementation classes should be internal by default.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
-      "LineNumber": 12
+      "LineNumber": 18
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
-      "LineNumber": 40
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
-      "LineNumber": 72
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
-      "LineNumber": 73
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
-      "LineNumber": 73
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
-      "LineNumber": 90
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
-      "LineNumber": 95
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
-      "LineNumber": 106
-    },
-    {
-      "Code": "STX0006",
-      "Description": "Business implementation classes should be internal by default.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
-      "LineNumber": 12
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
-      "LineNumber": 22
-    },
-    {
-      "Code": "STXFORMAT008",
-      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
-      "LineNumber": 22
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
-      "LineNumber": 70
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
-      "LineNumber": 74
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
-      "LineNumber": 75
-    },
-    {
-      "Code": "STXB002",
-      "Description": "A broker must not contain branching logic.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Brokers.Shells.ShellBroker",
-      "LineNumber": 81
+      "LineNumber": 24
     },
     {
       "Code": "STXAPI001",
@@ -2547,199 +1778,192 @@
       "LineNumber": 13
     },
     {
-      "Code": "STXSTRUCT001",
-      "Description": "The source file must live in the standard folder for its element type.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
-      "LineNumber": 9
-    },
-    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 12
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 22
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 25
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 28
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 31
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 38
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 48
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 51
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 54
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 57
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 64
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 73
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 76
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 79
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 82
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 89
     },
     {
       "Code": "STXFORMAT008",
       "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 95
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 121
     },
     {
       "Code": "STXFORMAT002",
       "Description": "Expression-bodied method implementations must start on the line after the =\u003E token.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 140
     },
     {
       "Code": "STXFORMAT002",
       "Description": "Expression-bodied method implementations must start on the line after the =\u003E token.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 159
     },
     {
       "Code": "STXFORMAT007",
       "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 172
     },
     {
       "Code": "STXFORMAT009",
       "Description": "Every method chained from an invocation result must begin on a new line.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 185
     },
     {
       "Code": "STXFORMAT008",
       "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 186
     },
     {
       "Code": "STXFORMAT009",
       "Description": "Every method chained from an invocation result must begin on a new line.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 193
     },
     {
       "Code": "STXFORMAT003",
       "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 194
     },
     {
       "Code": "STXFORMAT007",
       "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 201
     },
     {
       "Code": "STXFORMAT007",
       "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
       "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationProviderExtensions",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 204
     },
     {
@@ -3279,217 +2503,77 @@
       "Description": "Business implementation classes should be internal by default.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 9
+      "LineNumber": 10
     },
     {
       "Code": "STX0008",
       "Description": "A service must declare its validations in a Validations partial.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 9
+      "LineNumber": 10
     },
     {
       "Code": "STX0009",
       "Description": "A service must declare TryCatch handling in an Exceptions partial.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 9
+      "LineNumber": 10
     },
     {
       "Code": "STX0010",
       "Description": "Every public service method must enter through a local TryCatch operation.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 9
+      "LineNumber": 10
     },
     {
       "Code": "STX0011",
       "Description": "Every service input must be validated inside TryCatch before business work.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 9
+      "LineNumber": 10
     },
     {
       "Code": "STXEX001",
       "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 9
+      "LineNumber": 10
     },
     {
       "Code": "STXEX002",
       "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 9
+      "LineNumber": 10
     },
     {
       "Code": "STXEX003",
       "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 9
+      "LineNumber": 10
     },
     {
       "Code": "STXFORMAT007",
       "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 20
+      "LineNumber": 21
     },
     {
       "Code": "STXFORMAT008",
       "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 23
+      "LineNumber": 24
     },
     {
       "Code": "STXFORMAT007",
       "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 40
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 57
-    },
-    {
-      "Code": "STX0008",
-      "Description": "A service must declare its validations in a Validations partial.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "LineNumber": 50
-    },
-    {
-      "Code": "STX0009",
-      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "LineNumber": 50
-    },
-    {
-      "Code": "STX0010",
-      "Description": "Every public service method must enter through a local TryCatch operation.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "LineNumber": 50
-    },
-    {
-      "Code": "STX0014",
-      "Description": "A service contract must be named after its implementation with an I prefix.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "LineNumber": 50
-    },
-    {
-      "Code": "STXEX001",
-      "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "LineNumber": 50
-    },
-    {
-      "Code": "STXEX002",
-      "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "LineNumber": 50
-    },
-    {
-      "Code": "STXEX003",
-      "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "LineNumber": 50
-    },
-    {
-      "Code": "STXF002",
-      "Description": "A foundation service may only depend on brokers, exposures, or nothing.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "LineNumber": 50
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.GateLease",
-      "LineNumber": 57
-    },
-    {
-      "Code": "STX0004",
-      "Description": "A service must not depend on another service at the same layer.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STX0008",
-      "Description": "A service must declare its validations in a Validations partial.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STX0009",
-      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STX0014",
-      "Description": "A service contract must be named after its implementation with an I prefix.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STX0015",
-      "Description": "Every public service method must be declared by its local interface.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STXEX001",
-      "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STXEX002",
-      "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STXEX003",
-      "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STXF002",
-      "Description": "A foundation service may only depend on brokers, exposures, or nothing.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 45
-    },
-    {
-      "Code": "STX0002",
-      "Description": "Properties may only be declared on models.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.ProviderGate",
-      "LineNumber": 47
+      "LineNumber": 42
     },
     {
       "Code": "STX0004",
@@ -3690,13 +2774,6 @@
     {
       "Code": "STXEX003",
       "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
-      "LineNumber": 14
-    },
-    {
-      "Code": "STXF002",
-      "Description": "A foundation service may only depend on brokers, exposures, or nothing.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
       "LineNumber": 14
