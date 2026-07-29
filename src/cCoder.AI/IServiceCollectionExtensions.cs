@@ -5,6 +5,7 @@
 using cCoder.AI.Brokers.Completions;
 using cCoder.AI.Brokers.ModelProviders;
 using cCoder.AI.Brokers.Shells;
+using cCoder.AI.Dependencies;
 using cCoder.AI.Exposures;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Services.Foundations.Models;
@@ -48,24 +49,28 @@ public static class IServiceCollectionExtensions
     private static void AddBrokers(
         this IServiceCollection services)
     {
-        IHttpClientBuilder completions = services.AddHttpClient<
-            IChatCompletionsBroker,
-            ChatCompletionsBroker>();
+        IHttpClientBuilder completions =
+            services.AddHttpClient(name: "AI.Completions");
 
         completions.ConfigureHttpClient(
             configureClient: client =>
                 client.Timeout = Timeout.InfiniteTimeSpan);
 
-        services.AddSingleton<ICodexCliBroker, CodexCliBroker>();
+        services.AddTransient<ChatCompletionsDependency>();
+        services.AddTransient<CodexCliDependency>();
+        services.AddTransient<ShellDependency>();
+        services.AddTransient<IChatCompletionsBroker, ChatCompletionsBroker>();
+        services.AddTransient<ICodexCliBroker, CodexCliBroker>();
 
-        IHttpClientBuilder models = services.AddHttpClient<
-            IModelProviderBroker,
-            ModelProviderBroker>();
+        IHttpClientBuilder models =
+            services.AddHttpClient(name: "AI.Models");
 
         models.ConfigureHttpClient(
             configureClient: client =>
                 client.Timeout = Timeout.InfiniteTimeSpan);
 
+        services.AddTransient<ModelProviderDependency>();
+        services.AddTransient<IModelProviderBroker, ModelProviderBroker>();
         services.AddTransient<IShellBroker, ShellBroker>();
     }
 

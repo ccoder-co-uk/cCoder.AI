@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using cCoder.AI.Brokers.Completions;
+using cCoder.AI.Dependencies;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Models.Enums;
 using cCoder.AI.Models.Requests;
@@ -31,7 +32,7 @@ public class ChatCompletionsBrokerTests
                 Content = new StringContent(response, Encoding.UTF8, "application/json")
             };
         });
-        var broker = new ChatCompletionsBroker(httpClient: new HttpClient(handler));
+        var broker = CreateBroker(httpClient: new HttpClient(handler));
         AICompletionProviderConfiguration providerConfiguration = new()
         {
             Mode = AIProviderMode.OllamaApi,
@@ -69,7 +70,7 @@ request: new ProviderCompletionRequest
                     "application/json")
             };
         });
-        var broker = new ChatCompletionsBroker(httpClient: new HttpClient(handler));
+        var broker = CreateBroker(httpClient: new HttpClient(handler));
         AICompletionProviderConfiguration providerConfiguration = new()
         {
             Mode = AIProviderMode.OllamaApi,
@@ -123,7 +124,7 @@ request: new ProviderCompletionRequest
             });
 
         HttpClient httpClient = new(handler);
-        var broker = new ChatCompletionsBroker(httpClient: httpClient);
+        var broker = CreateBroker(httpClient: httpClient);
 
         AICompletionProviderConfiguration providerConfiguration = new()
         {
@@ -163,7 +164,7 @@ request: request);
             });
 
         HttpClient httpClient = new(handler);
-        var broker = new ChatCompletionsBroker(httpClient: httpClient);
+        var broker = CreateBroker(httpClient: httpClient);
 
         AICompletionProviderConfiguration providerConfiguration = new()
         {
@@ -210,7 +211,7 @@ request: request);
                         "application/json")
                 };
         });
-        var broker = new ChatCompletionsBroker(httpClient: new HttpClient(handler));
+        var broker = CreateBroker(httpClient: new HttpClient(handler));
         AICompletionProviderConfiguration providerConfiguration = new()
         {
             Mode = AIProviderMode.OpenAICompatible,
@@ -240,5 +241,19 @@ request: new ProviderCompletionRequest
             HttpRequestMessage request,
             CancellationToken cancellationToken) =>
             Task.FromResult(result: responseFactory(request));
+    }
+
+    private static ChatCompletionsBroker CreateBroker(
+        HttpClient httpClient) =>
+        new(
+            dependency: new ChatCompletionsDependency(
+                httpClientFactory: new StubHttpClientFactory(
+                    httpClient: httpClient)));
+
+    private sealed class StubHttpClientFactory(HttpClient httpClient) :
+        IHttpClientFactory
+    {
+        public HttpClient CreateClient(string name) =>
+            httpClient;
     }
 }

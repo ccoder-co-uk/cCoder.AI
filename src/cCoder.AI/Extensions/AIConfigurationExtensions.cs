@@ -6,7 +6,7 @@ using cCoder.AI.Models.Enums;
 
 namespace cCoder.AI.Models.Configurations;
 
-public static class AIConfigurationProviderExtensions
+public static class AIConfigurationExtensions
 {
     public static AIConfiguration AddOllama(
         this AIConfiguration configuration,
