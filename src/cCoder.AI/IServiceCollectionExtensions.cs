@@ -79,12 +79,17 @@ public static class IServiceCollectionExtensions
     {
         services.AddSingleton<IAIProviderExecutionLimiter, AIProviderExecutionLimiter>();
         services.AddTransient<ICompletionProviderService, CompletionProviderService>();
+        services.AddTransient<ICompletionProviderManager, CompletionProviderService>();
         services.AddTransient<IModelManagerService, ModelManagerService>();
+        services.AddTransient<IModelManager, ModelManagerService>();
     }
 
     private static void AddOrchestrations(
-        this IServiceCollection services) =>
+        this IServiceCollection services)
+    {
         services.AddTransient<IAgentOrchestrationService, AgentOrchestrationService>();
+        services.AddTransient<IAgentManager, AgentOrchestrationService>();
+    }
 
     private static void AddExposures(
         this IServiceCollection services)

@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------
 
 using AI.Web.Models;
+using AI.Web.Exposures;
 using AI.Web.Services.Diagnostics;
 using cCoder.AI;
 
@@ -27,8 +28,11 @@ public static class IServiceCollectionExtensions
     }
 
     private static void AddFoundations(
-        this IServiceCollection services) =>
+        this IServiceCollection services)
+    {
         services.AddSingleton<IAgentRunHistoryService, AgentRunHistoryService>();
+        services.AddSingleton<IAgentRunHistoryManager, AgentRunHistoryService>();
+    }
 
     private static void AddExposures(
         this IServiceCollection services)

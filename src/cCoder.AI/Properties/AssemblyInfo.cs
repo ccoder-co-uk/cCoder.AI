@@ -5,3 +5,4 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("cCoder.AI.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

@@ -5,6 +5,7 @@
 using System.Text.Json;
 using System.Runtime.CompilerServices;
 using cCoder.AI.Brokers.Shells;
+using cCoder.AI.Exposures;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Models.Enums;
 using cCoder.AI.Models.Internal;
@@ -14,8 +15,8 @@ using cCoder.AI.Services.Foundations.Completions;
 
 namespace cCoder.AI.Services.Orchestrations;
 
-public class AgentOrchestrationService(
-    ICompletionProviderService completionProviderService,
+internal class AgentOrchestrationService(
+    ICompletionProviderManager completionProviderService,
     IShellBroker shellBroker,
     AIConfiguration aiConfiguration)
     : IAgentOrchestrationService

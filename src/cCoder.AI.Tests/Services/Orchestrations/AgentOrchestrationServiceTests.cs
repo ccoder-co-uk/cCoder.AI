@@ -2,6 +2,7 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using cCoder.AI.Exposures;
 using cCoder.AI.Brokers.Shells;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Services.Foundations.Completions;
@@ -12,13 +13,13 @@ namespace cCoder.AI.Tests.Services.Orchestrations;
 
 public partial class AgentOrchestrationServiceTests
 {
-    private readonly Mock<ICompletionProviderService> completionProviderServiceMock;
+    private readonly Mock<ICompletionProviderManager> completionProviderServiceMock;
     private readonly Mock<IShellBroker> shellBrokerMock;
     private readonly AgentOrchestrationService agentOrchestrationService;
 
     public AgentOrchestrationServiceTests()
     {
-        completionProviderServiceMock = new Mock<ICompletionProviderService>();
+        completionProviderServiceMock = new Mock<ICompletionProviderManager>();
         shellBrokerMock = new Mock<IShellBroker>();
 
         AIConfiguration aiConfiguration = new()

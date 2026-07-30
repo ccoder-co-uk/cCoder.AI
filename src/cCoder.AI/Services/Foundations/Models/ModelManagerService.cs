@@ -11,7 +11,7 @@ using cCoder.AI.Models.Responses;
 
 namespace cCoder.AI.Services.Foundations.Models;
 
-public class ModelManagerService(
+internal class ModelManagerService(
     IModelProviderBroker modelProviderBroker,
     AIConfiguration aiConfiguration)
     : IModelManagerService

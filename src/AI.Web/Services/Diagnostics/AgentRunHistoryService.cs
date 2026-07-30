@@ -3,10 +3,11 @@
 // ---------------------------------------------------------------
 
 using System.Collections.Concurrent;
+using AI.Web.Models;
 
 namespace AI.Web.Services.Diagnostics;
 
-public class AgentRunHistoryService : IAgentRunHistoryService
+internal class AgentRunHistoryService : IAgentRunHistoryService
 {
     const int MaxEntries = 100;
     readonly ConcurrentQueue<AgentRunHistoryEntry> entries = new();

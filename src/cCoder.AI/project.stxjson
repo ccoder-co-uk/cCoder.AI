@@ -2499,13 +2499,6 @@
       "LineNumber": 17
     },
     {
-      "Code": "STX0006",
-      "Description": "Business implementation classes should be internal by default.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
-      "LineNumber": 10
-    },
-    {
       "Code": "STX0008",
       "Description": "A service must declare its validations in a Validations partial.",
       "Severity": "Warning",
@@ -2578,13 +2571,6 @@
     {
       "Code": "STX0004",
       "Description": "A service must not depend on another service at the same layer.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
-      "LineNumber": 12
-    },
-    {
-      "Code": "STX0006",
-      "Description": "Business implementation classes should be internal by default.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "LineNumber": 12
@@ -2700,13 +2686,6 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "LineNumber": 71
-    },
-    {
-      "Code": "STX0006",
-      "Description": "Business implementation classes should be internal by default.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
-      "LineNumber": 14
     },
     {
       "Code": "STX0007",
@@ -2835,123 +2814,116 @@
       "LineNumber": 172
     },
     {
-      "Code": "STX0006",
-      "Description": "Business implementation classes should be internal by default.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
-    },
-    {
       "Code": "STX0007",
       "Description": "A service public API must use one model contract or primitive types.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STX0008",
       "Description": "A service must declare its validations in a Validations partial.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STX0009",
       "Description": "A service must declare TryCatch handling in an Exceptions partial.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STX0010",
       "Description": "Every public service method must enter through a local TryCatch operation.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STX0011",
       "Description": "Every service input must be validated inside TryCatch before business work.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STXEX001",
       "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STXEX002",
       "Description": "Every TryCatch overload must classify, wrap, and preserve dependency exceptions.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STXEX003",
       "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STXO001",
       "Description": "An orchestration must have two or three foundation or processing dependencies and must not mix them.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STX0018",
       "Description": "Service method names must include each model type they operate on.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 25
+      "LineNumber": 26
     },
     {
       "Code": "STXFORMAT008",
       "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 32
+      "LineNumber": 33
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 73
+      "LineNumber": 74
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 121
+      "LineNumber": 122
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 141
+      "LineNumber": 142
     },
     {
       "Code": "STX0018",
       "Description": "Service method names must include each model type they operate on.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 155
+      "LineNumber": 156
     },
     {
       "Code": "STX0005",
       "Description": "A public service method must not call another public method on the same service.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
-      "LineNumber": 170
+      "LineNumber": 171
     }
   ]
 }

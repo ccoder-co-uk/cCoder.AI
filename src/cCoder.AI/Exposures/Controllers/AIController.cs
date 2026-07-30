@@ -14,8 +14,8 @@ namespace cCoder.AI.Exposures.Controllers;
 [ApiController]
 [Route("Api/[controller]")]
 public sealed class AIController(
-    ICompletionProviderService completionProviderService,
-    IAgentOrchestrationService agentOrchestrationService,
+    ICompletionProviderManager completionProviderService,
+    IAgentManager agentOrchestrationService,
     ChatContext chatContext)
     : ControllerBase
 {
