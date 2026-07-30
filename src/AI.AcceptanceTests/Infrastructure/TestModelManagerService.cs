@@ -2,14 +2,14 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using cCoder.AI.Exposures;
 using System.Collections.Concurrent;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Models.Responses;
-using cCoder.AI.Services.Foundations.Models;
 
 namespace AI.AcceptanceTests.Infrastructure;
 
-public sealed class TestModelManagerService : IModelManagerService
+public sealed class TestModelManagerService : IModelManager
 {
     private readonly ConcurrentDictionary<string, List<ModelDescriptorResponse>> availableModels =
         new(StringComparer.OrdinalIgnoreCase);

@@ -11,7 +11,7 @@ namespace cCoder.AI.Exposures.Controllers;
 [ApiController]
 [Route("Api/[controller]")]
 public sealed class ModelController(
-    IModelManagerService modelManagerService)
+    IModelManager modelManagerService)
     : ControllerBase
 {
     [HttpGet("Providers/{provider}/Available")]

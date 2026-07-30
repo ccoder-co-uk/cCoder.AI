@@ -2,10 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using AI.Web.Exposures;
+
 namespace AI.Web.Services.Diagnostics;
 
-public interface IAgentRunHistoryService
-{
-    void Record(AgentRunHistoryEntry entry);
-    IReadOnlyList<AgentRunHistoryEntry> RetrieveRecent(int take = 25);
-}
+internal interface IAgentRunHistoryService : IAgentRunHistoryManager { }

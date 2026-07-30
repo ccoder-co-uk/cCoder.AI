@@ -2,9 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using cCoder.AI.Exposures;
 using cCoder.AI.Brokers.Shells;
-using cCoder.AI.Services.Foundations.Completions;
-using cCoder.AI.Services.Foundations.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -39,13 +38,13 @@ public sealed class AIWebApplicationFactory : WebApplicationFactory<Program>
 
         builder.ConfigureTestServices(servicesConfiguration: services =>
         {
-            services.RemoveAll<ICompletionProviderService>();
+            services.RemoveAll<ICompletionProviderManager>();
             services.RemoveAll<IShellBroker>();
-            services.RemoveAll<IModelManagerService>();
+            services.RemoveAll<IModelManager>();
 
-            services.AddSingleton<ICompletionProviderService>(CompletionProviderService);
+            services.AddSingleton<ICompletionProviderManager>(CompletionProviderService);
             services.AddSingleton<IShellBroker>(ShellBroker);
-            services.AddSingleton<IModelManagerService>(ModelManagerService);
+            services.AddSingleton<IModelManager>(ModelManagerService);
         });
     }
 }

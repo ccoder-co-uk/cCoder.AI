@@ -9,7 +9,7 @@ using cCoder.AI.Services.Orchestrations;
 namespace cCoder.AI.Exposures;
 
 public sealed class ChatContext(
-    IAgentOrchestrationService agentOrchestrationService)
+    IAgentManager agentOrchestrationService)
 {
     public ValueTask<AgentRunResponse> InferAsync(
         ChatRequest chatRequest,

@@ -7,7 +7,7 @@ using cCoder.AI.Dependencies;
 
 namespace cCoder.AI.Services.Foundations.Completions;
 
-public sealed class AIProviderExecutionLimiter : IAIProviderExecutionLimiter, IDisposable
+internal sealed class AIProviderExecutionLimiter : IAIProviderExecutionLimiter, IDisposable
 {
     readonly ConcurrentDictionary<string, ProviderGateDependency> gates =
         new(StringComparer.OrdinalIgnoreCase);

@@ -2,18 +2,19 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using cCoder.AI.Exposures;
+using AI.Web.Exposures;
 using AI.Web.Models;
 using AI.Web.Services.Diagnostics;
 using cCoder.AI.Models.Configurations;
-using cCoder.AI.Services.Foundations.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AI.Web.Controllers;
 
 public class AdminController(
     AIConfiguration aiConfiguration,
-    IModelManagerService modelManagerService,
-    IAgentRunHistoryService agentRunHistoryService)
+    IModelManager modelManagerService,
+    IAgentRunHistoryManager agentRunHistoryService)
     : Controller
 {
     public async Task<IActionResult> Index(CancellationToken cancellationToken)

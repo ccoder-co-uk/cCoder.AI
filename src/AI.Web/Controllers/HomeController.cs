@@ -2,6 +2,7 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using AI.Web.Exposures;
 using AI.Web.Models;
 using AI.Web.Services.Diagnostics;
 using cCoder.AI.Exposures;
@@ -16,7 +17,7 @@ namespace AI.Web.Controllers;
 public class HomeController(
     AIConfiguration aiConfiguration,
     ChatContext chatContext,
-    IAgentRunHistoryService agentRunHistoryService)
+    IAgentRunHistoryManager agentRunHistoryService)
     : Controller
 {
     private const string WorkspaceUseCasePrompt =

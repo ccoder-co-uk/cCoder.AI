@@ -165,6 +165,53 @@
       "Methods": []
     },
     {
+      "Name": "AI.Web.Models.AgentRunHistoryEntry",
+      "StandardElementType": "Model",
+      "Properties": [
+        {
+          "Name": "Duration",
+          "Type": "System.TimeSpan"
+        },
+        {
+          "Name": "ErrorMessage",
+          "Type": "System.String?"
+        },
+        {
+          "Name": "Iterations",
+          "Type": "System.Int32"
+        },
+        {
+          "Name": "Model",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Operation",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Provider",
+          "Type": "System.String"
+        },
+        {
+          "Name": "RecordedOn",
+          "Type": "System.DateTimeOffset"
+        },
+        {
+          "Name": "Source",
+          "Type": "System.String"
+        },
+        {
+          "Name": "Succeeded",
+          "Type": "System.Boolean"
+        },
+        {
+          "Name": "Summary",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
       "Name": "AI.Web.Models.AgentSettingsViewModel",
       "StandardElementType": "Model",
       "Properties": [
@@ -278,53 +325,6 @@
       "Methods": []
     },
     {
-      "Name": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
-      "StandardElementType": "Model",
-      "Properties": [
-        {
-          "Name": "Duration",
-          "Type": "System.TimeSpan"
-        },
-        {
-          "Name": "ErrorMessage",
-          "Type": "System.String?"
-        },
-        {
-          "Name": "Iterations",
-          "Type": "System.Int32"
-        },
-        {
-          "Name": "Model",
-          "Type": "System.String"
-        },
-        {
-          "Name": "Operation",
-          "Type": "System.String"
-        },
-        {
-          "Name": "Provider",
-          "Type": "System.String"
-        },
-        {
-          "Name": "RecordedOn",
-          "Type": "System.DateTimeOffset"
-        },
-        {
-          "Name": "Source",
-          "Type": "System.String"
-        },
-        {
-          "Name": "Succeeded",
-          "Type": "System.Boolean"
-        },
-        {
-          "Name": "Summary",
-          "Type": "System.String"
-        }
-      ],
-      "Methods": []
-    },
-    {
       "Name": "AI.Web.Services.Diagnostics.AgentRunHistoryService",
       "StandardElementType": "Unknown",
       "Properties": [],
@@ -334,7 +334,7 @@
           "Inputs": [
             {
               "Name": "entry",
-              "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry"
+              "Type": "AI.Web.Models.AgentRunHistoryEntry"
             }
           ],
           "ReturnType": "System.Void"
@@ -347,7 +347,7 @@
               "Type": "System.Int32"
             }
           ],
-          "ReturnType": "System.Collections.Generic.IReadOnlyList\u003CAI.Web.Services.Diagnostics.AgentRunHistoryEntry\u003E"
+          "ReturnType": "System.Collections.Generic.IReadOnlyList\u003CAI.Web.Models.AgentRunHistoryEntry\u003E"
         }
       ]
     },
@@ -374,42 +374,35 @@
       "Description": "An API controller must have exactly one business dependency.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.AdminController",
-      "LineNumber": 13
+      "LineNumber": 14
     },
     {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.AdminController",
-      "LineNumber": 19
+      "LineNumber": 20
     },
     {
       "Code": "STXFORMAT009",
       "Description": "Every method chained from an invocation result must begin on a new line.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.AdminController",
-      "LineNumber": 78
+      "LineNumber": 79
     },
     {
       "Code": "STXAPI001",
       "Description": "An API controller must have exactly one business dependency.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 16
+      "LineNumber": 17
     },
     {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 30
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 37
+      "LineNumber": 31
     },
     {
       "Code": "STXFORMAT005",
@@ -423,28 +416,35 @@
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 40
-    },
-    {
-      "Code": "STXAPI004",
-      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 56
-    },
-    {
-      "Code": "STXE002",
-      "Description": "An exposure must not contain loops.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 72
+      "LineNumber": 39
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 111
+      "LineNumber": 41
+    },
+    {
+      "Code": "STXAPI004",
+      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 57
+    },
+    {
+      "Code": "STXE002",
+      "Description": "An exposure must not contain loops.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 73
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 112
     },
     {
       "Code": "STXM002",
@@ -541,6 +541,41 @@
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
+      "Type": "AI.Web.Models.AgentRunHistoryEntry",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AgentRunHistoryEntry",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AgentRunHistoryEntry",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AgentRunHistoryEntry",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AgentRunHistoryEntry",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
       "Type": "AI.Web.Models.ProviderDiagnosticsViewModel",
       "LineNumber": 9
     },
@@ -615,46 +650,11 @@
       "LineNumber": 15
     },
     {
-      "Code": "STXM002",
-      "Description": "Model properties must not declare default values.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
-      "LineNumber": 9
-    },
-    {
-      "Code": "STXM002",
-      "Description": "Model properties must not declare default values.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
-      "LineNumber": 10
-    },
-    {
-      "Code": "STXM002",
-      "Description": "Model properties must not declare default values.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
-      "LineNumber": 11
-    },
-    {
-      "Code": "STXM002",
-      "Description": "Model properties must not declare default values.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
-      "LineNumber": 12
-    },
-    {
-      "Code": "STXM002",
-      "Description": "Model properties must not declare default values.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryEntry",
-      "LineNumber": 15
-    },
-    {
       "Code": "STX0001",
       "Description": "The type is not a valid Standard element type.",
       "Severity": "Warning",
       "Type": "AI.Web.Services.Diagnostics.AgentRunHistoryService",
-      "LineNumber": 9
+      "LineNumber": 10
     }
   ]
 }

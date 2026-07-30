@@ -2,7 +2,7 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
-namespace AI.Web.Services.Diagnostics;
+namespace AI.Web.Models;
 
 public class AgentRunHistoryEntry
 {

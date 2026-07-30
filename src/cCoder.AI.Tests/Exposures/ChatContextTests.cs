@@ -18,7 +18,7 @@ public sealed class ChatContextTests
     public async Task InferAsync_ShouldMapChatRequestToAgentRunRequest()
     {
         // Given
-        Mock<IAgentOrchestrationService> orchestrationServiceMock = new();
+        Mock<IAgentManager> orchestrationServiceMock = new();
 
         AgentRunResponse expectedResponse = new()
         {

@@ -2,14 +2,14 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using cCoder.AI.Exposures;
 using System.Collections.Concurrent;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Models.Responses;
-using cCoder.AI.Services.Foundations.Completions;
 
 namespace AI.AcceptanceTests.Infrastructure;
 
-public sealed class TestCompletionProviderService : ICompletionProviderService
+public sealed class TestCompletionProviderService : ICompletionProviderManager
 {
     private readonly ConcurrentQueue<CompletionResponse> completionResponses = new();
 

@@ -9,7 +9,7 @@ using cCoder.AI.Models.Responses;
 
 namespace cCoder.AI.Services.Foundations.Completions;
 
-public class CompletionProviderService(
+internal class CompletionProviderService(
     IChatCompletionsBroker chatCompletionsBroker,
     ICodexCliBroker codexCliBroker,
     IAIProviderExecutionLimiter providerExecutionLimiter,
