@@ -409,7 +409,7 @@
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 38
+      "LineNumber": 34
     },
     {
       "Code": "STXFORMAT005",
@@ -423,28 +423,63 @@
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 41
-    },
-    {
-      "Code": "STXAPI004",
-      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 57
-    },
-    {
-      "Code": "STXE002",
-      "Description": "An exposure must not contain loops.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 73
+      "LineNumber": 40
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 112
+      "LineNumber": 42
+    },
+    {
+      "Code": "STXAPI004",
+      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 65
+    },
+    {
+      "Code": "STXE002",
+      "Description": "An exposure must not contain loops.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 81
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 122
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 156
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 158
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 159
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 161
     },
     {
       "Code": "STXM002",

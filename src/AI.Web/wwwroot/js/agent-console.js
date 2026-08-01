@@ -177,7 +177,10 @@
         messageList.appendChild(article);
         messageList.scrollTop = messageList.scrollHeight;
 
-        return article.querySelector(".message-content");
+        return {
+            content: article.querySelector(".message-content"),
+            tag: article.querySelector(".message-tag")
+        };
     }
 
     async function readNdjsonStream(response, onToken) {
@@ -250,7 +253,8 @@
                 throw new Error(await response.text());
             }
 
-            const assistantMessageContent = createStreamingAssistantCard();
+            const assistantMessage = createStreamingAssistantCard();
+            const assistantMessageContent = assistantMessage.content;
             let finalMessage = "";
             let completion = null;
 
@@ -271,6 +275,7 @@
                     completion = token.completion || null;
                     finalMessage = token.content || finalMessage;
                     assistantMessageContent.textContent = finalMessage;
+                    assistantMessage.tag.textContent = "complete";
                     return;
                 }
 

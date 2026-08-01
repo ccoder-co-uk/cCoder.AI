@@ -60,6 +60,32 @@ public static class AIConfigurationExtensions
         });
     }
 
+    public static AIConfiguration AddPeerLlm(
+        this AIConfiguration configuration,
+        string key,
+        Action<PeerLlmProviderOptions> configure)
+    {
+        PeerLlmProviderOptions options = new();
+        configure?.Invoke(obj: options);
+        string baseEndpoint = TrimKnownSuffix(endpoint: options.Endpoint, suffix: "/chat/completions");
+
+        return AddProvider(configuration: configuration, key: key, options: options, provider: new AIProviderConfiguration
+        {
+            CompletionProvider = BuildCompletion(
+                options,
+                AIProviderMode.OpenAICompatible,
+                AppendPath(baseEndpoint, "chat/completions"),
+                "Authorization",
+                "Bearer"),
+            ModelProvider = BuildModel(
+                options,
+                AIModelProviderMode.OpenAICompatible,
+                Coalesce(options.ModelEndpoint, baseEndpoint),
+                "Authorization",
+                "Bearer")
+        });
+    }
+
     public static AIConfiguration AddFoundry(
         this AIConfiguration configuration,
         string key,
