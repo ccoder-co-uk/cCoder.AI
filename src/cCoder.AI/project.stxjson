@@ -640,6 +640,82 @@
       ]
     },
     {
+      "Name": "cCoder.AI.Dependencies.LegacyRouteApiDescriptionDependency",
+      "StandardElementType": "Dependency",
+      "LineNumber": 9,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "cCoder.AI:IApiDescriptionProvider",
+        "FullName": "IApiDescriptionProvider",
+        "Name": "IApiDescriptionProvider",
+        "Namespace": "\u003Cglobal namespace\u003E",
+        "AssemblyName": "cCoder.AI",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Dependency"
+      },
+      "Interfaces": [],
+      "Properties": [
+        {
+          "Name": "Order",
+          "Type": "System.Int32"
+        }
+      ],
+      "Methods": [
+        {
+          "Id": "cCoder.AI.Dependencies.LegacyRouteApiDescriptionDependency.OnProvidersExecuted(ApiDescriptionProviderContext)",
+          "Name": "OnProvidersExecuted",
+          "LineNumber": 14,
+          "Inputs": [
+            {
+              "Name": "context",
+              "Type": "ApiDescriptionProviderContext"
+            }
+          ],
+          "ReturnType": "System.Void",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Dependencies.LegacyRouteApiDescriptionDependency.OnProvidersExecuting(ApiDescriptionProviderContext)",
+          "Name": "OnProvidersExecuting",
+          "LineNumber": 33,
+          "Inputs": [
+            {
+              "Name": "context",
+              "Type": "ApiDescriptionProviderContext"
+            }
+          ],
+          "ReturnType": "System.Void",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
       "Name": "cCoder.AI.Dependencies.ModelProviderDependency",
       "StandardElementType": "Unknown",
       "LineNumber": 12,
@@ -1496,7 +1572,7 @@
         {
           "Id": "cCoder.AI.Exposures.Controllers.ModelController.GetAvailableModelsAsync(System.String,System.Threading.CancellationToken)",
           "Name": "GetAvailableModelsAsync",
-          "LineNumber": 18,
+          "LineNumber": 19,
           "Inputs": [
             {
               "Name": "provider",
@@ -1567,7 +1643,7 @@
         {
           "Id": "cCoder.AI.Exposures.Controllers.ModelController.PostImportModelAsync(System.String,cCoder.AI.Models.Requests.ModelImportRequest,System.Threading.CancellationToken)",
           "Name": "PostImportModelAsync",
-          "LineNumber": 42,
+          "LineNumber": 43,
           "Inputs": [
             {
               "Name": "provider",
@@ -1646,7 +1722,7 @@
     {
       "Name": "cCoder.AI.IServiceCollectionExtensions",
       "StandardElementType": "App",
-      "LineNumber": 19,
+      "LineNumber": 20,
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": null,
@@ -1656,7 +1732,7 @@
         {
           "Id": "cCoder.AI.IServiceCollectionExtensions.AddAIWeb(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action\u003CcCoder.AI.Models.Configurations.AIConfiguration\u003E)",
           "Name": "AddAIWeb",
-          "LineNumber": 21,
+          "LineNumber": 22,
           "Inputs": [
             {
               "Name": "services",
@@ -1700,7 +1776,7 @@
         {
           "Id": "cCoder.AI.IServiceCollectionExtensions.AddAIWeb(Microsoft.Extensions.DependencyInjection.IServiceCollection,cCoder.AI.Models.Configurations.AIConfiguration)",
           "Name": "AddAIWeb",
-          "LineNumber": 31,
+          "LineNumber": 32,
           "Inputs": [
             {
               "Name": "services",
@@ -4555,7 +4631,14 @@
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.ModelController",
-      "LineNumber": 44
+      "LineNumber": 45
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
+      "LineNumber": 67
     },
     {
       "Code": "STXM002",
