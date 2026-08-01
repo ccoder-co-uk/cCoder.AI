@@ -116,7 +116,7 @@
 
         try {
             const response = await fetch(
-                `/Api/Model/Providers/${encodeURIComponent(providerSelect.value)}/Available`);
+                `/Api/AI/Model/Providers/${encodeURIComponent(providerSelect.value)}/Available`);
 
             if (!response.ok) {
                 throw new Error(await response.text());

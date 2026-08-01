@@ -82,8 +82,11 @@ Applications that map controllers consequently receive:
 - `POST /Api/AI/Agents/Stream`
 - `POST /Api/AI/Chat`
 - `POST /Api/AI/Chat/Stream`
-- `GET /Api/Model/Providers/{provider}/Available`
-- `POST /Api/Model/Providers/{provider}/Import`
+- `GET /Api/AI/Model/Providers/{provider}/Available`
+- `POST /Api/AI/Model/Providers/{provider}/Import`
+
+The previous `/Api/Model/...` routes remain available for compatibility but
+are omitted from generated API descriptions.
 
 The included web application contains only UI-facing controller actions. Its
 API controllers are supplied by `cCoder.AI`, so another host receives the same

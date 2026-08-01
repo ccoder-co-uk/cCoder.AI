@@ -39,7 +39,7 @@ provider: "Ollama",
             });
 
         // When
-        using HttpResponseMessage response = await client.GetAsync(requestUri: "/Api/Model/Providers/Ollama/Available");
+        using HttpResponseMessage response = await client.GetAsync(requestUri: "/Api/AI/Model/Providers/Ollama/Available");
         string content = await response.Content.ReadAsStringAsync();
 
         IReadOnlyList<ModelDescriptorResponse> actualResponse =
@@ -51,6 +51,43 @@ provider: "Ollama",
         actualResponse.Should().ContainSingle();
         actualResponse[0].Id.Should().Be(expected: "gpt-oss:20b");
         factory.ModelManagerService.RetrievalRequests.Should().ContainSingle(because: "Ollama");
+    }
+
+    [Fact]
+    public async Task GetLegacyAvailableModels_ShouldRemainCompatible()
+    {
+        // Given
+        factory.ModelManagerService.SeedAvailableModels(
+            provider: "Ollama",
+            new ModelDescriptorResponse
+            {
+                Id = "gpt-oss:20b",
+                Name = "gpt-oss:20b",
+                Provider = "Ollama",
+                IsAvailable = true,
+            });
+
+        // When
+        using HttpResponseMessage response = await client.GetAsync(
+            requestUri: "/Api/Model/Providers/Ollama/Available");
+
+        // Then
+        response.IsSuccessStatusCode.Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task GetOpenApi_ShouldOnlyDescribeCanonicalModelRoutes()
+    {
+        // When
+        using HttpResponseMessage response = await client.GetAsync(
+            requestUri: "/openapi/v1.json");
+
+        string content = await response.Content.ReadAsStringAsync();
+
+        // Then
+        response.IsSuccessStatusCode.Should().BeTrue(because: content);
+        content.Should().Contain(expected: "/Api/AI/Model/");
+        content.Should().NotContain(unexpected: "\"/Api/Model/");
     }
 
     [Fact]
@@ -73,7 +110,7 @@ provider: "Ollama",
 
         // When
         using HttpResponseMessage response = await client.PostAsJsonAsync(
-requestUri: "/Api/Model/Providers/Ollama/Import",
+requestUri: "/Api/AI/Model/Providers/Ollama/Import",
 value: inputRequest);
 
         string content = await response.Content.ReadAsStringAsync();

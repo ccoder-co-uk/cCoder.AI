@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace cCoder.AI.Exposures.Controllers;
 
 [ApiController]
-[Route("Api/[controller]")]
+[Route("Api/AI/Model")]
+[Route("Api/Model")]
 public sealed class ModelController(
     IModelManager modelManagerService)
     : ControllerBase

@@ -11,6 +11,7 @@ using cCoder.AI.Models.Configurations;
 using cCoder.AI.Services.Foundations.Models;
 using cCoder.AI.Services.Foundations.Completions;
 using cCoder.AI.Services.Orchestrations;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -94,6 +95,10 @@ public static class IServiceCollectionExtensions
     private static void AddExposures(
         this IServiceCollection services)
     {
+        services.AddSingleton<
+            IApiDescriptionProvider,
+            LegacyRouteApiDescriptionDependency>();
+
         services.AddTransient<ChatContext>();
 
         IMvcBuilder mvcBuilder = services.AddControllers();
