@@ -30,7 +30,9 @@ public class HomeController(
 
     public IActionResult Index()
     {
-        IReadOnlyList<AIProviderOptionViewModel> providers = aiConfiguration.Providers
+        try
+        {
+            IReadOnlyList<AIProviderOptionViewModel> providers = aiConfiguration.Providers
             .Where(predicate: provider => IsProviderAvailable(provider.Value))
             .OrderBy(keySelector: provider => provider.Key)
             .Select(selector: provider => new AIProviderOptionViewModel
@@ -59,7 +61,12 @@ public class HomeController(
             Providers = providers,
         };
 
-        return View(model: viewModel);
+            return View(model: viewModel);
+        }
+        catch (Exception)
+        {
+            return StatusCode(statusCode: 500);
+        }
     }
 
     [HttpPost]
@@ -67,7 +74,9 @@ public class HomeController(
         [FromBody] ChatRequest chatRequest,
         CancellationToken cancellationToken)
     {
-        DateTimeOffset startedOn = DateTimeOffset.UtcNow;
+        try
+        {
+            DateTimeOffset startedOn = DateTimeOffset.UtcNow;
         string provider = chatRequest.Provider ?? string.Empty;
         string model = chatRequest.Model ?? string.Empty;
         int iterations = 0;
@@ -127,7 +136,28 @@ public class HomeController(
             Duration = DateTimeOffset.UtcNow - startedOn,
         });
 
-        return new EmptyResult();
+            return Response.HasStarted
+                ? new EmptyResult()
+                : Ok();
+        }
+        catch (ArgumentException)
+        {
+            if (Response.HasStarted)
+            {
+                throw;
+            }
+
+            return BadRequest(error: "The conversation request is invalid.");
+        }
+        catch (Exception)
+        {
+            if (Response.HasStarted)
+            {
+                throw;
+            }
+
+            return StatusCode(statusCode: 500);
+        }
     }
 
     private static string BuildProviderDescription(

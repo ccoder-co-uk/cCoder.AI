@@ -11,15 +11,15 @@ using FluentAssertions;
 
 namespace AI.AcceptanceTests.Tests;
 
-public sealed partial class AIControllerTests : IClassFixture<AIWebApplicationFactory>
+public sealed partial class AIControllerTests
 {
     private readonly AIWebApplicationFactory factory;
     private readonly HttpClient client;
     private static readonly JsonSerializerOptions JsonSerializerOptions = new() { PropertyNameCaseInsensitive = true };
 
-    public AIControllerTests(AIWebApplicationFactory factory)
+    public AIControllerTests()
     {
-        this.factory = factory;
+        factory = new AIWebApplicationFactory();
         client = factory.CreateClient();
         factory.CompletionProviderService.Reset();
         factory.ShellBroker.Reset();

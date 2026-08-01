@@ -19,12 +19,23 @@ public sealed class ModelController(
         string provider,
         CancellationToken cancellationToken)
     {
-        var modelResponses =
-            await modelManagerService.RetrieveAvailableModelsAsync(
-                provider: provider,
-                cancellationToken: cancellationToken);
+        try
+        {
+            var modelResponses =
+                await modelManagerService.RetrieveAvailableModelsAsync(
+                    provider: provider,
+                    cancellationToken: cancellationToken);
 
-        return Ok(value: modelResponses);
+            return Ok(value: modelResponses);
+        }
+        catch (ArgumentException)
+        {
+            return BadRequest(error: "The model provider is invalid.");
+        }
+        catch (Exception)
+        {
+            return StatusCode(statusCode: 500);
+        }
     }
 
     [HttpPost("Providers/{provider}/Import")]
@@ -33,12 +44,23 @@ public sealed class ModelController(
         [FromBody] ModelImportRequest modelImportRequest,
         CancellationToken cancellationToken)
     {
-        var modelImportResponse =
-            await modelManagerService.ImportModelAsync(
-                provider: provider,
-                request: modelImportRequest,
-                cancellationToken: cancellationToken);
+        try
+        {
+            var modelImportResponse =
+                await modelManagerService.ImportModelAsync(
+                    provider: provider,
+                    request: modelImportRequest,
+                    cancellationToken: cancellationToken);
 
-        return Ok(value: modelImportResponse);
+            return Ok(value: modelImportResponse);
+        }
+        catch (ArgumentException)
+        {
+            return BadRequest(error: "The model import request is invalid.");
+        }
+        catch (Exception)
+        {
+            return StatusCode(statusCode: 500);
+        }
     }
 }
