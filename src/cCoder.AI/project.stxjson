@@ -1,12 +1,36 @@
 {
+  "SchemaVersion": 2,
+  "Project": {
+    "Id": "cCoder.AI",
+    "Name": "cCoder.AI",
+    "AssemblyName": "cCoder.AI"
+  },
   "Classes": [
     {
       "Name": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
       "StandardElementType": "Broker",
+      "LineNumber": 12,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Brokers.Completions.IChatCompletionsBroker",
+          "FullName": "cCoder.AI.Brokers.Completions.IChatCompletionsBroker",
+          "Name": "IChatCompletionsBroker",
+          "Namespace": "cCoder.AI.Brokers.Completions",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Broker"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker.PostChatCompletionAsync(System.String,cCoder.AI.Models.Configurations.AICompletionProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
           "Name": "PostChatCompletionAsync",
+          "LineNumber": 16,
           "Inputs": [
             {
               "Name": "providerName",
@@ -25,17 +49,65 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [
+            "cCoder.AI.Brokers.Completions.IChatCompletionsBroker.PostChatCompletionAsync(System.String,cCoder.AI.Models.Configurations.AICompletionProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Dependencies.ChatCompletionsDependency",
+              "MethodName": "PostChatCompletionAsync",
+              "MethodId": "cCoder.AI.Dependencies.ChatCompletionsDependency.PostChatCompletionAsync(System.String,cCoder.AI.Models.Configurations.AICompletionProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Unknown",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Brokers.Completions.CodexCliBroker",
       "StandardElementType": "Broker",
+      "LineNumber": 12,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Brokers.Completions.ICodexCliBroker",
+          "FullName": "cCoder.AI.Brokers.Completions.ICodexCliBroker",
+          "Name": "ICodexCliBroker",
+          "Namespace": "cCoder.AI.Brokers.Completions",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Broker"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Brokers.Completions.CodexCliBroker.CompleteAsync(System.String,cCoder.AI.Models.Configurations.AIProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
           "Name": "CompleteAsync",
+          "LineNumber": 16,
           "Inputs": [
             {
               "Name": "providerName",
@@ -54,17 +126,65 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [
+            "cCoder.AI.Brokers.Completions.ICodexCliBroker.CompleteAsync(System.String,cCoder.AI.Models.Configurations.AIProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Dependencies.CodexCliDependency",
+              "MethodName": "CompleteAsync",
+              "MethodId": "cCoder.AI.Dependencies.CodexCliDependency.CompleteAsync(System.String,cCoder.AI.Models.Configurations.AIProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
       "StandardElementType": "Broker",
+      "LineNumber": 10,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Brokers.ModelProviders.IModelProviderBroker",
+          "FullName": "cCoder.AI.Brokers.ModelProviders.IModelProviderBroker",
+          "Name": "IModelProviderBroker",
+          "Namespace": "cCoder.AI.Brokers.ModelProviders",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Broker"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker.GetStringAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Threading.CancellationToken)",
           "Name": "GetStringAsync",
+          "LineNumber": 14,
           "Inputs": [
             {
               "Name": "configuration",
@@ -79,10 +199,35 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E",
+          "Implements": [
+            "cCoder.AI.Brokers.ModelProviders.IModelProviderBroker.GetStringAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Dependencies.ModelProviderDependency",
+              "MethodName": "GetStringAsync",
+              "MethodId": "cCoder.AI.Dependencies.ModelProviderDependency.GetStringAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Threading.CancellationToken)",
+              "StandardElementType": "Unknown",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker.PostAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Object,System.Threading.CancellationToken)",
           "Name": "PostAsync",
+          "LineNumber": 23,
           "Inputs": [
             {
               "Name": "configuration",
@@ -101,17 +246,58 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E",
+          "Implements": [
+            "cCoder.AI.Brokers.ModelProviders.IModelProviderBroker.PostAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Object,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Dependencies.ModelProviderDependency",
+              "MethodName": "PostAsync",
+              "MethodId": "cCoder.AI.Dependencies.ModelProviderDependency.PostAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Object,System.Threading.CancellationToken)",
+              "StandardElementType": "Unknown",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Brokers.Shells.ShellBroker",
       "StandardElementType": "Broker",
+      "LineNumber": 11,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Brokers.Shells.IShellBroker",
+          "FullName": "cCoder.AI.Brokers.Shells.IShellBroker",
+          "Name": "IShellBroker",
+          "Namespace": "cCoder.AI.Brokers.Shells",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Broker"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Brokers.Shells.ShellBroker.ExecuteAsync(System.String,System.String?,System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?,cCoder.AI.Models.Enums.ShellKind,System.Threading.CancellationToken)",
           "Name": "ExecuteAsync",
+          "LineNumber": 15,
           "Inputs": [
             {
               "Name": "command",
@@ -134,17 +320,53 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ToolExecutionResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ToolExecutionResponse\u003E",
+          "Implements": [
+            "cCoder.AI.Brokers.Shells.IShellBroker.ExecuteAsync(System.String,System.String?,System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?,cCoder.AI.Models.Enums.ShellKind,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Dependencies.ShellDependency",
+              "MethodName": "ExecuteAsync",
+              "MethodId": "cCoder.AI.Dependencies.ShellDependency.ExecuteAsync(System.String,System.String?,System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?,cCoder.AI.Models.Enums.ShellKind,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Dependencies.ChatCompletionsDependency",
       "StandardElementType": "Unknown",
+      "LineNumber": 15,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Dependencies.ChatCompletionsDependency.PostChatCompletionAsync(System.String,cCoder.AI.Models.Configurations.AICompletionProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
           "Name": "PostChatCompletionAsync",
+          "LineNumber": 23,
           "Inputs": [
             {
               "Name": "providerName",
@@ -163,17 +385,118 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.InvalidOperationException",
+              "MethodName": ".ctor",
+              "MethodId": "System.InvalidOperationException..ctor(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Math",
+              "MethodName": "Max",
+              "MethodId": "System.Math.Max(System.Int32,System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Math",
+              "MethodName": "Pow",
+              "MethodId": "System.Math.Pow(System.Double,System.Double)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.HttpClient",
+              "MethodName": "SendAsync",
+              "MethodId": "System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.HttpContent",
+              "MethodName": "ReadAsStringAsync",
+              "MethodId": "System.Net.Http.HttpContent.ReadAsStringAsync(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.HttpRequestMessage",
+              "MethodName": ".ctor",
+              "MethodId": "System.Net.Http.HttpRequestMessage..ctor(System.Net.Http.HttpMethod,System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.StringContent",
+              "MethodName": ".ctor",
+              "MethodId": "System.Net.Http.StringContent..ctor(System.String,System.Text.Encoding?,System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Threading.Tasks.Task",
+              "MethodName": "Delay",
+              "MethodId": "System.Threading.Tasks.Task.Delay(System.TimeSpan,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.TimeSpan",
+              "MethodName": "FromMilliseconds",
+              "MethodId": "System.TimeSpan.FromMilliseconds(System.Double)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": true
         }
       ]
     },
     {
       "Name": "cCoder.AI.Dependencies.CodexCliDependency",
       "StandardElementType": "Dependency",
+      "LineNumber": 13,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "System.Diagnostics.Process:System.Diagnostics.Process",
+        "FullName": "System.Diagnostics.Process",
+        "Name": "Process",
+        "Namespace": "System.Diagnostics",
+        "AssemblyName": "System.Diagnostics.Process",
+        "Kind": "Class",
+        "IsInCurrentProject": false,
+        "StandardElementType": "Dependency"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Dependencies.CodexCliDependency.CompleteAsync(System.String,cCoder.AI.Models.Configurations.AIProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
           "Name": "CompleteAsync",
+          "LineNumber": 15,
           "Inputs": [
             {
               "Name": "providerName",
@@ -192,17 +515,144 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Diagnostics.Process",
+              "MethodName": "Start",
+              "MethodId": "System.Diagnostics.Process.Start()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Diagnostics.Process",
+              "MethodName": "WaitForExitAsync",
+              "MethodId": "System.Diagnostics.Process.WaitForExitAsync(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Diagnostics.ProcessStartInfo",
+              "MethodName": ".ctor",
+              "MethodId": "System.Diagnostics.ProcessStartInfo..ctor()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.IO.StreamReader",
+              "MethodName": "ReadToEndAsync",
+              "MethodId": "System.IO.StreamReader.ReadToEndAsync(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.IO.StreamWriter",
+              "MethodName": "Close",
+              "MethodId": "System.IO.StreamWriter.Close()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.IO.StreamWriter",
+              "MethodName": "FlushAsync",
+              "MethodId": "System.IO.StreamWriter.FlushAsync(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.IO.StreamWriter",
+              "MethodName": "WriteAsync",
+              "MethodId": "System.IO.StreamWriter.WriteAsync(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.InvalidOperationException",
+              "MethodName": ".ctor",
+              "MethodId": "System.InvalidOperationException..ctor(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.InvalidOperationException",
+              "MethodName": ".ctor",
+              "MethodId": "System.InvalidOperationException..ctor(System.String?,System.Exception?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "Trim",
+              "MethodId": "System.String.Trim()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Threading.CancellationTokenSource",
+              "MethodName": "CancelAfter",
+              "MethodId": "System.Threading.CancellationTokenSource.CancelAfter(System.TimeSpan)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Threading.CancellationTokenSource",
+              "MethodName": "CreateLinkedTokenSource",
+              "MethodId": "System.Threading.CancellationTokenSource.CreateLinkedTokenSource(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.TimeSpan",
+              "MethodName": "FromSeconds",
+              "MethodId": "System.TimeSpan.FromSeconds(System.Int64)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": true
         }
       ]
     },
     {
       "Name": "cCoder.AI.Dependencies.ModelProviderDependency",
       "StandardElementType": "Unknown",
+      "LineNumber": 12,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Dependencies.ModelProviderDependency.GetStringAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Threading.CancellationToken)",
           "Name": "GetStringAsync",
+          "LineNumber": 20,
           "Inputs": [
             {
               "Name": "configuration",
@@ -217,10 +667,54 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Net.Http.HttpClient",
+              "MethodName": "SendAsync",
+              "MethodId": "System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.HttpContent",
+              "MethodName": "ReadAsStringAsync",
+              "MethodId": "System.Net.Http.HttpContent.ReadAsStringAsync(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.HttpRequestMessage",
+              "MethodName": ".ctor",
+              "MethodId": "System.Net.Http.HttpRequestMessage..ctor(System.Net.Http.HttpMethod,System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.HttpResponseMessage",
+              "MethodName": "EnsureSuccessStatusCode",
+              "MethodId": "System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Dependencies.ModelProviderDependency.PostAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Object,System.Threading.CancellationToken)",
           "Name": "PostAsync",
+          "LineNumber": 43,
           "Inputs": [
             {
               "Name": "configuration",
@@ -239,35 +733,169 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Net.Http.HttpClient",
+              "MethodName": "SendAsync",
+              "MethodId": "System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.HttpContent",
+              "MethodName": "ReadAsStringAsync",
+              "MethodId": "System.Net.Http.HttpContent.ReadAsStringAsync(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.HttpRequestMessage",
+              "MethodName": ".ctor",
+              "MethodId": "System.Net.Http.HttpRequestMessage..ctor(System.Net.Http.HttpMethod,System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.HttpResponseMessage",
+              "MethodName": "EnsureSuccessStatusCode",
+              "MethodId": "System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Net.Http.StringContent",
+              "MethodName": ".ctor",
+              "MethodId": "System.Net.Http.StringContent..ctor(System.String,System.Text.Encoding?,System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Text.Json.JsonSerializer",
+              "MethodName": "Serialize",
+              "MethodId": "System.Text.Json.JsonSerializer.Serialize(TValue,System.Text.Json.JsonSerializerOptions?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Dependencies.ProviderGateDependency",
       "StandardElementType": "Dependency",
+      "LineNumber": 7,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "System.Private.CoreLib:System.Threading.SemaphoreSlim",
+        "FullName": "System.Threading.SemaphoreSlim",
+        "Name": "SemaphoreSlim",
+        "Namespace": "System.Threading",
+        "AssemblyName": "System.Private.CoreLib",
+        "Kind": "Class",
+        "IsInCurrentProject": false,
+        "StandardElementType": "Dependency"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": []
     },
     {
       "Name": "cCoder.AI.Dependencies.ProviderGateDependency.GateLease",
       "StandardElementType": "Dependency",
+      "LineNumber": 21,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "System.Private.CoreLib:System.IAsyncDisposable",
+          "FullName": "System.IAsyncDisposable",
+          "Name": "IAsyncDisposable",
+          "Namespace": "System",
+          "AssemblyName": "System.Private.CoreLib",
+          "Kind": "Interface",
+          "IsInCurrentProject": false,
+          "StandardElementType": "Dependency"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Dependencies.ProviderGateDependency.GateLease.DisposeAsync()",
           "Name": "DisposeAsync",
+          "LineNumber": 27,
           "Inputs": [],
-          "ReturnType": "System.Threading.Tasks.ValueTask"
+          "ReturnType": "System.Threading.Tasks.ValueTask",
+          "Implements": [
+            "System.IAsyncDisposable.DisposeAsync()"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.Threading.Interlocked",
+              "MethodName": "Exchange",
+              "MethodId": "System.Threading.Interlocked.Exchange(System.Int32,System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Threading.SemaphoreSlim",
+              "MethodName": "Release",
+              "MethodId": "System.Threading.SemaphoreSlim.Release()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Dependencies.ShellDependency",
       "StandardElementType": "Dependency",
+      "LineNumber": 12,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "System.Diagnostics.Process:System.Diagnostics.Process",
+        "FullName": "System.Diagnostics.Process",
+        "Name": "Process",
+        "Namespace": "System.Diagnostics",
+        "AssemblyName": "System.Diagnostics.Process",
+        "Kind": "Class",
+        "IsInCurrentProject": false,
+        "StandardElementType": "Dependency"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Dependencies.ShellDependency.ExecuteAsync(System.String,System.String?,System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?,cCoder.AI.Models.Enums.ShellKind,System.Threading.CancellationToken)",
           "Name": "ExecuteAsync",
+          "LineNumber": 14,
           "Inputs": [
             {
               "Name": "command",
@@ -290,17 +918,79 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ToolExecutionResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ToolExecutionResponse\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Diagnostics.Process",
+              "MethodName": "Start",
+              "MethodId": "System.Diagnostics.Process.Start()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Diagnostics.Process",
+              "MethodName": "WaitForExitAsync",
+              "MethodId": "System.Diagnostics.Process.WaitForExitAsync(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.IO.Path",
+              "MethodName": "GetFullPath",
+              "MethodId": "System.IO.Path.GetFullPath(System.String)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.IO.StreamReader",
+              "MethodName": "ReadToEndAsync",
+              "MethodId": "System.IO.StreamReader.ReadToEndAsync(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Exposures.ChatContext",
       "StandardElementType": "Exposure",
+      "LineNumber": 11,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Exposures.ChatContext.InferAsStreamAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "InferAsStreamAsync",
+          "LineNumber": 21,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -311,10 +1001,38 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Collections.Generic.IAsyncEnumerable\u003CcCoder.AI.Models.Responses.AgentStreamTokenResponse\u003E"
+          "ReturnType": "System.Collections.Generic.IAsyncEnumerable\u003CcCoder.AI.Models.Responses.AgentStreamTokenResponse\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.IAgentManager",
+              "MethodName": "StreamAsync",
+              "MethodId": "cCoder.AI.Exposures.IAgentManager.StreamAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Exposures.ChatContext.InferAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "InferAsync",
+          "LineNumber": 14,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -325,17 +1043,67 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.AgentRunResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.AgentRunResponse\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.IAgentManager",
+              "MethodName": "RunAsync",
+              "MethodId": "cCoder.AI.Exposures.IAgentManager.RunAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Exposures.Controllers.AIController",
-      "StandardElementType": "Exposure",
+      "StandardElementType": "HttpExposure",
+      "LineNumber": 14,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "cCoder.AI:ControllerBase",
+        "FullName": "ControllerBase",
+        "Name": "ControllerBase",
+        "Namespace": "\u003Cglobal namespace\u003E",
+        "AssemblyName": "cCoder.AI",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Dependency"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Exposures.Controllers.AIController.PostAgentsAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
           "Name": "PostAgentsAsync",
+          "LineNumber": 36,
           "Inputs": [
             {
               "Name": "agentRunRequest",
@@ -346,10 +1114,58 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.IAgentManager",
+              "MethodName": "RunAsync",
+              "MethodId": "cCoder.AI.Exposures.IAgentManager.RunAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [
+            "POST"
+          ],
+          "HttpResponses": [
+            {
+              "StatusCode": 200,
+              "ResultMethod": "Ok",
+              "ExceptionType": "",
+              "IsExceptionPath": false,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            }
+          ],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Exposures.Controllers.AIController.PostChatAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "PostChatAsync",
+          "LineNumber": 59,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -360,10 +1176,58 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.ChatContext",
+              "MethodName": "InferAsync",
+              "MethodId": "cCoder.AI.Exposures.ChatContext.InferAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [
+            "POST"
+          ],
+          "HttpResponses": [
+            {
+              "StatusCode": 200,
+              "ResultMethod": "Ok",
+              "ExceptionType": "",
+              "IsExceptionPath": false,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            }
+          ],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Exposures.Controllers.AIController.PostCompletionsAsync(cCoder.AI.Models.Requests.CompletionRequest,System.Threading.CancellationToken)",
           "Name": "PostCompletionsAsync",
+          "LineNumber": 23,
           "Inputs": [
             {
               "Name": "completionRequest",
@@ -374,10 +1238,58 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.ICompletionProviderManager",
+              "MethodName": "CompleteAsync",
+              "MethodId": "cCoder.AI.Exposures.ICompletionProviderManager.CompleteAsync(cCoder.AI.Models.Requests.CompletionRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [
+            "POST"
+          ],
+          "HttpResponses": [
+            {
+              "StatusCode": 200,
+              "ResultMethod": "Ok",
+              "ExceptionType": "",
+              "IsExceptionPath": false,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            }
+          ],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Exposures.Controllers.AIController.StreamAgentsAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
           "Name": "StreamAgentsAsync",
+          "LineNumber": 49,
           "Inputs": [
             {
               "Name": "agentRunRequest",
@@ -388,10 +1300,40 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task"
+          "ReturnType": "System.Threading.Tasks.Task",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.IAgentManager",
+              "MethodName": "StreamAsync",
+              "MethodId": "cCoder.AI.Exposures.IAgentManager.StreamAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [
+            "POST"
+          ],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Exposures.Controllers.AIController.StreamChatAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "StreamChatAsync",
+          "LineNumber": 72,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -402,17 +1344,61 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task"
+          "ReturnType": "System.Threading.Tasks.Task",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.ChatContext",
+              "MethodName": "InferAsStreamAsync",
+              "MethodId": "cCoder.AI.Exposures.ChatContext.InferAsStreamAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [
+            "POST"
+          ],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Exposures.Controllers.ModelController",
-      "StandardElementType": "Exposure",
+      "StandardElementType": "HttpExposure",
+      "LineNumber": 11,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "cCoder.AI:ControllerBase",
+        "FullName": "ControllerBase",
+        "Name": "ControllerBase",
+        "Namespace": "\u003Cglobal namespace\u003E",
+        "AssemblyName": "cCoder.AI",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Dependency"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Exposures.Controllers.ModelController.GetAvailableModelsAsync(System.String,System.Threading.CancellationToken)",
           "Name": "GetAvailableModelsAsync",
+          "LineNumber": 18,
           "Inputs": [
             {
               "Name": "provider",
@@ -423,10 +1409,51 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.IModelManager",
+              "MethodName": "RetrieveAvailableModelsAsync",
+              "MethodId": "cCoder.AI.Exposures.IModelManager.RetrieveAvailableModelsAsync(System.String?,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [
+            "GET"
+          ],
+          "HttpResponses": [
+            {
+              "StatusCode": 200,
+              "ResultMethod": "Ok",
+              "ExceptionType": "",
+              "IsExceptionPath": false,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            }
+          ],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": true,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Exposures.Controllers.ModelController.PostImportModelAsync(System.String,cCoder.AI.Models.Requests.ModelImportRequest,System.Threading.CancellationToken)",
           "Name": "PostImportModelAsync",
+          "LineNumber": 31,
           "Inputs": [
             {
               "Name": "provider",
@@ -441,17 +1468,66 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.IModelManager",
+              "MethodName": "ImportModelAsync",
+              "MethodId": "cCoder.AI.Exposures.IModelManager.ImportModelAsync(System.String,cCoder.AI.Models.Requests.ModelImportRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [
+            "POST"
+          ],
+          "HttpResponses": [
+            {
+              "StatusCode": 200,
+              "ResultMethod": "Ok",
+              "ExceptionType": "",
+              "IsExceptionPath": false,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            }
+          ],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.IServiceCollectionExtensions",
       "StandardElementType": "App",
+      "LineNumber": 19,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.IServiceCollectionExtensions.AddAIWeb(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action\u003CcCoder.AI.Models.Configurations.AIConfiguration\u003E)",
           "Name": "AddAIWeb",
+          "LineNumber": 21,
           "Inputs": [
             {
               "Name": "services",
@@ -462,10 +1538,40 @@
               "Type": "System.Action\u003CcCoder.AI.Models.Configurations.AIConfiguration\u003E"
             }
           ],
-          "ReturnType": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
+          "ReturnType": "Microsoft.Extensions.DependencyInjection.IServiceCollection",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Action\u003CT\u003E",
+              "MethodName": "Invoke",
+              "MethodId": "System.Action\u003CT\u003E.Invoke(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "cCoder.AI.IServiceCollectionExtensions",
+              "MethodName": "AddAIWeb",
+              "MethodId": "cCoder.AI.IServiceCollectionExtensions.AddAIWeb(Microsoft.Extensions.DependencyInjection.IServiceCollection,cCoder.AI.Models.Configurations.AIConfiguration)",
+              "StandardElementType": "App",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.IServiceCollectionExtensions.AddAIWeb(Microsoft.Extensions.DependencyInjection.IServiceCollection,cCoder.AI.Models.Configurations.AIConfiguration)",
           "Name": "AddAIWeb",
+          "LineNumber": 31,
           "Inputs": [
             {
               "Name": "services",
@@ -476,13 +1582,60 @@
               "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
             }
           ],
-          "ReturnType": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
+          "ReturnType": "Microsoft.Extensions.DependencyInjection.IServiceCollection",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions",
+              "MethodName": "AddSingleton",
+              "MethodId": "Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func\u003CSystem.IServiceProvider, TService\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions",
+              "MethodName": "AddSingleton",
+              "MethodId": "Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(Microsoft.Extensions.DependencyInjection.IServiceCollection,TService)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.Extensions.Options.Options",
+              "MethodName": "Create",
+              "MethodId": "Microsoft.Extensions.Options.Options.Create(TOptions)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.ArgumentNullException",
+              "MethodName": "ThrowIfNull",
+              "MethodId": "System.ArgumentNullException.ThrowIfNull(System.Object?,System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Models.Configurations.AIAgentConfiguration",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "BasePrompt",
@@ -510,6 +1663,11 @@
     {
       "Name": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration",
       "StandardElementType": "Model",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "ApiKey",
@@ -557,6 +1715,11 @@
     {
       "Name": "cCoder.AI.Models.Configurations.AIConfiguration",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Agent",
@@ -576,10 +1739,17 @@
     {
       "Name": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "StandardElementType": "Exposure",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Models.Configurations.AIConfigurationExtensions.AddCodex(cCoder.AI.Models.Configurations.AIConfiguration,System.String,System.Action\u003CcCoder.AI.Models.Configurations.CodexAIProviderOptions\u003E)",
           "Name": "AddCodex",
+          "LineNumber": 114,
           "Inputs": [
             {
               "Name": "configuration",
@@ -594,10 +1764,46 @@
               "Type": "System.Action\u003CcCoder.AI.Models.Configurations.CodexAIProviderOptions\u003E"
             }
           ],
-          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration"
+          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Action\u003CT\u003E",
+              "MethodName": "Invoke",
+              "MethodId": "System.Action\u003CT\u003E.Invoke(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "Trim",
+              "MethodId": "System.String.Trim()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Models.Configurations.AIConfigurationExtensions.AddFoundry(cCoder.AI.Models.Configurations.AIConfiguration,System.String,System.Action\u003CcCoder.AI.Models.Configurations.FoundryAIProviderOptions\u003E)",
           "Name": "AddFoundry",
+          "LineNumber": 89,
           "Inputs": [
             {
               "Name": "configuration",
@@ -612,10 +1818,39 @@
               "Type": "System.Action\u003CcCoder.AI.Models.Configurations.FoundryAIProviderOptions\u003E"
             }
           ],
-          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration"
+          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Action\u003CT\u003E",
+              "MethodName": "Invoke",
+              "MethodId": "System.Action\u003CT\u003E.Invoke(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Models.Configurations.AIConfigurationExtensions.AddOllama(cCoder.AI.Models.Configurations.AIConfiguration,System.String,System.Action\u003CcCoder.AI.Models.Configurations.OllamaAIProviderOptions\u003E)",
           "Name": "AddOllama",
+          "LineNumber": 11,
           "Inputs": [
             {
               "Name": "configuration",
@@ -630,10 +1865,39 @@
               "Type": "System.Action\u003CcCoder.AI.Models.Configurations.OllamaAIProviderOptions\u003E"
             }
           ],
-          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration"
+          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Action\u003CT\u003E",
+              "MethodName": "Invoke",
+              "MethodId": "System.Action\u003CT\u003E.Invoke(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Models.Configurations.AIConfigurationExtensions.AddOpenAI(cCoder.AI.Models.Configurations.AIConfiguration,System.String,System.Action\u003CcCoder.AI.Models.Configurations.OpenAIProviderOptions\u003E)",
           "Name": "AddOpenAI",
+          "LineNumber": 37,
           "Inputs": [
             {
               "Name": "configuration",
@@ -648,10 +1912,39 @@
               "Type": "System.Action\u003CcCoder.AI.Models.Configurations.OpenAIProviderOptions\u003E"
             }
           ],
-          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration"
+          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Action\u003CT\u003E",
+              "MethodName": "Invoke",
+              "MethodId": "System.Action\u003CT\u003E.Invoke(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Models.Configurations.AIConfigurationExtensions.AddPeerLlm(cCoder.AI.Models.Configurations.AIConfiguration,System.String,System.Action\u003CcCoder.AI.Models.Configurations.PeerLlmProviderOptions\u003E)",
           "Name": "AddPeerLlm",
+          "LineNumber": 63,
           "Inputs": [
             {
               "Name": "configuration",
@@ -666,13 +1959,45 @@
               "Type": "System.Action\u003CcCoder.AI.Models.Configurations.PeerLlmProviderOptions\u003E"
             }
           ],
-          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration"
+          "ReturnType": "cCoder.AI.Models.Configurations.AIConfiguration",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Action\u003CT\u003E",
+              "MethodName": "Invoke",
+              "MethodId": "System.Action\u003CT\u003E.Invoke(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration",
       "StandardElementType": "Model",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "ApiKey",
@@ -704,6 +2029,11 @@
     {
       "Name": "cCoder.AI.Models.Configurations.AIProviderConfiguration",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "CodexCli",
@@ -731,6 +2061,11 @@
     {
       "Name": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "ApiKey",
@@ -774,6 +2109,20 @@
     {
       "Name": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
       "StandardElementType": "Model",
+      "LineNumber": 42,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "cCoder.AI:cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "FullName": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "Name": "AIProviderRegistrationOptions",
+        "Namespace": "cCoder.AI.Models.Configurations",
+        "AssemblyName": "cCoder.AI",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Model"
+      },
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "ExecutablePath",
@@ -813,6 +2162,11 @@
     {
       "Name": "cCoder.AI.Models.Configurations.CodexCliConfiguration",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "ExecutablePath",
@@ -852,6 +2206,20 @@
     {
       "Name": "cCoder.AI.Models.Configurations.FoundryAIProviderOptions",
       "StandardElementType": "Model",
+      "LineNumber": 36,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "cCoder.AI:cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "FullName": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "Name": "AIProviderRegistrationOptions",
+        "Namespace": "cCoder.AI.Models.Configurations",
+        "AssemblyName": "cCoder.AI",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Model"
+      },
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "ApiKeyHeaderName",
@@ -867,24 +2235,71 @@
     {
       "Name": "cCoder.AI.Models.Configurations.OllamaAIProviderOptions",
       "StandardElementType": "Model",
+      "LineNumber": 20,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "cCoder.AI:cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "FullName": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "Name": "AIProviderRegistrationOptions",
+        "Namespace": "cCoder.AI.Models.Configurations",
+        "AssemblyName": "cCoder.AI",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Model"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": []
     },
     {
       "Name": "cCoder.AI.Models.Configurations.OpenAIProviderOptions",
       "StandardElementType": "Model",
+      "LineNumber": 28,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "cCoder.AI:cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "FullName": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "Name": "AIProviderRegistrationOptions",
+        "Namespace": "cCoder.AI.Models.Configurations",
+        "AssemblyName": "cCoder.AI",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Model"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": []
     },
     {
       "Name": "cCoder.AI.Models.Configurations.PeerLlmProviderOptions",
       "StandardElementType": "Model",
+      "LineNumber": 54,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "cCoder.AI:cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "FullName": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+        "Name": "AIProviderRegistrationOptions",
+        "Namespace": "cCoder.AI.Models.Configurations",
+        "AssemblyName": "cCoder.AI",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Model"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": []
     },
     {
       "Name": "cCoder.AI.Models.Internal.AgentDirective",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Command",
@@ -912,6 +2327,11 @@
     {
       "Name": "cCoder.AI.Models.Requests.AgentRunRequest",
       "StandardElementType": "Model",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "EnvironmentVariables",
@@ -955,6 +2375,11 @@
     {
       "Name": "cCoder.AI.Models.Requests.ChatCompletionMessage",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Content",
@@ -970,6 +2395,11 @@
     {
       "Name": "cCoder.AI.Models.Requests.ChatRequest",
       "StandardElementType": "Model",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "EnvironmentVariables",
@@ -1013,6 +2443,11 @@
     {
       "Name": "cCoder.AI.Models.Requests.CompletionRequest",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Model",
@@ -1040,6 +2475,11 @@
     {
       "Name": "cCoder.AI.Models.Requests.ModelImportRequest",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "ModelId",
@@ -1051,6 +2491,11 @@
     {
       "Name": "cCoder.AI.Models.Requests.ProviderCompletionRequest",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "EnableShellTooling",
@@ -1078,6 +2523,11 @@
     {
       "Name": "cCoder.AI.Models.Responses.AIProviderCapabilitiesResponse",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "DefaultModel",
@@ -1105,6 +2555,11 @@
     {
       "Name": "cCoder.AI.Models.Responses.AgentIterationResponse",
       "StandardElementType": "Model",
+      "LineNumber": 10,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "CompletionContent",
@@ -1140,6 +2595,11 @@
     {
       "Name": "cCoder.AI.Models.Responses.AgentRunResponse",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "FinalMessage",
@@ -1171,6 +2631,11 @@
     {
       "Name": "cCoder.AI.Models.Responses.AgentStreamTokenResponse",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Completion",
@@ -1202,6 +2667,11 @@
     {
       "Name": "cCoder.AI.Models.Responses.CompletionResponse",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Content",
@@ -1225,6 +2695,11 @@
     {
       "Name": "cCoder.AI.Models.Responses.ModelDescriptorResponse",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Description",
@@ -1260,6 +2735,11 @@
     {
       "Name": "cCoder.AI.Models.Responses.ModelImportResponse",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Message",
@@ -1287,6 +2767,11 @@
     {
       "Name": "cCoder.AI.Models.Responses.ToolExecutionResponse",
       "StandardElementType": "Model",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Command",
@@ -1322,10 +2807,38 @@
     {
       "Name": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
       "StandardElementType": "FoundationService",
+      "LineNumber": 10,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "System.Private.CoreLib:System.IDisposable",
+          "FullName": "System.IDisposable",
+          "Name": "IDisposable",
+          "Namespace": "System",
+          "AssemblyName": "System.Private.CoreLib",
+          "Kind": "Interface",
+          "IsInCurrentProject": false,
+          "StandardElementType": "Dependency"
+        },
+        {
+          "Id": "cCoder.AI:cCoder.AI.Services.Foundations.Completions.IAIProviderExecutionLimiter",
+          "FullName": "cCoder.AI.Services.Foundations.Completions.IAIProviderExecutionLimiter",
+          "Name": "IAIProviderExecutionLimiter",
+          "Namespace": "cCoder.AI.Services.Foundations.Completions",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "FoundationService"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.AcquireAsync(System.String,System.Int32,System.Threading.CancellationToken)",
           "Name": "AcquireAsync",
+          "LineNumber": 15,
           "Inputs": [
             {
               "Name": "providerKey",
@@ -1340,22 +2853,139 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.IAsyncDisposable\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.IAsyncDisposable\u003E",
+          "Implements": [
+            "cCoder.AI.Services.Foundations.Completions.IAIProviderExecutionLimiter.AcquireAsync(System.String,System.Int32,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.ArgumentException",
+              "MethodName": ".ctor",
+              "MethodId": "System.ArgumentException..ctor(System.String?,System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Collections.Concurrent.ConcurrentDictionary\u003CTKey, TValue\u003E",
+              "MethodName": "GetOrAdd",
+              "MethodId": "System.Collections.Concurrent.ConcurrentDictionary\u003CTKey, TValue\u003E.GetOrAdd(TKey,System.Func\u003CTKey, TValue\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.InvalidOperationException",
+              "MethodName": ".ctor",
+              "MethodId": "System.InvalidOperationException..ctor(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Math",
+              "MethodName": "Max",
+              "MethodId": "System.Math.Max(System.Int32,System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "Trim",
+              "MethodId": "System.String.Trim()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter.Dispose()",
           "Name": "Dispose",
+          "LineNumber": 39,
           "Inputs": [],
-          "ReturnType": "System.Void"
+          "ReturnType": "System.Void",
+          "Implements": [
+            "System.IDisposable.Dispose()"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.Collections.Concurrent.ConcurrentDictionary\u003CTKey, TValue\u003E",
+              "MethodName": "Clear",
+              "MethodId": "System.Collections.Concurrent.ConcurrentDictionary\u003CTKey, TValue\u003E.Clear()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Threading.SemaphoreSlim",
+              "MethodName": "Dispose",
+              "MethodId": "System.Threading.SemaphoreSlim.Dispose()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "StandardElementType": "FoundationService",
+      "LineNumber": 12,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Services.Foundations.Completions.ICompletionProviderService",
+          "FullName": "cCoder.AI.Services.Foundations.Completions.ICompletionProviderService",
+          "Name": "ICompletionProviderService",
+          "Namespace": "cCoder.AI.Services.Foundations.Completions",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "FoundationService"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService.CompleteAsync(cCoder.AI.Models.Requests.CompletionRequest,System.Threading.CancellationToken)",
           "Name": "CompleteAsync",
+          "LineNumber": 19,
           "Inputs": [
             {
               "Name": "request",
@@ -1366,40 +2996,62 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
-        },
-        {
-          "Name": "CompleteChatAsync",
-          "Inputs": [
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [
+            "cCoder.AI.Exposures.ICompletionProviderManager.CompleteAsync(cCoder.AI.Models.Requests.CompletionRequest,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
             {
-              "Name": "provider",
-              "Type": "System.String?"
+              "TypeName": "System.Collections.Generic.List\u003CT\u003E",
+              "MethodName": "Add",
+              "MethodId": "System.Collections.Generic.List\u003CT\u003E.Add(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
             },
             {
-              "Name": "model",
-              "Type": "System.String?"
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
             },
             {
-              "Name": "messages",
-              "Type": "System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E"
-            },
-            {
-              "Name": "temperature",
-              "Type": "System.Double?"
-            },
-            {
-              "Name": "enableShellTooling",
-              "Type": "System.Boolean"
-            },
-            {
-              "Name": "cancellationToken",
-              "Type": "System.Threading.CancellationToken"
+              "TypeName": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+              "MethodName": "CompleteChatAsync",
+              "MethodId": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Threading.CancellationToken)",
+              "StandardElementType": "FoundationService",
+              "IsDependencyBoundary": false
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E?,System.Threading.CancellationToken)",
           "Name": "CompleteChatAsync",
+          "LineNumber": 59,
           "Inputs": [
             {
               "Name": "provider",
@@ -1430,27 +3082,222 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [
+            "cCoder.AI.Exposures.ICompletionProviderManager.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E?,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.Array",
+              "MethodName": "Empty",
+              "MethodId": "System.Array.Empty()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.InvalidOperationException",
+              "MethodName": ".ctor",
+              "MethodId": "System.InvalidOperationException..ctor(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Completions.IChatCompletionsBroker",
+              "MethodName": "PostChatCompletionAsync",
+              "MethodId": "cCoder.AI.Brokers.Completions.IChatCompletionsBroker.PostChatCompletionAsync(System.String,cCoder.AI.Models.Configurations.AICompletionProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Completions.ICodexCliBroker",
+              "MethodName": "CompleteAsync",
+              "MethodId": "cCoder.AI.Brokers.Completions.ICodexCliBroker.CompleteAsync(System.String,cCoder.AI.Models.Configurations.AIProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Services.Foundations.Completions.IAIProviderExecutionLimiter",
+              "MethodName": "AcquireAsync",
+              "MethodId": "cCoder.AI.Services.Foundations.Completions.IAIProviderExecutionLimiter.AcquireAsync(System.String,System.Int32,System.Threading.CancellationToken)",
+              "StandardElementType": "FoundationService",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Threading.CancellationToken)",
+          "Name": "CompleteChatAsync",
+          "LineNumber": 43,
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "model",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "messages",
+              "Type": "System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E"
+            },
+            {
+              "Name": "temperature",
+              "Type": "System.Double?"
+            },
+            {
+              "Name": "enableShellTooling",
+              "Type": "System.Boolean"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [
+            "cCoder.AI.Exposures.ICompletionProviderManager.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+              "MethodName": "CompleteChatAsync",
+              "MethodId": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E?,System.Threading.CancellationToken)",
+              "StandardElementType": "FoundationService",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
       "StandardElementType": "FoundationService",
+      "LineNumber": 14,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Services.Foundations.Models.IModelManagerService",
+          "FullName": "cCoder.AI.Services.Foundations.Models.IModelManagerService",
+          "Name": "IModelManagerService",
+          "Namespace": "cCoder.AI.Services.Foundations.Models",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "FoundationService"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Services.Foundations.Models.ModelManagerService.GetProviderCapabilities(System.String)",
           "Name": "GetProviderCapabilities",
+          "LineNumber": 19,
           "Inputs": [
             {
               "Name": "provider",
               "Type": "System.String"
             }
           ],
-          "ReturnType": "cCoder.AI.Models.Responses.AIProviderCapabilitiesResponse"
+          "ReturnType": "cCoder.AI.Models.Responses.AIProviderCapabilitiesResponse",
+          "Implements": [
+            "cCoder.AI.Exposures.IModelManager.GetProviderCapabilities(System.String)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.Math",
+              "MethodName": "Max",
+              "MethodId": "System.Math.Max(System.Int32,System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Services.Foundations.Models.ModelManagerService.ImportModelAsync(System.String,cCoder.AI.Models.Requests.ModelImportRequest,System.Threading.CancellationToken)",
           "Name": "ImportModelAsync",
+          "LineNumber": 66,
           "Inputs": [
             {
               "Name": "provider",
@@ -1465,10 +3312,44 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ModelImportResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ModelImportResponse\u003E",
+          "Implements": [
+            "cCoder.AI.Exposures.IModelManager.ImportModelAsync(System.String,cCoder.AI.Models.Requests.ModelImportRequest,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.InvalidOperationException",
+              "MethodName": ".ctor",
+              "MethodId": "System.InvalidOperationException..ctor(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Services.Foundations.Models.ModelManagerService.RetrieveAvailableModelsAsync(System.String?,System.Threading.CancellationToken)",
           "Name": "RetrieveAvailableModelsAsync",
+          "LineNumber": 39,
           "Inputs": [
             {
               "Name": "provider",
@@ -1479,17 +3360,71 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Responses.ModelDescriptorResponse\u003E\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Responses.ModelDescriptorResponse\u003E\u003E",
+          "Implements": [
+            "cCoder.AI.Exposures.IModelManager.RetrieveAvailableModelsAsync(System.String?,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.InvalidOperationException",
+              "MethodName": ".ctor",
+              "MethodId": "System.InvalidOperationException..ctor(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+              "MethodName": "GetProviderCapabilities",
+              "MethodId": "cCoder.AI.Services.Foundations.Models.ModelManagerService.GetProviderCapabilities(System.String)",
+              "StandardElementType": "FoundationService",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.InvalidOperationException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
       "StandardElementType": "OrchestrationService",
+      "LineNumber": 18,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Services.Orchestrations.IAgentOrchestrationService",
+          "FullName": "cCoder.AI.Services.Orchestrations.IAgentOrchestrationService",
+          "Name": "IAgentOrchestrationService",
+          "Namespace": "cCoder.AI.Services.Orchestrations",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "OrchestrationService"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService.RunAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
           "Name": "RunAsync",
+          "LineNumber": 26,
           "Inputs": [
             {
               "Name": "request",
@@ -1500,10 +3435,111 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.AgentRunResponse\u003E"
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.AgentRunResponse\u003E",
+          "Implements": [
+            "cCoder.AI.Exposures.IAgentManager.RunAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.Collections.Generic.List\u003CT\u003E",
+              "MethodName": "Add",
+              "MethodId": "System.Collections.Generic.List\u003CT\u003E.Add(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.InvalidOperationException",
+              "MethodName": ".ctor",
+              "MethodId": "System.InvalidOperationException..ctor(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "Equals",
+              "MethodId": "System.String.Equals(System.String?,System.StringComparison)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Threading.CancellationTokenSource",
+              "MethodName": "CancelAfter",
+              "MethodId": "System.Threading.CancellationTokenSource.CancelAfter(System.TimeSpan)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Threading.CancellationTokenSource",
+              "MethodName": "CreateLinkedTokenSource",
+              "MethodId": "System.Threading.CancellationTokenSource.CreateLinkedTokenSource(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.TimeSpan",
+              "MethodName": "FromSeconds",
+              "MethodId": "System.TimeSpan.FromSeconds(System.Int64)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Shells.IShellBroker",
+              "MethodName": "ExecuteAsync",
+              "MethodId": "cCoder.AI.Brokers.Shells.IShellBroker.ExecuteAsync(System.String,System.String?,System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?,cCoder.AI.Models.Enums.ShellKind,System.Threading.CancellationToken)",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Exposures.ICompletionProviderManager",
+              "MethodName": "CompleteChatAsync",
+              "MethodId": "cCoder.AI.Exposures.ICompletionProviderManager.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E?,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Exposures.ICompletionProviderManager",
+              "MethodName": "CompleteChatAsync",
+              "MethodId": "cCoder.AI.Exposures.ICompletionProviderManager.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService.StreamAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
           "Name": "StreamAsync",
+          "LineNumber": 156,
           "Inputs": [
             {
               "Name": "request",
@@ -1514,9 +3550,706 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Collections.Generic.IAsyncEnumerable\u003CcCoder.AI.Models.Responses.AgentStreamTokenResponse\u003E"
+          "ReturnType": "System.Collections.Generic.IAsyncEnumerable\u003CcCoder.AI.Models.Responses.AgentStreamTokenResponse\u003E",
+          "Implements": [
+            "cCoder.AI.Exposures.IAgentManager.StreamAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.Threading.Tasks.Task",
+              "MethodName": "Delay",
+              "MethodId": "System.Threading.Tasks.Task.Delay(System.Int32,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+              "MethodName": "RunAsync",
+              "MethodId": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService.RunAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "OrchestrationService",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [
+            "System.ArgumentException",
+            "System.IO.FileNotFoundException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "IncomingExceptionTypes": [
+            "System.ArgumentException",
+            "System.InvalidOperationException",
+            "System.Net.Http.HttpRequestException"
+          ],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": true
         }
       ]
+    }
+  ],
+  "Interfaces": [
+    {
+      "Name": "cCoder.AI.Brokers.Completions.IChatCompletionsBroker",
+      "StandardElementType": "Broker",
+      "LineNumber": 11,
+      "IsPublic": true,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "cCoder.AI.Brokers.Completions.IChatCompletionsBroker.PostChatCompletionAsync(System.String,cCoder.AI.Models.Configurations.AICompletionProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
+          "Name": "PostChatCompletionAsync",
+          "LineNumber": 13,
+          "Inputs": [
+            {
+              "Name": "providerName",
+              "Type": "System.String"
+            },
+            {
+              "Name": "providerConfiguration",
+              "Type": "cCoder.AI.Models.Configurations.AICompletionProviderConfiguration"
+            },
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.ProviderCompletionRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Brokers.Completions.ICodexCliBroker",
+      "StandardElementType": "Broker",
+      "LineNumber": 11,
+      "IsPublic": true,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "cCoder.AI.Brokers.Completions.ICodexCliBroker.CompleteAsync(System.String,cCoder.AI.Models.Configurations.AIProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
+          "Name": "CompleteAsync",
+          "LineNumber": 13,
+          "Inputs": [
+            {
+              "Name": "providerName",
+              "Type": "System.String"
+            },
+            {
+              "Name": "providerConfiguration",
+              "Type": "cCoder.AI.Models.Configurations.AIProviderConfiguration"
+            },
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.ProviderCompletionRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Brokers.ModelProviders.IModelProviderBroker",
+      "StandardElementType": "Broker",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "cCoder.AI.Brokers.ModelProviders.IModelProviderBroker.GetStringAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Threading.CancellationToken)",
+          "Name": "GetStringAsync",
+          "LineNumber": 11,
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration"
+            },
+            {
+              "Name": "relativePath",
+              "Type": "System.String"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Brokers.ModelProviders.IModelProviderBroker.PostAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Object,System.Threading.CancellationToken)",
+          "Name": "PostAsync",
+          "LineNumber": 16,
+          "Inputs": [
+            {
+              "Name": "configuration",
+              "Type": "cCoder.AI.Models.Configurations.AIModelProviderConfiguration"
+            },
+            {
+              "Name": "relativePath",
+              "Type": "System.String"
+            },
+            {
+              "Name": "payload",
+              "Type": "System.Object"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.String\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Brokers.Shells.IShellBroker",
+      "StandardElementType": "Broker",
+      "LineNumber": 10,
+      "IsPublic": true,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "cCoder.AI.Brokers.Shells.IShellBroker.ExecuteAsync(System.String,System.String?,System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?,cCoder.AI.Models.Enums.ShellKind,System.Threading.CancellationToken)",
+          "Name": "ExecuteAsync",
+          "LineNumber": 12,
+          "Inputs": [
+            {
+              "Name": "command",
+              "Type": "System.String"
+            },
+            {
+              "Name": "workingDirectory",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "environmentVariables",
+              "Type": "System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String, System.String\u003E?"
+            },
+            {
+              "Name": "shellKind",
+              "Type": "cCoder.AI.Models.Enums.ShellKind"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ToolExecutionResponse\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Exposures.IAgentManager",
+      "StandardElementType": "Exposure",
+      "LineNumber": 10,
+      "IsPublic": true,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "cCoder.AI.Exposures.IAgentManager.RunAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
+          "Name": "RunAsync",
+          "LineNumber": 12,
+          "Inputs": [
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.AgentRunRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.AgentRunResponse\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Exposures.IAgentManager.StreamAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
+          "Name": "StreamAsync",
+          "LineNumber": 16,
+          "Inputs": [
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.AgentRunRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Collections.Generic.IAsyncEnumerable\u003CcCoder.AI.Models.Responses.AgentStreamTokenResponse\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Exposures.ICompletionProviderManager",
+      "StandardElementType": "Exposure",
+      "LineNumber": 10,
+      "IsPublic": true,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "cCoder.AI.Exposures.ICompletionProviderManager.CompleteAsync(cCoder.AI.Models.Requests.CompletionRequest,System.Threading.CancellationToken)",
+          "Name": "CompleteAsync",
+          "LineNumber": 12,
+          "Inputs": [
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.CompletionRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Exposures.ICompletionProviderManager.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E?,System.Threading.CancellationToken)",
+          "Name": "CompleteChatAsync",
+          "LineNumber": 24,
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "model",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "messages",
+              "Type": "System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E"
+            },
+            {
+              "Name": "temperature",
+              "Type": "System.Double?"
+            },
+            {
+              "Name": "enableShellTooling",
+              "Type": "System.Boolean"
+            },
+            {
+              "Name": "inputFilePaths",
+              "Type": "System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E?"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "cCoder.AI.Exposures.ICompletionProviderManager",
+              "MethodName": "CompleteChatAsync",
+              "MethodId": "cCoder.AI.Exposures.ICompletionProviderManager.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Threading.CancellationToken)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Exposures.ICompletionProviderManager.CompleteChatAsync(System.String?,System.String?,System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E,System.Double?,System.Boolean,System.Threading.CancellationToken)",
+          "Name": "CompleteChatAsync",
+          "LineNumber": 16,
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "model",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "messages",
+              "Type": "System.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Requests.ChatCompletionMessage\u003E"
+            },
+            {
+              "Name": "temperature",
+              "Type": "System.Double?"
+            },
+            {
+              "Name": "enableShellTooling",
+              "Type": "System.Boolean"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Exposures.IModelManager",
+      "StandardElementType": "Exposure",
+      "LineNumber": 10,
+      "IsPublic": true,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "cCoder.AI.Exposures.IModelManager.GetProviderCapabilities(System.String)",
+          "Name": "GetProviderCapabilities",
+          "LineNumber": 12,
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String"
+            }
+          ],
+          "ReturnType": "cCoder.AI.Models.Responses.AIProviderCapabilitiesResponse",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Exposures.IModelManager.ImportModelAsync(System.String,cCoder.AI.Models.Requests.ModelImportRequest,System.Threading.CancellationToken)",
+          "Name": "ImportModelAsync",
+          "LineNumber": 18,
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String"
+            },
+            {
+              "Name": "request",
+              "Type": "cCoder.AI.Models.Requests.ModelImportRequest"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.ModelImportResponse\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Exposures.IModelManager.RetrieveAvailableModelsAsync(System.String?,System.Threading.CancellationToken)",
+          "Name": "RetrieveAvailableModelsAsync",
+          "LineNumber": 14,
+          "Inputs": [
+            {
+              "Name": "provider",
+              "Type": "System.String?"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.Collections.Generic.IReadOnlyList\u003CcCoder.AI.Models.Responses.ModelDescriptorResponse\u003E\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Services.Foundations.Completions.IAIProviderExecutionLimiter",
+      "StandardElementType": "FoundationService",
+      "LineNumber": 7,
+      "IsPublic": false,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "cCoder.AI.Services.Foundations.Completions.IAIProviderExecutionLimiter.AcquireAsync(System.String,System.Int32,System.Threading.CancellationToken)",
+          "Name": "AcquireAsync",
+          "LineNumber": 9,
+          "Inputs": [
+            {
+              "Name": "providerKey",
+              "Type": "System.String"
+            },
+            {
+              "Name": "maxConcurrency",
+              "Type": "System.Int32"
+            },
+            {
+              "Name": "cancellationToken",
+              "Type": "System.Threading.CancellationToken"
+            }
+          ],
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CSystem.IAsyncDisposable\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
+      "Name": "cCoder.AI.Services.Foundations.Completions.ICompletionProviderService",
+      "StandardElementType": "FoundationService",
+      "LineNumber": 12,
+      "IsPublic": false,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Exposures.ICompletionProviderManager",
+          "FullName": "cCoder.AI.Exposures.ICompletionProviderManager",
+          "Name": "ICompletionProviderManager",
+          "Namespace": "cCoder.AI.Exposures",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Exposure"
+        }
+      ],
+      "Properties": [],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Services.Foundations.Models.IModelManagerService",
+      "StandardElementType": "FoundationService",
+      "LineNumber": 12,
+      "IsPublic": false,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Exposures.IModelManager",
+          "FullName": "cCoder.AI.Exposures.IModelManager",
+          "Name": "IModelManager",
+          "Namespace": "cCoder.AI.Exposures",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Exposure"
+        }
+      ],
+      "Properties": [],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Services.Orchestrations.IAgentOrchestrationService",
+      "StandardElementType": "OrchestrationService",
+      "LineNumber": 12,
+      "IsPublic": false,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "cCoder.AI:cCoder.AI.Exposures.IAgentManager",
+          "FullName": "cCoder.AI.Exposures.IAgentManager",
+          "Name": "IAgentManager",
+          "Namespace": "cCoder.AI.Exposures",
+          "AssemblyName": "cCoder.AI",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Exposure"
+        }
+      ],
+      "Properties": [],
+      "Methods": []
     }
   ],
   "Links": [
@@ -1627,11 +4360,25 @@
       "LineNumber": 14
     },
     {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 23
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
       "LineNumber": 24
+    },
+    {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 36
     },
     {
       "Code": "STX0019",
@@ -1648,6 +4395,20 @@
       "LineNumber": 48
     },
     {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 49
+    },
+    {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 59
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
@@ -1662,11 +4423,32 @@
       "LineNumber": 71
     },
     {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 72
+    },
+    {
       "Code": "STXE002",
       "Description": "An exposure must not contain loops.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
       "LineNumber": 88
+    },
+    {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
+      "LineNumber": 18
+    },
+    {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
+      "LineNumber": 31
     },
     {
       "Code": "STX0019",
@@ -1793,6 +4575,13 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfiguration",
       "LineNumber": 12
+    },
+    {
+      "Code": "STXAPP013",
+      "Description": "Configuration properties must be public, strongly typed, and bindable with get and set accessors.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfiguration",
+      "LineNumber": 13
     },
     {
       "Code": "STXM002",
@@ -2094,6 +4883,13 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIProviderConfiguration",
       "LineNumber": 12
+    },
+    {
+      "Code": "STXSTRUCT002",
+      "Description": "A source file must contain only one top-level class.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
+      "LineNumber": 7
     },
     {
       "Code": "STXM002",

@@ -1,34 +1,207 @@
 {
+  "SchemaVersion": 2,
+  "Project": {
+    "Id": "AI.Web",
+    "Name": "AI.Web",
+    "AssemblyName": "AI.Web"
+  },
   "Classes": [
     {
       "Name": "AI.Web.Controllers.AdminController",
-      "StandardElementType": "Exposure",
+      "StandardElementType": "HttpExposure",
+      "LineNumber": 14,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "AI.Web:Controller",
+        "FullName": "Controller",
+        "Name": "Controller",
+        "Namespace": "\u003Cglobal namespace\u003E",
+        "AssemblyName": "AI.Web",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Dependency"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "AI.Web.Controllers.AdminController.Index(System.Threading.CancellationToken)",
           "Name": "Index",
+          "LineNumber": 20,
           "Inputs": [
             {
               "Name": "cancellationToken",
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E"
+          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "AI.Web.Exposures.IAgentRunHistoryManager",
+              "MethodName": "RetrieveRecent",
+              "MethodId": "AI.Web.Exposures.IAgentRunHistoryManager.RetrieveRecent(System.Int32)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "System.Collections.Generic.List\u003CT\u003E",
+              "MethodName": "Add",
+              "MethodId": "System.Collections.Generic.List\u003CT\u003E.Add(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "OrderBy",
+              "MethodId": "System.Linq.Enumerable.OrderBy(System.Collections.Generic.IEnumerable\u003CTSource\u003E,System.Func\u003CTSource, TKey\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "Select",
+              "MethodId": "System.Linq.Enumerable.Select(System.Collections.Generic.IEnumerable\u003CTSource\u003E,System.Func\u003CTSource, TResult\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "ToList",
+              "MethodId": "System.Linq.Enumerable.ToList(System.Collections.Generic.IEnumerable\u003CTSource\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "cCoder.AI.Exposures.IModelManager",
+              "MethodName": "RetrieveAvailableModelsAsync",
+              "MethodId": "cCoder.AI.Exposures.IModelManager.RetrieveAvailableModelsAsync(System.String?,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": true
         }
       ]
     },
     {
       "Name": "AI.Web.Controllers.HomeController",
-      "StandardElementType": "Exposure",
+      "StandardElementType": "HttpExposure",
+      "LineNumber": 17,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "AI.Web:Controller",
+        "FullName": "Controller",
+        "Name": "Controller",
+        "Namespace": "\u003Cglobal namespace\u003E",
+        "AssemblyName": "AI.Web",
+        "Kind": "Class",
+        "IsInCurrentProject": true,
+        "StandardElementType": "Dependency"
+      },
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "AI.Web.Controllers.HomeController.Index()",
           "Name": "Index",
+          "LineNumber": 31,
           "Inputs": [],
-          "ReturnType": "IActionResult"
+          "ReturnType": "IActionResult",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "Any",
+              "MethodId": "System.Linq.Enumerable.Any(System.Collections.Generic.IEnumerable\u003CTSource\u003E,System.Func\u003CTSource, System.Boolean\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "FirstOrDefault",
+              "MethodId": "System.Linq.Enumerable.FirstOrDefault(System.Collections.Generic.IEnumerable\u003CTSource\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "OrderBy",
+              "MethodId": "System.Linq.Enumerable.OrderBy(System.Collections.Generic.IEnumerable\u003CTSource\u003E,System.Func\u003CTSource, TKey\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "Select",
+              "MethodId": "System.Linq.Enumerable.Select(System.Collections.Generic.IEnumerable\u003CTSource\u003E,System.Func\u003CTSource, TResult\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "ToList",
+              "MethodId": "System.Linq.Enumerable.ToList(System.Collections.Generic.IEnumerable\u003CTSource\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "Where",
+              "MethodId": "System.Linq.Enumerable.Where(System.Collections.Generic.IEnumerable\u003CTSource\u003E,System.Func\u003CTSource, System.Boolean\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "Equals",
+              "MethodId": "System.String.Equals(System.String?,System.StringComparison)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "AI.Web.Controllers.HomeController.StreamConversationAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "StreamConversationAsync",
+          "LineNumber": 66,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -39,17 +212,75 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E"
+          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "AI.Web.Exposures.IAgentRunHistoryManager",
+              "MethodName": "Record",
+              "MethodId": "AI.Web.Exposures.IAgentRunHistoryManager.Record(AI.Web.Models.AgentRunHistoryEntry)",
+              "StandardElementType": "Exposure",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "Equals",
+              "MethodId": "System.String.Equals(System.String?,System.StringComparison)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "IsNullOrWhiteSpace",
+              "MethodId": "System.String.IsNullOrWhiteSpace(System.String?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Text.Json.JsonSerializer",
+              "MethodName": "Serialize",
+              "MethodId": "System.Text.Json.JsonSerializer.Serialize(TValue,System.Text.Json.JsonSerializerOptions?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "cCoder.AI.Exposures.ChatContext",
+              "MethodName": "InferAsStreamAsync",
+              "MethodId": "cCoder.AI.Exposures.ChatContext.InferAsStreamAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [
+            "POST"
+          ],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": true,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "AI.Web.IServiceCollectionExtensions",
       "StandardElementType": "App",
+      "LineNumber": 12,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [],
       "Methods": [
         {
+          "Id": "AI.Web.IServiceCollectionExtensions.AddAIWeb(IServiceCollection,IConfiguration,System.Action\u003CAI.Web.Models.AIWebConfiguration\u003E)",
           "Name": "AddAIWeb",
+          "LineNumber": 14,
           "Inputs": [
             {
               "Name": "services",
@@ -64,13 +295,46 @@
               "Type": "System.Action\u003CAI.Web.Models.AIWebConfiguration\u003E"
             }
           ],
-          "ReturnType": "System.Void"
+          "ReturnType": "System.Void",
+          "Implements": [],
+          "Calls": [
+            {
+              "TypeName": "System.Action\u003CT\u003E",
+              "MethodName": "Invoke",
+              "MethodId": "System.Action\u003CT\u003E.Invoke(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "cCoder.AI.IServiceCollectionExtensions",
+              "MethodName": "AddAIWeb",
+              "MethodId": "cCoder.AI.IServiceCollectionExtensions.AddAIWeb(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action\u003CcCoder.AI.Models.Configurations.AIConfiguration\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "AI.Web.Models.AIProviderOptionViewModel",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "DefaultModel",
@@ -98,6 +362,11 @@
     {
       "Name": "AI.Web.Models.AIWebConfiguration",
       "StandardElementType": "Model",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "AI",
@@ -109,6 +378,11 @@
     {
       "Name": "AI.Web.Models.AIWorkspaceViewModel",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "DefaultMaxIterations",
@@ -136,6 +410,11 @@
     {
       "Name": "AI.Web.Models.AdminDashboardViewModel",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "AgentSettings",
@@ -167,6 +446,11 @@
     {
       "Name": "AI.Web.Models.AgentRunHistoryEntry",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "Duration",
@@ -214,6 +498,11 @@
     {
       "Name": "AI.Web.Models.AgentSettingsViewModel",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "MaxIterations",
@@ -237,6 +526,11 @@
     {
       "Name": "AI.Web.Models.ProviderDiagnosticsViewModel",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "AvailableModels",
@@ -280,6 +574,11 @@
     {
       "Name": "AI.Web.Models.RunHistoryItemViewModel",
       "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
       "Properties": [
         {
           "Name": "DurationMilliseconds",
@@ -327,33 +626,218 @@
     {
       "Name": "AI.Web.Services.Diagnostics.AgentRunHistoryService",
       "StandardElementType": "Unknown",
+      "LineNumber": 10,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "AI.Web:AI.Web.Services.Diagnostics.IAgentRunHistoryService",
+          "FullName": "AI.Web.Services.Diagnostics.IAgentRunHistoryService",
+          "Name": "IAgentRunHistoryService",
+          "Namespace": "AI.Web.Services.Diagnostics",
+          "AssemblyName": "AI.Web",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Unknown"
+        }
+      ],
       "Properties": [],
       "Methods": [
         {
+          "Id": "AI.Web.Services.Diagnostics.AgentRunHistoryService.Record(AI.Web.Models.AgentRunHistoryEntry)",
           "Name": "Record",
+          "LineNumber": 15,
           "Inputs": [
             {
               "Name": "entry",
               "Type": "AI.Web.Models.AgentRunHistoryEntry"
             }
           ],
-          "ReturnType": "System.Void"
+          "ReturnType": "System.Void",
+          "Implements": [
+            "AI.Web.Exposures.IAgentRunHistoryManager.Record(AI.Web.Models.AgentRunHistoryEntry)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.Collections.Concurrent.ConcurrentQueue\u003CT\u003E",
+              "MethodName": "Enqueue",
+              "MethodId": "System.Collections.Concurrent.ConcurrentQueue\u003CT\u003E.Enqueue(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Collections.Concurrent.ConcurrentQueue\u003CT\u003E",
+              "MethodName": "TryDequeue",
+              "MethodId": "System.Collections.Concurrent.ConcurrentQueue\u003CT\u003E.TryDequeue(T)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         },
         {
+          "Id": "AI.Web.Services.Diagnostics.AgentRunHistoryService.RetrieveRecent(System.Int32)",
           "Name": "RetrieveRecent",
+          "LineNumber": 24,
           "Inputs": [
             {
               "Name": "take",
               "Type": "System.Int32"
             }
           ],
-          "ReturnType": "System.Collections.Generic.IReadOnlyList\u003CAI.Web.Models.AgentRunHistoryEntry\u003E"
+          "ReturnType": "System.Collections.Generic.IReadOnlyList\u003CAI.Web.Models.AgentRunHistoryEntry\u003E",
+          "Implements": [
+            "AI.Web.Exposures.IAgentRunHistoryManager.RetrieveRecent(System.Int32)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "Reverse",
+              "MethodId": "System.Linq.Enumerable.Reverse(System.Collections.Generic.IEnumerable\u003CTSource\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "Take",
+              "MethodId": "System.Linq.Enumerable.Take(System.Collections.Generic.IEnumerable\u003CTSource\u003E,System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Linq.Enumerable",
+              "MethodName": "ToList",
+              "MethodId": "System.Linq.Enumerable.ToList(System.Collections.Generic.IEnumerable\u003CTSource\u003E)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.Math",
+              "MethodName": "Max",
+              "MethodId": "System.Math.Max(System.Int32,System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
         }
       ]
     },
     {
       "Name": "Program",
       "StandardElementType": "App",
+      "LineNumber": 28,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": []
+    }
+  ],
+  "Interfaces": [
+    {
+      "Name": "AI.Web.Exposures.IAgentRunHistoryManager",
+      "StandardElementType": "Exposure",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "AI.Web.Exposures.IAgentRunHistoryManager.Record(AI.Web.Models.AgentRunHistoryEntry)",
+          "Name": "Record",
+          "LineNumber": 11,
+          "Inputs": [
+            {
+              "Name": "entry",
+              "Type": "AI.Web.Models.AgentRunHistoryEntry"
+            }
+          ],
+          "ReturnType": "System.Void",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "AI.Web.Exposures.IAgentRunHistoryManager.RetrieveRecent(System.Int32)",
+          "Name": "RetrieveRecent",
+          "LineNumber": 12,
+          "Inputs": [
+            {
+              "Name": "take",
+              "Type": "System.Int32"
+            }
+          ],
+          "ReturnType": "System.Collections.Generic.IReadOnlyList\u003CAI.Web.Models.AgentRunHistoryEntry\u003E",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
+      "Name": "AI.Web.Services.Diagnostics.IAgentRunHistoryService",
+      "StandardElementType": "Unknown",
+      "LineNumber": 9,
+      "IsPublic": false,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "AI.Web:AI.Web.Exposures.IAgentRunHistoryManager",
+          "FullName": "AI.Web.Exposures.IAgentRunHistoryManager",
+          "Name": "IAgentRunHistoryManager",
+          "Namespace": "AI.Web.Exposures",
+          "AssemblyName": "AI.Web",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Exposure"
+        }
+      ],
       "Properties": [],
       "Methods": []
     }
@@ -384,6 +868,13 @@
       "LineNumber": 20
     },
     {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.AdminController",
+      "LineNumber": 20
+    },
+    {
       "Code": "STXFORMAT009",
       "Description": "Every method chained from an invocation result must begin on a new line.",
       "Severity": "Warning",
@@ -400,6 +891,13 @@
     {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 31
+    },
+    {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
       "LineNumber": 31
@@ -438,6 +936,13 @@
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
       "LineNumber": 65
+    },
+    {
+      "Code": "STXAPI005",
+      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 66
     },
     {
       "Code": "STXE002",
