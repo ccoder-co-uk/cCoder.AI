@@ -19,7 +19,9 @@ public class AdminController(
 {
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
-        List<ProviderDiagnosticsViewModel> providers = [];
+        try
+        {
+            List<ProviderDiagnosticsViewModel> providers = [];
 
         foreach ((string key, AIProviderConfiguration providerConfiguration) in aiConfiguration.Providers.OrderBy(keySelector: item => item.Key))
         {
@@ -79,6 +81,11 @@ public class AdminController(
             }).ToList()
         };
 
-        return View(model: viewModel);
+            return View(model: viewModel);
+        }
+        catch (Exception)
+        {
+            return StatusCode(statusCode: 500);
+        }
     }
 }

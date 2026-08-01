@@ -24,12 +24,23 @@ public sealed class AIController(
         [FromBody] CompletionRequest completionRequest,
         CancellationToken cancellationToken)
     {
-        var completionResponse =
-            await completionProviderService.CompleteAsync(
-                request: completionRequest,
-                cancellationToken: cancellationToken);
+        try
+        {
+            var completionResponse =
+                await completionProviderService.CompleteAsync(
+                    request: completionRequest,
+                    cancellationToken: cancellationToken);
 
-        return Ok(value: completionResponse);
+            return Ok(value: completionResponse);
+        }
+        catch (ArgumentException)
+        {
+            return BadRequest(error: "The completion request is invalid.");
+        }
+        catch (Exception)
+        {
+            return StatusCode(statusCode: 500);
+        }
     }
 
     [HttpPost("Agents")]
@@ -37,46 +48,122 @@ public sealed class AIController(
         [FromBody] AgentRunRequest agentRunRequest,
         CancellationToken cancellationToken)
     {
-        var agentRunResponse =
-            await agentOrchestrationService.RunAsync(
-                request: agentRunRequest,
-                cancellationToken: cancellationToken);
+        try
+        {
+            var agentRunResponse =
+                await agentOrchestrationService.RunAsync(
+                    request: agentRunRequest,
+                    cancellationToken: cancellationToken);
 
-        return Ok(value: agentRunResponse);
+            return Ok(value: agentRunResponse);
+        }
+        catch (ArgumentException)
+        {
+            return BadRequest(error: "The agent request is invalid.");
+        }
+        catch (Exception)
+        {
+            return StatusCode(statusCode: 500);
+        }
     }
 
     [HttpPost("Agents/Stream")]
-    public Task StreamAgentsAsync(
+    public async Task<IActionResult> StreamAgentsAsync(
         [FromBody] AgentRunRequest agentRunRequest,
-        CancellationToken cancellationToken) =>
-        WriteStreamAsync(
-            tokens: agentOrchestrationService.StreamAsync(
-                request: agentRunRequest,
-                cancellationToken: cancellationToken),
-            cancellationToken: cancellationToken);
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            await WriteStreamAsync(
+                tokens: agentOrchestrationService.StreamAsync(
+                    request: agentRunRequest,
+                    cancellationToken: cancellationToken),
+                cancellationToken: cancellationToken);
+
+            return Response.HasStarted
+                ? new EmptyResult()
+                : Ok();
+        }
+        catch (ArgumentException)
+        {
+            if (Response.HasStarted)
+            {
+                throw;
+            }
+
+            return BadRequest(error: "The agent stream request is invalid.");
+        }
+        catch (Exception)
+        {
+            if (Response.HasStarted)
+            {
+                throw;
+            }
+
+            return StatusCode(statusCode: 500);
+        }
+    }
 
     [HttpPost("Chat")]
     public async ValueTask<IActionResult> PostChatAsync(
         [FromBody] ChatRequest chatRequest,
         CancellationToken cancellationToken)
     {
-        var chatResponse =
-            await chatContext.InferAsync(
-                chatRequest: chatRequest,
-                cancellationToken: cancellationToken);
+        try
+        {
+            var chatResponse =
+                await chatContext.InferAsync(
+                    chatRequest: chatRequest,
+                    cancellationToken: cancellationToken);
 
-        return Ok(value: chatResponse);
+            return Ok(value: chatResponse);
+        }
+        catch (ArgumentException)
+        {
+            return BadRequest(error: "The chat request is invalid.");
+        }
+        catch (Exception)
+        {
+            return StatusCode(statusCode: 500);
+        }
     }
 
     [HttpPost("Chat/Stream")]
-    public Task StreamChatAsync(
+    public async Task<IActionResult> StreamChatAsync(
         [FromBody] ChatRequest chatRequest,
-        CancellationToken cancellationToken) =>
-        WriteStreamAsync(
-            tokens: chatContext.InferAsStreamAsync(
-                chatRequest: chatRequest,
-                cancellationToken: cancellationToken),
-            cancellationToken: cancellationToken);
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            await WriteStreamAsync(
+                tokens: chatContext.InferAsStreamAsync(
+                    chatRequest: chatRequest,
+                    cancellationToken: cancellationToken),
+                cancellationToken: cancellationToken);
+
+            return Response.HasStarted
+                ? new EmptyResult()
+                : Ok();
+        }
+        catch (ArgumentException)
+        {
+            if (Response.HasStarted)
+            {
+                throw;
+            }
+
+            return BadRequest(error: "The chat stream request is invalid.");
+        }
+        catch (Exception)
+        {
+            if (Response.HasStarted)
+            {
+                throw;
+            }
+
+            return StatusCode(statusCode: 500);
+        }
+    }
 
     private async Task WriteStreamAsync(
         IAsyncEnumerable<Models.Responses.AgentStreamTokenResponse> tokens,

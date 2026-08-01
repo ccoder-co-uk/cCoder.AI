@@ -7,10 +7,13 @@ using FluentAssertions;
 
 namespace AI.AcceptanceTests.Tests;
 
-public sealed partial class HomeControllerTests(AIWebApplicationFactory factory)
-    : IClassFixture<AIWebApplicationFactory>
+public sealed partial class HomeControllerTests
 {
-    private readonly HttpClient client = factory.CreateClient();
+    private readonly AIWebApplicationFactory factory = new();
+    private readonly HttpClient client;
+
+    public HomeControllerTests() =>
+        client = factory.CreateClient();
 
     [Fact]
     public async Task GetHomePage_ShouldRenderAgentConsoleUi()

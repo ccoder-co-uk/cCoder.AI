@@ -24,7 +24,7 @@ public partial class CompletionProviderServiceTests
         AIConfiguration aiConfiguration = new()
         {
             DefaultProvider = "Ollama",
-            Providers = new Dictionary<string, AIProviderConfiguration>(comparer: StringComparer.OrdinalIgnoreCase)
+            Providers = new AIProvidersConfiguration
             {
                 ["Ollama"] = new()
                 {

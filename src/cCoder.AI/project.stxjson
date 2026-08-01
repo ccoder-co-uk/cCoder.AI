@@ -1103,7 +1103,7 @@
         {
           "Id": "cCoder.AI.Exposures.Controllers.AIController.PostAgentsAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
           "Name": "PostAgentsAsync",
-          "LineNumber": 36,
+          "LineNumber": 47,
           "Inputs": [
             {
               "Name": "agentRunRequest",
@@ -1136,11 +1136,7 @@
             "System.InvalidOperationException",
             "System.Net.Http.HttpRequestException"
           ],
-          "ThrowsExceptionTypes": [
-            "System.ArgumentException",
-            "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
-          ],
+          "ThrowsExceptionTypes": [],
           "HttpMethods": [
             "POST"
           ],
@@ -1153,6 +1149,24 @@
               "IsNullPath": false,
               "HasBody": true,
               "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 400,
+              "ResultMethod": "BadRequest",
+              "ExceptionType": "System.ArgumentException",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1160,12 +1174,12 @@
           "HasFromBodyParameter": false,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
-          "HasTryCatch": false
+          "HasTryCatch": true
         },
         {
           "Id": "cCoder.AI.Exposures.Controllers.AIController.PostChatAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "PostChatAsync",
-          "LineNumber": 59,
+          "LineNumber": 108,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -1198,11 +1212,7 @@
             "System.InvalidOperationException",
             "System.Net.Http.HttpRequestException"
           ],
-          "ThrowsExceptionTypes": [
-            "System.ArgumentException",
-            "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
-          ],
+          "ThrowsExceptionTypes": [],
           "HttpMethods": [
             "POST"
           ],
@@ -1215,6 +1225,24 @@
               "IsNullPath": false,
               "HasBody": true,
               "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 400,
+              "ResultMethod": "BadRequest",
+              "ExceptionType": "System.ArgumentException",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1222,7 +1250,7 @@
           "HasFromBodyParameter": false,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
-          "HasTryCatch": false
+          "HasTryCatch": true
         },
         {
           "Id": "cCoder.AI.Exposures.Controllers.AIController.PostCompletionsAsync(cCoder.AI.Models.Requests.CompletionRequest,System.Threading.CancellationToken)",
@@ -1260,11 +1288,7 @@
             "System.InvalidOperationException",
             "System.Net.Http.HttpRequestException"
           ],
-          "ThrowsExceptionTypes": [
-            "System.ArgumentException",
-            "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
-          ],
+          "ThrowsExceptionTypes": [],
           "HttpMethods": [
             "POST"
           ],
@@ -1277,6 +1301,24 @@
               "IsNullPath": false,
               "HasBody": true,
               "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 400,
+              "ResultMethod": "BadRequest",
+              "ExceptionType": "System.ArgumentException",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1284,12 +1326,12 @@
           "HasFromBodyParameter": false,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
-          "HasTryCatch": false
+          "HasTryCatch": true
         },
         {
           "Id": "cCoder.AI.Exposures.Controllers.AIController.StreamAgentsAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
           "Name": "StreamAgentsAsync",
-          "LineNumber": 49,
+          "LineNumber": 71,
           "Inputs": [
             {
               "Name": "agentRunRequest",
@@ -1300,7 +1342,7 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task",
+          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E",
           "Implements": [],
           "Calls": [
             {
@@ -1322,18 +1364,46 @@
           "HttpMethods": [
             "POST"
           ],
-          "HttpResponses": [],
+          "HttpResponses": [
+            {
+              "StatusCode": 200,
+              "ResultMethod": "Ok",
+              "ExceptionType": "",
+              "IsExceptionPath": false,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 400,
+              "ResultMethod": "BadRequest",
+              "ExceptionType": "System.ArgumentException",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
+            }
+          ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
           "HasFromBodyParameter": false,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
-          "HasTryCatch": false
+          "HasTryCatch": true
         },
         {
           "Id": "cCoder.AI.Exposures.Controllers.AIController.StreamChatAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "StreamChatAsync",
-          "LineNumber": 72,
+          "LineNumber": 132,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -1344,7 +1414,7 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task",
+          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E",
           "Implements": [],
           "Calls": [
             {
@@ -1366,13 +1436,41 @@
           "HttpMethods": [
             "POST"
           ],
-          "HttpResponses": [],
+          "HttpResponses": [
+            {
+              "StatusCode": 200,
+              "ResultMethod": "Ok",
+              "ExceptionType": "",
+              "IsExceptionPath": false,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 400,
+              "ResultMethod": "BadRequest",
+              "ExceptionType": "System.ArgumentException",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
+            }
+          ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
           "HasFromBodyParameter": false,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
-          "HasTryCatch": false
+          "HasTryCatch": true
         }
       ]
     },
@@ -1426,9 +1524,7 @@
           "IncomingExceptionTypes": [
             "System.InvalidOperationException"
           ],
-          "ThrowsExceptionTypes": [
-            "System.InvalidOperationException"
-          ],
+          "ThrowsExceptionTypes": [],
           "HttpMethods": [
             "GET"
           ],
@@ -1441,6 +1537,24 @@
               "IsNullPath": false,
               "HasBody": true,
               "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 400,
+              "ResultMethod": "BadRequest",
+              "ExceptionType": "System.ArgumentException",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1448,12 +1562,12 @@
           "HasFromBodyParameter": false,
           "HasKeyParameter": true,
           "HandlesNullWithNotFound": false,
-          "HasTryCatch": false
+          "HasTryCatch": true
         },
         {
           "Id": "cCoder.AI.Exposures.Controllers.ModelController.PostImportModelAsync(System.String,cCoder.AI.Models.Requests.ModelImportRequest,System.Threading.CancellationToken)",
           "Name": "PostImportModelAsync",
-          "LineNumber": 31,
+          "LineNumber": 42,
           "Inputs": [
             {
               "Name": "provider",
@@ -1487,10 +1601,7 @@
             "System.ArgumentException",
             "System.InvalidOperationException"
           ],
-          "ThrowsExceptionTypes": [
-            "System.ArgumentException",
-            "System.InvalidOperationException"
-          ],
+          "ThrowsExceptionTypes": [],
           "HttpMethods": [
             "POST"
           ],
@@ -1503,6 +1614,24 @@
               "IsNullPath": false,
               "HasBody": true,
               "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 400,
+              "ResultMethod": "BadRequest",
+              "ExceptionType": "System.ArgumentException",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1510,7 +1639,7 @@
           "HasFromBodyParameter": false,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
-          "HasTryCatch": false
+          "HasTryCatch": true
         }
       ]
     },
@@ -1731,7 +1860,7 @@
         },
         {
           "Name": "Providers",
-          "Type": "System.Collections.Generic.Dictionary\u003CSystem.String, cCoder.AI.Models.Configurations.AIProviderConfiguration\u003E"
+          "Type": "cCoder.AI.Models.Configurations.AIProvidersConfiguration"
         }
       ],
       "Methods": []
@@ -2107,9 +2236,29 @@
       "Methods": []
     },
     {
+      "Name": "cCoder.AI.Models.Configurations.AIProvidersConfiguration",
+      "StandardElementType": "Dependency",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": {
+        "Id": "System.Private.CoreLib:System.Collections.Generic.Dictionary\u003CSystem.String, cCoder.AI.Models.Configurations.AIProviderConfiguration\u003E",
+        "FullName": "System.Collections.Generic.Dictionary\u003CSystem.String, cCoder.AI.Models.Configurations.AIProviderConfiguration\u003E",
+        "Name": "Dictionary",
+        "Namespace": "System.Collections.Generic",
+        "AssemblyName": "System.Private.CoreLib",
+        "Kind": "Class",
+        "IsInCurrentProject": false,
+        "StandardElementType": "Dependency"
+      },
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": []
+    },
+    {
       "Name": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
       "StandardElementType": "Model",
-      "LineNumber": 42,
+      "LineNumber": 7,
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
@@ -2206,7 +2355,7 @@
     {
       "Name": "cCoder.AI.Models.Configurations.FoundryAIProviderOptions",
       "StandardElementType": "Model",
-      "LineNumber": 36,
+      "LineNumber": 7,
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
@@ -2235,7 +2384,7 @@
     {
       "Name": "cCoder.AI.Models.Configurations.OllamaAIProviderOptions",
       "StandardElementType": "Model",
-      "LineNumber": 20,
+      "LineNumber": 7,
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
@@ -2255,7 +2404,7 @@
     {
       "Name": "cCoder.AI.Models.Configurations.OpenAIProviderOptions",
       "StandardElementType": "Model",
-      "LineNumber": 28,
+      "LineNumber": 7,
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
@@ -2275,7 +2424,7 @@
     {
       "Name": "cCoder.AI.Models.Configurations.PeerLlmProviderOptions",
       "StandardElementType": "Model",
-      "LineNumber": 54,
+      "LineNumber": 7,
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
@@ -4360,13 +4509,6 @@
       "LineNumber": 14
     },
     {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 23
-    },
-    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
@@ -4374,88 +4516,46 @@
       "LineNumber": 24
     },
     {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 36
-    },
-    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 37
-    },
-    {
-      "Code": "STXAPI004",
-      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
       "LineNumber": 48
     },
     {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Code": "STXAPI004",
+      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 49
-    },
-    {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 59
+      "LineNumber": 70
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 60
+      "LineNumber": 109
     },
     {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 71
-    },
-    {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 72
+      "LineNumber": 131
     },
     {
       "Code": "STXE002",
       "Description": "An exposure must not contain loops.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 88
-    },
-    {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
-      "LineNumber": 18
-    },
-    {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
-      "LineNumber": 31
+      "LineNumber": 175
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.ModelController",
-      "LineNumber": 33
+      "LineNumber": 44
     },
     {
       "Code": "STXM002",
@@ -4575,13 +4675,6 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfiguration",
       "LineNumber": 12
-    },
-    {
-      "Code": "STXAPP013",
-      "Description": "Configuration properties must be public, strongly typed, and bindable with get and set accessors.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfiguration",
-      "LineNumber": 13
     },
     {
       "Code": "STXM002",
@@ -4885,13 +4978,6 @@
       "LineNumber": 12
     },
     {
-      "Code": "STXSTRUCT002",
-      "Description": "A source file must contain only one top-level class.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIProviderRegistrationOptions",
-      "LineNumber": 7
-    },
-    {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
@@ -4959,49 +5045,49 @@
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
-      "LineNumber": 44
+      "LineNumber": 9
     },
     {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
-      "LineNumber": 45
+      "LineNumber": 10
     },
     {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
-      "LineNumber": 46
+      "LineNumber": 11
     },
     {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
-      "LineNumber": 47
+      "LineNumber": 12
     },
     {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
-      "LineNumber": 48
+      "LineNumber": 13
     },
     {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
-      "LineNumber": 49
+      "LineNumber": 14
     },
     {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.CodexAIProviderOptions",
-      "LineNumber": 51
+      "LineNumber": 16
     },
     {
       "Code": "STXM002",
@@ -5057,14 +5143,14 @@
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.FoundryAIProviderOptions",
-      "LineNumber": 38
+      "LineNumber": 9
     },
     {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.FoundryAIProviderOptions",
-      "LineNumber": 39
+      "LineNumber": 10
     },
     {
       "Code": "STXM002",

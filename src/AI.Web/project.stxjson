@@ -92,7 +92,17 @@
           "IncomingExceptionTypes": [],
           "ThrowsExceptionTypes": [],
           "HttpMethods": [],
-          "HttpResponses": [],
+          "HttpResponses": [
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
+            }
+          ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
           "HasFromBodyParameter": false,
@@ -190,18 +200,28 @@
           "IncomingExceptionTypes": [],
           "ThrowsExceptionTypes": [],
           "HttpMethods": [],
-          "HttpResponses": [],
+          "HttpResponses": [
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
+            }
+          ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
           "HasFromBodyParameter": false,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
-          "HasTryCatch": false
+          "HasTryCatch": true
         },
         {
           "Id": "AI.Web.Controllers.HomeController.StreamConversationAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "StreamConversationAsync",
-          "LineNumber": 66,
+          "LineNumber": 73,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -257,13 +277,41 @@
           "HttpMethods": [
             "POST"
           ],
-          "HttpResponses": [],
+          "HttpResponses": [
+            {
+              "StatusCode": 200,
+              "ResultMethod": "Ok",
+              "ExceptionType": "",
+              "IsExceptionPath": false,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 400,
+              "ResultMethod": "BadRequest",
+              "ExceptionType": "System.ArgumentException",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": true,
+              "ExposesExceptionDetails": false
+            },
+            {
+              "StatusCode": 500,
+              "ResultMethod": "StatusCode",
+              "ExceptionType": "System.Exception",
+              "IsExceptionPath": true,
+              "IsNullPath": false,
+              "HasBody": false,
+              "ExposesExceptionDetails": false
+            }
+          ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
           "HasFromBodyParameter": false,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
-          "HasTryCatch": false
+          "HasTryCatch": true
         }
       ]
     },
@@ -868,18 +916,11 @@
       "LineNumber": 20
     },
     {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.AdminController",
-      "LineNumber": 20
-    },
-    {
       "Code": "STXFORMAT009",
       "Description": "Every method chained from an invocation result must begin on a new line.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.AdminController",
-      "LineNumber": 79
+      "LineNumber": 81
     },
     {
       "Code": "STXAPI001",
@@ -896,32 +937,18 @@
       "LineNumber": 31
     },
     {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 31
+      "LineNumber": 36
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 34
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 39
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 40
+      "LineNumber": 41
     },
     {
       "Code": "STXFORMAT005",
@@ -931,60 +958,53 @@
       "LineNumber": 42
     },
     {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 44
+    },
+    {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 65
-    },
-    {
-      "Code": "STXAPI005",
-      "Description": "Every public HTTP handler must map success and caught failure paths to 2xx, 4xx, or 5xx responses.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 66
+      "LineNumber": 72
     },
     {
       "Code": "STXE002",
       "Description": "An exposure must not contain loops.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 81
+      "LineNumber": 90
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 122
+      "LineNumber": 131
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 156
+      "LineNumber": 186
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 158
+      "LineNumber": 188
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 159
-    },
-    {
-      "Code": "STXFORMAT001",
-      "Description": "Source files must not contain newline characters after the final code token.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 161
+      "LineNumber": 189
     },
     {
       "Code": "STXM002",
