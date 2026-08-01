@@ -31,6 +31,7 @@ public class HomeController(
     public IActionResult Index()
     {
         IReadOnlyList<AIProviderOptionViewModel> providers = aiConfiguration.Providers
+            .Where(predicate: provider => IsProviderAvailable(provider.Value))
             .OrderBy(keySelector: provider => provider.Key)
             .Select(selector: provider => new AIProviderOptionViewModel
             {
@@ -42,9 +43,16 @@ public class HomeController(
             })
             .ToList();
 
+        string defaultProvider = providers.Any(
+            predicate: provider => provider.Key.Equals(
+                value: aiConfiguration.DefaultProvider,
+                comparisonType: StringComparison.OrdinalIgnoreCase))
+            ? aiConfiguration.DefaultProvider
+            : providers.FirstOrDefault()?.Key ?? string.Empty;
+
         AIWorkspaceViewModel viewModel = new()
         {
-            DefaultProvider = aiConfiguration.DefaultProvider,
+            DefaultProvider = defaultProvider,
             DefaultWorkingDirectory = Environment.CurrentDirectory,
             DefaultMaxIterations = aiConfiguration.Agent.MaxIterations,
             UseCasePrompt = WorkspaceUseCasePrompt,
@@ -89,7 +97,9 @@ public class HomeController(
                 errorMessage = token.Content;
             }
 
-            string serializedToken = JsonSerializer.Serialize(value: token);
+            string serializedToken = JsonSerializer.Serialize(
+                value: token,
+                options: JsonSerializerOptions.Web);
 
             await Response.WriteAsync(
                 text: serializedToken,
@@ -122,16 +132,30 @@ public class HomeController(
 
     private static string BuildProviderDescription(
         AIProviderConfiguration providerConfiguration) =>
-        providerConfiguration.CompletionProvider.Mode switch
+        (providerConfiguration.Name, providerConfiguration.CompletionProvider.Mode) switch
         {
-            AIProviderMode.OllamaApi =>
+            ("PeerLLM", _) =>
+                "PeerLLM hosted inference through the decentralized LLooMA network.",
+            (_, AIProviderMode.OllamaApi) =>
                 "Local Ollama endpoint for private, on-device inference.",
-            AIProviderMode.OpenAICompatible =>
+            (_, AIProviderMode.OpenAICompatible) =>
                 "OpenAI-compatible hosted completion provider.",
-            AIProviderMode.AzureFoundry =>
+            (_, AIProviderMode.AzureFoundry) =>
                 "Azure AI Foundry hosted model deployment.",
-            AIProviderMode.CodexCli =>
+            (_, AIProviderMode.CodexCli) =>
                 "Codex CLI using its configured ChatGPT or API-key session.",
             _ => "Configured AI provider.",
+        };
+
+    private static bool IsProviderAvailable(
+        AIProviderConfiguration providerConfiguration) =>
+        providerConfiguration.CompletionProvider.Mode switch
+        {
+            AIProviderMode.CodexCli => true,
+            AIProviderMode.OllamaApi =>
+                string.IsNullOrWhiteSpace(providerConfiguration.CompletionProvider.Endpoint) is false,
+            _ =>
+                string.IsNullOrWhiteSpace(providerConfiguration.CompletionProvider.Endpoint) is false
+                && string.IsNullOrWhiteSpace(providerConfiguration.CompletionProvider.ApiKey) is false,
         };
 }

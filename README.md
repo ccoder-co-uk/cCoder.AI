@@ -28,6 +28,13 @@ builder.Services.AddAIWeb(ai =>
         provider.MaxConcurrency = 8;
     });
 
+    ai.AddPeerLlm("peer-llm", provider =>
+    {
+        provider.ApiKey = configuration["PEERLLM_API_KEY"];
+        provider.Model = "LLooMA2.0";
+        provider.MaxConcurrency = 8;
+    });
+
     ai.AddFoundry("foundry", provider =>
     {
         provider.Endpoint = configuration["FOUNDRY_COMPLETION_ENDPOINT"];
@@ -89,8 +96,8 @@ The Codex provider runs non-interactive `codex exec` requests in ephemeral, read
 Applications can query `IModelManagerService.GetProviderCapabilities(key)` for the provider's declared concurrency limit and model-listing support, then call `RetrieveAvailableModelsAsync(key)` when listing is supported. This keeps provider/model selection and worker controls capability-driven in consuming applications.
 
 The sample web application exposes every completion provider currently
-implemented by the library: Ollama, OpenAI-compatible, Azure AI Foundry, and
-Codex CLI. Keys and endpoints remain configuration-driven; secrets should be
+implemented by the library: Ollama, OpenAI-compatible, PeerLLM, Azure AI Foundry,
+and Codex CLI. Keys and endpoints remain configuration-driven; secrets should be
 provided through environment variables or another configuration provider.
 
 ## Local configuration
@@ -105,6 +112,8 @@ them through structured user- or machine-level environment variables:
 - `AI__Providers__AzureFoundry__ModelProvider__ApiKey`
 - `AI__Providers__OpenAI__CompletionProvider__ApiKey`
 - `AI__Providers__OpenAI__ModelProvider__ApiKey`
+- `AI__Providers__PeerLLM__CompletionProvider__ApiKey`
+- `AI__Providers__PeerLLM__ModelProvider__ApiKey`
 - `AI__Providers__Codex__CompletionProvider__ApiKey`
 - `AI__Providers__Codex__ModelProvider__ApiKey`
 

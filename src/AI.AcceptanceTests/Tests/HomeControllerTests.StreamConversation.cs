@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------
 
 using System.Net.Http.Json;
+using System.Text.Json;
 using cCoder.AI.Models.Requests;
 using FluentAssertions;
 using cCoder.AI.Models.Responses;
@@ -32,20 +33,33 @@ public sealed partial class HomeControllerTests
         // When
         using HttpResponseMessage response =
             await client.PostAsJsonAsync(
-requestUri: "/Home/StreamConversation",
-value: inputRequest);
+                requestUri: "/Home/StreamConversation",
+                value: inputRequest);
         string content = await response.Content.ReadAsStringAsync();
 
-        IReadOnlyList<AgentStreamTokenResponse> actualTokens = content
-            .Split(separator: '\n', options: StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-            .Select(selector: line => System.Text.Json.JsonSerializer.Deserialize<AgentStreamTokenResponse>(
+        string[] serializedTokens = content.Split(
+            separator: '\n',
+            options: StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+        IReadOnlyList<AgentStreamTokenResponse> actualTokens = serializedTokens
+            .Select(selector: line => JsonSerializer.Deserialize<AgentStreamTokenResponse>(
                 line,
-                new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true }))
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }))
             .Cast<AgentStreamTokenResponse>()
             .ToList();
 
+        using JsonDocument startToken = JsonDocument.Parse(json: serializedTokens[0]);
+        using JsonDocument completeToken = JsonDocument.Parse(json: serializedTokens[^1]);
+
         // Then
         response.IsSuccessStatusCode.Should().BeTrue(because: content);
+        startToken.RootElement.TryGetProperty(propertyName: "type", value: out _).Should().BeTrue();
+        startToken.RootElement.TryGetProperty(propertyName: "Type", value: out _).Should().BeFalse();
+        completeToken.RootElement
+            .GetProperty(propertyName: "completion")
+            .GetProperty(propertyName: "finalMessage")
+            .GetString()
+            .Should().Be(expected: "Workspace response.");
         actualTokens[0].Type.Should().Be(expected: "start");
         actualTokens[^1].Type.Should().Be(expected: "complete");
         actualTokens[^1].Completion!.FinalMessage.Should().Be(expected: "Workspace response.");

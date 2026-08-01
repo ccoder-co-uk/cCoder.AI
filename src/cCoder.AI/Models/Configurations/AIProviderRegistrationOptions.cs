@@ -50,3 +50,12 @@ public sealed class CodexAIProviderOptions : AIProviderRegistrationOptions
     public bool UseOss { get; set; }
     public string LocalProvider { get; set; } = string.Empty;
 }
+
+public sealed class PeerLlmProviderOptions : AIProviderRegistrationOptions
+{
+    public PeerLlmProviderOptions()
+    {
+        Endpoint = "https://api.peerllm.com/v1";
+        Model = "LLooMA2.0";
+    }
+}
