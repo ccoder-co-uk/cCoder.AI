@@ -13,7 +13,6 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO: true
   NUGET_DIRECTORY: ${{ github.workspace }}/artifacts/nuget
-  DOTNET_CLI_DISABLE_PERSISTENT_MSBUILD_SERVER: true
 
 defaults:
   run:
@@ -36,15 +35,15 @@ jobs:
         run: dotnet restore src/cCoder.AI.slnx
 
       - name: Build
-        run: dotnet build src/cCoder.AI.slnx -c Release --no-restore -m:1 /p:BuildInParallel=false /p:UseSharedCompilation=false /p:Version="${{ steps.version.outputs.value }}"
+        run: dotnet build src/cCoder.AI.slnx -c Release --no-restore /p:Version="${{ steps.version.outputs.value }}"
 
       - name: Test
-        run: dotnet test src/cCoder.AI.slnx -c Release --no-build -m:1 /p:BuildInParallel=false /p:UseSharedCompilation=false
+        run: dotnet test src/cCoder.AI.slnx -c Release --no-build
 
       - name: Pack
         run: |
           New-Item -ItemType Directory -Path "${{ env.NUGET_DIRECTORY }}" -Force | Out-Null
-          dotnet pack src/cCoder.AI/cCoder.AI.csproj -c Release --no-build --output "${{ env.NUGET_DIRECTORY }}" -m:1 /p:BuildInParallel=false /p:UseSharedCompilation=false /p:Version="${{ steps.version.outputs.value }}"
+          dotnet pack src/cCoder.AI/cCoder.AI.csproj -c Release --no-build --output "${{ env.NUGET_DIRECTORY }}" /p:Version="${{ steps.version.outputs.value }}"
 
       - name: Upload package artifacts
         uses: actions/upload-artifact@v4
