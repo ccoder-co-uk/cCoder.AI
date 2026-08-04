@@ -47,7 +47,7 @@ providerConfiguration: providerConfiguration,
 request: new ProviderCompletionRequest
 {
     Model = "qwen3.5:4b",
-    Messages = [new ChatCompletionMessage("user", "Return structured JSON.")]
+    Messages = [new ChatCompletionMessage { Role = "user", Content = "Return structured JSON." }]
 });
 
         requestCount.Should().Be(expected: 2);
@@ -84,7 +84,7 @@ providerConfiguration: providerConfiguration,
 request: new ProviderCompletionRequest
 {
     Model = "qwen3.5:4b",
-    Messages = [new ChatCompletionMessage("user", "Return structured JSON.")]
+    Messages = [new ChatCompletionMessage { Role = "user", Content = "Return structured JSON." }]
 });
 
         // Then
@@ -135,7 +135,7 @@ request: new ProviderCompletionRequest
         ProviderCompletionRequest request = new()
         {
             Model = "gpt-oss:20b",
-            Messages = [new ChatCompletionMessage(role: "user", content: "Inspect the helper scripts.")],
+            Messages = [new ChatCompletionMessage { Role = "user", Content = "Inspect the helper scripts." }],
             Temperature = 0.2,
         };
 
@@ -176,7 +176,7 @@ request: request);
         ProviderCompletionRequest request = new()
         {
             Model = "gpt-oss:20b",
-            Messages = [new ChatCompletionMessage(role: "user", content: "Hello.")],
+            Messages = [new ChatCompletionMessage { Role = "user", Content = "Hello." }],
             Temperature = 0.2,
         };
 
@@ -226,7 +226,7 @@ providerConfiguration: providerConfiguration,
 request: new ProviderCompletionRequest
 {
     Model = "test-model",
-    Messages = [new ChatCompletionMessage("user", "Hello.")]
+    Messages = [new ChatCompletionMessage { Role = "user", Content = "Hello." }]
 });
 
         response.Content.Should().Be(expected: "ready");

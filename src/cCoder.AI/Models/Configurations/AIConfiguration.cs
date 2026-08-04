@@ -10,8 +10,8 @@ public class AIConfiguration
 
     public string DefaultProvider { get; set; } = "Ollama";
     public AIAgentConfiguration Agent { get; set; } = new();
-    public AIProvidersConfiguration Providers { get; set; } =
-        new()
+    public Dictionary<string, AIProviderConfiguration> Providers { get; set; } =
+        new(StringComparer.OrdinalIgnoreCase)
         {
             ["Ollama"] = new AIProviderConfiguration
             {

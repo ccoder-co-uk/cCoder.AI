@@ -32,8 +32,8 @@ internal class AgentOrchestrationService(
         int maxIterations = request.MaxIterations ?? aiConfiguration.Agent.MaxIterations;
         List<ChatCompletionMessage> messages =
         [
-            new("system", BuildSystemPrompt(additionalSystemPrompt: request.SystemPrompt)),
-            new("user", request.Instructions),
+            new() { Role = "system", Content = BuildSystemPrompt(additionalSystemPrompt: request.SystemPrompt) },
+            new() { Role = "user", Content = request.Instructions },
         ];
 
         List<AgentIterationResponse> iterationResponses = [];
@@ -70,8 +70,8 @@ internal class AgentOrchestrationService(
                     ResultType = AgentResultType.InvalidDirective,
                 });
 
-                messages.Add(item: new ChatCompletionMessage("assistant", lastCompletionResponse.Content ?? string.Empty));
-                messages.Add(item: new ChatCompletionMessage("user", BuildDirectiveRepairMessage(lastCompletionResponse.Content, parseError)));
+                messages.Add(item: new ChatCompletionMessage { Role = "assistant", Content = lastCompletionResponse.Content ?? string.Empty });
+                messages.Add(item: new ChatCompletionMessage { Role = "user", Content = BuildDirectiveRepairMessage(lastCompletionResponse.Content, parseError) });
 
                 continue;
             }
@@ -138,8 +138,8 @@ cancellationToken: linkedCancellationTokenSource.Token);
                 ToolName = "shell",
             });
 
-            messages.Add(item: new ChatCompletionMessage("assistant", lastCompletionResponse.Content));
-            messages.Add(item: new ChatCompletionMessage("user", BuildToolResultMessage(toolExecutionResponse)));
+            messages.Add(item: new ChatCompletionMessage { Role = "assistant", Content = lastCompletionResponse.Content });
+            messages.Add(item: new ChatCompletionMessage { Role = "user", Content = BuildToolResultMessage(toolExecutionResponse) });
         }
 
         return new AgentRunResponse
@@ -345,6 +345,6 @@ options: JsonSerializerOptions);
 
     private static List<ChatCompletionMessage> CloneMessages(IEnumerable<ChatCompletionMessage> messages) =>
         messages
-            .Select(selector: message => new ChatCompletionMessage(message.Role, message.Content))
+            .Select(selector: message => new ChatCompletionMessage { Role = message.Role, Content = message.Content })
             .ToList();
 }

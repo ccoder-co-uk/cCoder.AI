@@ -1,5 +1,7 @@
 # cCoder.AI
 
+[View the latest main-branch code coverage report](https://ccoder-co-uk.github.io/cCoder.AI/)
+
 `cCoder.AI` is a named-provider inference broker. Applications register every AI endpoint once, then select a provider by its key on each completion or agent request.
 
 ```csharp
