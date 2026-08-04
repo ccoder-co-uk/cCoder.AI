@@ -98,7 +98,7 @@ public class ModelManagerServiceTests
         aiConfiguration: new AIConfiguration
         {
             DefaultProvider = "Ollama",
-            Providers = new AIProvidersConfiguration
+            Providers = new Dictionary<string, AIProviderConfiguration>
             {
                 ["Ollama"] = Provider("Ollama", AIModelProviderMode.OllamaApi, endpoint: "http://ollama", defaultModel: "llama", maxConcurrency: 0),
                 ["Azure"] = Provider("Azure", AIModelProviderMode.AzureFoundryDeployments, endpoint: "http://azure"),
