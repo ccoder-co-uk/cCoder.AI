@@ -13,6 +13,46 @@ namespace cCoder.AI.Tests.Services.Foundations.Completions;
 public partial class CompletionProviderServiceTests
 {
     [Fact]
+    public async Task ShouldRejectEmptyPromptAsync()
+    {
+        // Given
+        CompletionRequest inputRequest = new()
+        {
+            Prompt = " ",
+        };
+
+        // When
+        Func<Task> completeAction = async () =>
+            await completionProviderService.CompleteAsync(request: inputRequest);
+
+        // Then
+        await completeAction.Should().ThrowAsync<ArgumentException>()
+            .WithParameterName("prompt");
+
+        chatCompletionsBrokerMock.VerifyNoOtherCalls();
+        codexCliBrokerMock.VerifyNoOtherCalls();
+    }
+
+    [Fact]
+    public async Task ShouldRejectUnsupportedProviderAsync()
+    {
+        // Given
+        CompletionRequest inputRequest = new()
+        {
+            Provider = "Missing",
+            Prompt = "Hello",
+        };
+
+        // When
+        Func<Task> completeAction = async () =>
+            await completionProviderService.CompleteAsync(request: inputRequest);
+
+        // Then
+        await completeAction.Should().ThrowAsync<InvalidOperationException>()
+            .WithMessage(expectedWildcardPattern: "*Unsupported AI provider 'Missing'.*");
+    }
+
+    [Fact]
     public async Task ShouldUseDefaultProviderForPromptCompletionAsync()
     {
         // Given

@@ -13,6 +13,100 @@ namespace cCoder.AI.Tests.Services.Orchestrations;
 public partial class AgentOrchestrationServiceTests
 {
     [Fact]
+    public async Task ShouldRejectEmptyInstructionsAsync()
+    {
+        // Given
+        AgentRunRequest inputRequest = new()
+        {
+            Instructions = string.Empty,
+        };
+
+        // When
+        Func<Task> runAction = async () =>
+            await agentOrchestrationService.RunAsync(request: inputRequest);
+
+        // Then
+        await runAction.Should().ThrowAsync<ArgumentException>()
+            .WithParameterName("request");
+
+        completionProviderServiceMock.VerifyNoOtherCalls();
+        shellBrokerMock.VerifyNoOtherCalls();
+    }
+
+    [Fact]
+    public async Task ShouldStreamErrorWhenAgentRunFailsAsync()
+    {
+        // Given
+        AgentRunRequest inputRequest = new()
+        {
+            Instructions = "Run an invalid directive.",
+        };
+
+        completionProviderServiceMock
+            .Setup(expression: service => service.CompleteChatAsync(
+                inputRequest.Provider,
+                inputRequest.Model,
+                It.IsAny<IReadOnlyList<ChatCompletionMessage>>(),
+                null,
+                true,
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(value: new CompletionResponse
+            {
+                Content = "{\"type\":\"unsupported\"}",
+            });
+
+        List<AgentStreamTokenResponse> actualTokens = [];
+
+        // When
+        await foreach (AgentStreamTokenResponse token in agentOrchestrationService.StreamAsync(request: inputRequest))
+        {
+            actualTokens.Add(item: token);
+        }
+
+        // Then
+        actualTokens.Should().HaveCount(expected: 2);
+        actualTokens[0].Type.Should().Be(expected: "start");
+        actualTokens[1].Type.Should().Be(expected: "error");
+        actualTokens[1].Content.Should().Contain(expected: "expected a 'final' result or a 'shell' command request");
+    }
+
+    [Fact]
+    public async Task ShouldStopAtConfiguredIterationLimitAsync()
+    {
+        // Given
+        AgentRunRequest inputRequest = new()
+        {
+            Instructions = "Never produce a valid directive.",
+            MaxIterations = 2,
+        };
+
+        completionProviderServiceMock
+            .Setup(expression: service => service.CompleteChatAsync(
+                inputRequest.Provider,
+                inputRequest.Model,
+                It.IsAny<IReadOnlyList<ChatCompletionMessage>>(),
+                null,
+                true,
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(value: new CompletionResponse
+            {
+                Content = "not json",
+                Model = "model",
+                Provider = "provider",
+            });
+
+        // When
+        AgentRunResponse actualResponse = await agentOrchestrationService.RunAsync(request: inputRequest);
+
+        // Then
+        actualResponse.Succeeded.Should().BeFalse();
+        actualResponse.Iterations.Should().Be(expected: 2);
+        actualResponse.IterationResponses.Should().HaveCount(expected: 2);
+        actualResponse.IterationResponses.Should().OnlyContain(
+            predicate: response => response.ResultType == AgentResultType.InvalidDirective);
+    }
+
+    [Fact]
     public async Task ShouldReturnFinalMessageWithoutUsingToolAsync()
     {
         // Given
