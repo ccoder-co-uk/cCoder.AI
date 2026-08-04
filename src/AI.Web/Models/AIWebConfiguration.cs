@@ -8,8 +8,5 @@ namespace AI.Web.Models;
 
 public sealed class AIWebConfiguration
 {
-    public AIWebConfiguration() =>
-        AI = new AIConfiguration();
-
-    public AIConfiguration AI { get; set; }
+    public AIConfiguration AI { get; set; } = new();
 }

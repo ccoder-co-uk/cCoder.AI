@@ -26,10 +26,10 @@ internal class CompletionProviderService(
 
         if (string.IsNullOrWhiteSpace(value: request.SystemPrompt) is false)
         {
-            messages.Add(item: new ChatCompletionMessage("system", request.SystemPrompt));
+            messages.Add(item: new ChatCompletionMessage { Role = "system", Content = request.SystemPrompt });
         }
 
-        messages.Add(item: new ChatCompletionMessage("user", request.Prompt));
+        messages.Add(item: new ChatCompletionMessage { Role = "user", Content = request.Prompt });
 
         return CompleteChatAsync(
 provider: request.Provider,

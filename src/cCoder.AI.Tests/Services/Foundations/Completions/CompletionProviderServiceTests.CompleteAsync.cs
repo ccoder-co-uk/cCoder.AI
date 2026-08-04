@@ -69,8 +69,8 @@ times: Times.Once);
 
         IReadOnlyList<ChatCompletionMessage> inputMessages =
         [
-            new("system", "Be concise."),
-            new("user", "Say hello."),
+            new() { Role = "system", Content = "Be concise." },
+            new() { Role = "user", Content = "Say hello." },
         ];
 
         chatCompletionsBrokerMock

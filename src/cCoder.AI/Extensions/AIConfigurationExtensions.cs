@@ -13,7 +13,10 @@ public static class AIConfigurationExtensions
         string key,
         Action<OllamaAIProviderOptions> configure)
     {
-        OllamaAIProviderOptions options = new();
+        OllamaAIProviderOptions options = new()
+        {
+            Endpoint = "http://localhost:11434",
+        };
         configure?.Invoke(obj: options);
         string baseEndpoint = TrimKnownSuffix(endpoint: options.Endpoint, suffix: "/api/chat");
 
@@ -39,7 +42,10 @@ public static class AIConfigurationExtensions
         string key,
         Action<OpenAIProviderOptions> configure)
     {
-        OpenAIProviderOptions options = new();
+        OpenAIProviderOptions options = new()
+        {
+            Endpoint = "https://api.openai.com/v1",
+        };
         configure?.Invoke(obj: options);
         string baseEndpoint = TrimKnownSuffix(endpoint: options.Endpoint, suffix: "/chat/completions");
 
@@ -65,7 +71,11 @@ public static class AIConfigurationExtensions
         string key,
         Action<PeerLlmProviderOptions> configure)
     {
-        PeerLlmProviderOptions options = new();
+        PeerLlmProviderOptions options = new()
+        {
+            Endpoint = "https://api.peerllm.com/v1",
+            Model = "LLooMA2.0",
+        };
         configure?.Invoke(obj: options);
         string baseEndpoint = TrimKnownSuffix(endpoint: options.Endpoint, suffix: "/chat/completions");
 
