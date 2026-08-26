@@ -38,11 +38,11 @@ internal sealed class CodexCliDependency : Process
         AddArguments(startInfo: startInfo, configuration: configuration, model: request.Model);
         AddInputFiles(startInfo: startInfo, inputFilePaths: request.InputFilePaths);
 
-        StartInfo = startInfo;
+        using Process process = new() { StartInfo = startInfo };
 
         try
         {
-            if (!Start())
+            if (!process.Start())
                 throw new InvalidOperationException(message: $"Codex CLI provider '{providerName}' could not start.");
         }
         catch (Exception exception) when (exception is not InvalidOperationException)
@@ -52,11 +52,11 @@ message: $"Codex CLI provider '{providerName}' could not start executable '{exec
 innerException: exception);
         }
 
-        Task<string> stdoutTask = StandardOutput.ReadToEndAsync(cancellationToken: cancellationToken);
-        Task<string> stderrTask = StandardError.ReadToEndAsync(cancellationToken: cancellationToken);
-        await StandardInput.WriteAsync(value: BuildPrompt(request.Messages));
-        await StandardInput.FlushAsync(cancellationToken: cancellationToken);
-        StandardInput.Close();
+        Task<string> stdoutTask = process.StandardOutput.ReadToEndAsync(cancellationToken: cancellationToken);
+        Task<string> stderrTask = process.StandardError.ReadToEndAsync(cancellationToken: cancellationToken);
+        await process.StandardInput.WriteAsync(value: BuildPrompt(request.Messages));
+        await process.StandardInput.FlushAsync(cancellationToken: cancellationToken);
+        process.StandardInput.Close();
 
         using CancellationTokenSource timeout =
             CancellationTokenSource.CreateLinkedTokenSource(token: cancellationToken);
@@ -65,20 +65,20 @@ innerException: exception);
 
         try
         {
-            await WaitForExitAsync(cancellationToken: timeout.Token);
+            await process.WaitForExitAsync(cancellationToken: timeout.Token);
         }
         catch (OperationCanceledException)
         {
-            TryKill(process: this);
+            TryKill(process: process);
             throw;
         }
 
         string stdout = (await stdoutTask).Trim();
         string stderr = (await stderrTask).Trim();
-        if (ExitCode != 0)
+        if (process.ExitCode != 0)
         {
             throw new InvalidOperationException(
-message: $"Codex CLI provider '{providerName}' exited with code {ExitCode}: {Truncate(stderr, 2000)}");
+message: $"Codex CLI provider '{providerName}' exited with code {process.ExitCode}: {Truncate(stderr, 2000)}");
         }
 
         if (string.IsNullOrWhiteSpace(value: stdout))
@@ -146,6 +146,18 @@ message: $"Codex CLI provider '{providerName}' exited with code {ExitCode}: {Tru
                 throw new FileNotFoundException(
                     message: "An AI input file could not be found.",
                     fileName: fullPath);
+            }
+
+            string extension = Path.GetExtension(path: fullPath).ToLowerInvariant();
+
+            if (extension is not ".png"
+                and not ".jpg"
+                and not ".jpeg"
+                and not ".gif"
+                and not ".webp")
+            {
+                throw new NotSupportedException(
+                    message: $"The Codex CLI provider cannot receive '{extension}' files. Supported inputs are PNG, JPEG, GIF, and WebP images.");
             }
 
             startInfo.ArgumentList.Insert(
