@@ -9,6 +9,7 @@ using System.Text.Json.Nodes;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Models.Responses;
+using cCoder.AI.Models.Internal;
 
 namespace cCoder.AI.Dependencies;
 
@@ -165,7 +166,7 @@ parameter: providerConfiguration.ApiKey);
             Models.Enums.AIProviderMode.OllamaApi => new
             {
                 model = request.Model,
-                messages = request.Messages,
+                messages = BuildOllamaMessages(request: request),
                 stream = false,
                 think = false,
                 tools = request.EnableShellTooling ? BuildOllamaShellTools() : null,
@@ -178,13 +179,122 @@ parameter: providerConfiguration.ApiKey);
             _ => new
             {
                 model = request.Model,
-                messages = request.Messages,
+                messages = BuildOpenAICompatibleMessages(request: request),
                 temperature = request.Temperature,
                 stream = false,
             }
         };
 
         return JsonSerializer.Serialize(value: payload, options: JsonSerializerOptions);
+    }
+
+    private static IReadOnlyList<object> BuildOpenAICompatibleMessages(
+        ProviderCompletionRequest request)
+    {
+        IReadOnlyList<InputFileContent> images = ReadImages(
+            inputFilePaths: request.InputFilePaths,
+            includeDataUrlPrefix: true);
+        int targetIndex = LastUserMessageIndex(messages: request.Messages);
+
+        return request.Messages.Select((message, index) => new
+        {
+            role = message.Role,
+            content = index == targetIndex && images.Count > 0
+                ? (object) BuildOpenAIContent(
+                    text: message.Content,
+                    images: images)
+                : message.Content
+        }).Cast<object>().ToList();
+    }
+
+    private static IReadOnlyList<object> BuildOllamaMessages(
+        ProviderCompletionRequest request)
+    {
+        IReadOnlyList<InputFileContent> images = ReadImages(
+            inputFilePaths: request.InputFilePaths,
+            includeDataUrlPrefix: false);
+        int targetIndex = LastUserMessageIndex(messages: request.Messages);
+
+        return request.Messages.Select((message, index) => new
+        {
+            role = message.Role,
+            content = message.Content,
+            images = index == targetIndex && images.Count > 0
+                ? images.Select(selector: image => image.Content).ToArray()
+                : null
+        }).Cast<object>().ToList();
+    }
+
+    private static IReadOnlyList<object> BuildOpenAIContent(
+        string text,
+        IReadOnlyList<InputFileContent> images)
+    {
+        List<object> content = [new { type = "text", text }];
+        content.AddRange(images.Select(selector: image => (object) new
+        {
+            type = "image_url",
+            image_url = new { url = image.Content }
+        }));
+
+        return content;
+    }
+
+    private static IReadOnlyList<InputFileContent> ReadImages(
+        IReadOnlyList<string> inputFilePaths,
+        bool includeDataUrlPrefix)
+    {
+        List<InputFileContent> images = [];
+
+        foreach (string inputFilePath in inputFilePaths ?? [])
+        {
+            string fullPath = Path.GetFullPath(path: inputFilePath);
+            string mediaType = ResolveImageMediaType(path: fullPath);
+
+            if (!File.Exists(path: fullPath))
+            {
+                throw new FileNotFoundException(
+                    message: "An AI input file could not be found.",
+                    fileName: fullPath);
+            }
+
+            string base64 = Convert.ToBase64String(
+                inArray: File.ReadAllBytes(path: fullPath));
+            images.Add(new InputFileContent
+            {
+                Content = includeDataUrlPrefix
+                    ? $"data:{mediaType};base64,{base64}"
+                    : base64
+            });
+        }
+
+        return images;
+    }
+
+    private static string ResolveImageMediaType(string path) =>
+        Path.GetExtension(path).ToLowerInvariant() switch
+        {
+            ".png" => "image/png",
+            ".jpg" or ".jpeg" => "image/jpeg",
+            ".gif" => "image/gif",
+            ".webp" => "image/webp",
+            _ => throw new NotSupportedException(
+                message: $"The configured chat-completion provider cannot receive '{Path.GetExtension(path)}' files. Supported inputs are PNG, JPEG, GIF, and WebP images.")
+        };
+
+    private static int LastUserMessageIndex(
+        IReadOnlyList<ChatCompletionMessage> messages)
+    {
+        for (int index = messages.Count - 1; index >= 0; index--)
+        {
+            if (messages[index].Role.Equals(
+                value: "user",
+                comparisonType: StringComparison.OrdinalIgnoreCase))
+            {
+                return index;
+            }
+        }
+
+        return -1;
     }
 
     private static object[] BuildOllamaShellTools() =>

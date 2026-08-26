@@ -76,6 +76,14 @@ AgentRunResponse response = await chat.InferAsync(new ChatRequest
 ```
 
 Use `InferAsStreamAsync` for an `IAsyncEnumerable<AgentStreamTokenResponse>`.
+Attached PNG, JPEG, GIF, and WebP files are forwarded using each provider's
+native multimodal contract: OpenAI-compatible and Azure Foundry chat endpoints
+receive `image_url` content, Ollama receives its message `images` array, and
+Codex CLI receives repeated `--image` arguments. The selected model must also
+support vision. Other file types are rejected explicitly; consumers should
+extract their text or use a provider-specific document API rather than silently
+submitting an unsupported attachment.
+
 `AddAIWeb` registers the exposure and the library-owned MVC application part.
 Applications that map controllers consequently receive:
 
