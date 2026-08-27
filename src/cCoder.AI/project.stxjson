@@ -58,19 +58,25 @@
               "TypeName": "cCoder.AI.Dependencies.ChatCompletionsDependency",
               "MethodName": "PostChatCompletionAsync",
               "MethodId": "cCoder.AI.Dependencies.ChatCompletionsDependency.PostChatCompletionAsync(System.String,cCoder.AI.Models.Configurations.AICompletionProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
-              "StandardElementType": "Unknown",
+              "StandardElementType": "Dependency",
               "IsDependencyBoundary": false
             }
           ],
           "PossibleExceptionTypes": [
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
-            "System.Net.Http.HttpRequestException"
+            "System.IO.FileNotFoundException",
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [
-            "System.Net.Http.HttpRequestException"
+            "System.IO.FileNotFoundException",
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "HttpMethods": [],
           "HttpResponses": [],
@@ -141,7 +147,8 @@
           ],
           "PossibleExceptionTypes": [
             "System.IO.FileNotFoundException",
-            "System.InvalidOperationException"
+            "System.InvalidOperationException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.InvalidOperationException"
@@ -208,7 +215,7 @@
               "TypeName": "cCoder.AI.Dependencies.ModelProviderDependency",
               "MethodName": "GetStringAsync",
               "MethodId": "cCoder.AI.Dependencies.ModelProviderDependency.GetStringAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Threading.CancellationToken)",
-              "StandardElementType": "Unknown",
+              "StandardElementType": "Dependency",
               "IsDependencyBoundary": false
             }
           ],
@@ -255,7 +262,7 @@
               "TypeName": "cCoder.AI.Dependencies.ModelProviderDependency",
               "MethodName": "PostAsync",
               "MethodId": "cCoder.AI.Dependencies.ModelProviderDependency.PostAsync(cCoder.AI.Models.Configurations.AIModelProviderConfiguration,System.String,System.Object,System.Threading.CancellationToken)",
-              "StandardElementType": "Unknown",
+              "StandardElementType": "Dependency",
               "IsDependencyBoundary": false
             }
           ],
@@ -355,8 +362,8 @@
     },
     {
       "Name": "cCoder.AI.Dependencies.ChatCompletionsDependency",
-      "StandardElementType": "Unknown",
-      "LineNumber": 15,
+      "StandardElementType": "Dependency",
+      "LineNumber": 16,
       "IsPublic": false,
       "Kind": "Class",
       "BaseType": null,
@@ -366,7 +373,7 @@
         {
           "Id": "cCoder.AI.Dependencies.ChatCompletionsDependency.PostChatCompletionAsync(System.String,cCoder.AI.Models.Configurations.AICompletionProviderConfiguration,cCoder.AI.Models.Requests.ProviderCompletionRequest,System.Threading.CancellationToken)",
           "Name": "PostChatCompletionAsync",
-          "LineNumber": 23,
+          "LineNumber": 24,
           "Inputs": [
             {
               "Name": "providerName",
@@ -453,15 +460,21 @@
             }
           ],
           "PossibleExceptionTypes": [
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [
-            "System.Net.Http.HttpRequestException"
+            "System.IO.FileNotFoundException",
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "HttpMethods": [],
           "HttpResponses": [],
@@ -518,6 +531,13 @@
           "ReturnType": "System.Threading.Tasks.ValueTask\u003CcCoder.AI.Models.Responses.CompletionResponse\u003E",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "System.Diagnostics.Process",
+              "MethodName": ".ctor",
+              "MethodId": "System.Diagnostics.Process..ctor()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
             {
               "TypeName": "System.Diagnostics.Process",
               "MethodName": "Start",
@@ -619,11 +639,13 @@
           ],
           "PossibleExceptionTypes": [
             "System.IO.FileNotFoundException",
-            "System.InvalidOperationException"
+            "System.InvalidOperationException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.IO.FileNotFoundException",
-            "System.InvalidOperationException"
+            "System.InvalidOperationException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [
             "System.InvalidOperationException"
@@ -717,7 +739,7 @@
     },
     {
       "Name": "cCoder.AI.Dependencies.ModelProviderDependency",
-      "StandardElementType": "Unknown",
+      "StandardElementType": "Dependency",
       "LineNumber": 12,
       "IsPublic": false,
       "Kind": "Class",
@@ -1092,7 +1114,8 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [],
           "ThrowsExceptionTypes": [],
@@ -1134,17 +1157,22 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "HttpMethods": [],
           "HttpResponses": [],
@@ -1205,12 +1233,15 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [],
           "HttpMethods": [
@@ -1224,7 +1255,8 @@
               "IsExceptionPath": false,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 400,
@@ -1233,7 +1265,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 500,
@@ -1242,7 +1275,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1281,12 +1315,15 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [],
           "HttpMethods": [
@@ -1300,7 +1337,8 @@
               "IsExceptionPath": false,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 400,
@@ -1309,7 +1347,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 500,
@@ -1318,7 +1357,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1357,12 +1397,15 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [],
           "HttpMethods": [
@@ -1376,7 +1419,8 @@
               "IsExceptionPath": false,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 400,
@@ -1385,7 +1429,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 500,
@@ -1394,7 +1439,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1433,7 +1479,8 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [],
           "ThrowsExceptionTypes": [],
@@ -1448,7 +1495,8 @@
               "IsExceptionPath": false,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 400,
@@ -1457,7 +1505,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 500,
@@ -1466,7 +1515,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1505,7 +1555,8 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [],
           "ThrowsExceptionTypes": [],
@@ -1520,7 +1571,8 @@
               "IsExceptionPath": false,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 400,
@@ -1529,7 +1581,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 500,
@@ -1538,7 +1591,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1612,7 +1666,8 @@
               "IsExceptionPath": false,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 400,
@@ -1621,7 +1676,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 500,
@@ -1630,13 +1686,14 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
           "HasFromBodyParameter": false,
-          "HasKeyParameter": true,
+          "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
           "HasTryCatch": true
         },
@@ -1689,7 +1746,8 @@
               "IsExceptionPath": false,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 400,
@@ -1698,7 +1756,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 500,
@@ -1707,7 +1766,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -1936,7 +1996,7 @@
         },
         {
           "Name": "Providers",
-          "Type": "cCoder.AI.Models.Configurations.AIProvidersConfiguration"
+          "Type": "System.Collections.Generic.Dictionary\u003CSystem.String, cCoder.AI.Models.Configurations.AIProviderConfiguration\u003E"
         }
       ],
       "Methods": []
@@ -1954,7 +2014,7 @@
         {
           "Id": "cCoder.AI.Models.Configurations.AIConfigurationExtensions.AddCodex(cCoder.AI.Models.Configurations.AIConfiguration,System.String,System.Action\u003CcCoder.AI.Models.Configurations.CodexAIProviderOptions\u003E)",
           "Name": "AddCodex",
-          "LineNumber": 114,
+          "LineNumber": 124,
           "Inputs": [
             {
               "Name": "configuration",
@@ -2008,7 +2068,7 @@
         {
           "Id": "cCoder.AI.Models.Configurations.AIConfigurationExtensions.AddFoundry(cCoder.AI.Models.Configurations.AIConfiguration,System.String,System.Action\u003CcCoder.AI.Models.Configurations.FoundryAIProviderOptions\u003E)",
           "Name": "AddFoundry",
-          "LineNumber": 89,
+          "LineNumber": 99,
           "Inputs": [
             {
               "Name": "configuration",
@@ -2102,7 +2162,7 @@
         {
           "Id": "cCoder.AI.Models.Configurations.AIConfigurationExtensions.AddOpenAI(cCoder.AI.Models.Configurations.AIConfiguration,System.String,System.Action\u003CcCoder.AI.Models.Configurations.OpenAIProviderOptions\u003E)",
           "Name": "AddOpenAI",
-          "LineNumber": 37,
+          "LineNumber": 40,
           "Inputs": [
             {
               "Name": "configuration",
@@ -2149,7 +2209,7 @@
         {
           "Id": "cCoder.AI.Models.Configurations.AIConfigurationExtensions.AddPeerLlm(cCoder.AI.Models.Configurations.AIConfiguration,System.String,System.Action\u003CcCoder.AI.Models.Configurations.PeerLlmProviderOptions\u003E)",
           "Name": "AddPeerLlm",
-          "LineNumber": 63,
+          "LineNumber": 69,
           "Inputs": [
             {
               "Name": "configuration",
@@ -2309,26 +2369,6 @@
           "Type": "System.Int32"
         }
       ],
-      "Methods": []
-    },
-    {
-      "Name": "cCoder.AI.Models.Configurations.AIProvidersConfiguration",
-      "StandardElementType": "Dependency",
-      "LineNumber": 7,
-      "IsPublic": true,
-      "Kind": "Class",
-      "BaseType": {
-        "Id": "System.Private.CoreLib:System.Collections.Generic.Dictionary\u003CSystem.String, cCoder.AI.Models.Configurations.AIProviderConfiguration\u003E",
-        "FullName": "System.Collections.Generic.Dictionary\u003CSystem.String, cCoder.AI.Models.Configurations.AIProviderConfiguration\u003E",
-        "Name": "Dictionary",
-        "Namespace": "System.Collections.Generic",
-        "AssemblyName": "System.Private.CoreLib",
-        "Kind": "Class",
-        "IsInCurrentProject": false,
-        "StandardElementType": "Dependency"
-      },
-      "Interfaces": [],
-      "Properties": [],
       "Methods": []
     },
     {
@@ -2544,6 +2584,22 @@
         },
         {
           "Name": "Type",
+          "Type": "System.String"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "cCoder.AI.Models.Internal.InputFileContent",
+      "StandardElementType": "Model",
+      "LineNumber": 7,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [
+        {
+          "Name": "Content",
           "Type": "System.String"
         }
       ],
@@ -3252,17 +3308,22 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "HttpMethods": [],
           "HttpResponses": [],
@@ -3359,17 +3420,22 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "HttpMethods": [],
           "HttpResponses": [],
@@ -3427,17 +3493,22 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "HttpMethods": [],
           "HttpResponses": [],
@@ -3740,17 +3811,22 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "HttpMethods": [],
           "HttpResponses": [],
@@ -3799,12 +3875,15 @@
             "System.ArgumentException",
             "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "IncomingExceptionTypes": [
             "System.ArgumentException",
+            "System.IO.FileNotFoundException",
             "System.InvalidOperationException",
-            "System.Net.Http.HttpRequestException"
+            "System.Net.Http.HttpRequestException",
+            "System.NotSupportedException"
           ],
           "ThrowsExceptionTypes": [],
           "HttpMethods": [],
@@ -4585,11 +4664,53 @@
       "LineNumber": 14
     },
     {
+      "Code": "STXE008",
+      "Description": "An exposure must log a caught exception before rethrowing or wrapping it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXE008",
+      "Description": "An exposure must log a caught exception before rethrowing or wrapping it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXE008",
+      "Description": "An exposure must log a caught exception before rethrowing or wrapping it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXE008",
+      "Description": "An exposure must log a caught exception before rethrowing or wrapping it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 14
+    },
+    {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 23
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
       "LineNumber": 24
+    },
+    {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 47
     },
     {
       "Code": "STX0019",
@@ -4606,6 +4727,20 @@
       "LineNumber": 70
     },
     {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 71
+    },
+    {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 108
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
@@ -4620,11 +4755,32 @@
       "LineNumber": 131
     },
     {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 132
+    },
+    {
       "Code": "STXE002",
       "Description": "An exposure must not contain loops.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
       "LineNumber": 175
+    },
+    {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
+      "LineNumber": 19
+    },
+    {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
+      "LineNumber": 43
     },
     {
       "Code": "STX0019",
@@ -4767,6 +4923,13 @@
       "LineNumber": 13
     },
     {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfiguration",
+      "LineNumber": 36
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
@@ -4774,11 +4937,11 @@
       "LineNumber": 12
     },
     {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 22
+      "LineNumber": 16
     },
     {
       "Code": "STXFORMAT005",
@@ -4802,25 +4965,25 @@
       "LineNumber": 31
     },
     {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 34
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 38
+      "LineNumber": 41
     },
     {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 48
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 51
+      "LineNumber": 45
     },
     {
       "Code": "STXFORMAT005",
@@ -4837,15 +5000,29 @@
       "LineNumber": 57
     },
     {
-      "Code": "STX0019",
-      "Description": "create model parameters must use the new prefix.",
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 64
+      "LineNumber": 60
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 63
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 70
+    },
+    {
+      "Code": "STXFORMAT008",
+      "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 74
@@ -4855,25 +5032,18 @@
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 77
+      "LineNumber": 84
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 80
+      "LineNumber": 87
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 83
-    },
-    {
-      "Code": "STX0019",
-      "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 90
@@ -4883,112 +5053,133 @@
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 99
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 102
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 105
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 108
+      "LineNumber": 93
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 100
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 109
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 112
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 115
+    },
+    {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 118
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 125
     },
     {
       "Code": "STXFORMAT008",
       "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 121
+      "LineNumber": 131
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 147
+      "LineNumber": 157
     },
     {
       "Code": "STXFORMAT002",
       "Description": "Expression-bodied method implementations must start on the line after the =\u003E token.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 166
+      "LineNumber": 176
     },
     {
       "Code": "STXFORMAT002",
       "Description": "Expression-bodied method implementations must start on the line after the =\u003E token.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 185
+      "LineNumber": 195
     },
     {
       "Code": "STXFORMAT007",
       "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 198
+      "LineNumber": 208
     },
     {
       "Code": "STXFORMAT009",
       "Description": "Every method chained from an invocation result must begin on a new line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 211
+      "LineNumber": 221
     },
     {
       "Code": "STXFORMAT008",
       "Description": "Wrapped statements must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 212
+      "LineNumber": 222
     },
     {
       "Code": "STXFORMAT009",
       "Description": "Every method chained from an invocation result must begin on a new line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 219
+      "LineNumber": 229
     },
     {
       "Code": "STXFORMAT003",
       "Description": "Control-flow blocks must be separated from adjacent method statements by an empty line.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 220
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
-      "LineNumber": 227
-    },
-    {
-      "Code": "STXFORMAT007",
-      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
-      "Severity": "Warning",
-      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 230
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 237
+    },
+    {
+      "Code": "STXFORMAT007",
+      "Description": "Control-flow statement bodies must always be enclosed in scope braces.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 240
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 244
     },
     {
       "Code": "STXM002",
@@ -5236,11 +5427,39 @@
       "LineNumber": 10
     },
     {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.OllamaAIProviderOptions",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.OpenAIProviderOptions",
+      "LineNumber": 9
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.PeerLlmProviderOptions",
+      "LineNumber": 9
+    },
+    {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Internal.AgentDirective",
       "LineNumber": 9
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Internal.InputFileContent",
+      "LineNumber": 10
     },
     {
       "Code": "STXM002",
@@ -5268,14 +5487,21 @@
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Requests.ChatCompletionMessage",
-      "LineNumber": 19
+      "LineNumber": 9
     },
     {
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Requests.ChatCompletionMessage",
-      "LineNumber": 20
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Requests.ChatCompletionMessage",
+      "LineNumber": 11
     },
     {
       "Code": "STXM002",
@@ -5524,14 +5750,14 @@
     },
     {
       "Code": "STX0008",
-      "Description": "A service must declare its validations in a Validations partial.",
+      "Description": "A service must declare its validations in AIProviderExecutionLimiter.Validations.cs.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
       "LineNumber": 10
     },
     {
       "Code": "STX0009",
-      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Description": "A service must declare TryCatch handling in AIProviderExecutionLimiter.Exceptions.cs.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
       "LineNumber": 10
@@ -5608,14 +5834,14 @@
     },
     {
       "Code": "STX0008",
-      "Description": "A service must declare its validations in a Validations partial.",
+      "Description": "A service must declare its validations in CompletionProviderService.Validations.cs.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "LineNumber": 12
     },
     {
       "Code": "STX0009",
-      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Description": "A service must declare TryCatch handling in CompletionProviderService.Exceptions.cs.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "LineNumber": 12
@@ -5712,6 +5938,13 @@
       "LineNumber": 71
     },
     {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 144
+    },
+    {
       "Code": "STX0007",
       "Description": "A service public API must use one model contract or primitive types.",
       "Severity": "Warning",
@@ -5720,14 +5953,14 @@
     },
     {
       "Code": "STX0008",
-      "Description": "A service must declare its validations in a Validations partial.",
+      "Description": "A service must declare its validations in ModelManagerService.Validations.cs.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
       "LineNumber": 14
     },
     {
       "Code": "STX0009",
-      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Description": "A service must declare TryCatch handling in ModelManagerService.Exceptions.cs.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
       "LineNumber": 14
@@ -5846,14 +6079,14 @@
     },
     {
       "Code": "STX0008",
-      "Description": "A service must declare its validations in a Validations partial.",
+      "Description": "A service must declare its validations in AgentOrchestrationService.Validations.cs.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
       "LineNumber": 18
     },
     {
       "Code": "STX0009",
-      "Description": "A service must declare TryCatch handling in an Exceptions partial.",
+      "Description": "A service must declare TryCatch handling in AgentOrchestrationService.Exceptions.cs.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
       "LineNumber": 18
@@ -5948,6 +6181,13 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
       "LineNumber": 171
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 350
     }
   ]
 }

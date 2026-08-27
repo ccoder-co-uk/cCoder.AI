@@ -100,7 +100,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -208,7 +209,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -285,7 +287,8 @@
               "IsExceptionPath": false,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 400,
@@ -294,7 +297,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": true,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             },
             {
               "StatusCode": 500,
@@ -303,7 +307,8 @@
               "IsExceptionPath": true,
               "IsNullPath": false,
               "HasBody": false,
-              "ExposesExceptionDetails": false
+              "ExposesExceptionDetails": false,
+              "LogsException": false
             }
           ],
           "IsHttpRequestHandler": true,
@@ -916,6 +921,13 @@
       "LineNumber": 20
     },
     {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.AdminController",
+      "LineNumber": 20
+    },
+    {
       "Code": "STXFORMAT009",
       "Description": "Every method chained from an invocation result must begin on a new line.",
       "Severity": "Warning",
@@ -930,8 +942,29 @@
       "LineNumber": 17
     },
     {
+      "Code": "STXE008",
+      "Description": "An exposure must log a caught exception before rethrowing or wrapping it.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 17
+    },
+    {
+      "Code": "STXE008",
+      "Description": "An exposure must log a caught exception before rethrowing or wrapping it.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 17
+    },
+    {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 31
+    },
+    {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
       "LineNumber": 31
@@ -970,6 +1003,13 @@
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
       "LineNumber": 72
+    },
+    {
+      "Code": "STXAPI006",
+      "Description": "An HTTP failure response must log the caught exception before returning it.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 73
     },
     {
       "Code": "STXE002",
@@ -1032,6 +1072,20 @@
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
       "Type": "AI.Web.Models.AIProviderOptionViewModel",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIWebConfiguration",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AIWebConfiguration",
       "LineNumber": 12
     },
     {
