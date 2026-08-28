@@ -6,7 +6,7 @@ using cCoder.AI.Models.Configurations;
 
 namespace AI.Web.Models;
 
-public sealed class AIWebConfiguration
+public sealed class AppConfiguration
 {
     public AIConfiguration AI { get; set; } = new();
 }

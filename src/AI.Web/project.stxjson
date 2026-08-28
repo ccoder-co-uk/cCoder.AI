@@ -331,8 +331,8 @@
       "Properties": [],
       "Methods": [
         {
-          "Id": "AI.Web.IServiceCollectionExtensions.AddAIWeb(IServiceCollection,IConfiguration,System.Action\u003CAI.Web.Models.AIWebConfiguration\u003E)",
-          "Name": "AddAIWeb",
+          "Id": "AI.Web.IServiceCollectionExtensions.AddWeb(IServiceCollection,IConfiguration,System.Action\u003CAI.Web.Models.AppConfiguration\u003E)",
+          "Name": "AddWeb",
           "LineNumber": 14,
           "Inputs": [
             {
@@ -345,7 +345,7 @@
             },
             {
               "Name": "configure",
-              "Type": "System.Action\u003CAI.Web.Models.AIWebConfiguration\u003E"
+              "Type": "System.Action\u003CAI.Web.Models.AppConfiguration\u003E"
             }
           ],
           "ReturnType": "System.Void",
@@ -408,22 +408,6 @@
         {
           "Name": "SupportsModelListing",
           "Type": "System.Boolean"
-        }
-      ],
-      "Methods": []
-    },
-    {
-      "Name": "AI.Web.Models.AIWebConfiguration",
-      "StandardElementType": "Model",
-      "LineNumber": 9,
-      "IsPublic": true,
-      "Kind": "Class",
-      "BaseType": null,
-      "Interfaces": [],
-      "Properties": [
-        {
-          "Name": "AI",
-          "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
         }
       ],
       "Methods": []
@@ -572,6 +556,22 @@
         {
           "Name": "StreamingChunkDelayMilliseconds",
           "Type": "System.Int32"
+        }
+      ],
+      "Methods": []
+    },
+    {
+      "Name": "AI.Web.Models.AppConfiguration",
+      "StandardElementType": "Model",
+      "LineNumber": 9,
+      "IsPublic": true,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [
+        {
+          "Name": "AI",
+          "Type": "cCoder.AI.Models.Configurations.AIConfiguration"
         }
       ],
       "Methods": []
@@ -1078,20 +1078,6 @@
       "Code": "STXM002",
       "Description": "Model properties must not declare default values.",
       "Severity": "Warning",
-      "Type": "AI.Web.Models.AIWebConfiguration",
-      "LineNumber": 11
-    },
-    {
-      "Code": "STXFORMAT001",
-      "Description": "Source files must not contain newline characters after the final code token.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Models.AIWebConfiguration",
-      "LineNumber": 12
-    },
-    {
-      "Code": "STXM002",
-      "Description": "Model properties must not declare default values.",
-      "Severity": "Warning",
       "Type": "AI.Web.Models.AIWorkspaceViewModel",
       "LineNumber": 9
     },
@@ -1185,6 +1171,13 @@
       "Severity": "Warning",
       "Type": "AI.Web.Models.AgentRunHistoryEntry",
       "LineNumber": 15
+    },
+    {
+      "Code": "STXM002",
+      "Description": "Model properties must not declare default values.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Models.AppConfiguration",
+      "LineNumber": 11
     },
     {
       "Code": "STXM002",
