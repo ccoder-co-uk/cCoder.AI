@@ -115,9 +115,15 @@ provided through environment variables or another configuration provider.
 
 ## Local configuration
 
-The sample application binds an `AIWebConfiguration` root containing the `AI`
-domain section. Keep provider secrets empty in `appsettings.json` and provide
-them through structured user- or machine-level environment variables:
+The sample application binds the complete configuration root to its
+`AppConfiguration`, whose `AI` property contains the AI domain configuration.
+This app has no persistence dependency; applications that combine AI with Data
+domains must register those Data domains explicitly at their own composition
+root. An application consuming `cCoder.Core` should use Core's composite API,
+which deliberately composes its configured child domains recursively.
+
+Keep provider secrets empty in `appsettings.json` and provide them through
+structured user- or machine-level environment variables:
 
 - `AI__Providers__Ollama__CompletionProvider__ApiKey`
 - `AI__Providers__Ollama__ModelProvider__ApiKey`

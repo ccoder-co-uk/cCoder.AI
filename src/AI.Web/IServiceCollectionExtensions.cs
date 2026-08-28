@@ -11,12 +11,12 @@ namespace AI.Web;
 
 public static class IServiceCollectionExtensions
 {
-    public static void AddAIWeb(
+    public static void AddWeb(
         this IServiceCollection services,
         IConfiguration applicationConfiguration,
-        Action<AIWebConfiguration> configure = null)
+        Action<AppConfiguration> configure = null)
     {
-        AIWebConfiguration configuration = new();
+        AppConfiguration configuration = new();
         applicationConfiguration.Bind(configuration);
         configure?.Invoke(configuration);
 

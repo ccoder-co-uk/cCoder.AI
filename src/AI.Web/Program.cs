@@ -6,7 +6,7 @@ using AI.Web;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args: args);
 
-builder.Services.AddAIWeb(builder.Configuration);
+builder.Services.AddWeb(builder.Configuration);
 
 WebApplication app = builder.Build();
 
