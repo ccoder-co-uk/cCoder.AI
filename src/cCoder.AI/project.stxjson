@@ -4574,6 +4574,18 @@
       "ToType": "cCoder.AI.Dependencies.ShellDependency"
     },
     {
+      "FromType": "cCoder.AI.Dependencies.ChatCompletionsDependency",
+      "ToType": "IHttpClientFactory"
+    },
+    {
+      "FromType": "cCoder.AI.Dependencies.ModelProviderDependency",
+      "ToType": "IHttpClientFactory"
+    },
+    {
+      "FromType": "cCoder.AI.Dependencies.ProviderGateDependency",
+      "ToType": "System.Int32"
+    },
+    {
       "FromType": "cCoder.AI.Dependencies.ProviderGateDependency.GateLease",
       "ToType": "cCoder.AI.Dependencies.ProviderGateDependency"
     },

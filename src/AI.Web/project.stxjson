@@ -901,8 +901,24 @@
       "ToType": "AI.Web.Services.Diagnostics.AgentRunHistoryService"
     },
     {
+      "FromType": "AI.Web.Controllers.AdminController",
+      "ToType": "cCoder.AI.Exposures.IModelManager"
+    },
+    {
+      "FromType": "AI.Web.Controllers.AdminController",
+      "ToType": "cCoder.AI.Models.Configurations.AIConfiguration"
+    },
+    {
       "FromType": "AI.Web.Controllers.HomeController",
       "ToType": "AI.Web.Services.Diagnostics.AgentRunHistoryService"
+    },
+    {
+      "FromType": "AI.Web.Controllers.HomeController",
+      "ToType": "cCoder.AI.Exposures.ChatContext"
+    },
+    {
+      "FromType": "AI.Web.Controllers.HomeController",
+      "ToType": "cCoder.AI.Models.Configurations.AIConfiguration"
     }
   ],
   "AnalysisItems": [
