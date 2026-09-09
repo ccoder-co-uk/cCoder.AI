@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------
 
 using System.Text.Json;
+using cCoder.AI.Brokers.Loggings;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Services.Foundations.Completions;
 using cCoder.AI.Services.Orchestrations;
@@ -16,7 +17,8 @@ namespace cCoder.AI.Exposures.Controllers;
 public sealed class AIController(
     ICompletionProviderManager completionProviderService,
     IAgentManager agentOrchestrationService,
-    ChatContext chatContext)
+    ChatContext chatContext,
+    ILoggingBroker loggingBroker)
     : ControllerBase
 {
     [HttpPost("Completions")]
@@ -33,12 +35,16 @@ public sealed class AIController(
 
             return Ok(value: completionResponse);
         }
-        catch (ArgumentException)
+        catch (ArgumentException exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             return BadRequest(error: "The completion request is invalid.");
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             return StatusCode(statusCode: 500);
         }
     }
@@ -57,12 +63,16 @@ public sealed class AIController(
 
             return Ok(value: agentRunResponse);
         }
-        catch (ArgumentException)
+        catch (ArgumentException exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             return BadRequest(error: "The agent request is invalid.");
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             return StatusCode(statusCode: 500);
         }
     }
@@ -84,8 +94,10 @@ public sealed class AIController(
                 ? new EmptyResult()
                 : Ok();
         }
-        catch (ArgumentException)
+        catch (ArgumentException exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             if (Response.HasStarted)
             {
                 throw;
@@ -93,8 +105,10 @@ public sealed class AIController(
 
             return BadRequest(error: "The agent stream request is invalid.");
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             if (Response.HasStarted)
             {
                 throw;
@@ -118,12 +132,16 @@ public sealed class AIController(
 
             return Ok(value: chatResponse);
         }
-        catch (ArgumentException)
+        catch (ArgumentException exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             return BadRequest(error: "The chat request is invalid.");
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             return StatusCode(statusCode: 500);
         }
     }
@@ -145,8 +163,10 @@ public sealed class AIController(
                 ? new EmptyResult()
                 : Ok();
         }
-        catch (ArgumentException)
+        catch (ArgumentException exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             if (Response.HasStarted)
             {
                 throw;
@@ -154,8 +174,10 @@ public sealed class AIController(
 
             return BadRequest(error: "The chat stream request is invalid.");
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+
             if (Response.HasStarted)
             {
                 throw;
