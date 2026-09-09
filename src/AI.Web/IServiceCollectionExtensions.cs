@@ -2,6 +2,7 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using AI.Web.Brokers.Loggings;
 using AI.Web.Models;
 using AI.Web.Exposures;
 using AI.Web.Services.Diagnostics;
@@ -20,6 +21,7 @@ public static class IServiceCollectionExtensions
         applicationConfiguration.Bind(configuration);
         configure?.Invoke(configuration);
 
+        services.AddTransient<ILoggingBroker, LoggingBroker>();
         services.AddFoundations();
         services.AddExposures();
         cCoder.AI.IServiceCollectionExtensions.AddAIWeb(

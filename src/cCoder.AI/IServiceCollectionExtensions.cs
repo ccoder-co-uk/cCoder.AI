@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------
 
 using cCoder.AI.Brokers.Completions;
+using cCoder.AI.Brokers.Loggings;
 using cCoder.AI.Brokers.ModelProviders;
 using cCoder.AI.Brokers.Shells;
 using cCoder.AI.Dependencies;
@@ -60,6 +61,7 @@ public static class IServiceCollectionExtensions
         services.AddTransient<ChatCompletionsDependency>();
         services.AddTransient<CodexCliDependency>();
         services.AddTransient<ShellDependency>();
+        services.AddTransient<ILoggingBroker, LoggingBroker>();
         services.AddTransient<IChatCompletionsBroker, ChatCompletionsBroker>();
         services.AddTransient<ICodexCliBroker, CodexCliBroker>();
 

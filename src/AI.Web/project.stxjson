@@ -7,6 +7,64 @@
   },
   "Classes": [
     {
+      "Name": "AI.Web.Brokers.Loggings.LoggingBroker",
+      "StandardElementType": "Broker",
+      "LineNumber": 7,
+      "IsPublic": false,
+      "Kind": "Class",
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "AI.Web:AI.Web.Brokers.Loggings.ILoggingBroker",
+          "FullName": "AI.Web.Brokers.Loggings.ILoggingBroker",
+          "Name": "ILoggingBroker",
+          "Namespace": "AI.Web.Brokers.Loggings",
+          "AssemblyName": "AI.Web",
+          "Kind": "Interface",
+          "IsInCurrentProject": true,
+          "StandardElementType": "Broker"
+        }
+      ],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "AI.Web.Brokers.Loggings.LoggingBroker.LogError(System.Exception,System.String,System.Object[])",
+          "Name": "LogError",
+          "LineNumber": 9,
+          "Inputs": [
+            {
+              "Name": "exception",
+              "Type": "System.Exception"
+            },
+            {
+              "Name": "message",
+              "Type": "System.String"
+            },
+            {
+              "Name": "args",
+              "Type": "System.Object[]"
+            }
+          ],
+          "ReturnType": "System.Void",
+          "Implements": [
+            "AI.Web.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])"
+          ],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
       "Name": "AI.Web.Controllers.AdminController",
       "StandardElementType": "HttpExposure",
       "LineNumber": 14,
@@ -116,7 +174,7 @@
     {
       "Name": "AI.Web.Controllers.HomeController",
       "StandardElementType": "HttpExposure",
-      "LineNumber": 17,
+      "LineNumber": 18,
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
@@ -135,11 +193,18 @@
         {
           "Id": "AI.Web.Controllers.HomeController.Index()",
           "Name": "Index",
-          "LineNumber": 31,
+          "LineNumber": 33,
           "Inputs": [],
           "ReturnType": "IActionResult",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "AI.Web.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogError",
+              "MethodId": "AI.Web.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
             {
               "TypeName": "System.Linq.Enumerable",
               "MethodName": "Any",
@@ -210,7 +275,7 @@
               "IsNullPath": false,
               "HasBody": false,
               "ExposesExceptionDetails": false,
-              "LogsException": false
+              "LogsException": true
             }
           ],
           "IsHttpRequestHandler": true,
@@ -223,7 +288,7 @@
         {
           "Id": "AI.Web.Controllers.HomeController.StreamConversationAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "StreamConversationAsync",
-          "LineNumber": 73,
+          "LineNumber": 77,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -237,6 +302,13 @@
           "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "AI.Web.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogError",
+              "MethodId": "AI.Web.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
             {
               "TypeName": "AI.Web.Exposures.IAgentRunHistoryManager",
               "MethodName": "Record",
@@ -298,7 +370,7 @@
               "IsNullPath": false,
               "HasBody": true,
               "ExposesExceptionDetails": false,
-              "LogsException": false
+              "LogsException": true
             },
             {
               "StatusCode": 500,
@@ -308,7 +380,7 @@
               "IsNullPath": false,
               "HasBody": false,
               "ExposesExceptionDetails": false,
-              "LogsException": false
+              "LogsException": true
             }
           ],
           "IsHttpRequestHandler": true,
@@ -323,7 +395,7 @@
     {
       "Name": "AI.Web.IServiceCollectionExtensions",
       "StandardElementType": "App",
-      "LineNumber": 12,
+      "LineNumber": 13,
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": null,
@@ -333,7 +405,7 @@
         {
           "Id": "AI.Web.IServiceCollectionExtensions.AddWeb(IServiceCollection,IConfiguration,System.Action\u003CAI.Web.Models.AppConfiguration\u003E)",
           "Name": "AddWeb",
-          "LineNumber": 14,
+          "LineNumber": 15,
           "Inputs": [
             {
               "Name": "services",
@@ -811,6 +883,51 @@
   ],
   "Interfaces": [
     {
+      "Name": "AI.Web.Brokers.Loggings.ILoggingBroker",
+      "StandardElementType": "Broker",
+      "LineNumber": 7,
+      "IsPublic": true,
+      "Kind": "Interface",
+      "BaseType": null,
+      "Interfaces": [],
+      "Properties": [],
+      "Methods": [
+        {
+          "Id": "AI.Web.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
+          "Name": "LogError",
+          "LineNumber": 9,
+          "Inputs": [
+            {
+              "Name": "exception",
+              "Type": "System.Exception"
+            },
+            {
+              "Name": "message",
+              "Type": "System.String"
+            },
+            {
+              "Name": "args",
+              "Type": "System.Object[]"
+            }
+          ],
+          "ReturnType": "System.Void",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        }
+      ]
+    },
+    {
       "Name": "AI.Web.Exposures.IAgentRunHistoryManager",
       "StandardElementType": "Exposure",
       "LineNumber": 9,
@@ -897,6 +1014,10 @@
   ],
   "Links": [
     {
+      "FromType": "AI.Web.Brokers.Loggings.LoggingBroker",
+      "ToType": "ILogger\u003CAI.Web.Brokers.Loggings.LoggingBroker\u003E"
+    },
+    {
       "FromType": "AI.Web.Controllers.AdminController",
       "ToType": "AI.Web.Services.Diagnostics.AgentRunHistoryService"
     },
@@ -907,6 +1028,10 @@
     {
       "FromType": "AI.Web.Controllers.AdminController",
       "ToType": "cCoder.AI.Models.Configurations.AIConfiguration"
+    },
+    {
+      "FromType": "AI.Web.Controllers.HomeController",
+      "ToType": "AI.Web.Brokers.Loggings.LoggingBroker"
     },
     {
       "FromType": "AI.Web.Controllers.HomeController",
@@ -955,56 +1080,28 @@
       "Description": "An API controller must have exactly one business dependency.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 17
-    },
-    {
-      "Code": "STXE008",
-      "Description": "An exposure must log a caught exception before rethrowing or wrapping it.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 17
-    },
-    {
-      "Code": "STXE008",
-      "Description": "An exposure must log a caught exception before rethrowing or wrapping it.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 17
+      "LineNumber": 18
     },
     {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 31
-    },
-    {
-      "Code": "STXAPI006",
-      "Description": "An HTTP failure response must log the caught exception before returning it.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 31
+      "LineNumber": 33
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 36
+      "LineNumber": 38
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 41
-    },
-    {
-      "Code": "STXFORMAT005",
-      "Description": "Method call arguments must declare their parameter names.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 42
+      "LineNumber": 43
     },
     {
       "Code": "STXFORMAT005",
@@ -1014,53 +1111,53 @@
       "LineNumber": 44
     },
     {
+      "Code": "STXFORMAT005",
+      "Description": "Method call arguments must declare their parameter names.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 46
+    },
+    {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 72
-    },
-    {
-      "Code": "STXAPI006",
-      "Description": "An HTTP failure response must log the caught exception before returning it.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 73
+      "LineNumber": 76
     },
     {
       "Code": "STXE002",
       "Description": "An exposure must not contain loops.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 90
+      "LineNumber": 94
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 131
+      "LineNumber": 135
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 186
+      "LineNumber": 194
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 188
+      "LineNumber": 196
     },
     {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 189
+      "LineNumber": 197
     },
     {
       "Code": "STXM002",

@@ -2,6 +2,7 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using AI.Web.Brokers.Loggings;
 using AI.Web.Exposures;
 using AI.Web.Models;
 using AI.Web.Services.Diagnostics;
@@ -17,7 +18,8 @@ namespace AI.Web.Controllers;
 public class HomeController(
     AIConfiguration aiConfiguration,
     ChatContext chatContext,
-    IAgentRunHistoryManager agentRunHistoryService)
+    IAgentRunHistoryManager agentRunHistoryService,
+    ILoggingBroker loggingBroker)
     : Controller
 {
     private const string WorkspaceUseCasePrompt =
@@ -63,8 +65,10 @@ public class HomeController(
 
             return View(model: viewModel);
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "Home controller request failed.");
+
             return StatusCode(statusCode: 500);
         }
     }
@@ -140,8 +144,10 @@ public class HomeController(
                 ? new EmptyResult()
                 : Ok();
         }
-        catch (ArgumentException)
+        catch (ArgumentException exception)
         {
+            loggingBroker.LogError(exception: exception, message: "Home controller request failed.");
+
             if (Response.HasStarted)
             {
                 throw;
@@ -149,8 +155,10 @@ public class HomeController(
 
             return BadRequest(error: "The conversation request is invalid.");
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "Home controller request failed.");
+
             if (Response.HasStarted)
             {
                 throw;

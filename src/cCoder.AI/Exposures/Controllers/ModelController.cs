@@ -2,6 +2,7 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using cCoder.AI.Brokers.Loggings;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Services.Foundations.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,8 @@ namespace cCoder.AI.Exposures.Controllers;
 [Route("Api/AI/Model")]
 [Route("Api/Model")]
 public sealed class ModelController(
-    IModelManager modelManagerService)
+    IModelManager modelManagerService,
+    ILoggingBroker loggingBroker)
     : ControllerBase
 {
     [HttpGet("Providers/{provider}/Available")]
@@ -29,12 +31,16 @@ public sealed class ModelController(
 
             return Ok(value: modelResponses);
         }
-        catch (ArgumentException)
+        catch (ArgumentException exception)
         {
+            loggingBroker.LogError(exception: exception, message: "Model controller request failed.");
+
             return BadRequest(error: "The model provider is invalid.");
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "Model controller request failed.");
+
             return StatusCode(statusCode: 500);
         }
     }
@@ -55,12 +61,16 @@ public sealed class ModelController(
 
             return Ok(value: modelImportResponse);
         }
-        catch (ArgumentException)
+        catch (ArgumentException exception)
         {
+            loggingBroker.LogError(exception: exception, message: "Model controller request failed.");
+
             return BadRequest(error: "The model import request is invalid.");
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "Model controller request failed.");
+
             return StatusCode(statusCode: 500);
         }
     }
