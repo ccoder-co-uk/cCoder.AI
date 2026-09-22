@@ -49,7 +49,15 @@
           "Implements": [
             "AI.Web.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])"
           ],
-          "Calls": [],
+          "Calls": [
+            {
+              "TypeName": "Microsoft.Extensions.Logging.LoggerExtensions",
+              "MethodName": "LogError",
+              "MethodId": "Microsoft.Extensions.Logging.LoggerExtensions.LogError(Microsoft.Extensions.Logging.ILogger,System.Exception?,System.String?,System.Object?[])",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
           "PossibleExceptionTypes": [],
           "IncomingExceptionTypes": [],
           "ThrowsExceptionTypes": [],
@@ -71,13 +79,13 @@
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
-        "Id": "AI.Web:Controller",
-        "FullName": "Controller",
+        "Id": "Microsoft.AspNetCore.Mvc.ViewFeatures:Microsoft.AspNetCore.Mvc.Controller",
+        "FullName": "Microsoft.AspNetCore.Mvc.Controller",
         "Name": "Controller",
-        "Namespace": "\u003Cglobal namespace\u003E",
-        "AssemblyName": "AI.Web",
+        "Namespace": "Microsoft.AspNetCore.Mvc",
+        "AssemblyName": "Microsoft.AspNetCore.Mvc.ViewFeatures",
         "Kind": "Class",
-        "IsInCurrentProject": true,
+        "IsInCurrentProject": false,
         "StandardElementType": "Dependency"
       },
       "Interfaces": [],
@@ -93,7 +101,7 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E",
+          "ReturnType": "System.Threading.Tasks.Task\u003CMicrosoft.AspNetCore.Mvc.IActionResult\u003E",
           "Implements": [],
           "Calls": [
             {
@@ -102,6 +110,20 @@
               "MethodId": "AI.Web.Exposures.IAgentRunHistoryManager.RetrieveRecent(System.Int32)",
               "StandardElementType": "Exposure",
               "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.Controller",
+              "MethodName": "View",
+              "MethodId": "Microsoft.AspNetCore.Mvc.Controller.View(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
             },
             {
               "TypeName": "System.Collections.Generic.List\u003CT\u003E",
@@ -178,13 +200,13 @@
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
-        "Id": "AI.Web:Controller",
-        "FullName": "Controller",
+        "Id": "Microsoft.AspNetCore.Mvc.ViewFeatures:Microsoft.AspNetCore.Mvc.Controller",
+        "FullName": "Microsoft.AspNetCore.Mvc.Controller",
         "Name": "Controller",
-        "Namespace": "\u003Cglobal namespace\u003E",
-        "AssemblyName": "AI.Web",
+        "Namespace": "Microsoft.AspNetCore.Mvc",
+        "AssemblyName": "Microsoft.AspNetCore.Mvc.ViewFeatures",
         "Kind": "Class",
-        "IsInCurrentProject": true,
+        "IsInCurrentProject": false,
         "StandardElementType": "Dependency"
       },
       "Interfaces": [],
@@ -195,7 +217,7 @@
           "Name": "Index",
           "LineNumber": 33,
           "Inputs": [],
-          "ReturnType": "IActionResult",
+          "ReturnType": "Microsoft.AspNetCore.Mvc.IActionResult",
           "Implements": [],
           "Calls": [
             {
@@ -204,6 +226,20 @@
               "MethodId": "AI.Web.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
               "StandardElementType": "Broker",
               "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.Controller",
+              "MethodName": "View",
+              "MethodId": "Microsoft.AspNetCore.Mvc.Controller.View(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
             },
             {
               "TypeName": "System.Linq.Enumerable",
@@ -299,7 +335,7 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E",
+          "ReturnType": "System.Threading.Tasks.Task\u003CMicrosoft.AspNetCore.Mvc.IActionResult\u003E",
           "Implements": [],
           "Calls": [
             {
@@ -315,6 +351,48 @@
               "MethodId": "AI.Web.Exposures.IAgentRunHistoryManager.Record(AI.Web.Models.AgentRunHistoryEntry)",
               "StandardElementType": "Exposure",
               "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Http.HttpResponseWritingExtensions",
+              "MethodName": "WriteAsync",
+              "MethodId": "Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "BadRequest",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "Ok",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.Ok()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.EmptyResult",
+              "MethodName": ".ctor",
+              "MethodId": "Microsoft.AspNetCore.Mvc.EmptyResult..ctor()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.IO.Stream",
+              "MethodName": "FlushAsync",
+              "MethodId": "System.IO.Stream.FlushAsync(System.Threading.CancellationToken)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
             },
             {
               "TypeName": "System.String",
@@ -385,7 +463,7 @@
           ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
-          "HasFromBodyParameter": false,
+          "HasFromBodyParameter": true,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
           "HasTryCatch": true
@@ -403,17 +481,17 @@
       "Properties": [],
       "Methods": [
         {
-          "Id": "AI.Web.IServiceCollectionExtensions.AddWeb(IServiceCollection,IConfiguration,System.Action\u003CAI.Web.Models.AppConfiguration\u003E)",
+          "Id": "AI.Web.IServiceCollectionExtensions.AddWeb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Action\u003CAI.Web.Models.AppConfiguration\u003E)",
           "Name": "AddWeb",
           "LineNumber": 15,
           "Inputs": [
             {
               "Name": "services",
-              "Type": "IServiceCollection"
+              "Type": "Microsoft.Extensions.DependencyInjection.IServiceCollection"
             },
             {
               "Name": "applicationConfiguration",
-              "Type": "IConfiguration"
+              "Type": "Microsoft.Extensions.Configuration.IConfiguration"
             },
             {
               "Name": "configure",
@@ -424,6 +502,20 @@
           "Implements": [],
           "Calls": [
             {
+              "TypeName": "Microsoft.Extensions.Configuration.ConfigurationBinder",
+              "MethodName": "Bind",
+              "MethodId": "Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions",
+              "MethodName": "AddTransient",
+              "MethodId": "Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
               "TypeName": "System.Action\u003CT\u003E",
               "MethodName": "Invoke",
               "MethodId": "System.Action\u003CT\u003E.Invoke(T)",
@@ -433,7 +525,7 @@
             {
               "TypeName": "cCoder.AI.IServiceCollectionExtensions",
               "MethodName": "AddAIWeb",
-              "MethodId": "cCoder.AI.IServiceCollectionExtensions.AddAIWeb(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action\u003CcCoder.AI.Models.Configurations.AIConfiguration\u003E)",
+              "MethodId": "cCoder.AI.IServiceCollectionExtensions.AddAIWeb(Microsoft.Extensions.DependencyInjection.IServiceCollection,cCoder.AI.Models.Configurations.AIConfiguration)",
               "StandardElementType": "Dependency",
               "IsDependencyBoundary": true
             }
@@ -1015,7 +1107,7 @@
   "Links": [
     {
       "FromType": "AI.Web.Brokers.Loggings.LoggingBroker",
-      "ToType": "ILogger\u003CAI.Web.Brokers.Loggings.LoggingBroker\u003E"
+      "ToType": "Microsoft.Extensions.Logging.ILogger\u003CAI.Web.Brokers.Loggings.LoggingBroker\u003E"
     },
     {
       "FromType": "AI.Web.Controllers.AdminController",
@@ -1048,25 +1140,11 @@
   ],
   "AnalysisItems": [
     {
-      "Code": "STXAPI001",
-      "Description": "An API controller must have exactly one business dependency.",
+      "Code": "STX0004",
+      "Description": "An architectural element must not depend on another element at the same layer.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.AdminController",
       "LineNumber": 14
-    },
-    {
-      "Code": "STXAPI004",
-      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.AdminController",
-      "LineNumber": 20
-    },
-    {
-      "Code": "STXAPI006",
-      "Description": "An HTTP failure response must log the caught exception before returning it.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.AdminController",
-      "LineNumber": 20
     },
     {
       "Code": "STXFORMAT009",
@@ -1076,18 +1154,18 @@
       "LineNumber": 81
     },
     {
-      "Code": "STXAPI001",
-      "Description": "An API controller must have exactly one business dependency.",
+      "Code": "STX0004",
+      "Description": "An architectural element must not depend on another element at the same layer.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
       "LineNumber": 18
     },
     {
-      "Code": "STXAPI004",
-      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
+      "Code": "STXE004",
+      "Description": "An exposure must not communicate directly with a broker.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 33
+      "LineNumber": 18
     },
     {
       "Code": "STXFORMAT005",
@@ -1118,13 +1196,6 @@
       "LineNumber": 46
     },
     {
-      "Code": "STXAPI004",
-      "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
-      "Severity": "Warning",
-      "Type": "AI.Web.Controllers.HomeController",
-      "LineNumber": 76
-    },
-    {
       "Code": "STXE002",
       "Description": "An exposure must not contain loops.",
       "Severity": "Warning",
@@ -1132,11 +1203,67 @@
       "LineNumber": 94
     },
     {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.Text.Json.JsonSerializer.Serialize(TValue,System.Text.Json.JsonSerializerOptions?)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 113
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.Text.Json.JsonSerializer.Serialize(TValue,System.Text.Json.JsonSerializerOptions?)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 113
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 117
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 117
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.IO.Stream.FlushAsync(System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 125
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.IO.Stream.FlushAsync(System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 125
+    },
+    {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "AI.Web.Controllers.HomeController",
       "LineNumber": 135
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027Microsoft.AspNetCore.Mvc.EmptyResult..ctor()\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 144
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027Microsoft.AspNetCore.Mvc.EmptyResult..ctor()\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "AI.Web.Controllers.HomeController",
+      "LineNumber": 144
     },
     {
       "Code": "STXFORMAT005",

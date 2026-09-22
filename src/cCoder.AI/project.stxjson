@@ -733,17 +733,19 @@
       "LineNumber": 9,
       "IsPublic": false,
       "Kind": "Class",
-      "BaseType": {
-        "Id": "cCoder.AI:IApiDescriptionProvider",
-        "FullName": "IApiDescriptionProvider",
-        "Name": "IApiDescriptionProvider",
-        "Namespace": "\u003Cglobal namespace\u003E",
-        "AssemblyName": "cCoder.AI",
-        "Kind": "Class",
-        "IsInCurrentProject": true,
-        "StandardElementType": "Dependency"
-      },
-      "Interfaces": [],
+      "BaseType": null,
+      "Interfaces": [
+        {
+          "Id": "Microsoft.AspNetCore.Mvc.Abstractions:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider",
+          "FullName": "Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider",
+          "Name": "IApiDescriptionProvider",
+          "Namespace": "Microsoft.AspNetCore.Mvc.ApiExplorer",
+          "AssemblyName": "Microsoft.AspNetCore.Mvc.Abstractions",
+          "Kind": "Interface",
+          "IsInCurrentProject": false,
+          "StandardElementType": "Dependency"
+        }
+      ],
       "Properties": [
         {
           "Name": "Order",
@@ -752,18 +754,35 @@
       ],
       "Methods": [
         {
-          "Id": "cCoder.AI.Dependencies.LegacyRouteApiDescriptionDependency.OnProvidersExecuted(ApiDescriptionProviderContext)",
+          "Id": "cCoder.AI.Dependencies.LegacyRouteApiDescriptionDependency.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)",
           "Name": "OnProvidersExecuted",
           "LineNumber": 14,
           "Inputs": [
             {
               "Name": "context",
-              "Type": "ApiDescriptionProviderContext"
+              "Type": "Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext"
             }
           ],
           "ReturnType": "System.Void",
-          "Implements": [],
-          "Calls": [],
+          "Implements": [
+            "Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)"
+          ],
+          "Calls": [
+            {
+              "TypeName": "System.Collections.Generic.IList\u003CT\u003E",
+              "MethodName": "RemoveAt",
+              "MethodId": "System.Collections.Generic.IList\u003CT\u003E.RemoveAt(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "System.String",
+              "MethodName": "StartsWith",
+              "MethodId": "System.String.StartsWith(System.String,System.StringComparison)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
           "PossibleExceptionTypes": [],
           "IncomingExceptionTypes": [],
           "ThrowsExceptionTypes": [],
@@ -777,17 +796,19 @@
           "HasTryCatch": false
         },
         {
-          "Id": "cCoder.AI.Dependencies.LegacyRouteApiDescriptionDependency.OnProvidersExecuting(ApiDescriptionProviderContext)",
+          "Id": "cCoder.AI.Dependencies.LegacyRouteApiDescriptionDependency.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)",
           "Name": "OnProvidersExecuting",
           "LineNumber": 33,
           "Inputs": [
             {
               "Name": "context",
-              "Type": "ApiDescriptionProviderContext"
+              "Type": "Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext"
             }
           ],
           "ReturnType": "System.Void",
-          "Implements": [],
+          "Implements": [
+            "Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)"
+          ],
           "Calls": [],
           "PossibleExceptionTypes": [],
           "IncomingExceptionTypes": [],
@@ -1258,13 +1279,13 @@
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
-        "Id": "cCoder.AI:ControllerBase",
-        "FullName": "ControllerBase",
+        "Id": "Microsoft.AspNetCore.Mvc.Core:Microsoft.AspNetCore.Mvc.ControllerBase",
+        "FullName": "Microsoft.AspNetCore.Mvc.ControllerBase",
         "Name": "ControllerBase",
-        "Namespace": "\u003Cglobal namespace\u003E",
-        "AssemblyName": "cCoder.AI",
+        "Namespace": "Microsoft.AspNetCore.Mvc",
+        "AssemblyName": "Microsoft.AspNetCore.Mvc.Core",
         "Kind": "Class",
-        "IsInCurrentProject": true,
+        "IsInCurrentProject": false,
         "StandardElementType": "Dependency"
       },
       "Interfaces": [],
@@ -1284,9 +1305,30 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CMicrosoft.AspNetCore.Mvc.IActionResult\u003E",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "BadRequest",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "Ok",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.Ok(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
             {
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
@@ -1354,7 +1396,7 @@
           ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
-          "HasFromBodyParameter": false,
+          "HasFromBodyParameter": true,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
           "HasTryCatch": true
@@ -1373,9 +1415,30 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CMicrosoft.AspNetCore.Mvc.IActionResult\u003E",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "BadRequest",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "Ok",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.Ok(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
             {
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
@@ -1443,7 +1506,7 @@
           ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
-          "HasFromBodyParameter": false,
+          "HasFromBodyParameter": true,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
           "HasTryCatch": true
@@ -1462,9 +1525,30 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CMicrosoft.AspNetCore.Mvc.IActionResult\u003E",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "BadRequest",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "Ok",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.Ok(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
             {
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
@@ -1532,7 +1616,7 @@
           ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
-          "HasFromBodyParameter": false,
+          "HasFromBodyParameter": true,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
           "HasTryCatch": true
@@ -1551,9 +1635,37 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E",
+          "ReturnType": "System.Threading.Tasks.Task\u003CMicrosoft.AspNetCore.Mvc.IActionResult\u003E",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "BadRequest",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "Ok",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.Ok()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.EmptyResult",
+              "MethodName": ".ctor",
+              "MethodId": "Microsoft.AspNetCore.Mvc.EmptyResult..ctor()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
             {
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
@@ -1615,7 +1727,7 @@
           ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
-          "HasFromBodyParameter": false,
+          "HasFromBodyParameter": true,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
           "HasTryCatch": true
@@ -1634,9 +1746,37 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.Task\u003CIActionResult\u003E",
+          "ReturnType": "System.Threading.Tasks.Task\u003CMicrosoft.AspNetCore.Mvc.IActionResult\u003E",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "BadRequest",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "Ok",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.Ok()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.EmptyResult",
+              "MethodName": ".ctor",
+              "MethodId": "Microsoft.AspNetCore.Mvc.EmptyResult..ctor()",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
             {
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
@@ -1698,7 +1838,7 @@
           ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
-          "HasFromBodyParameter": false,
+          "HasFromBodyParameter": true,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
           "HasTryCatch": true
@@ -1712,13 +1852,13 @@
       "IsPublic": true,
       "Kind": "Class",
       "BaseType": {
-        "Id": "cCoder.AI:ControllerBase",
-        "FullName": "ControllerBase",
+        "Id": "Microsoft.AspNetCore.Mvc.Core:Microsoft.AspNetCore.Mvc.ControllerBase",
+        "FullName": "Microsoft.AspNetCore.Mvc.ControllerBase",
         "Name": "ControllerBase",
-        "Namespace": "\u003Cglobal namespace\u003E",
-        "AssemblyName": "cCoder.AI",
+        "Namespace": "Microsoft.AspNetCore.Mvc",
+        "AssemblyName": "Microsoft.AspNetCore.Mvc.Core",
         "Kind": "Class",
-        "IsInCurrentProject": true,
+        "IsInCurrentProject": false,
         "StandardElementType": "Dependency"
       },
       "Interfaces": [],
@@ -1738,9 +1878,30 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CMicrosoft.AspNetCore.Mvc.IActionResult\u003E",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "BadRequest",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "Ok",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.Ok(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
             {
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
@@ -1823,9 +1984,30 @@
               "Type": "System.Threading.CancellationToken"
             }
           ],
-          "ReturnType": "System.Threading.Tasks.ValueTask\u003CIActionResult\u003E",
+          "ReturnType": "System.Threading.Tasks.ValueTask\u003CMicrosoft.AspNetCore.Mvc.IActionResult\u003E",
           "Implements": [],
           "Calls": [
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "BadRequest",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "Ok",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.Ok(System.Object?)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
+            {
+              "TypeName": "Microsoft.AspNetCore.Mvc.ControllerBase",
+              "MethodName": "StatusCode",
+              "MethodId": "Microsoft.AspNetCore.Mvc.ControllerBase.StatusCode(System.Int32)",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            },
             {
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
@@ -1887,7 +2069,7 @@
           ],
           "IsHttpRequestHandler": true,
           "IsODataControllerAction": false,
-          "HasFromBodyParameter": false,
+          "HasFromBodyParameter": true,
           "HasKeyParameter": false,
           "HandlesNullWithNotFound": false,
           "HasTryCatch": true
@@ -4739,11 +4921,11 @@
     },
     {
       "FromType": "cCoder.AI.Dependencies.ChatCompletionsDependency",
-      "ToType": "IHttpClientFactory"
+      "ToType": "System.Net.Http.IHttpClientFactory"
     },
     {
       "FromType": "cCoder.AI.Dependencies.ModelProviderDependency",
-      "ToType": "IHttpClientFactory"
+      "ToType": "System.Net.Http.IHttpClientFactory"
     },
     {
       "FromType": "cCoder.AI.Dependencies.ProviderGateDependency",
@@ -4820,8 +5002,8 @@
   ],
   "AnalysisItems": [
     {
-      "Code": "STX0019",
-      "Description": "create model parameters must use the new prefix.",
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
       "LineNumber": 18
@@ -4830,8 +5012,141 @@
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 18
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.ChatCompletionsBroker",
+      "LineNumber": 19
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 18
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Completions.CodexCliBroker",
+      "LineNumber": 19
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
       "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
       "LineNumber": 24
+    },
+    {
+      "Code": "STX0019",
+      "Description": "create model parameters must use the new prefix.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.ModelProviders.ModelProviderBroker",
+      "LineNumber": 24
+    },
+    {
+      "Code": "STXD002",
+      "Description": "A dependency must inherit an external type or implement an external interface that the application cannot control.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.ChatCompletionsDependency",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXD007",
+      "Description": "A dependency must not depend on locally defined type \u0027cCoder.AI.Models.Responses.CompletionResponse\u0027.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.ChatCompletionsDependency",
+      "LineNumber": 16
+    },
+    {
+      "Code": "STXD007",
+      "Description": "A dependency must not depend on locally defined type \u0027cCoder.AI.Models.Responses.CompletionResponse\u0027.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.CodexCliDependency",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXD008",
+      "Description": "A dependency that inherits an external base type must override a framework member.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.CodexCliDependency",
+      "LineNumber": 13
+    },
+    {
+      "Code": "STXD002",
+      "Description": "A dependency must inherit an external type or implement an external interface that the application cannot control.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.ModelProviderDependency",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXD007",
+      "Description": "A dependency must not depend on locally defined type \u0027cCoder.AI.Models.Configurations.AIModelProviderConfiguration\u0027.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.ModelProviderDependency",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXD007",
+      "Description": "A dependency must not depend on locally defined type \u0027cCoder.AI.Dependencies.ProviderGateDependency.GateLease\u0027.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.ProviderGateDependency",
+      "LineNumber": 7
+    },
+    {
+      "Code": "STXD008",
+      "Description": "A dependency that inherits an external base type must override a framework member.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.ProviderGateDependency",
+      "LineNumber": 7
+    },
+    {
+      "Code": "STXD007",
+      "Description": "A dependency must not depend on locally defined type \u0027cCoder.AI.Dependencies.ProviderGateDependency\u0027.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.ProviderGateDependency.GateLease",
+      "LineNumber": 21
+    },
+    {
+      "Code": "STXD007",
+      "Description": "A dependency must not depend on locally defined type \u0027cCoder.AI.Models.Responses.ToolExecutionResponse\u0027.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.ShellDependency",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXD008",
+      "Description": "A dependency that inherits an external base type must override a framework member.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Dependencies.ShellDependency",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STX0004",
+      "Description": "An architectural element must not depend on another element at the same layer.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.ChatContext",
+      "LineNumber": 11
+    },
+    {
+      "Code": "STX0004",
+      "Description": "An architectural element must not depend on another element at the same layer.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 15
     },
     {
       "Code": "STXAPI001",
@@ -4843,6 +5158,13 @@
     {
       "Code": "STXAPI002",
       "Description": "An API controller must expose a single model contract.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 15
+    },
+    {
+      "Code": "STXE004",
+      "Description": "An exposure must not communicate directly with a broker.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
       "LineNumber": 15
@@ -4869,6 +5191,20 @@
       "LineNumber": 80
     },
     {
+      "Code": "STXD005",
+      "Description": "External API call \u0027Microsoft.AspNetCore.Mvc.EmptyResult..ctor()\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 94
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027Microsoft.AspNetCore.Mvc.EmptyResult..ctor()\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 94
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
@@ -4883,11 +5219,74 @@
       "LineNumber": 149
     },
     {
+      "Code": "STXD005",
+      "Description": "External API call \u0027Microsoft.AspNetCore.Mvc.EmptyResult..ctor()\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 163
+    },
+    {
       "Code": "STXE002",
       "Description": "An exposure must not contain loops.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
       "LineNumber": 197
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.Text.Json.JsonSerializer.Serialize(TValue,System.Text.Json.JsonSerializerOptions?)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 199
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.Text.Json.JsonSerializer.Serialize(TValue,System.Text.Json.JsonSerializerOptions?)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 199
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 201
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 201
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.IO.Stream.FlushAsync(System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 209
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.IO.Stream.FlushAsync(System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 209
+    },
+    {
+      "Code": "STX0004",
+      "Description": "An architectural element must not depend on another element at the same layer.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXE004",
+      "Description": "An exposure must not communicate directly with a broker.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
+      "LineNumber": 12
     },
     {
       "Code": "STX0019",
@@ -5030,6 +5429,13 @@
       "LineNumber": 36
     },
     {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 12
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
@@ -5070,6 +5476,13 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 34
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 41
     },
     {
       "Code": "STX0019",
@@ -5114,6 +5527,13 @@
       "LineNumber": 63
     },
     {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 70
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
@@ -5156,6 +5576,13 @@
       "LineNumber": 93
     },
     {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 100
+    },
+    {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
@@ -5189,6 +5616,13 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
       "LineNumber": 118
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Models.Configurations.AIConfigurationExtensions",
+      "LineNumber": 125
     },
     {
       "Code": "STX0019",
@@ -5877,6 +6311,13 @@
       "LineNumber": 10
     },
     {
+      "Code": "STXD001",
+      "Description": "Dependency elements and event hubs may only be consumed by brokers or other dependencies.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 10
+    },
+    {
       "Code": "STXEX001",
       "Description": "Every TryCatch overload must classify, wrap, and preserve validation exceptions.",
       "Severity": "Warning",
@@ -5893,6 +6334,13 @@
     {
       "Code": "STXEX003",
       "Description": "Every TryCatch overload must wrap and preserve unclassified exceptions.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
+      "LineNumber": 10
+    },
+    {
+      "Code": "STXF002",
+      "Description": "A foundation service may only depend on brokers or nothing.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.AIProviderExecutionLimiter",
       "LineNumber": 10
@@ -5920,7 +6368,7 @@
     },
     {
       "Code": "STX0004",
-      "Description": "A service must not depend on another service at the same layer.",
+      "Description": "An architectural element must not depend on another element at the same layer.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "LineNumber": 12
@@ -5983,17 +6431,31 @@
     },
     {
       "Code": "STXF002",
-      "Description": "A foundation service may only depend on brokers, exposures, or nothing.",
+      "Description": "A foundation service may only depend on brokers or nothing.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 12
+    },
+    {
+      "Code": "STXF005",
+      "Description": "A foundation service may depend on only one ordinary broker; utility brokers are excluded.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "LineNumber": 12
     },
     {
       "Code": "STX0018",
-      "Description": "Service method names must include each model type they operate on.",
+      "Description": "Service method names must include each full model type they operate on.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "LineNumber": 19
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
+      "LineNumber": 20
     },
     {
       "Code": "STX0005",
@@ -6004,7 +6466,7 @@
     },
     {
       "Code": "STX0018",
-      "Description": "Service method names must include each model type they operate on.",
+      "Description": "Service method names must include each full model type they operate on.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "LineNumber": 43
@@ -6025,7 +6487,7 @@
     },
     {
       "Code": "STX0018",
-      "Description": "Service method names must include each model type they operate on.",
+      "Description": "Service method names must include each full model type they operate on.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Completions.CompletionProviderService",
       "LineNumber": 59
@@ -6137,10 +6599,24 @@
     },
     {
       "Code": "STX0018",
-      "Description": "Service method names must include each model type they operate on.",
+      "Description": "Service method names must include each full model type they operate on.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
       "LineNumber": 66
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 68
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API type \u0027System.Text.Json.Nodes.JsonNode\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 98
     },
     {
       "Code": "STXFORMAT005",
@@ -6150,11 +6626,25 @@
       "LineNumber": 110
     },
     {
+      "Code": "STXD005",
+      "Description": "External API type \u0027System.Text.Json.Nodes.JsonNode\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 124
+    },
+    {
       "Code": "STXFORMAT005",
       "Description": "Method call arguments must declare their parameter names.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
       "LineNumber": 148
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API type \u0027System.Text.Json.Nodes.JsonNode\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Foundations.Models.ModelManagerService",
+      "LineNumber": 162
     },
     {
       "Code": "STXFORMAT008",
@@ -6234,11 +6724,25 @@
       "LineNumber": 18
     },
     {
+      "Code": "STXD005",
+      "Description": "External API type \u0027System.Text.Json.JsonSerializerOptions\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 24
+    },
+    {
       "Code": "STX0018",
-      "Description": "Service method names must include each model type they operate on.",
+      "Description": "Service method names must include each full model type they operate on.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
       "LineNumber": 26
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 27
     },
     {
       "Code": "STXFORMAT008",
@@ -6270,10 +6774,17 @@
     },
     {
       "Code": "STX0018",
-      "Description": "Service method names must include each model type they operate on.",
+      "Description": "Service method names must include each full model type they operate on.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
       "LineNumber": 156
+    },
+    {
+      "Code": "STX0017",
+      "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 157
     },
     {
       "Code": "STX0005",
@@ -6281,6 +6792,27 @@
       "Severity": "Warning",
       "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
       "LineNumber": 171
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.Text.Json.JsonSerializer.Deserialize(System.String,System.Text.Json.JsonSerializerOptions?)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 295
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API call \u0027System.Text.Json.JsonSerializer.Deserialize(System.String,System.Text.Json.JsonSerializerOptions?)\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 295
+    },
+    {
+      "Code": "STXD005",
+      "Description": "External API type \u0027System.Text.Json.JsonException\u0027 must be isolated behind a broker or dependency.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Services.Orchestrations.AgentOrchestrationService",
+      "LineNumber": 314
     },
     {
       "Code": "STXFORMAT001",
