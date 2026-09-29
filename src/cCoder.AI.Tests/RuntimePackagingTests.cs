@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System.IO;
+using Xunit;
 using cCoder.AI.Exposures;
 using FluentAssertions;
 

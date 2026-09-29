@@ -2,6 +2,9 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using Xunit;
 using AI.Web.Brokers.Loggings;
 using AI.Web.Controllers;
 using cCoder.AI.Models.Configurations;

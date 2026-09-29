@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using Xunit;
 using cCoder.AI.Brokers.Completions;
 using cCoder.AI.Brokers.ModelProviders;
 using cCoder.AI.Brokers.Shells;

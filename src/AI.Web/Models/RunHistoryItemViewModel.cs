@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+
 namespace AI.Web.Models;
 
 public class RunHistoryItemViewModel

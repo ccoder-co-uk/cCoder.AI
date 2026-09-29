@@ -2,6 +2,11 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.IO;
+using Xunit;
 using System.Net.Http.Json;
 using cCoder.AI.Models.Enums;
 using cCoder.AI.Models.Requests;

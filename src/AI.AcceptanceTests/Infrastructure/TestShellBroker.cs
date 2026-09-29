@@ -2,6 +2,10 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using cCoder.AI.Brokers.Shells;
 using cCoder.AI.Models.Enums;

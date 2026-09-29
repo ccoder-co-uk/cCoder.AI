@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using Xunit;
 using FluentAssertions;
 
 namespace AI.AcceptanceTests.Tests;

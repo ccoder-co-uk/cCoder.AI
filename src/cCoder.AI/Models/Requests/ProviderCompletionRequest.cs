@@ -2,6 +2,9 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace cCoder.AI.Models.Requests;
 
 public class ProviderCompletionRequest

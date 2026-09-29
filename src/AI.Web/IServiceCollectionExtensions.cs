@@ -2,6 +2,9 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using AI.Web.Brokers.Loggings;
 using AI.Web.Models;
 using AI.Web.Exposures;

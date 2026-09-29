@@ -2,6 +2,10 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using cCoder.AI.Exposures;
 using System.Collections.Concurrent;
 using cCoder.AI.Models.Requests;
@@ -12,6 +16,7 @@ namespace AI.AcceptanceTests.Infrastructure;
 public sealed class TestCompletionProviderService : ICompletionProviderManager
 {
     private readonly ConcurrentQueue<CompletionResponse> completionResponses = new();
+    private Exception? exception;
 
     public List<CompletionRequest> CompletionRequests { get; } = [];
     public List<(string? Provider, string? Model, IReadOnlyList<ChatCompletionMessage> Messages)> ChatRequests { get; } = [];
@@ -20,6 +25,7 @@ public sealed class TestCompletionProviderService : ICompletionProviderManager
     {
         CompletionRequests.Clear();
         ChatRequests.Clear();
+        exception = null;
 
         while (completionResponses.TryDequeue(result: out _))
         {
@@ -29,11 +35,20 @@ public sealed class TestCompletionProviderService : ICompletionProviderManager
     public void EnqueueResponse(CompletionResponse completionResponse) =>
         completionResponses.Enqueue(item: completionResponse);
 
+    public void FailWith(Exception expectedException) =>
+        exception = expectedException;
+
     public ValueTask<CompletionResponse> CompleteAsync(
         CompletionRequest request,
         CancellationToken cancellationToken = default)
     {
         CompletionRequests.Add(item: request);
+
+        if (exception is not null)
+        {
+            throw exception;
+        }
+
         return ValueTask.FromResult(result: DequeueResponse());
     }
 

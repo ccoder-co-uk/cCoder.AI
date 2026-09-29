@@ -2,6 +2,9 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System.Threading.Tasks;
+using System.Net.Http;
+using Xunit;
 using AI.AcceptanceTests.Infrastructure;
 using FluentAssertions;
 

@@ -2,6 +2,9 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using cCoder.AI.Brokers.Loggings;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Services.Foundations.Models;

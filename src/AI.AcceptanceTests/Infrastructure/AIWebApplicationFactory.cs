@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System.Collections.Generic;
+using cCoder.AI.Brokers.Loggings;
 using cCoder.AI.Exposures;
 using cCoder.AI.Brokers.Shells;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +20,7 @@ public sealed class AIWebApplicationFactory : WebApplicationFactory<Program>
     public TestCompletionProviderService CompletionProviderService { get; } = new();
     public TestShellBroker ShellBroker { get; } = new();
     public TestModelManagerService ModelManagerService { get; } = new();
+    public RecordingLoggingBroker LoggingBroker { get; } = new();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -41,10 +44,12 @@ public sealed class AIWebApplicationFactory : WebApplicationFactory<Program>
             services.RemoveAll<ICompletionProviderManager>();
             services.RemoveAll<IShellBroker>();
             services.RemoveAll<IModelManager>();
+            services.RemoveAll<ILoggingBroker>();
 
             services.AddSingleton<ICompletionProviderManager>(CompletionProviderService);
             services.AddSingleton<IShellBroker>(ShellBroker);
             services.AddSingleton<IModelManager>(ModelManagerService);
+            services.AddSingleton<ILoggingBroker>(LoggingBroker);
         });
     }
 }

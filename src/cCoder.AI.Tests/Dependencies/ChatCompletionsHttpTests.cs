@@ -2,10 +2,15 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using cCoder.AI.Brokers.Completions;
 using cCoder.AI.Dependencies;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Models.Enums;
@@ -13,9 +18,9 @@ using cCoder.AI.Models.Requests;
 using FluentAssertions;
 using System.Text.Json.Nodes;
 
-namespace cCoder.AI.Tests.Brokers.Completions;
+namespace cCoder.AI.Tests.Dependencies;
 
-public class ChatCompletionsBrokerTests
+public class ChatCompletionsHttpTests
 {
     [Fact]
     public async Task ShouldSendImagesAsOpenAIMultimodalMessageContentAsync()
@@ -35,10 +40,10 @@ public class ChatCompletionsBrokerTests
                     "application/json")
             };
         });
-        var broker = CreateBroker(httpClient: new HttpClient(handler));
+        var dependency = CreateDependency(httpClient: new HttpClient(handler));
 
         // When
-        await broker.PostChatCompletionAsync(
+        await dependency.PostChatCompletionAsync(
             providerName: "OpenAI",
             providerConfiguration: new AICompletionProviderConfiguration
             {
@@ -83,10 +88,10 @@ public class ChatCompletionsBrokerTests
                     "application/json")
             };
         });
-        var broker = CreateBroker(httpClient: new HttpClient(handler));
+        var dependency = CreateDependency(httpClient: new HttpClient(handler));
 
         // When
-        await broker.PostChatCompletionAsync(
+        await dependency.PostChatCompletionAsync(
             providerName: "Ollama",
             providerConfiguration: new AICompletionProviderConfiguration
             {
@@ -116,12 +121,12 @@ public class ChatCompletionsBrokerTests
         // Given
         string filePath = Path.GetTempFileName() + ".pdf";
         await File.WriteAllBytesAsync(filePath, [1, 2, 3]);
-        var broker = CreateBroker(httpClient: new HttpClient(
+        var dependency = CreateDependency(httpClient: new HttpClient(
             new StubHttpMessageHandler(responseFactory: _ =>
                 new HttpResponseMessage(HttpStatusCode.OK))));
 
         // When
-        Func<Task> action = async () => await broker.PostChatCompletionAsync(
+        Func<Task> action = async () => await dependency.PostChatCompletionAsync(
             providerName: "OpenAI",
             providerConfiguration: new AICompletionProviderConfiguration
             {
@@ -159,7 +164,7 @@ public class ChatCompletionsBrokerTests
                 Content = new StringContent(response, Encoding.UTF8, "application/json")
             };
         });
-        var broker = CreateBroker(httpClient: new HttpClient(handler));
+        var dependency = CreateDependency(httpClient: new HttpClient(handler));
         AICompletionProviderConfiguration providerConfiguration = new()
         {
             Mode = AIProviderMode.OllamaApi,
@@ -168,7 +173,7 @@ public class ChatCompletionsBrokerTests
             RetryBaseDelayMilliseconds = 1,
         };
 
-        var response = await broker.PostChatCompletionAsync(
+        var response = await dependency.PostChatCompletionAsync(
 providerName: "Ollama",
 providerConfiguration: providerConfiguration,
 request: new ProviderCompletionRequest
@@ -197,7 +202,7 @@ request: new ProviderCompletionRequest
                     "application/json")
             };
         });
-        var broker = CreateBroker(httpClient: new HttpClient(handler));
+        var dependency = CreateDependency(httpClient: new HttpClient(handler));
         AICompletionProviderConfiguration providerConfiguration = new()
         {
             Mode = AIProviderMode.OllamaApi,
@@ -205,7 +210,7 @@ request: new ProviderCompletionRequest
         };
 
         // When
-        await broker.PostChatCompletionAsync(
+        await dependency.PostChatCompletionAsync(
 providerName: "Ollama",
 providerConfiguration: providerConfiguration,
 request: new ProviderCompletionRequest
@@ -251,7 +256,7 @@ request: new ProviderCompletionRequest
             });
 
         HttpClient httpClient = new(handler);
-        var broker = CreateBroker(httpClient: httpClient);
+        var dependency = CreateDependency(httpClient: httpClient);
 
         AICompletionProviderConfiguration providerConfiguration = new()
         {
@@ -267,7 +272,7 @@ request: new ProviderCompletionRequest
         };
 
         // When
-        var response = await broker.PostChatCompletionAsync(
+        var response = await dependency.PostChatCompletionAsync(
 providerName: "Ollama",
 providerConfiguration: providerConfiguration,
 request: request);
@@ -291,7 +296,7 @@ request: request);
             });
 
         HttpClient httpClient = new(handler);
-        var broker = CreateBroker(httpClient: httpClient);
+        var dependency = CreateDependency(httpClient: httpClient);
 
         AICompletionProviderConfiguration providerConfiguration = new()
         {
@@ -308,7 +313,7 @@ request: request);
         };
 
         // When
-        Func<Task> action = async () => await broker.PostChatCompletionAsync(
+        Func<Task> action = async () => await dependency.PostChatCompletionAsync(
 providerName: "Ollama",
 providerConfiguration: providerConfiguration,
 request: request);
@@ -338,7 +343,7 @@ request: request);
                         "application/json")
                 };
         });
-        var broker = CreateBroker(httpClient: new HttpClient(handler));
+        var dependency = CreateDependency(httpClient: new HttpClient(handler));
         AICompletionProviderConfiguration providerConfiguration = new()
         {
             Mode = AIProviderMode.OpenAICompatible,
@@ -347,7 +352,7 @@ request: request);
             RetryBaseDelayMilliseconds = 1,
         };
 
-        var response = await broker.PostChatCompletionAsync(
+        var response = await dependency.PostChatCompletionAsync(
 providerName: "open-ai",
 providerConfiguration: providerConfiguration,
 request: new ProviderCompletionRequest
@@ -370,12 +375,10 @@ request: new ProviderCompletionRequest
             Task.FromResult(result: responseFactory(request));
     }
 
-    private static ChatCompletionsBroker CreateBroker(
+    private static ChatCompletionsDependency CreateDependency(
         HttpClient httpClient) =>
-        new(
-            dependency: new ChatCompletionsDependency(
-                httpClientFactory: new StubHttpClientFactory(
-                    httpClient: httpClient)));
+        new(httpClientFactory: new StubHttpClientFactory(
+            httpClient: httpClient));
 
     private sealed class StubHttpClientFactory(HttpClient httpClient) :
         IHttpClientFactory

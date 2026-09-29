@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System.Linq;
+using System;
 using cCoder.AI.Models.Enums;
 
 namespace cCoder.AI.Models.Configurations;

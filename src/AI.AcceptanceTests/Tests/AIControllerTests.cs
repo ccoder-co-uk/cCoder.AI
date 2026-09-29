@@ -2,6 +2,11 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Linq;
 using System.Net.Http.Json;
 using System.Text.Json;
 using AI.AcceptanceTests.Infrastructure;
@@ -23,6 +28,7 @@ public sealed partial class AIControllerTests
         client = factory.CreateClient();
         factory.CompletionProviderService.Reset();
         factory.ShellBroker.Reset();
+        factory.LoggingBroker.Reset();
     }
 
     private async Task<T> ReadAsAsync<T>(HttpResponseMessage httpResponseMessage)
