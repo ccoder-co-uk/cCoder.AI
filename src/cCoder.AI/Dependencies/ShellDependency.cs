@@ -2,6 +2,11 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using cCoder.AI.Models.Enums;

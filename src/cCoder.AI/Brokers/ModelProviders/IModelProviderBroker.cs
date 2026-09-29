@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System.Threading;
+using System.Threading.Tasks;
 using cCoder.AI.Models.Configurations;
 
 namespace cCoder.AI.Brokers.ModelProviders;

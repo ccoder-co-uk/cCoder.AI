@@ -2,6 +2,9 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using Microsoft.Extensions.Logging;
+
 namespace AI.Web.Brokers.Loggings;
 
 internal sealed class LoggingBroker(ILogger<LoggingBroker> logger) : ILoggingBroker

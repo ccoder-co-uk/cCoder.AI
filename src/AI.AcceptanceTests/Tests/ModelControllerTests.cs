@@ -2,6 +2,11 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Net.Http;
+using Xunit;
 using System.Net.Http.Json;
 using System.Text.Json;
 using AI.AcceptanceTests.Infrastructure;
@@ -22,6 +27,7 @@ public sealed class ModelControllerTests
         factory = new AIWebApplicationFactory();
         client = factory.CreateClient();
         factory.ModelManagerService.Reset();
+        factory.LoggingBroker.Reset();
     }
 
     [Fact]
@@ -51,6 +57,23 @@ provider: "Ollama",
         actualResponse.Should().ContainSingle();
         actualResponse[0].Id.Should().Be(expected: "gpt-oss:20b");
         factory.ModelManagerService.RetrievalRequests.Should().ContainSingle(because: "Ollama");
+    }
+
+    [Fact]
+    public async Task GetAvailableModels_WhenServiceFails_ReturnsServerErrorAndLogsException()
+    {
+        // Given
+        InvalidOperationException expectedException = new(message: "Model lookup failed.");
+        factory.ModelManagerService.FailWith(expectedException: expectedException);
+
+        // When
+        using HttpResponseMessage response = await client.GetAsync(
+            requestUri: "/Api/AI/Model/Providers/Ollama/Available");
+
+        // Then
+        response.StatusCode.Should().Be(expected: System.Net.HttpStatusCode.InternalServerError);
+        factory.LoggingBroker.Exceptions.Should().ContainSingle()
+            .Which.Should().BeSameAs(expectedException);
     }
 
     [Fact]

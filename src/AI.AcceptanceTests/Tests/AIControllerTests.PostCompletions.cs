@@ -2,6 +2,11 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Net;
+using System.Threading.Tasks;
+using System.Net.Http;
+using Xunit;
 using System.Net.Http.Json;
 using cCoder.AI.Models.Requests;
 using cCoder.AI.Models.Responses;
@@ -37,5 +42,23 @@ public sealed partial class AIControllerTests
         actualResponse.Content.Should().Be(expected: "Hello.");
         factory.CompletionProviderService.CompletionRequests.Should().ContainSingle();
         factory.CompletionProviderService.CompletionRequests[0].Prompt.Should().Be(expected: "Say hello.");
+    }
+
+    [Fact]
+    public async Task PostCompletions_WhenServiceFails_ReturnsServerErrorAndLogsException()
+    {
+        // Given
+        InvalidOperationException expectedException = new(message: "Completion failed.");
+        factory.CompletionProviderService.FailWith(expectedException: expectedException);
+
+        // When
+        using HttpResponseMessage response = await client.PostAsJsonAsync(
+            requestUri: "/Api/AI/Completions",
+            value: new CompletionRequest());
+
+        // Then
+        response.StatusCode.Should().Be(expected: HttpStatusCode.InternalServerError);
+        factory.LoggingBroker.Exceptions.Should().ContainSingle()
+            .Which.Should().BeSameAs(expectedException);
     }
 }

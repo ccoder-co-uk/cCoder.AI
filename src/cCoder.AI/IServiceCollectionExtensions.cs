@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Threading;
 using cCoder.AI.Brokers.Completions;
 using cCoder.AI.Brokers.Loggings;
 using cCoder.AI.Brokers.ModelProviders;

@@ -2,6 +2,10 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace cCoder.AI.Dependencies;
 
 internal sealed class ProviderGateDependency(int maxConcurrency) :

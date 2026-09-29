@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+
 namespace cCoder.AI.Brokers.Loggings;
 
 public interface ILoggingBroker

@@ -2,6 +2,11 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
 using cCoder.AI.Exposures;
 using System.Collections.Concurrent;
 using cCoder.AI.Models.Requests;
@@ -11,6 +16,7 @@ namespace AI.AcceptanceTests.Infrastructure;
 
 public sealed class TestModelManagerService : IModelManager
 {
+    private Exception? exception;
     private readonly ConcurrentDictionary<string, List<ModelDescriptorResponse>> availableModels =
         new(StringComparer.OrdinalIgnoreCase);
 
@@ -24,6 +30,7 @@ public sealed class TestModelManagerService : IModelManager
         availableModels.Clear();
         ImportRequests.Clear();
         RetrievalRequests.Clear();
+        exception = null;
 
         while (importResponses.TryDequeue(result: out _))
         {
@@ -35,6 +42,9 @@ public sealed class TestModelManagerService : IModelManager
 
     public void EnqueueImportResponse(ModelImportResponse response) =>
         importResponses.Enqueue(item: response);
+
+    public void FailWith(Exception expectedException) =>
+        exception = expectedException;
 
     public AIProviderCapabilitiesResponse GetProviderCapabilities(string provider) => new()
     {
@@ -52,6 +62,11 @@ public sealed class TestModelManagerService : IModelManager
         CancellationToken cancellationToken = default)
     {
         RetrievalRequests.Add(item: provider);
+
+        if (exception is not null)
+        {
+            throw exception;
+        }
 
         if (provider is not null && availableModels.TryGetValue(key: provider, value: out List<ModelDescriptorResponse>? models))
         {

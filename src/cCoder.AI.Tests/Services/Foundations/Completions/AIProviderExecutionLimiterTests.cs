@@ -2,6 +2,10 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
 using FluentAssertions;
 using cCoder.AI.Services.Foundations.Completions;
 

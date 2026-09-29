@@ -2,6 +2,8 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System.Threading.Tasks;
+
 namespace cCoder.AI.Models.Configurations;
 
 public class AIAgentConfiguration

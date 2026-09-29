@@ -2,6 +2,7 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using System;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace cCoder.AI.Dependencies;

@@ -2,6 +2,7 @@
 // Copyright (c) Paul.Ward@ccoder.co.uk
 // ---------------------------------------------------------------
 
+using Xunit;
 using cCoder.AI.Models.Configurations;
 using cCoder.AI.Models.Enums;
 using FluentAssertions;
