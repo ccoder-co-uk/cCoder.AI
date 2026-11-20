@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using AI.Web.Exposures;
 
 namespace AI.AcceptanceTests.Infrastructure;
 
@@ -21,6 +22,9 @@ public sealed class AIWebApplicationFactory : WebApplicationFactory<Program>
     public TestShellBroker ShellBroker { get; } = new();
     public TestModelManagerService ModelManagerService { get; } = new();
     public RecordingLoggingBroker LoggingBroker { get; } = new();
+    public TestAgentRunHistoryManager AgentRunHistoryManager { get; } = new();
+    public TestAgentManager AgentManager { get; } = new();
+    public bool UseTestAgentManager { get; set; }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -45,11 +49,21 @@ public sealed class AIWebApplicationFactory : WebApplicationFactory<Program>
             services.RemoveAll<IShellBroker>();
             services.RemoveAll<IModelManager>();
             services.RemoveAll<ILoggingBroker>();
+            services.RemoveAll<AI.Web.Brokers.Loggings.ILoggingBroker>();
+            services.RemoveAll<IAgentRunHistoryManager>();
+
+            if (UseTestAgentManager)
+            {
+                services.RemoveAll<IAgentManager>();
+                services.AddSingleton<IAgentManager>(AgentManager);
+            }
 
             services.AddSingleton<ICompletionProviderManager>(CompletionProviderService);
             services.AddSingleton<IShellBroker>(ShellBroker);
             services.AddSingleton<IModelManager>(ModelManagerService);
             services.AddSingleton<ILoggingBroker>(LoggingBroker);
+            services.AddSingleton<AI.Web.Brokers.Loggings.ILoggingBroker>(LoggingBroker);
+            services.AddSingleton<IAgentRunHistoryManager>(AgentRunHistoryManager);
         });
     }
 }

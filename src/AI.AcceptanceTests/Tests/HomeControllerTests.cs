@@ -44,6 +44,9 @@ provider: "Ollama",
         content.Should().Contain(expected: "Conversation");
         content.Should().Contain(expected: "Refresh Models");
         content.Should().NotContain(unexpected: "Iteration Trace");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 1);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 0);
     }
 
     [Fact]
@@ -71,5 +74,8 @@ provider: "Ollama",
         content.Should().Contain(expected: "Provider Diagnostics");
         content.Should().Contain(expected: "Recent Activity");
         content.Should().Contain(expected: "gpt-oss:20b");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 1);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 0);
     }
 }

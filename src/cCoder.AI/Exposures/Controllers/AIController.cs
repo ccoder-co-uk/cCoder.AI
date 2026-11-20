@@ -38,11 +38,13 @@ public sealed class AIController(
                     request: completionRequest,
                     cancellationToken: cancellationToken);
 
+            loggingBroker.LogInformation(message: "AI completion request completed successfully.");
+
             return Ok(value: completionResponse);
         }
         catch (ArgumentException exception)
         {
-            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+            loggingBroker.LogWarning(exception: exception, message: "AI completion request was invalid.");
 
             return BadRequest(error: "The completion request is invalid.");
         }
@@ -66,11 +68,13 @@ public sealed class AIController(
                     request: agentRunRequest,
                     cancellationToken: cancellationToken);
 
+            loggingBroker.LogInformation(message: "AI agent request completed successfully.");
+
             return Ok(value: agentRunResponse);
         }
         catch (ArgumentException exception)
         {
-            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+            loggingBroker.LogWarning(exception: exception, message: "AI agent request was invalid.");
 
             return BadRequest(error: "The agent request is invalid.");
         }
@@ -95,18 +99,22 @@ public sealed class AIController(
                     cancellationToken: cancellationToken),
                 cancellationToken: cancellationToken);
 
+            loggingBroker.LogInformation(message: "AI agent stream completed successfully.");
+
             return Response.HasStarted
                 ? new EmptyResult()
                 : Ok();
         }
         catch (ArgumentException exception)
         {
-            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+            loggingBroker.LogWarning(exception: exception, message: "AI agent stream request was invalid.");
 
             if (Response.HasStarted)
             {
                 throw;
             }
+
+            Response.ContentType = null;
 
             return BadRequest(error: "The agent stream request is invalid.");
         }
@@ -118,6 +126,8 @@ public sealed class AIController(
             {
                 throw;
             }
+
+            Response.ContentType = null;
 
             return StatusCode(statusCode: 500);
         }
@@ -135,11 +145,13 @@ public sealed class AIController(
                     chatRequest: chatRequest,
                     cancellationToken: cancellationToken);
 
+            loggingBroker.LogInformation(message: "AI chat request completed successfully.");
+
             return Ok(value: chatResponse);
         }
         catch (ArgumentException exception)
         {
-            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+            loggingBroker.LogWarning(exception: exception, message: "AI chat request was invalid.");
 
             return BadRequest(error: "The chat request is invalid.");
         }
@@ -164,18 +176,22 @@ public sealed class AIController(
                     cancellationToken: cancellationToken),
                 cancellationToken: cancellationToken);
 
+            loggingBroker.LogInformation(message: "AI chat stream completed successfully.");
+
             return Response.HasStarted
                 ? new EmptyResult()
                 : Ok();
         }
         catch (ArgumentException exception)
         {
-            loggingBroker.LogError(exception: exception, message: "AI controller request failed.");
+            loggingBroker.LogWarning(exception: exception, message: "AI chat stream request was invalid.");
 
             if (Response.HasStarted)
             {
                 throw;
             }
+
+            Response.ContentType = null;
 
             return BadRequest(error: "The chat stream request is invalid.");
         }
@@ -187,6 +203,8 @@ public sealed class AIController(
             {
                 throw;
             }
+
+            Response.ContentType = null;
 
             return StatusCode(statusCode: 500);
         }

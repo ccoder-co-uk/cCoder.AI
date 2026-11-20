@@ -61,6 +61,12 @@ public sealed class TestCompletionProviderService : ICompletionProviderManager
         CancellationToken cancellationToken = default)
     {
         ChatRequests.Add(item: (provider, model, messages));
+
+        if (exception is not null)
+        {
+            throw exception;
+        }
+
         return ValueTask.FromResult(result: DequeueResponse());
     }
 
