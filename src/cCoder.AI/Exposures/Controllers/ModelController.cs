@@ -32,11 +32,13 @@ public sealed class ModelController(
                     provider: provider,
                     cancellationToken: cancellationToken);
 
+            loggingBroker.LogInformation(message: "Model retrieval completed successfully.");
+
             return Ok(value: modelResponses);
         }
         catch (ArgumentException exception)
         {
-            loggingBroker.LogError(exception: exception, message: "Model controller request failed.");
+            loggingBroker.LogWarning(exception: exception, message: "Model provider request was invalid.");
 
             return BadRequest(error: "The model provider is invalid.");
         }
@@ -62,11 +64,13 @@ public sealed class ModelController(
                     request: modelImportRequest,
                     cancellationToken: cancellationToken);
 
+            loggingBroker.LogInformation(message: "Model import completed successfully.");
+
             return Ok(value: modelImportResponse);
         }
         catch (ArgumentException exception)
         {
-            loggingBroker.LogError(exception: exception, message: "Model controller request failed.");
+            loggingBroker.LogWarning(exception: exception, message: "Model import request was invalid.");
 
             return BadRequest(error: "The model import request is invalid.");
         }

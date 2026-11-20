@@ -69,5 +69,8 @@ public sealed partial class HomeControllerTests
         actualTokens[0].Type.Should().Be(expected: "start");
         actualTokens[^1].Type.Should().Be(expected: "complete");
         actualTokens[^1].Completion!.FinalMessage.Should().Be(expected: "Workspace response.");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 1);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 0);
     }
 }

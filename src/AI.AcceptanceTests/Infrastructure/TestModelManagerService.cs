@@ -83,6 +83,11 @@ public sealed class TestModelManagerService : IModelManager
     {
         ImportRequests.Add(item: (provider, request.ModelId));
 
+        if (exception is not null)
+        {
+            throw exception;
+        }
+
         if (importResponses.TryDequeue(result: out ModelImportResponse? response))
         {
             return ValueTask.FromResult(result: response);

@@ -69,6 +69,8 @@ public class HomeController(
             Providers = providers,
         };
 
+            loggingBroker.LogInformation(message: "Home page loaded successfully.");
+
             return View(model: viewModel);
         }
         catch (Exception exception)
@@ -146,18 +148,22 @@ public class HomeController(
             Duration = DateTimeOffset.UtcNow - startedOn,
         });
 
+            loggingBroker.LogInformation(message: "Conversation stream completed successfully.");
+
             return Response.HasStarted
                 ? new EmptyResult()
                 : Ok();
         }
         catch (ArgumentException exception)
         {
-            loggingBroker.LogError(exception: exception, message: "Home controller request failed.");
+            loggingBroker.LogWarning(exception: exception, message: "Conversation request was invalid.");
 
             if (Response.HasStarted)
             {
                 throw;
             }
+
+            Response.ContentType = null;
 
             return BadRequest(error: "The conversation request is invalid.");
         }
@@ -169,6 +175,8 @@ public class HomeController(
             {
                 throw;
             }
+
+            Response.ContentType = null;
 
             return StatusCode(statusCode: 500);
         }

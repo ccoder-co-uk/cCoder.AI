@@ -11,6 +11,7 @@ using cCoder.AI.Exposures;
 using AI.Web.Exposures;
 using AI.Web.Models;
 using AI.Web.Services.Diagnostics;
+using AI.Web.Brokers.Loggings;
 using cCoder.AI.Models.Configurations;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,8 @@ namespace AI.Web.Controllers;
 public class AdminController(
     AIConfiguration aiConfiguration,
     IModelManager modelManagerService,
-    IAgentRunHistoryManager agentRunHistoryService)
+    IAgentRunHistoryManager agentRunHistoryService,
+    ILoggingBroker loggingBroker)
     : Controller
 {
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -86,10 +88,14 @@ public class AdminController(
             }).ToList()
         };
 
+            loggingBroker.LogInformation(message: "Admin dashboard loaded successfully.");
+
             return View(model: viewModel);
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            loggingBroker.LogError(exception: exception, message: "Admin controller request failed.");
+
             return StatusCode(statusCode: 500);
         }
     }

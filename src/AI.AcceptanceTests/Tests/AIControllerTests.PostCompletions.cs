@@ -42,6 +42,9 @@ public sealed partial class AIControllerTests
         actualResponse.Content.Should().Be(expected: "Hello.");
         factory.CompletionProviderService.CompletionRequests.Should().ContainSingle();
         factory.CompletionProviderService.CompletionRequests[0].Prompt.Should().Be(expected: "Say hello.");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 1);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 0);
     }
 
     [Fact]
@@ -58,6 +61,10 @@ public sealed partial class AIControllerTests
 
         // Then
         response.StatusCode.Should().Be(expected: HttpStatusCode.InternalServerError);
+        (await response.Content.ReadAsStringAsync()).Should().NotContain(unexpected: "Completion failed.");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 0);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 1);
         factory.LoggingBroker.Exceptions.Should().ContainSingle()
             .Which.Should().BeSameAs(expectedException);
     }

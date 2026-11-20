@@ -57,6 +57,9 @@ provider: "Ollama",
         actualResponse.Should().ContainSingle();
         actualResponse[0].Id.Should().Be(expected: "gpt-oss:20b");
         factory.ModelManagerService.RetrievalRequests.Should().ContainSingle(because: "Ollama");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 1);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 0);
     }
 
     [Fact]
@@ -72,6 +75,10 @@ provider: "Ollama",
 
         // Then
         response.StatusCode.Should().Be(expected: System.Net.HttpStatusCode.InternalServerError);
+        (await response.Content.ReadAsStringAsync()).Should().NotContain(unexpected: "Model lookup failed.");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 0);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 1);
         factory.LoggingBroker.Exceptions.Should().ContainSingle()
             .Which.Should().BeSameAs(expectedException);
     }
@@ -147,5 +154,8 @@ value: inputRequest);
         actualResponse.ModelId.Should().Be(expected: "llama3.1:8b");
         factory.ModelManagerService.ImportRequests.Should().ContainSingle();
         factory.ModelManagerService.ImportRequests[0].ModelId.Should().Be(expected: "llama3.1:8b");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 1);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 0);
     }
 }

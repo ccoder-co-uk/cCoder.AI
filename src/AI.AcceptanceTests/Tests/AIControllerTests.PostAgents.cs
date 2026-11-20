@@ -65,6 +65,9 @@ public sealed partial class AIControllerTests
         actualResponse.IterationResponses.Should().HaveCount(expected: 2);
         factory.ShellBroker.Executions.Should().ContainSingle();
         factory.ShellBroker.Executions[0].Command.Should().Be(expected: "Get-Location");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 1);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 0);
     }
 
     [Fact]
@@ -94,5 +97,8 @@ public sealed partial class AIControllerTests
         actualTokens[0].Type.Should().Be(expected: "start");
         actualTokens[^1].Type.Should().Be(expected: "complete");
         actualTokens[^1].Completion!.FinalMessage.Should().Be(expected: "The folder is C:\\Temp.");
+        factory.LoggingBroker.InformationCount.Should().Be(expected: 1);
+        factory.LoggingBroker.WarningCount.Should().Be(expected: 0);
+        factory.LoggingBroker.ErrorCount.Should().Be(expected: 0);
     }
 }
