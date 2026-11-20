@@ -191,7 +191,7 @@
         {
           "Id": "cCoder.AI.Brokers.Loggings.LoggingBroker.LogError(System.Exception,System.String,System.Object[])",
           "Name": "LogError",
-          "LineNumber": 12,
+          "LineNumber": 18,
           "Inputs": [
             {
               "Name": "exception",
@@ -215,6 +215,88 @@
               "TypeName": "Microsoft.Extensions.Logging.LoggerExtensions",
               "MethodName": "LogError",
               "MethodId": "Microsoft.Extensions.Logging.LoggerExtensions.LogError(Microsoft.Extensions.Logging.ILogger,System.Exception?,System.String?,System.Object?[])",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Brokers.Loggings.LoggingBroker.LogInformation(System.String,System.Object[])",
+          "Name": "LogInformation",
+          "LineNumber": 12,
+          "Inputs": [
+            {
+              "Name": "message",
+              "Type": "System.String"
+            },
+            {
+              "Name": "args",
+              "Type": "System.Object[]"
+            }
+          ],
+          "ReturnType": "System.Void",
+          "Implements": [
+            "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogInformation(System.String,System.Object[])"
+          ],
+          "Calls": [
+            {
+              "TypeName": "Microsoft.Extensions.Logging.LoggerExtensions",
+              "MethodName": "LogInformation",
+              "MethodId": "Microsoft.Extensions.Logging.LoggerExtensions.LogInformation(Microsoft.Extensions.Logging.ILogger,System.String?,System.Object?[])",
+              "StandardElementType": "Dependency",
+              "IsDependencyBoundary": true
+            }
+          ],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Brokers.Loggings.LoggingBroker.LogWarning(System.Exception,System.String,System.Object[])",
+          "Name": "LogWarning",
+          "LineNumber": 15,
+          "Inputs": [
+            {
+              "Name": "exception",
+              "Type": "System.Exception"
+            },
+            {
+              "Name": "message",
+              "Type": "System.String"
+            },
+            {
+              "Name": "args",
+              "Type": "System.Object[]"
+            }
+          ],
+          "ReturnType": "System.Void",
+          "Implements": [
+            "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogWarning(System.Exception,System.String,System.Object[])"
+          ],
+          "Calls": [
+            {
+              "TypeName": "Microsoft.Extensions.Logging.LoggerExtensions",
+              "MethodName": "LogWarning",
+              "MethodId": "Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(Microsoft.Extensions.Logging.ILogger,System.Exception?,System.String?,System.Object?[])",
               "StandardElementType": "Dependency",
               "IsDependencyBoundary": true
             }
@@ -1294,7 +1376,7 @@
         {
           "Id": "cCoder.AI.Exposures.Controllers.AIController.PostAgentsAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
           "Name": "PostAgentsAsync",
-          "LineNumber": 58,
+          "LineNumber": 60,
           "Inputs": [
             {
               "Name": "agentRunRequest",
@@ -1333,6 +1415,20 @@
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
               "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogInformation",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogInformation(System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogWarning",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogWarning(System.Exception,System.String,System.Object[])",
               "StandardElementType": "Broker",
               "IsDependencyBoundary": false
             },
@@ -1404,7 +1500,7 @@
         {
           "Id": "cCoder.AI.Exposures.Controllers.AIController.PostChatAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "PostChatAsync",
-          "LineNumber": 127,
+          "LineNumber": 137,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -1443,6 +1539,20 @@
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
               "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogInformation",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogInformation(System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogWarning",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogWarning(System.Exception,System.String,System.Object[])",
               "StandardElementType": "Broker",
               "IsDependencyBoundary": false
             },
@@ -1557,6 +1667,20 @@
               "IsDependencyBoundary": false
             },
             {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogInformation",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogInformation(System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogWarning",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogWarning(System.Exception,System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
               "TypeName": "cCoder.AI.Exposures.ICompletionProviderManager",
               "MethodName": "CompleteAsync",
               "MethodId": "cCoder.AI.Exposures.ICompletionProviderManager.CompleteAsync(cCoder.AI.Models.Requests.CompletionRequest,System.Threading.CancellationToken)",
@@ -1624,7 +1748,7 @@
         {
           "Id": "cCoder.AI.Exposures.Controllers.AIController.StreamAgentsAsync(cCoder.AI.Models.Requests.AgentRunRequest,System.Threading.CancellationToken)",
           "Name": "StreamAgentsAsync",
-          "LineNumber": 86,
+          "LineNumber": 90,
           "Inputs": [
             {
               "Name": "agentRunRequest",
@@ -1670,6 +1794,20 @@
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
               "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogInformation",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogInformation(System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogWarning",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogWarning(System.Exception,System.String,System.Object[])",
               "StandardElementType": "Broker",
               "IsDependencyBoundary": false
             },
@@ -1735,7 +1873,7 @@
         {
           "Id": "cCoder.AI.Exposures.Controllers.AIController.StreamChatAsync(cCoder.AI.Models.Requests.ChatRequest,System.Threading.CancellationToken)",
           "Name": "StreamChatAsync",
-          "LineNumber": 155,
+          "LineNumber": 167,
           "Inputs": [
             {
               "Name": "chatRequest",
@@ -1781,6 +1919,20 @@
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
               "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogInformation",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogInformation(System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogWarning",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogWarning(System.Exception,System.String,System.Object[])",
               "StandardElementType": "Broker",
               "IsDependencyBoundary": false
             },
@@ -1910,6 +2062,20 @@
               "IsDependencyBoundary": false
             },
             {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogInformation",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogInformation(System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogWarning",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogWarning(System.Exception,System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
               "TypeName": "cCoder.AI.Exposures.IModelManager",
               "MethodName": "RetrieveAvailableModelsAsync",
               "MethodId": "cCoder.AI.Exposures.IModelManager.RetrieveAvailableModelsAsync(System.String?,System.Threading.CancellationToken)",
@@ -1969,7 +2135,7 @@
         {
           "Id": "cCoder.AI.Exposures.Controllers.ModelController.PostImportModelAsync(System.String,cCoder.AI.Models.Requests.ModelImportRequest,System.Threading.CancellationToken)",
           "Name": "PostImportModelAsync",
-          "LineNumber": 52,
+          "LineNumber": 54,
           "Inputs": [
             {
               "Name": "provider",
@@ -2012,6 +2178,20 @@
               "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
               "MethodName": "LogError",
               "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogInformation",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogInformation(System.String,System.Object[])",
+              "StandardElementType": "Broker",
+              "IsDependencyBoundary": false
+            },
+            {
+              "TypeName": "cCoder.AI.Brokers.Loggings.ILoggingBroker",
+              "MethodName": "LogWarning",
+              "MethodId": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogWarning(System.Exception,System.String,System.Object[])",
               "StandardElementType": "Broker",
               "IsDependencyBoundary": false
             },
@@ -4307,7 +4487,69 @@
         {
           "Id": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogError(System.Exception,System.String,System.Object[])",
           "Name": "LogError",
+          "LineNumber": 13,
+          "Inputs": [
+            {
+              "Name": "exception",
+              "Type": "System.Exception"
+            },
+            {
+              "Name": "message",
+              "Type": "System.String"
+            },
+            {
+              "Name": "args",
+              "Type": "System.Object[]"
+            }
+          ],
+          "ReturnType": "System.Void",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogInformation(System.String,System.Object[])",
+          "Name": "LogInformation",
           "LineNumber": 11,
+          "Inputs": [
+            {
+              "Name": "message",
+              "Type": "System.String"
+            },
+            {
+              "Name": "args",
+              "Type": "System.Object[]"
+            }
+          ],
+          "ReturnType": "System.Void",
+          "Implements": [],
+          "Calls": [],
+          "PossibleExceptionTypes": [],
+          "IncomingExceptionTypes": [],
+          "ThrowsExceptionTypes": [],
+          "HttpMethods": [],
+          "HttpResponses": [],
+          "IsHttpRequestHandler": false,
+          "IsODataControllerAction": false,
+          "HasFromBodyParameter": false,
+          "HasKeyParameter": false,
+          "HandlesNullWithNotFound": false,
+          "HasTryCatch": false
+        },
+        {
+          "Id": "cCoder.AI.Brokers.Loggings.ILoggingBroker.LogWarning(System.Exception,System.String,System.Object[])",
+          "Name": "LogWarning",
+          "LineNumber": 12,
           "Inputs": [
             {
               "Name": "exception",
@@ -5037,6 +5279,13 @@
       "LineNumber": 21
     },
     {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Brokers.Loggings.LoggingBroker",
+      "LineNumber": 20
+    },
+    {
       "Code": "STX0017",
       "Description": "Model parameters must use their full camelCase type name, preserving applicable mutation prefixes.",
       "Severity": "Warning",
@@ -5181,98 +5430,105 @@
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 59
+      "LineNumber": 61
     },
     {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 85
+      "LineNumber": 89
     },
     {
       "Code": "STXD005",
       "Description": "External API call \u0027Microsoft.AspNetCore.Mvc.EmptyResult..ctor()\u0027 must be isolated behind a broker or dependency.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 99
+      "LineNumber": 105
     },
     {
       "Code": "STXD005",
       "Description": "External API call \u0027Microsoft.AspNetCore.Mvc.EmptyResult..ctor()\u0027 must be isolated behind a broker or dependency.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 99
+      "LineNumber": 105
     },
     {
       "Code": "STX0019",
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 128
+      "LineNumber": 138
     },
     {
       "Code": "STXAPI004",
       "Description": "API controller methods must use HTTP nouns: Get, Post, Put, or Delete.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 154
+      "LineNumber": 166
     },
     {
       "Code": "STXD005",
       "Description": "External API call \u0027Microsoft.AspNetCore.Mvc.EmptyResult..ctor()\u0027 must be isolated behind a broker or dependency.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 168
+      "LineNumber": 182
     },
     {
       "Code": "STXE002",
       "Description": "An exposure must not contain loops.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 202
+      "LineNumber": 220
     },
     {
       "Code": "STXD005",
       "Description": "External API call \u0027System.Text.Json.JsonSerializer.Serialize(TValue,System.Text.Json.JsonSerializerOptions?)\u0027 must be isolated behind a broker or dependency.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 204
+      "LineNumber": 222
     },
     {
       "Code": "STXD005",
       "Description": "External API call \u0027System.Text.Json.JsonSerializer.Serialize(TValue,System.Text.Json.JsonSerializerOptions?)\u0027 must be isolated behind a broker or dependency.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 204
+      "LineNumber": 222
     },
     {
       "Code": "STXD005",
       "Description": "External API call \u0027Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 206
+      "LineNumber": 224
     },
     {
       "Code": "STXD005",
       "Description": "External API call \u0027Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 206
+      "LineNumber": 224
     },
     {
       "Code": "STXD005",
       "Description": "External API call \u0027System.IO.Stream.FlushAsync(System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 214
+      "LineNumber": 232
     },
     {
       "Code": "STXD005",
       "Description": "External API call \u0027System.IO.Stream.FlushAsync(System.Threading.CancellationToken)\u0027 must be isolated behind a broker or dependency.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.AIController",
-      "LineNumber": 214
+      "LineNumber": 232
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.AIController",
+      "LineNumber": 236
     },
     {
       "Code": "STX0004",
@@ -5293,7 +5549,14 @@
       "Description": "create model parameters must use the new prefix.",
       "Severity": "Warning",
       "Type": "cCoder.AI.Exposures.Controllers.ModelController",
-      "LineNumber": 54
+      "LineNumber": 56
+    },
+    {
+      "Code": "STXFORMAT001",
+      "Description": "Source files must not contain newline characters after the final code token.",
+      "Severity": "Warning",
+      "Type": "cCoder.AI.Exposures.Controllers.ModelController",
+      "LineNumber": 84
     },
     {
       "Code": "STXM002",
